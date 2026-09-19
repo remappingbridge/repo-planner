@@ -1,230 +1,190 @@
 # Ambiguity and decision register
 
-Status: **OPEN PLANNING REGISTER**. No item in this file is permission to change firmware yet.
-
-The purpose of this register is to prevent implementation from resolving contradictory or incomplete product rules opportunistically. `mbr-00` must freeze the required decisions before any dependent implementation gate can close.
+Status: **PLANNED**. This register contains only decisions that still matter after the 2026-09-20 single-connected-Mouse simplification.
 
 Severity:
 
 - **BLOCKER** — dependent implementation cannot be accepted until explicitly resolved.
-- **MATERIAL** — architecture can proceed behind an abstraction, but the affected UX/behavior gate cannot close.
-- **EDITORIAL** — literal contract still needs normalization/golden tests, but the architecture is not blocked.
+- **MATERIAL** — architecture can proceed behind an abstraction, but affected behavior cannot be accepted.
+- **EDITORIAL** — wording/layout must still be normalized before final UI acceptance.
 
-## AMB-001 — Mouse-only USB scope vs Escape remapping
+## Closed decisions — do not reopen implicitly
 
-**Severity:** BLOCKER.
+The following older ambiguities are resolved by current product authority:
 
-The project is explicitly Mouse-only and excludes Keyboard and Composite. The supplied new screens still contain `ESCAPE REMAP`, `LEFT IS ESCAPE` and Custom targets named `ESCAPE`.
+### Escape output
 
-BLU2USB G06 implemented Escape by keeping a firmware-owned **USB Keyboard interface** beside the USB Mouse interface. A standard USB HID Mouse interface cannot emit the Keyboard Escape key.
+**RESOLVED.** Escape remains supported.
 
-Possible product decisions are mutually exclusive:
+The product may expose a minimal fixed USB Keyboard output capability solely to emit synthetic `Escape` from Mouse remapping. This does not authorize Bluetooth Keyboard pairing/input or Composite product support.
 
-1. remove Escape as a profile/Custom target and remain strictly one USB HID Mouse function;
-2. permit a fixed synthetic-keyboard USB interface solely for remap output, which technically makes the USB device composite Mouse+Keyboard even though no physical Keyboard pairing exists;
-3. redefine what `ESCAPE` means to something other than a standard Keyboard Escape key, which would be a new product behavior and must be explicitly specified.
+### Multiple simultaneous Mouse connections
 
-**Planning treatment:** target architecture remains Mouse-only; no Keyboard/Composite implementation is introduced. Gates touching USB identity or Escape behavior remain blocked until this is decided.
+**RESOLVED by removal.** Only one Mouse may be connected/ready at a time. Multiple saved Mouse records remain supported.
 
-## AMB-002 — Multiple connected mice vs singular `home-connected`
+Removed concepts:
 
-**Severity:** BLOCKER for profile UX.
+- `N DEVICES CONNECTED` UI;
+- connected-Mouse count limit such as 999;
+- multi-Mouse runtime session set;
+- simultaneous HIDS qualification;
+- cross-Mouse button aggregation;
+- UI focus/target selection among live mice;
+- reconnect-many scheduling.
 
-General rules say several mice may be connected simultaneously. `home-connected` displays exactly one Mouse name and describes it as “o dispositivo atualmente conectado”. Its first option opens that Mouse's remapper options.
+### HOME profile target
 
-Undefined: when two or more mice are connected, which Mouse is displayed and receives profile edits?
+**RESOLVED.** Remapper actions target the single currently connected Mouse.
 
-**Architecture treatment:** separate the runtime `connected_mouse_ids` set from an optional UI-only `focused_mouse_id`. Do not let a single “active mouse” object become transport truth again. The rule that chooses/changes focus remains open.
+### Saved reconnect policy
 
-## AMB-003 — How a user selects another connected Mouse for remapping
+**RESOLVED.** Whenever HOME is entered with saved mice and no live Mouse, start a bounded saved-device search automatically. The first saved Mouse that reaches ready state wins and the search stops. Timeout leads to `home-retry` / `DEVICE NOT FOUND`.
 
-**Severity:** BLOCKER for multi-Mouse profile UX.
+A disconnect/power-off of the live Mouse uses this same HOME resolver automatically.
 
-No supplied screen offers an explicit “choose connected mouse for remapping” action. `saved-devices` pages expose only `REMOVE DEVICE`, while `home-connected` exposes the profile of one Mouse.
+### Pair New while connected
 
-Undefined possibilities include page navigation choosing focus, last-connected wins, last-input wins, or a new explicit action. None may be invented silently.
+**RESOLVED.** Pair New is a replacement transaction. The current live Mouse is safely released/disconnected first but remains saved. Then the product searches for one unsaved Mouse; first valid winner becomes the sole live Mouse.
 
-## AMB-004 — Boot reconnect with several saved mice
+Pair New failure/cancel does not delete the previous saved Mouse and does not silently reconnect it inside Pair New.
 
-**Severity:** BLOCKER for final reconnect semantics.
+### Saved Devices connected color
 
-`home-searching` says it searches a saved Mouse for a finite time. The global rule allows multiple connected mice. Undefined: should boot stop after the first saved Mouse reconnects, or continue attempting all saved mice up to the supported simultaneous limit?
+**RESOLVED.** Only the page for the single connected Mouse may show its name in cyan and `STATUS: CONNECTED`.
 
-**Architecture treatment:** implement reconnect scheduling as policy over independent sessions. BLE parsing must not encode first-only/all behavior.
+## AMB-001 — Final USB VID/PID/manufacturer/product strings
 
-## AMB-005 — Maximum simultaneous and saved Mouse count
+**Severity:** BLOCKER for final USB identity acceptance.
 
-**Severity:** MATERIAL.
+Structural USB behavior is settled:
 
-“Vários mouses” requires more than one but specifies no maximum. RP2350/BTstack memory, HIDS client contexts and peripheral behavior impose a finite practical limit.
+- fixed identity from boot;
+- Mouse HID output;
+- minimal Keyboard HID output only for synthetic Escape;
+- no CDC/debug interface;
+- no Bluetooth-driven re-enumeration.
 
-**Planning treatment:** no arbitrary user-visible maximum is frozen now. `mbr-07` is a physical feasibility/capacity gate. It must prove at least two simultaneous BLE HOGP mice and determine the supportable production maximum before release qualification. Saved-device capacity may be larger and is separately bounded by persistent storage/UI pagination.
+What remains open is the exact project-specific VID/PID, manufacturer string and product string.
 
-## AMB-006 — `DEFAULT REMAP` vs `STANDARD REMAP`
+Historical BLU2USB strings are evidence only and must not be copied automatically.
 
-**Severity:** MATERIAL/EDITORIAL.
-
-The new `MOUSE OPTIONS` layout says `DEFAULT REMAP`, matching accepted G06. `home-connected` dynamic-label rules call the same profile `STANDARD REMAP` and display `REMAPPED TO STANDARD`; the dedicated pages are named `STANDARD REMAP`.
-
-Undefined: canonical internal/profile name and exact visible wording.
-
-**Planning treatment:** runtime uses an internal stable profile identifier independent from display strings. Literal display wording must be frozen before the UX gate.
-
-## AMB-007 — Learn/search-first title text conflicts inside the new rules
-
-**Severity:** MATERIAL/EDITORIAL.
-
-The displayed block says `PRESS TO LEARN KEYS`; a rule refers to `PRESS A KEY TO LEARN`; accepted G06 used `PRESS TO LEARN A KEY`.
-
-Because the supplied file both replaces the old layout and contradicts itself, no variant is silently preferred.
-
-## AMB-008 — New character coordinates vs old accepted coordinates
+## AMB-002 — `DEFAULT REMAP` vs `STANDARD REMAP`
 
 **Severity:** MATERIAL/EDITORIAL.
 
-The new Learn/search-first layouts explicitly move several tokens compared with G06 (for example three `JOY` labels begin at columns 3/10/17 instead of old 1/8/15). These explicit new coordinates are intended to supersede old positions, but some wording says “linha 16” where the context clearly appears to discuss a column and some headings say “na coluna” for a row.
+`MOUSE OPTIONS` says `DEFAULT REMAP`, while dedicated pages and HOME summary use `STANDARD` terminology.
 
-**Planning treatment:** preserve the supplied coordinate declarations verbatim, then freeze corrected coordinate assertions as an explicit mbr-00 decision before rendering implementation. Never infer positions from visual spacing alone.
+They denote the same mapping. Internal profile identity must remain display-string independent.
 
-## AMB-009 — `searching-first` vs `searching-first-mouse`
+## AMB-003 — Learn/search-first title wording
+
+**Severity:** MATERIAL/EDITORIAL.
+
+The supplied screen block says `PRESS TO LEARN KEYS`; earlier prose variants include `PRESS A KEY TO LEARN` and historical G06 used `PRESS TO LEARN A KEY`.
+
+The canonical current screen reference uses `PRESS TO LEARN KEYS`, but mbr-00 must freeze the literal table and treat that freeze as acceptance authority.
+
+## AMB-004 — Didactic character coordinates
+
+**Severity:** MATERIAL/EDITORIAL.
+
+The new coordinate declarations intentionally supersede historical G06 horizontal positions, but some source wording used “linha” where the context clearly meant a column.
+
+mbr-00 must freeze exact 1-based token-column assertions from the current canonical screen reference. Renderer implementation may not infer positions from Markdown spacing.
+
+## AMB-005 — `searching-first` naming aliases
 
 **Severity:** EDITORIAL.
 
-The screen is named `searching-first`, while several flows/rules call it `searching-first-mouse`.
+Older source prose sometimes says `searching-first-mouse`; current canonical screen ID is `searching-first`.
 
-**Architecture treatment:** one internal screen ID only; exact canonical name must be normalized in mbr-00 and all aliases documented.
+Implementation must use one canonical ID and may preserve the old phrase only as historical prose.
 
-## AMB-010 — Incomplete Pair New rule
-
-**Severity:** MATERIAL.
-
-The rule ends mid-sentence: “caso o mouse esteja na lista”. The intent appears to be that `pair-new` accepts only a Mouse not already saved, but the missing consequence is not specified.
-
-**Architecture treatment:** candidate classification can distinguish already-saved vs new without deleting or overwriting anything. The UX behavior after discovering a saved peer while `pair-new` is active remains open.
-
-## AMB-011 — Pair/Retry Back destinations
+## AMB-006 — Pair New handling of already-saved candidates
 
 **Severity:** MATERIAL.
 
-Accepted G06 had a global rule: `KEY B` means exactly one logical page Back. The new `retry-pair-new` label says `KEY B: BACK TRY SAVED`, suggesting a semantic transition that may also start a saved-device search. `pair-new` says `CANCEL` but does not state the precise destination/side effect.
+Pair New is defined as new-only. A candidate already present in Saved Devices must not be accepted as the new pairing winner.
 
-**Planning treatment:** preserve release-triggered Back semantics and model navigation separately from search commands. Exact transition table must be frozen before mbr-08/mbr-09.
+Still to freeze: whether such a candidate is silently ignored while the Pair New window continues, explicitly rejected with UI feedback, or causes another documented behavior.
 
-## AMB-012 — `JOY LEFT: GO TO HOME` conflicts with inherited G06 rule
+It must not delete/overwrite the saved record.
 
-**Severity:** BLOCKER for that screen.
-
-Accepted G06 explicitly removed all `GO TO HOME` behavior and defined Back as one logical page. The new `escape-active` screen explicitly prints `JOY LEFT: GO TO HOME`.
-
-Because this is an explicit new rule, it would normally supersede G06, but it appears only on one profile feedback screen and conflicts with the otherwise inherited navigation model. It must be confirmed as intentional rather than treated as a typo.
-
-## AMB-013 — Lock availability on replaced screens
+## AMB-007 — `KEY B: BACK TRY SAVED` exact transition
 
 **Severity:** MATERIAL.
 
-Some new screens print `KEY Y: LOCK`, some do not, and Escape screens differ from Passthrough/Standard. Accepted G06 also had hidden Key Y Lock on some pages.
+Product-level behavior is constrained: when navigation reaches HOME with saved mice and no live connection, `home-searching` automatically starts saved search.
 
-Undefined: does omission in the new replacement layout intentionally remove lock, or are old hidden controls inherited?
+Still open is the exact one-step screen/navigation action from `retry-pair-new` on Key B. The implementation must not create a second independent reconnect mechanism.
 
-**Planning treatment:** every screen gets an explicit control map in the final transition table; no hidden control is inferred merely because an old screen with similar purpose had one.
-
-## AMB-014 — `first-mouse-connected` lifetime and exit behavior
+## AMB-008 — `JOY LEFT: GO TO HOME` on `escape-active`
 
 **Severity:** MATERIAL.
 
-The screen must appear after the very first Mouse connects, but the rules do not state how/when it transitions to `home-connected`, whether all didactic keys are inert like Learn, or which action opens home.
+The current screen explicitly includes this action, while historical G06 generally removed special “Go To Home” behavior in favor of logical Back.
 
-The visible text suggests Key Y is associated with `OPEN HOME`, while old Learn semantics associated Key Y with lock. This needs an explicit transition/control map.
+mbr-00 must decide whether the explicit new screen rule intentionally supersedes the old navigation rule or should be normalized.
 
-## AMB-015 — Saved-device status/profile for multiple live mice
-
-**Severity:** MATERIAL.
-
-Per-Mouse saved pages show `STATUS: CONNECTED` and `PROFILE: STANDARD`, which naturally supports several pages showing CONNECTED at once. Exact values for disconnected/saved states and canonical profile strings are not exhaustively specified.
-
-**Architecture treatment:** projection derives from `SavedMouse + optional live session + confirmed profile`. Do not collapse status to one global active Mouse.
-
-## AMB-016 — Removing a connected Mouse while others remain
+## AMB-009 — Lock availability on screens where omitted
 
 **Severity:** MATERIAL.
 
-Rules specify destination based on whether it is the only **saved** Mouse, but do not explicitly say how a live connected session is disconnected/released before credentials/profile data are erased.
+Some new screens print `KEY Y: LOCK`; others omit it. Historical G06 sometimes had hidden lock controls.
 
-**Inherited safety treatment:** removal must be transactional and release only that Mouse's source ownership. Other connected mice continue uninterrupted. The exact UI timing/error presentation if disconnect/credential deletion fails remains open.
+Every final screen needs an explicit control map. Omitted controls must not be inherited merely by analogy.
 
-## AMB-017 — Long Mouse names and 21-character layout
+## AMB-010 — `FIRST MOUSE CONNECTED` lifetime/control semantics
+
+**Severity:** MATERIAL.
+
+The page must appear after the first Mouse is successfully saved/ready, but the complete release-action map is not yet frozen.
+
+Visible text associates `OPEN HOME -> KEY Y` with the right-side controls and also presents lock/unlock teaching. mbr-00 must freeze exact interaction semantics.
+
+## AMB-011 — Disconnected status word in Saved Devices
 
 **Severity:** MATERIAL/EDITORIAL.
 
-The new layouts use dynamic Mouse names, but no truncation, scrolling, wrapping or fallback-name policy is specified. G06 renderer contracts used a 21-character semantic width.
+`STATUS: CONNECTED` is defined for the one live Mouse. The exact visible word for every saved-but-disconnected Mouse is not frozen (`SAVED`, `DISCONNECTED`, etc.).
 
-**Planning treatment:** storage keeps the full normalized available name; projection needs a deterministic display policy frozen before renderer acceptance.
+Underlying state is unambiguous.
 
-## AMB-018 — New USB VID/PID/manufacturer/product strings
+## AMB-012 — Long Mouse names
 
-**Severity:** BLOCKER for USB identity acceptance.
+**Severity:** MATERIAL/EDITORIAL.
 
-G06 used VID `0xCAFE`, PID `0x4010`, manufacturer `BLU2USB`, product `BLU2USB Mouse + Keyboard`, and two HID interfaces. The new project name/scope makes that literal identity misleading and the Keyboard interface conflicts with Mouse-only scope.
+Dynamic Mouse names may exceed the 21-character semantic width. Storage should retain the best complete normalized name available, but projection needs a deterministic truncation/ellipsis/scroll policy.
 
-**Architecture treatment:** identity remains fixed from boot and never Bluetooth-driven, but exact descriptor identity must be explicitly frozen in mbr-00/mbr-04.
+Renderer must not invent this policy.
 
-## AMB-019 — Exact BLE Mouse transport scope
+## AMB-013 — Search timeout constants
 
 **Severity:** MATERIAL.
 
-Accepted G06 Mouse transport is BLE HOGP. The new wording says Mouse generically but does not explicitly request Bluetooth Classic Mouse support.
+First-Mouse search is logically indefinite. Saved-device search and Pair New are bounded, but exact durations are not frozen.
 
-**Planning default:** BLE HOGP is the only planned production Mouse transport because it is the accepted baseline. Classic HID Mouse is out of scope unless explicitly added later; this is an assumption to be ratified, not an implicit feature claim.
+Timing belongs to coordinator policy constants, not BLE parser logic.
 
-## AMB-020 — `FORWARED`, `T0`, capitalization and metadata typos
+## AMB-014 — Literal typo/capitalization normalization
 
 **Severity:** EDITORIAL.
 
-Known literal anomalies in the supplied file include:
+Historical source anomalies include `REMAPPED T0 ESCAPE`, `FORWARED`, `kEY Y`, stray backticks and similar transcription issues.
 
-- `REMAPPED T0 ESCAPE` (`T0` with zero);
-- `MIDDLE IS FORWARED`;
-- lower-case `kEY Y`;
-- `Titulo da tela:` containing what appears to be a flow;
-- blank `Fluxo até a tela` fields;
-- stray backticks in names/flows;
-- “DEFAULT OPTIONS” where singular may have been intended.
+The current product manual already normalizes several obvious typos. mbr-00 must freeze the final literal screen table so renderer tests and physical acceptance use one source of truth.
 
-These are preserved in the verbatim requirement file. No renderer should implement corrected wording until the canonical literal table is frozen.
+## AMB-015 — Bluetooth Mouse transport scope
 
-## AMB-021 — Search timeout values
+**Severity:** MATERIAL, low risk.
 
-**Severity:** MATERIAL.
+Current production scope is BLE HOGP Mouse because that is the accepted G06 Mouse baseline. Bluetooth Classic Mouse support is not planned.
 
-No-saved first search is logically indefinite/very long. Saved search and Pair New are finite but no duration is specified. G06 used an 8-second bound for preferred bonded reconnect, which is evidence but not automatically the new UX timeout.
-
-**Architecture treatment:** expose timing as coordinator policy constants with host-testable state transitions. Exact values are gate decisions, not BLE-parser constants.
-
-## AMB-022 — What happens when a new Mouse connects while others are already connected
-
-**Severity:** BLOCKER for full multi-Mouse UX.
-
-Undefined whether `home-connected` should immediately focus the newly connected Mouse, preserve the prior focus, or indicate several connections another way. A connection event must never disconnect existing mice merely to simplify the UI.
-
-## AMB-023 — Global CustomTemplate effect on several Custom-profile mice
-
-**Severity:** MATERIAL.
-
-G06 defines one global CustomTemplate. With several connected mice whose profile kind is Custom, committing a changed global template would logically change all of them. The new rules do not say whether that is desired.
-
-**Planning inherited default:** keep the G06 global template model until explicitly superseded, but mbr-09 must not close without testing and documenting the multi-Mouse consequence. If independent per-Mouse custom mappings are wanted, that is a schema/product change.
-
-## AMB-024 — First-search control behavior vs color text mismatch
-
-**Severity:** MATERIAL/EDITORIAL.
-
-`searching-first` says no key navigates and only the corresponding label changes white while held, but its rule names `PRESS A KEY TO LEARN` while the screen text is `PRESS TO LEARN KEYS`. It also does not explicitly state whether Key Y can lock on this screen.
-
-**Planning treatment:** treat searching-first as its own didactic+search state, not automatically the old Learn screen. Explicit control map required.
+mbr-00 should explicitly ratify BLE HOGP-only Mouse transport so implementation cannot expand scope opportunistically.
 
 ## Decision discipline
 
-- An ambiguity may be resolved only by an explicit planning edit recording the chosen behavior and affected gates.
-- Typographical cleanup that changes literal displayed text is still a decision because screen text is part of the acceptance contract.
-- Implementation may create abstractions that keep options open, but may not claim a blocked feature accepted.
-- When a decision changes a previously inherited G06 behavior, update the migration ledger and regression matrix in the same planning change.
+- An ambiguity is resolved by updating planning/product documentation, not by silently choosing in code.
+- Typographical cleanup that changes displayed text is still part of the UI acceptance contract.
+- Implementation may keep abstractions open for unresolved policy, but may not claim blocked behavior accepted.
+- Resolved simultaneous-Mouse questions must not be reintroduced as “future-proofing”; unnecessary complexity is out of scope.
