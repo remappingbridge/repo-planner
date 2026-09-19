@@ -2,24 +2,25 @@
 
 Status: **PLANNED ONLY — NO GATE EXECUTED**.
 
-Gate IDs are fixed as `mbr-00`, `mbr-01`, ... . The executor must always start from the first incomplete dependency-complete gate. Completing a later gate never waives an earlier one.
+Gate IDs are fixed as `mbr-00`, `mbr-01`, ... . The executor always starts from the first incomplete dependency-complete gate. Completing a later gate never waives an earlier one.
+
+The current product supports multiple saved mice but **only one connected Mouse at a time**. This plan intentionally removes all simultaneous-Mouse feasibility/capacity work.
 
 ## Sequence overview
 
 | Gate | Purpose | Physical acceptance |
 |---|---|---|
-| mbr-00 | Freeze provenance, ambiguity decisions and canonical product/UX contract | No |
-| mbr-01 | Clean repository bootstrap, module ownership and scope guards | No |
+| mbr-00 | Freeze provenance, remaining decisions and canonical product/UX contract | No |
+| mbr-01 | Clean repository bootstrap, module ownership and architecture guards | No |
 | mbr-02 | Host-pure interaction/state/projector + canonical screen/layout tests | No |
 | mbr-03 | Waveshare renderer/HAT integration and physical layout/input acceptance | Yes |
-| mbr-04 | Fixed Mouse-only USB identity and USB report ownership | Yes |
-| mbr-05 | Canonical multi-source Mouse core + one BLE HOGP Mouse passthrough | Yes |
+| mbr-04 | Fixed USB Mouse + synthetic Escape output identity | Yes |
+| mbr-05 | Canonical single-session Mouse core + one BLE HOGP Mouse passthrough | Yes |
 | mbr-06 | Migrate accepted G06 profiles, persistence, bonded reconnect and Logitech HID++ | Yes |
-| mbr-07 | Multiple simultaneous BLE Mouse runtime + aggregation feasibility/qualification | Yes, critical |
-| mbr-08 | Saved/new search policy, multi-Mouse registry, reconnect and removal transactions | Yes |
-| mbr-09 | Complete new Mouse-only UX + per-Mouse profile targeting | Yes |
-| mbr-10 | Resilience, reboot, corruption, disconnect and concurrency regression qualification | Yes |
-| mbr-11 | Final release qualification and immutable accepted baseline | Yes |
+| mbr-07 | Saved/new search, one-live-Mouse replacement, registry/reconnect/removal | Yes |
+| mbr-08 | Complete new UX integration against real runtime state | Yes |
+| mbr-09 | Resilience, reboot, corruption, disconnect and race regression qualification | Yes |
+| mbr-10 | Final release qualification and immutable accepted baseline | Yes |
 
 ---
 
@@ -27,35 +28,49 @@ Gate IDs are fixed as `mbr-00`, `mbr-01`, ... . The executor must always start f
 
 **Depends on:** none.
 
-**Purpose:** create an implementation-ready contract without changing runtime code.
+**Purpose:** produce an implementation-ready contract without changing runtime code.
 
 ### Required work
 
 - re-read `repo-planner/mouse-bridge-remapper/` at current main;
+- re-read current product documentation in `tiagooliveirajs/mouse-bridge-remapper`;
 - verify BLU2USB accepted G06 SHA `7eee024ad4ee726c5a85ffa2f32b9f47187878af` still exists;
 - record source tree/commit provenance for every G06 module/doc to be reused or studied;
-- verify destination `mouse-bridge-remapper` base SHA and preserve `main` according to branch policy;
-- resolve all BLOCKER ambiguities needed by mbr-01 through mbr-06, especially:
-  - `AMB-001` Escape vs Mouse-only USB;
-  - `AMB-002`/`003` focused Mouse/profile target;
-  - `AMB-004` reconnect semantics if it affects early coordinator API;
-  - `AMB-006` profile naming;
-  - `AMB-007`/`008` didactic literal text/coordinates;
-  - `AMB-012` Go-To-Home conflict;
-  - `AMB-014` first-connected behavior;
-  - `AMB-018` USB VID/PID/strings;
-- freeze one canonical screen/control/transition table from `04-ux-state-model.md` and the verbatim requirements;
-- freeze exact Mouse profile table after Escape decision;
-- freeze exact USB identity contract after Escape decision;
-- freeze expected minimum simultaneous-Mouse target for mbr-07 (must be at least 2);
-- produce a migration manifest classifying G06 production files/modules as `REUSE-REFERENCE`, `PORT/ADAPT`, or `EXCLUDE`;
-- explicitly record that G07+ Keyboard work is not a production base.
+- verify destination base SHA and branch policy;
+- explicitly freeze the already-decided architecture rules:
+  - zero or one live Mouse;
+  - multiple saved mice;
+  - Pair New disconnects/releases current Mouse first but keeps it saved;
+  - HOME with saved mice + no live Mouse starts bounded saved search automatically;
+  - disconnect/power-off of live Mouse uses the same HOME search flow;
+  - saved-search timeout -> `DEVICE NOT FOUND`;
+  - Escape retained via minimal fixed USB Keyboard output only;
+  - no Bluetooth Keyboard/Composite product support;
+- resolve remaining blockers/material UX decisions from `02-ambiguity-register.md`, especially:
+  - final USB VID/PID/manufacturer/product strings;
+  - Default vs Standard visible naming;
+  - exact didactic title/coordinates;
+  - Pair New treatment of already-saved candidates;
+  - `BACK TRY SAVED` exact navigation;
+  - `JOY LEFT: GO TO HOME` decision;
+  - lock availability by screen;
+  - first-connected controls;
+  - disconnected Saved Devices word;
+  - long-name display policy;
+  - search timeout constants;
+  - BLE HOGP-only Mouse transport ratification;
+- freeze one canonical screen/control/transition table from current product docs;
+- freeze exact Mouse profile table;
+- freeze exact USB identity/descriptor contract;
+- produce migration manifest classifying G06 modules as `REUSE-REFERENCE`, `PORT/ADAPT`, or `EXCLUDE`;
+- explicitly classify simultaneous-Mouse infrastructure as `EXCLUDE` rather than “future work”;
+- explicitly record G07+ Keyboard work as research evidence only.
 
 ### Acceptance
 
-Documentation/provenance only. No destination firmware feature, no build requirement, no UF2, no physical claim.
+Documentation/provenance only. No destination firmware feature, no build requirement, no UF2 and no physical claim.
 
-**Exit:** all decisions required to implement mbr-01..mbr-06 are explicit and no dependent gate needs to guess product behavior.
+**Exit:** all decisions required to implement mbr-01..mbr-07 are explicit and no dependent gate needs to guess product behavior.
 
 ---
 
@@ -63,26 +78,37 @@ Documentation/provenance only. No destination firmware feature, no build require
 
 **Depends on:** mbr-00.
 
-**Purpose:** establish a clean Mouse-only repository skeleton and prevent obsolete BLU2USB boundaries from leaking into the new product.
+**Purpose:** establish a clean repository skeleton that encodes the current single-live-Mouse product boundaries.
 
 ### Required work
 
-- dedicated `mbr/mbr-01-*` implementation branch from the approved destination base;
-- host/Pico CMake composition and pinned toolchain/SDK inputs based on the accepted G01/G06 environment unless deliberately updated;
-- materialize module boundaries from `03-target-architecture.md`;
-- create architecture checks that prohibit:
+- dedicated `mbr/mbr-01-*` branch from approved destination base;
+- host/Pico CMake composition and pinned toolchain/SDK inputs based on accepted G01/G06 environment unless deliberately updated;
+- materialize module boundaries from `03-target-architecture.md`, including conceptually:
+  - `domain`;
+  - `mouse_registry`;
+  - `mouse_session`;
+  - `output_state`;
+  - `profiles`/`remap`;
+  - `pairing_coordinator`;
+  - `bt_runtime` / `ble_hogp` / `logitech_hidpp`;
+  - `product_storage`;
+  - `usb_hid`;
+  - interaction/UI/renderer/HAT/app;
+- architecture checks prohibit:
+  - more than one ready Mouse session;
+  - simultaneous-Mouse session managers/aggregators added as speculative future-proofing;
   - Keyboard/Composite product modules;
-  - `classic_hid`/`keyboard_transport`;
+  - `classic_hid` / `keyboard_transport`;
   - duplicate TinyUSB ownership;
   - raw BTstack outside runtime/adapters;
   - raw GPIO/SPI outside HAT/renderer adapters;
   - direct flash writes outside storage;
   - UI calling transports;
-  - `.c` textual includes/macro interception patterns;
+  - `.c` textual includes/macro interception;
   - diagnostic CDC/UART-dependent product variants;
   - second Bluetooth lifecycle owner;
-- establish host test target and Pico 2 W production scaffold;
-- preserve no implementation behavior beyond a clean boot/scaffold.
+- establish host test target and Pico 2 W production scaffold.
 
 ### Automated evidence
 
@@ -94,7 +120,7 @@ Documentation/provenance only. No destination firmware feature, no build require
 
 ### Physical acceptance
 
-None unless bootstrap unexpectedly changes hardware assumptions. A generated scaffold UF2 is not product acceptance.
+None. A scaffold UF2 is not product acceptance.
 
 ---
 
@@ -102,27 +128,31 @@ None unless bootstrap unexpectedly changes hardware assumptions. A generated sca
 
 **Depends on:** mbr-01.
 
-**Purpose:** implement the complete new UX behavior as host-pure state/projection logic before hardware rendering or Bluetooth.
+**Purpose:** implement the complete UX state/projection logic as host-pure code before hardware rendering or Bluetooth.
 
 ### Required work
 
 - release-triggered HAT interaction state machine;
-- lock/help/back/cancel semantics from mbr-00 decisions;
+- lock/help/back/cancel semantics from mbr-00;
 - canonical screen IDs and transition table;
-- dynamic projections for Mouse name, `N OF M`, status and profile;
-- focused-Mouse abstraction separated from runtime connection set;
-- Pair/Saved/Retry commands emitted as semantic application commands only;
-- all new screens represented in host model;
-- Custom draft editing semantics;
-- no old Keyboard/Composite pages;
+- one HOME resolver:
+  - no saved -> `searching-first`;
+  - saved + live -> `home-connected`;
+  - saved + no live -> `home-searching` + semantic start-saved-search command;
+- saved-search timeout -> `home-retry`;
+- live disconnect -> immediate `home-searching` projection + saved-search command;
+- Pair New semantic replacement flow; host model never projects two live mice;
+- dynamic projections for Mouse name, `N OF M`, status/profile and Custom mappings;
+- all new screens represented;
+- no old Keyboard/Composite or multi-connected count/focus state;
 - literal/golden row tests and exact token-coordinate assertions;
 - name-length policy tests;
 - selected-white/current-cyan priority tests;
-- stale async transaction event filtering tests.
+- stale async transaction/session filtering tests.
 
 ### Automated acceptance
 
-Every canonical screen has deterministic projected rows/control map for representative states, all resolved character coordinates pass, and forbidden old screens are absent.
+Every canonical screen has deterministic projected rows/control map for representative states; all final character coordinates pass; forbidden states/screens are absent; HOME and Pair New transitions satisfy the single-live invariant.
 
 ### Physical acceptance
 
@@ -134,93 +164,97 @@ None.
 
 **Depends on:** mbr-02.
 
-**Purpose:** port/adapt accepted G03 renderer/HAT behavior to the new layouts without repeating pixel relocation and control-label regressions.
+**Purpose:** port/adapt accepted G03 renderer/HAT behavior to the new layouts without repeating pixel relocation or control-label regressions.
 
 ### Required work
 
 - ST7789 240x240 backend for Waveshare Pico-LCD-1.3;
 - accepted HAT GPIO mapping, active-low handling and debounce;
-- retained G03 physical vertical relocation unless mbr-00 explicitly superseded it;
-- exact new didactic horizontal coordinates;
+- retained G03 physical vertical relocation unless explicitly superseded;
+- exact current didactic horizontal coordinates;
 - black/dark-magenta region rules and semantic colors;
 - visible press feedback and release actions;
 - Help ownership;
 - lock/backlight-off and consumed unlock;
 - rendering independent from Bluetooth availability;
-- screenshot/framebuffer or renderer-command golden tests where practical.
+- framebuffer/renderer-command golden tests where practical.
 
 ### Physical closure
 
-Executor supplies exact UF2, source SHA, UF2 SHA-256, board/toolchain metadata and numbered scenarios. Minimum scenarios must cover:
+Executor supplies exact UF2, source SHA, UF2 SHA-256, board/toolchain metadata and numbered scenarios. Minimum scenarios:
 
 1. no-saved `searching-first` visual layout;
-2. `first-mouse-connected` fixture/projection visual layout without claiming real Bluetooth connection;
-3. saved-search/home fixtures;
-4. all remapper screens with representative dynamic text;
-5. Saved Devices pages/pagination;
-6. Learn screen exact token positions;
+2. `first-mouse-connected` fixture visual layout;
+3. `home-searching` / `home-retry` / `home-connected` fixtures;
+4. all remapper screens;
+5. Saved Devices pagination and connected-name cyan fixture;
+6. Learn exact token positions;
 7. press-white/release-restored behavior;
 8. Help any-key return;
 9. lock/unlock consumption;
-10. long-name display policy and no clipping.
+10. long-name policy and no clipping;
+11. no multi-device count screen/state.
 
-This gate validates UI/HAT; it does not claim Bluetooth or USB Mouse forwarding.
+This gate validates UI/HAT only; it does not claim Bluetooth or USB forwarding.
 
 ---
 
-# mbr-04 — Fixed Mouse-only USB identity
+# mbr-04 — Fixed USB Mouse + synthetic Escape identity
 
-**Depends on:** mbr-03 and resolved `AMB-001`/`AMB-018`.
+**Depends on:** mbr-03 and frozen USB identity from mbr-00.
 
-**Purpose:** establish the stable host-facing USB product before live Bluetooth forwarding.
+**Purpose:** establish stable host-facing USB behavior before live Bluetooth forwarding.
 
 ### Required work
 
-- only `usb_mouse` owns TinyUSB descriptors/tasks/report submission;
-- exact descriptor identity frozen by mbr-00;
-- no Bluetooth-driven re-enumeration path;
+- only `usb_hid` owns TinyUSB descriptors/tasks/report submission;
+- exact VID/PID/manufacturer/product strings frozen by mbr-00;
+- fixed Mouse HID output;
+- minimal Keyboard HID output sufficient only for documented synthetic Escape;
+- no Bluetooth-driven `tud_disconnect()/tud_connect()` re-enumeration;
 - no CDC/MSC/MIDI/vendor-debug interface;
-- Mouse report supports required buttons, X/Y, vertical wheel and horizontal pan as frozen by contract;
-- report builder accepts canonical aggregated state, not BLE report bytes;
-- test maximum/minimum relative chunking;
-- production identity remains unchanged through UI lock/profile fixture transitions.
-
-If mbr-00 chooses a synthetic Keyboard interface to retain Escape, this gate's title/scope must be explicitly amended before execution because that would no longer be strictly Mouse-only USB. Do not smuggle that interface into the implementation under the existing wording.
+- Mouse report supports required buttons, X/Y, vertical wheel and horizontal pan;
+- report builder accepts canonical output state, never BLE report bytes;
+- Escape report builder accepts canonical synthetic held state;
+- test relative min/max chunking and held-state backpressure;
+- production identity remains unchanged through UI/profile fixtures.
 
 ### Physical closure
 
-Numbered scenarios verify host descriptor/interfaces/strings, movement-report fixture behavior where possible, stable enumeration through HAT navigation/lock, and absence of surprise CDC/debug interfaces.
+Numbered scenarios verify descriptors/interfaces/strings, stable enumeration, Mouse report behavior from fixtures where possible, Escape press/hold/release from fixtures, lock/navigation stability and absence of surprise debug interfaces.
 
 ---
 
-# mbr-05 — Canonical Mouse core and single BLE HOGP passthrough
+# mbr-05 — Canonical single-session Mouse core and BLE HOGP passthrough
 
 **Depends on:** mbr-04.
 
-**Purpose:** reproduce the accepted G05 BLE Mouse path under multi-Mouse-capable internal boundaries, while physically validating one real Mouse first.
+**Purpose:** reproduce accepted G05 BLE Mouse behavior under the final one-live-session architecture.
 
 ### Required work
 
-- canonical `MouseSessionId`/`MouseSourceId`;
-- source-aware button ownership aggregation;
+- `MouseId` / `MouseSessionId` with generation token;
+- one optional authoritative live session;
+- held output state within the current session, including multiple physical sources mapping to one target;
 - bounded relative X/Y/wheel/pan accumulation and TinyUSB-accepted consumption;
 - one BTstack/CYW43 lifecycle owner;
 - BLE HID discovery/security/bonding/HIDS Report Protocol;
 - Report Map Mouse classification;
 - canonical parser for buttons/X/Y/wheel/pan;
 - duplicate Report-ID framing normalization and malformed-frame rejection;
-- disconnect/overflow release safety;
+- disconnect/overflow/parser-failure release safety;
+- stale-generation event rejection;
 - generic Mouse behavior independent of Logitech HID++;
-- HAT/LCD remains responsive during Bluetooth activity;
-- internal data structures must already support N sessions even if this gate opens only one physical connection.
+- HAT/LCD responsiveness during Bluetooth activity;
+- no second ready Mouse path exists.
 
 ### Automated acceptance
 
-Include negative malformed-frame cases, duplicate down/up, disconnect-held-button, overflow cleanup, USB backpressure, stale generation rejection and architecture guards.
+Include malformed frames, duplicate Down/Up, two current-session physical sources mapped to same target, disconnect-held-button, overflow cleanup, USB backpressure, stale generation rejection and architecture guards.
 
 ### Physical closure
 
-Minimum numbered scenarios:
+Minimum scenarios:
 
 1. fresh BLE HOGP Mouse pairing;
 2. movement;
@@ -228,7 +262,7 @@ Minimum numbered scenarios:
 4. vertical scroll;
 5. horizontal pan if hardware supports it;
 6. forward/back buttons if available;
-7. disconnect while held with no stuck host button;
+7. disconnect while held with no stuck host output;
 8. reconnect after disconnect;
 9. UI remains responsive while moving/scrolling;
 10. Mouse continues while LCD locked;
@@ -237,42 +271,42 @@ Minimum numbered scenarios:
 
 ---
 
-# mbr-06 — G06 Mouse feature parity: profiles, persistence, reconnect and HID++
+# mbr-06 — G06 feature parity: profiles, persistence, reconnect and HID++
 
-**Depends on:** mbr-05 and the resolved Escape contract.
+**Depends on:** mbr-05.
 
-**Purpose:** migrate every applicable, physically accepted Mouse behavior from BLU2USB G06 before adding simultaneous multi-Mouse runtime complexity.
+**Purpose:** migrate every applicable physically accepted Mouse behavior from BLU2USB G06 into the new single-live-session product.
 
 ### Required work
 
 - Passthrough exact mapping;
 - Default/Standard exact mapping;
-- Escape mapping only if explicitly compatible with resolved product scope;
+- Escape exact mapping through synthetic USB Escape;
 - Custom draft/edit/apply semantics;
-- per-Mouse profile-kind model even though physical acceptance may use one connected Mouse in this gate;
+- per-saved-Mouse confirmed profile kind;
 - global CustomTemplate unless superseded;
 - runtime+persistence-confirmed Apply feedback;
 - versioned power-loss-safe dual-generation product storage;
 - dirty/unapplied Custom draft reboot restoration;
-- restore active profile before input becomes authoritative;
+- restore selected Mouse profile before its input becomes authoritative;
 - BTstack credential separation;
-- bonded BLE reconnect before generic fallback, bounded so absent saved peer cannot block forever;
+- bounded bonded reconnect/fallback;
 - Logitech Lift HID++ Forward diversion/hold/release fix;
-- return to Passthrough removes diversion;
+- Passthrough removes unneeded diversion;
 - live connection/profile projection from runtime events;
-- all relevant G03-G05 regressions.
+- relevant G03-G05 regressions.
 
 ### Physical closure
 
-Re-run every applicable G06 scenario under the new product, including:
+Re-run every applicable G06 scenario, including:
 
-1. G05 passthrough regression;
+1. mbr-05 passthrough regression;
 2. Passthrough profile exactness;
 3. Default/Standard exactness;
-4. Escape exactness/hold-release **only if retained by mbr-00**;
+4. Escape exactness and hold/release;
 5. Custom draft immediate reflection;
-6. Custom complete apply;
-7. profile transition while a mapped button is held;
+6. Custom full Apply;
+7. profile transition while mapped output is held;
 8. generic/non-Logitech fail-safe;
 9. Logitech Forward->Left held drag;
 10. Passthrough restores native Forward;
@@ -282,159 +316,158 @@ Re-run every applicable G06 scenario under the new product, including:
 14. Custom template + dirty unapplied draft survive power cycle;
 15. Logitech Lift bonded reconnect after Pico power cycle without fresh pairing;
 16. generic bonded Mouse reconnect;
-17. absent saved peer eventually yields to allowed generic/new search policy.
+17. absent saved peer yields to bounded timeout behavior rather than trapping runtime.
 
-mbr-06 is the new stable **single-Mouse feature-parity baseline**. mbr-07 must branch from its accepted head.
-
----
-
-# mbr-07 — Multiple simultaneous Mouse feasibility and runtime qualification
-
-**Depends on:** mbr-06.
-
-**Purpose:** prove the fundamental new requirement that several BLE HOGP mice can be connected and forwarded simultaneously, without destabilizing the accepted one-Mouse baseline.
-
-This is a **critical feasibility gate**. Compilation or two saved records is not evidence of simultaneous runtime support.
-
-### Required work
-
-- multiple independent HIDS client/session contexts;
-- coordinator can maintain more than one ready Mouse session;
-- per-session Report Maps/parsers/security state/timers;
-- per-session Logitech/vendor state;
-- source-aware aggregator across mice;
-- disconnect/reconnect one Mouse without disturbing another;
-- profile kind independently associated with each saved Mouse;
-- if global CustomTemplate retained, explicit multi-Mouse behavior tested;
-- bounded queues/resource accounting;
-- determine production simultaneous-Mouse maximum based on physical evidence/resources;
-- no global `the_mouse`/single-connection handle assumptions.
-
-### Mandatory automated tests
-
-- Mouse A + Mouse B hold same target, release A, target remains held until B releases;
-- Mouse A disconnect while B holds target;
-- simultaneous relative motion accumulates deterministically;
-- one session queue/parser failure releases only that session;
-- stale callbacks from A generation N ignored after reconnect generation N+1;
-- profile transition A does not mutate B;
-- HID++ state A does not alter B;
-- removal A does not release B;
-- USB output remains fixed.
-
-### Mandatory physical experiment
-
-At least two independently identifiable BLE HOGP mice must be simultaneously ready and usable. Scenarios include:
-
-1. connect Mouse A then Mouse B without A dropping;
-2. move A and B alternately;
-3. click/hold A while moving B;
-4. both hold the same logical target, release one, verify target remains held from the other;
-5. scroll from both;
-6. disconnect/power off A while B continues;
-7. reconnect A while B continues;
-8. different profiles for A/B where supported by resolved UX targeting fixture;
-9. Logitech HID++ Mouse plus generic Mouse coexistence if available;
-10. lock/unlock display while both continue forwarding;
-11. power/reconnect experiment appropriate to the current saved-search policy;
-12. soak under high motion/report rate with no stuck state or UI starvation.
-
-If two simultaneous mice cannot be made reliable within the chosen stack/resource envelope, stop. Do not proceed to UX polish while claiming the requirement exists.
+mbr-06 is the stable feature-parity baseline for lifecycle integration.
 
 ---
 
-# mbr-08 — Saved/new search, registry, reconnect and removal
+# mbr-07 — Saved/new search, replacement, registry, reconnect and removal
 
-**Depends on:** mbr-07 and resolved `AMB-004`, `AMB-010`, `AMB-011`, `AMB-016`, `AMB-021`.
+**Depends on:** mbr-06 and relevant mbr-00 decisions.
 
-**Purpose:** make persistent multi-Mouse lifecycle semantics match the new screens.
+**Purpose:** implement the final multiple-saved/one-live lifecycle contract.
 
 ### Required work
 
+- persistent registry of multiple saved mice;
 - no-saved logically indefinite first search;
-- finite saved-search transaction and timeout;
-- explicit saved-search strategy for many saved mice;
-- Pair New excludes/handles already-saved peers exactly as frozen;
-- Pair New never destroys existing connected/saved mice on attempt failure;
-- per-Mouse saved identity/name/profile/capability record;
-- status projection for multiple connected mice;
-- transactional remove with source release, disconnect, credential cleanup and product-state update;
-- removal of last saved Mouse returns to first-search policy;
-- removal of one among many preserves other live sessions/records;
-- cancellation/stale completion isolation;
-- reboot reconnection behavior matches frozen policy.
+- HOME entry with saved mice + no live session automatically starts bounded saved search;
+- saved search considers eligible saved identities but accepts only the first successful ready Mouse;
+- saved search timeout -> `home-retry` / `DEVICE NOT FOUND`;
+- live Mouse disconnect/power-off -> release/clear session -> HOME resolver -> automatic saved search;
+- `KEY A: RETRY SEARCH` starts a fresh bounded saved search;
+- Pair New is new-only and accepts one winner;
+- Pair New while connected performs safe release/disconnect first while preserving old SavedMouse record/bond;
+- Pair New failure/cancel leaves old Mouse saved but disconnected;
+- returning to HOME with no live Mouse triggers normal saved search;
+- already-saved candidates in Pair New follow the exact frozen mbr-00 policy;
+- per-saved-Mouse name/profile/capability state;
+- at most one Saved Devices page can project connected/cyan;
+- transactional remove with held-state release, live disconnect if applicable, credential cleanup and product-state update;
+- removal of last saved Mouse returns to `searching-first` + first search;
+- removal of a disconnected saved Mouse does not disturb current live Mouse;
+- stale/canceled transaction completion isolation;
+- power-cycle behavior matches the same HOME resolver.
+
+### Automated acceptance
+
+Host/integration tests cover:
+
+- one-live invariant through all coordinator transitions;
+- saved search one-winner semantics;
+- saved-search timeout;
+- disconnect -> automatic HOME search;
+- Pair New current-Mouse teardown ordering;
+- Pair New failure preserves saved record/bond model;
+- stale Pair New completion after cancel ignored;
+- removal connected vs disconnected;
+- removal last vs non-last;
+- no second ready session can be published.
 
 ### Physical closure
 
-Minimum scenarios cover zero->first Mouse, two or more saved, saved boot reconnect, timeout to home-retry, retry, Pair New success, Pair New with an already-saved peer present, Pair New timeout/retry, removal of connected non-last Mouse, removal of last Mouse, and power cycle after each major registry mutation.
+Minimum scenarios:
+
+1. zero saved -> first Mouse pair;
+2. two or more mice saved over repeated Pair New operations;
+3. boot with saved Mouse available -> reconnect;
+4. boot with all saved mice absent -> bounded search -> `DEVICE NOT FOUND`;
+5. `KEY A` retry then successful reconnect;
+6. connected Mouse powered off -> automatic `home-searching` -> another saved Mouse connects if available;
+7. connected Mouse powered off with no other reachable saved Mouse -> `DEVICE NOT FOUND` after timeout;
+8. Pair New while Mouse A connected: A disconnects, Mouse B pairs and becomes sole live Mouse;
+9. Pair New failure: A remains saved, no live Mouse, returning HOME starts saved search and can reconnect A;
+10. Pair New with already-saved peer present follows frozen policy;
+11. remove disconnected non-last Mouse without disturbing live Mouse;
+12. remove connected non-last Mouse then HOME saved search behavior;
+13. remove last saved Mouse -> `searching-first`;
+14. power cycle after major registry mutations.
 
 ---
 
-# mbr-09 — Complete new UX integration and per-Mouse profile targeting
+# mbr-08 — Complete new UX integration
 
-**Depends on:** mbr-08 and all UX/focus ambiguities resolved.
+**Depends on:** mbr-07 and all remaining UX decisions frozen.
 
-**Purpose:** connect the already-tested UI model to real runtime state and close every 2026-09-19 screen/transition requirement.
+**Purpose:** connect the host-tested UI model to real runtime state and close every current screen/transition requirement.
 
 ### Required work
 
-- real `searching-first`/first-connected lifecycle;
-- real home-searching/home-retry async transitions;
-- real Pair New/retry/help transitions;
-- defined multi-Mouse focus/selection mechanism;
-- `home-connected` dynamic name/profile text from focused Mouse;
-- remapper actions affect exactly the intended Mouse;
-- Saved Devices `N OF M`, name, independent status and confirmed profile;
+- real `searching-first` / first-connected lifecycle;
+- real HOME resolver on boot/navigation/unlock/disconnect;
+- real `home-searching` / `home-retry` async transitions;
+- real Pair New replacement/retry/help transitions;
+- `home-connected` dynamic name/profile from the sole live Mouse;
+- remapper actions affect exactly that Mouse;
+- Saved Devices `N OF M`, one connected/cyan page maximum, confirmed profiles and final disconnected wording;
 - transactional remove feedback/destination;
 - Learn behavior;
 - all Help screens;
 - final lock map;
-- final literal typo/wording normalization from mbr-00;
-- no annotations such as `(nome do mouse)`, `(paginação)`, `(customizável)` rendered literally;
-- no Keyboard/Composite UI remnants.
+- final literal/coordinate normalization;
+- no annotation metadata rendered literally;
+- no Keyboard/Composite or multi-connected UI remnants.
 
 ### Physical closure
 
-Execute a full numbered screen/input matrix with at least two saved/connected mice where applicable, including each profile page, dynamic summary, pagination, Help, Back/Cancel, lock/unlock and async connection/disconnection while the relevant page is open.
+Execute a complete numbered screen/input matrix covering:
+
+- zero saved;
+- one/many saved;
+- live connected;
+- disconnected and searching;
+- search timeout/retry;
+- Pair New replacement success/failure;
+- each profile page;
+- dynamic summary;
+- Saved Devices pagination/status/colors;
+- Help;
+- Back/Cancel;
+- lock/unlock;
+- async connect/disconnect while relevant pages are visible.
 
 ---
 
-# mbr-10 — Resilience and regression qualification
+# mbr-09 — Resilience and regression qualification
 
-**Depends on:** mbr-09.
+**Depends on:** mbr-08.
 
-**Purpose:** treat the firmware as one integrated appliance and attack the failure boundaries that historically caused regressions.
+**Purpose:** attack integrated failure boundaries and ensure the simpler architecture still preserves all safety guarantees.
 
 ### Required work / tests
 
 - repeated power cycles with valid state;
 - corrupt newest product slot -> fallback to previous valid generation;
 - no valid product record -> safe defaults/first-search behavior;
-- power interruption/fault-injection around persistence where testable;
-- one Mouse disconnect while holding each mapped target;
-- simultaneous mice owning same target;
-- queue overflow/failure controls;
-- repeated profile switches while buttons held;
+- power interruption/fault injection around persistence where testable;
+- live Mouse disconnect while each mapped target/Escape is held;
+- two physical source buttons from one Mouse mapped to same target, release one then the other;
+- queue/parser failure release controls;
+- repeated profile switches while held;
 - Pair New cancel/retry races;
-- stale async connection completion after cancel;
+- stale connection completion after cancel/replacement;
+- replacement ordering prevents two ready sessions;
 - remove vs disconnect race;
-- bonded reconnect with one saved peer absent and another available;
+- saved search with one/many absent saved peers;
+- connected Mouse power-off -> automatic saved search -> timeout or alternate saved reconnect;
 - Logitech HID++ unsupported/failure path;
 - long Mouse names/unusual Report Maps/malformed reports;
 - sustained report traffic while navigating/locking/rendering;
-- USB host suspend/resume if supported by product contract;
+- USB host suspend/resume if in product contract;
 - no USB identity drift/re-enumeration;
-- production image contains no forbidden Keyboard/Composite/CDC feature according to final mbr-00 scope decision.
+- no forbidden Keyboard/Composite/debug feature;
+- no simultaneous-Mouse machinery or state leak.
 
 ### Physical closure
 
-Provide a focused resilience matrix and at least one extended multi-Mouse soak session. Any stuck button, unexplained disconnect loop, corrupted registry, frozen UI or USB re-enumeration keeps this gate open.
+Provide a focused resilience matrix and at least one extended single-Mouse soak including repeated disconnect/reconnect and Pair New replacement cycles. Any stuck output, false connected UI, endless search outside first-search policy, corrupted registry, frozen UI or USB re-enumeration keeps this gate open.
 
 ---
 
-# mbr-11 — Final release qualification
+# mbr-10 — Final release qualification
 
-**Depends on:** mbr-10.
+**Depends on:** mbr-09.
 
 **Purpose:** create the first immutable accepted Mouse Bridge Remapper baseline only after every prior gate is satisfied.
 
@@ -444,28 +477,33 @@ Provide a focused resilience matrix and at least one extended multi-Mouse soak s
 - clean production build from that committed revision;
 - rerun all host/architecture/layout tests;
 - rerun production Pico 2 W build;
-- verify final descriptor and forbidden-feature checks;
+- verify final USB descriptor and forbidden-feature checks;
 - produce release candidate UF2 + SHA-256 + size + board/SDK/toolchain metadata;
 - publish complete enumerated physical acceptance matrix covering:
   - boot with zero saved mice;
   - first pair;
+  - multiple saved records;
   - saved reconnect;
-  - Pair New;
-  - several simultaneous mice;
+  - connected Mouse power-off -> automatic saved search;
+  - saved search timeout -> `DEVICE NOT FOUND`;
+  - Retry Search;
+  - Pair New replacement success and failure recovery;
   - each retained profile;
   - Custom editing/apply;
   - Logitech HID++ behavior;
-  - per-Mouse profile targeting;
-  - Saved Devices/remove-last/remove-one-of-many;
+  - Saved Devices/remove-last/remove-non-last;
   - lock/help/navigation;
   - power-cycle persistence;
   - failure/reconnect safety;
-  - fixed USB identity;
+  - fixed USB Mouse + synthetic Escape identity;
+  - proof that no two Mouse sessions become ready simultaneously;
 - operator reports every required scenario PASS on the exact candidate;
-- create immutable acceptance record with exact artifact hashes and known limitations/capacity (including supported simultaneous-Mouse maximum).
+- create immutable acceptance record with exact artifact hashes and known limitations.
 
 No release/merge/tag is implied merely by preparing the candidate. Final repository integration policy must be explicitly followed at execution time.
 
 ## Universal gate rule
 
-A physical gate is never “done” because CI is green. The executor must supply the exact `.uf2` and numbered scenarios, and the gate remains pending until the operator reports results for that exact source/artifact. A failed physical scenario keeps the same gate open; fix, rebuild, identify the new candidate, and rerun all scenarios affected by the change.
+A physical gate is never complete because CI is green. The executor must provide the exact `.uf2` and numbered scenarios, and the gate remains pending until the operator reports results for that exact source/artifact.
+
+A failed physical scenario keeps the same gate open: fix, rebuild, identify the new candidate, invalidate affected evidence and rerun all behavior that could have changed.
