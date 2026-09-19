@@ -1,271 +1,147 @@
 # Target architecture — Mouse Bridge Remapper
 
-Status: **DESIGN ONLY / NO MBR GATE EXECUTED**.
+Status: **FROZEN BY MBR-00**.
 
-This architecture is intentionally simpler than the superseded simultaneous-mouse design. The product may save many mice but allows **zero or one live connected Mouse session**.
+The product may save many mice but has zero or one authoritative live Mouse. Architecture must stay as simple as that contract permits.
 
-## 1. Architectural goals
+## 1. Goals
 
-1. Mouse is the only Bluetooth product device type.
-2. Multiple saved Mouse records are allowed.
-3. At most one Mouse may be ready/connected at any time.
-4. Pair New replaces the live session; it never overlaps two authoritative Mouse sessions.
-5. HOME uses one deterministic resolver for startup, navigation and disconnect recovery.
-6. BLE transport details never leak into remap, UI or USB logic.
-7. Held output is released safely before disconnect, replacement, removal or invalidation.
-8. Product state and Bluetooth security credentials have separate ownership and coordinated deletion.
-9. UI is event/projector driven and never calls BTstack primitives directly.
-10. Accepted G06 reconnect, persistence, Logitech HID++, release-safety, pixel-layout and interaction lessons become regression constraints from the first relevant gate.
-11. Bluetooth Keyboard/Composite product modules do not exist.
-12. Synthetic Escape is allowed only as minimal USB Keyboard output from Mouse remapping.
+1. Bluetooth product device type: Mouse only.
+2. Mouse transport: BLE HOGP only.
+3. Multiple saved Mouse records; at most one authoritative ready Mouse.
+4. Pair New keeps a healthy current Mouse live while qualifying an unsaved replacement, then performs one safe handoff.
+5. Unified HOME resolver for startup/navigation/disconnect recovery.
+6. BLE details never leak into remap/UI/USB.
+7. Held output is release-safe on disconnect/handoff/removal/profile change/failure.
+8. Product state and BT credentials have separate ownership.
+9. UI is semantic/event-driven and never calls BTstack directly.
+10. Preserve accepted G06 reconnect, persistence, HID++, HAT, renderer and USB lessons.
+11. No Bluetooth Keyboard/Composite product modules.
+12. Synthetic Escape is a minimal fixed USB output exception only.
 
-## 2. System diagram
+## 2. Component model
 
 ```text
-HAT GPIO
-   |
-   v
-+------------------+       +--------------------+
-| hat_input        |------>| interaction_engine |
-+------------------+       | release-triggered  |
-                           +----------+---------+
-                                      |
-                                      v
-                           +--------------------+
-                           | application_service|
-                           +--+-------+-------+--+
-                              |       |       |
-                   +----------+       |       +----------------+
-                   v                  v                        v
-          +----------------+   +-------------+       +------------------+
-          | ui_projector   |   | profiles /  |       | pairing          |
-          | screen models  |   | remap       |       | coordinator      |
-          +-------+--------+   +------+------+       +---------+--------+
-                  |                   |                        |
-                  v                   v                        v
-          +----------------+   +-------------+       +------------------+
-          | renderer       |   | output_state|<------| mouse_session    |
-          | ST7789 240x240 |   | one session |       | None | one ready|
-          +----------------+   +------+------+       +---------+--------+
-                                      |                        |
-                                      v                        v
-                               +-------------+       +------------------+
-                               | usb_hid     |       | ble_hogp        |
-                               | Mouse +     |       | one live client |
-                               | Escape sink |       +---------+--------+
-                               +-------------+                 |
-                                                               v
-                                                      +------------------+
-                                                      | bt_runtime       |
-                                                      | one CYW43 owner  |
-                                                      +------------------+
+HAT -> interaction -> application -> ui_projector -> renderer
+                         |   |
+                         |   +-> pairing_coordinator -> mouse_session -> ble_hogp -> bt_runtime
+                         |
+                         +-> profiles/remap -> output_state -> usb_hid
+                         |
+                         +-> mouse_registry -> product_storage
 
-application_service -> mouse_registry -> product_storage
-ble_hogp -> logitech_hidpp for the current session only
-bt_runtime -> BTstack credential storage
+ble_hogp <-> logitech_hidpp (capability-driven)
+bt_runtime -> BTstack credential store
 ```
 
-`app/main` may compose modules and pump bounded events. It may not become a second owner of BTstack, TinyUSB, GPIO/SPI or flash serialization.
-
-## 3. Domain model
-
-### 3.1 Persistent identity
+## 3. Domain
 
 ```text
 MouseId
-  persistent identity used by Saved Devices / product storage
+  persistent saved identity
 
 MouseSessionId
-  MouseId + generation/token for one live or candidate session
-```
+  MouseId + generation/token
 
-Raw HCI/HIDS handles remain adapter-private.
-
-The generation/token prevents a stale callback from a disconnected/replaced session from mutating a newer session that reused an underlying handle.
-
-### 3.2 Saved Mouse
-
-```text
 SavedMouse {
-  MouseId id;
-  DisplayName name;
-  ProfileKind profile_kind;
-  CapabilitySummary capabilities;
-  VendorMetadata vendor_metadata;
+  MouseId
+  full_normalized_name
+  confirmed_profile_kind
+  capability_metadata
+  vendor_metadata
 }
+
+AuthoritativeSlot = None | MouseSession
+ReplacementCandidate = None | CandidateSession
 ```
 
-There may be several `SavedMouse` records.
+A replacement candidate is non-authoritative and cannot forward product Mouse output before promotion.
 
-There is no Keyboard/Composite device-type union in the product domain.
-
-### 3.3 Live session
+Hard invariant:
 
 ```text
-ConnectedMouseSlot = None | MouseSession
-
-MouseSession {
-  MouseSessionId session_id;
-  MouseId mouse_id;
-  ConnectionPhase phase;
-  ReportCapabilities reports;
-  bool secured;
-  bool ready;
-  HidppSessionState vendor;
-}
+authoritative_ready_mouse_count <= 1
 ```
 
-Invariant:
+## 4. Canonical Mouse boundary
 
-```text
-ready_live_mouse_count <= 1
-```
-
-## 4. Canonical Mouse event boundary
-
-BLE adapters emit canonical events only:
+Adapters emit only:
 
 ```text
 ButtonDown(LEFT|RIGHT|MIDDLE|FORWARD|BACKWARD)
-ButtonUp(LEFT|RIGHT|MIDDLE|FORWARD|BACKWARD)
-Move(dx, dy)
-Wheel(vertical)
-Pan(horizontal)
+ButtonUp(...)
+Move(dx,dy)
+Wheel(delta)
+Pan(delta)
 SessionGone(session_id)
 ```
 
-Rules:
+No Report ID/field offsets leave the BLE adapter. Malformed frames are rejected. Duplicate transitions are idempotent.
 
-- no Report ID or HID field offset survives this boundary;
-- malformed/truncated frames are rejected before canonical emission;
-- duplicate Down/Up is idempotent;
-- session cleanup is mandatory on disconnect, replacement, parser reset, fatal queue continuity loss and removal.
+## 5. Output state
 
-## 5. Output-state model
+No cross-Mouse aggregator exists.
 
-The superseded cross-mouse aggregator is removed.
+Within the authoritative session, each target keeps a set/refcount of physical/remapped sources so two buttons mapping to the same target cannot prematurely release it. Escape has equivalent held-state tracking.
 
-The current session still requires explicit held-state safety because two physical source buttons may map to the same output target.
-
-Conceptually:
-
-```text
-owners[LEFT]     = set of current-session physical/remapped sources
-owners[RIGHT]    = ...
-owners[MIDDLE]   = ...
-owners[FORWARD]  = ...
-owners[BACKWARD] = ...
-owners[ESCAPE]   = ...
-```
-
-The set never contains sources from two different live mice because only one Mouse session may be authoritative.
-
-Consequences:
-
-- releasing one physical source does not release a target still owned by another physical source from the same mouse;
-- disconnect/replacement/removal releases every owner from the outgoing session;
-- profile change releases stale owners from the previous mapping;
-- relative X/Y/wheel/pan remain transient and use bounded accumulation/backpressure handling.
+Relative movement/wheel/pan use bounded accumulation and USB backpressure-safe consumption.
 
 ## 6. Bluetooth runtime
 
-### 6.1 Owner
+Exactly one CYW43/BTstack lifecycle owner. Start from accepted G06 BLE-only runtime evidence; do not import G07 Classic Keyboard architecture.
 
-There is exactly one CYW43/BTstack lifecycle owner.
+An explicit candidate context during Pair New is allowed only to qualify a replacement. It never becomes authoritative before old-session cleanup.
 
-Use the accepted G06 BLE-only runtime as the starting evidence. Do not import G07 Classic-Keyboard multicore architecture merely because it exists historically.
+## 7. Search coordinator
 
-### 6.2 Session model
+### FIRST_MOUSE
 
-Only one HOGP session may reach ready state.
+- registry empty;
+- 8-second finite cycle;
+- automatically repeat until success;
+- first accepted valid unsaved Mouse wins.
 
-The implementation may temporarily have a discovery/connection candidate while replacing another session only if that candidate cannot become authoritative before the old session has completed release/disconnect cleanup. The preferred simple sequencing is disconnect-first, then discover/connect replacement.
+### SEARCH_SAVED
 
-Session state includes:
+- saved mice exist + no authoritative Mouse;
+- starts whenever HOME resolves under that condition;
+- 8-second window;
+- first saved Mouse reaching ready wins;
+- expiry/cancel -> `home-retry` / `DEVICE NOT FOUND`.
 
-- connection/security state;
-- HIDS client context;
-- Report Map and parsed Mouse fields;
-- notification/report subscriptions;
-- identity correlation;
-- timers/retries;
-- optional HID++ correlation state.
+### PAIR_NEW
 
-## 7. Pairing/search coordinator
+- 15-second new-only window;
+- healthy current Mouse remains authoritative/usable during search;
+- already-saved candidates ignored for Pair New acceptance;
+- first valid unsaved candidate may reach `REPLACEMENT_READY`;
+- then handoff:
+  1. freeze old input;
+  2. release old Mouse/Escape held output;
+  3. disconnect/clear old authoritative session, preserving saved record/bond;
+  4. persist/verify new product state;
+  5. promote candidate as sole authoritative Mouse;
+  6. stop Pair New.
+- timeout/cancel before handoff leaves old Mouse live.
 
-Search is modeled as explicit asynchronous transactions.
+If user manually unplugs current Mouse during Pair New/help, Pair New remains new-only. HOME later sees saved + no live and starts SEARCH_SAVED.
 
-### 7.1 First Mouse
-
-```text
-registry empty
- -> start finite FIRST_MOUSE cycle
- -> first valid unsaved candidate
- -> authenticate/classify/persist
- -> ready live session
- -> stop search
-
-cycle timeout/no candidate
- -> start another cycle
-```
-
-Logical first-Mouse search is therefore continuous while no Mouse is saved.
-
-### 7.2 Unified HOME resolver
+## 8. Unified HOME resolver
 
 ```text
-resolve_home():
-  if saved_mice.empty():
-    show searching-first
-    ensure FIRST_MOUSE search active
-  else if live_mouse.ready():
-    show home-connected
-    cancel/avoid saved search
-  else:
-    show home-searching
-    start bounded SEARCH_SAVED transaction
+if registry.empty():
+  searching-first + FIRST_MOUSE
+else if authoritative_mouse.ready():
+  home-connected
+else:
+  home-searching + SEARCH_SAVED
 ```
 
-This resolver is used for:
+Disconnect while HOME visible invokes resolver immediately. Disconnect elsewhere updates runtime truth; resolver runs on next HOME access.
 
-- startup;
-- returning to HOME;
-- unlocking when HOME is the destination;
-- current Mouse disconnect/power-off;
-- returning from failed/canceled Pair New with no live session.
+## 9. Registry/persistence
 
-`SEARCH_SAVED` accepts the first saved Mouse that reaches ready state and stops. If the bounded window expires, project `home-retry` / `DEVICE NOT FOUND`.
-
-### 7.3 Pair New replacement
-
-```text
-request PAIR_NEW
- -> cancel incompatible search
- -> if live_mouse exists:
-      stop new events from it
-      release held Mouse/Escape state
-      disconnect it
-      clear live slot
-      keep SavedMouse + bond
- -> search only for unsaved valid Mouse
- -> first accepted candidate persists + becomes sole live Mouse
- -> stop Pair New
-```
-
-If Pair New times out/cancels, the old Mouse remains saved but disconnected. Pair New does not silently reconnect it.
-
-## 8. Registry and persistence
-
-### 8.1 Ownership domains
-
-- **BT credentials:** BTstack-owned security material.
-- **Product state:** saved names, profile kinds, Custom state and capability/vendor metadata.
-
-They may share physical flash infrastructure but must remain logically/physically protected from overwriting each other.
-
-### 8.2 Product record
-
-Versioned record should include:
+Product record:
 
 ```text
 header { schema_version, generation, length, checksum }
@@ -275,125 +151,69 @@ custom_draft
 custom_draft_dirty
 ```
 
-Do not persist transient live handles, HIDS pointers or queue state.
+Use two alternating verified generations or proven equivalent. Corrupt newest -> previous valid. Product state cannot overwrite BT credentials.
 
-### 8.3 Power-loss behavior
+Removal is transactional; if target is live, release/disconnect before deletion commit.
 
-Use alternating generations/slots or a proven equivalent. Write and verify a new generation before considering it current. Boot selects newest valid generation and falls back to the previous valid one if necessary.
+## 10. Profiles
 
-### 8.4 Remove transaction
-
-For the target `MouseId`:
-
-1. if it is live, stop new events;
-2. release held output;
-3. disconnect/clear live session;
-4. remove product registry/profile association;
-5. remove relevant BT credentials;
-6. persist verified product generation;
-7. publish completion.
-
-Removing a disconnected saved Mouse does not disturb the current live Mouse.
-
-## 9. Profiles/remap
-
-`profiles` and `remap` remain host-pure.
-
-`ProfileKind = PASSTHROUGH | DEFAULT_OR_STANDARD | ESCAPE | CUSTOM`.
-
-The connected Mouse is the only runtime profile target. Each saved Mouse still stores its own confirmed profile kind for restoration when it later becomes connected.
-
-`CustomTemplate` remains global unless a later explicit product change supersedes it.
-
-Apply transaction:
+Canonical kinds:
 
 ```text
-request apply
- -> validate profile
- -> release stale held output from old mapping
- -> apply runtime/vendor requirements
- -> persist verified profile state
- -> publish confirmed profile changed
- -> UI may show ACTIVE/APPLIED state
+PASSTHROUGH | STANDARD | ESCAPE | CUSTOM
 ```
 
-No optimistic success.
+Historical `DEFAULT` is alias-only. Connected authoritative Mouse is the runtime target. Each saved Mouse stores confirmed kind. Global Custom template remains shared.
 
-## 10. Escape and USB
+Apply success requires runtime + persistent confirmation.
 
-Escape is retained as a deliberate output-only exception.
+## 11. Fixed USB
 
-`usb_hid` is the only TinyUSB owner and exposes:
+`usb_hid` sole TinyUSB owner.
 
-- fixed Mouse HID output;
-- minimal Keyboard HID output sufficient for synthetic Escape;
-- no diagnostic CDC or other debug interface.
+MBR-00 identity:
 
-Bluetooth never exposes a Keyboard role.
+- VID `0xCAFE`, PID `0x4011`, bcdDevice `0x0100`;
+- manufacturer `tiagooliveirajs`;
+- product `Mouse Bridge Remapper`;
+- no serial;
+- interface 0 Mouse;
+- interface 1 minimal Keyboard for synthetic Escape;
+- no CDC/debug interface;
+- no Bluetooth-driven re-enumeration.
 
-USB identity is fixed from boot and must not re-enumerate because of Bluetooth/profile/UI state.
+## 12. UI
 
-Exact final VID/PID/strings remain an mbr-00 decision.
+Canonical screen/control authority is destination `docs/manual/06-screen-reference.md`.
 
-## 11. Logitech HID++
+Key rules:
 
-HID++ is bound only to the current Mouse session.
+- `home-connected` shows sole live Mouse name/profile;
+- `home-searching` owns active SEARCH_SAVED;
+- Pair New Help literal text is frozen from 2026-09-20 user decision;
+- `STATUS: DISCONNECTED` is canonical disconnected word;
+- name display = first 21 renderer-supported characters, fallback `UNKNOWN MOUSE`;
+- no hidden controls;
+- instructional B/X/Y and didactic coordinates are frozen;
+- `JOY LEFT: GO TO HOME` on `escape-active` intentionally invokes HOME resolver.
 
-- capability probe is session-scoped;
-- preserve accepted `REPROG_CONTROLS_V4` Forward behavior where needed;
-- preserve true down/hold/up;
-- unsupported peers fail safe to Standard HOGP;
-- profile transition/disconnect/replacement clears stale vendor-derived held output.
+## 13. Architecture guards
 
-No concurrent HID++ contexts are required.
-
-## 12. UI architecture
-
-`interaction_engine` receives HAT transitions and emits semantic commands. `ui_projector` derives screen models. `renderer` only draws them.
-
-Key projection rules:
-
-- `home-connected` always shows the one connected Mouse name/profile;
-- `home-searching` automatically corresponds to an active bounded saved search;
-- current Mouse disconnect causes immediate projection to `home-searching` when saved records remain;
-- saved-search timeout projects `home-retry`;
-- Saved Devices has one saved Mouse per page and at most one cyan/CONNECTED page;
-- there is no multi-connected count/focus state.
-
-Actions remain release-triggered; Help/lock/color/pixel rules follow accepted G06 lessons and current canonical screen documentation.
-
-## 13. Concurrency and bounded queues
-
-Bluetooth callbacks, application/UI and USB service communicate through bounded structures with explicit overflow behavior.
-
-Requirements:
-
-- no unbounded allocation in report callbacks;
-- overflow invalidating state continuity triggers release-safe reset of the current session;
-- flash writes cannot block critical USB/radio servicing indefinitely;
-- repeated Mouse reports do not force unnecessary full-screen redraws;
-- stale transaction/session events are ignored by ID/generation.
-
-## 14. Architecture guards
-
-Automated checks should reject:
+Reject:
 
 - `.c` textual includes;
 - raw BTstack outside Bluetooth runtime/adapters;
-- TinyUSB ownership outside `usb_hid`;
-- GPIO/SPI outside HAT/renderer platform adapters;
-- flash erase/program outside storage infrastructure;
-- Bluetooth Keyboard/Composite production modules;
-- diagnostic CDC product descriptors;
-- second CYW43/BTstack lifecycle owner;
-- UI calling transport functions;
-- transport-specific report structs in remap/USB/UI;
-- more than one ready Mouse session;
-- simultaneous-Mouse aggregation/session-manager code introduced as speculative future-proofing.
+- TinyUSB outside `usb_hid`;
+- GPIO/SPI outside HAT/renderer adapters;
+- flash erase/program outside storage;
+- UI transport calls;
+- Bluetooth Keyboard/Composite modules;
+- a second BT runtime owner;
+- >1 authoritative ready Mouse;
+- speculative simultaneous-Mouse aggregator/focus/capacity code;
+- diagnostic CDC production descriptors.
 
-## 15. Planned module boundaries
-
-Names may be refined before mbr-01, but conceptual ownership is:
+## 14. Planned modules
 
 - `domain`
 - `mouse_registry`
@@ -413,17 +233,4 @@ Names may be refined before mbr-01, but conceptual ownership is:
 - `hat`
 - `app`
 
-There is intentionally no `classic_hid`, `keyboard_transport`, Composite module, multi-session Mouse manager or cross-Mouse aggregator.
-
-## 16. Architecture acceptance principle
-
-The architecture is successful when it makes invalid product states difficult or impossible to express:
-
-- two ready mice cannot coexist;
-- stale callbacks cannot mutate a replacement session;
-- Pair New cannot delete the old saved record merely because it disconnects it;
-- a disconnect cannot leave held Mouse/Escape output stuck;
-- HOME cannot remain falsely connected after session loss;
-- search timeout cannot run forever under saved-search policy;
-- UI cannot bypass pairing/removal/persistence orchestration;
-- Escape cannot grow into Bluetooth Keyboard support.
+No `classic_hid`, `keyboard_transport`, Bluetooth Composite module, multi-live-Mouse manager or cross-Mouse aggregator.
