@@ -1,251 +1,238 @@
 # Gate execution and evidence rules
 
-Status: **PLANNED ONLY**.
+Status: **ACTIVE AFTER MBR-00**.
 
-These rules apply whenever an `mbr-*` gate is later executed. They do not authorize execution now.
+These rules govern mbr-01 onward.
 
 ## 1. One gate at a time
 
 - Select the first incomplete dependency-complete gate.
-- Do not skip a blocked gate because a later feature is easier to build.
-- Re-read the planning directory, current product documentation, predecessor acceptance record and destination repository before editing.
-- Record exact base SHA before the first implementation change.
-- Use an explicit `mbr/...` implementation branch; do not use destination `main` as scratch space.
+- Do not skip a blocked gate.
+- Re-read current planner, current product documentation, predecessor acceptance record and destination repository before editing.
+- Record exact base SHA.
+- Use an explicit `mbr/...` implementation branch; never use destination `main` as scratch space.
 
-## 2. Source authority
+MBR-00 is accepted. The next executable gate is mbr-01.
 
-At every gate, revalidate:
+## 2. Authority order
 
-1. current `repo-planner/mouse-bridge-remapper` planning;
-2. current documentation in `tiagooliveirajs/mouse-bridge-remapper`;
-3. accepted predecessor MBR SHA/artifact/evidence;
-4. immutable BLU2USB G06 SHA `7eee024ad4ee726c5a85ffa2f32b9f47187878af` only for inherited/migration requirements;
-5. destination current code/CI/toolchain state.
+At every gate revalidate:
 
-G07+ BLU2USB Keyboard branches are evidence only and may not be imported wholesale.
+1. current product docs in `tiagooliveirajs/mouse-bridge-remapper`;
+2. current `repo-planner/mouse-bridge-remapper` frozen contract/gate plan;
+3. accepted predecessor MBR evidence;
+4. immutable BLU2USB G06 SHA `7eee024ad4ee726c5a85ffa2f32b9f47187878af` for inherited behavior;
+5. destination current code/toolchain/CI truth.
 
-## 3. Change discipline
+Latest explicit MBR product decisions override older conflicting MBR requirements. G07+ BLU2USB Keyboard work is research evidence only.
 
-Before implementation, the gate must state:
+## 3. Pre-implementation gate record
 
-- objective;
-- dependencies;
+Before code changes record:
+
+- objective/dependencies;
 - exact base SHA;
 - files/modules expected to change;
-- relevant ambiguity decisions;
+- frozen product decisions used;
 - inherited regressions at risk;
 - out-of-scope work;
 - verification commands;
-- physical scenarios if applicable;
-- rollback/recovery plan for persistent-state or descriptor changes.
+- physical scenarios where applicable;
+- rollback/recovery strategy for descriptor/persistence changes.
 
-If implementation discovers a product contradiction, stop dependent work and update planning/documentation. Do not redefine behavior inside code comments or tests merely to make them pass.
+If a true contradiction is discovered, stop dependent work and update documentation/planning first.
 
-## 4. Migration discipline
-
-For G06-derived work:
+## 4. G06 migration discipline
 
 - inspect exact accepted G06 source before porting;
-- prefer behavior-preserving adaptation over blind copy;
-- maintain a migration manifest recording source file/SHA and destination adaptation;
-- preserve G06 release safety, persistence, reconnect, HID++ and UI lessons;
-- **do not** carry forward simultaneous-Mouse machinery from the superseded MBR plan;
-- never bring Bluetooth Keyboard/Composite modules into production;
-- do not copy rejected G07 runtime architecture as a shortcut.
+- use behavior-preserving adaptation, not blind copy;
+- preserve release safety, persistence, bonded reconnect, HID++, interaction and renderer lessons;
+- keep a migration manifest from exact G06 source/module to destination adaptation;
+- never import Bluetooth Keyboard/Composite product scope;
+- never use rejected G07 runtime architecture as shortcut;
+- do not introduce simultaneous-authoritative-Mouse machinery as speculative future-proofing.
 
-## 5. Single-live-Mouse architecture rule
-
-Every implementation gate must preserve:
+## 5. Frozen live-Mouse invariant
 
 ```text
-saved_mice = 0..N persistent records
-live_mouse = None | one ready MouseSession
+saved_mice = 0..N
+live_authoritative_mouse = None | one MouseSession
 ```
 
-Forbidden unless product documentation is explicitly changed first:
+During Pair New, one non-authoritative candidate context is allowed only for replacement qualification. It cannot forward authoritative product Mouse input before promotion.
 
-- two ready Mouse sessions at once;
-- multi-HOGP live-session manager built for speculative future support;
-- cross-Mouse held-button aggregation;
-- multi-connected UI count/focus state;
+Forbidden without product change:
+
+- two authoritative ready mice;
+- multi-connected HOME/focus/count state;
+- cross-Mouse held aggregation;
 - simultaneous-Mouse capacity qualification.
 
-A candidate connection may not become authoritative before the outgoing live session has completed required release/disconnect cleanup.
-
-## 6. HOME/search invariant
-
-All gates touching lifecycle/UI must use the same HOME resolver:
+## 6. Frozen HOME/search policy
 
 ```text
-no saved mice -> searching-first
-saved mice + live Mouse -> home-connected
-saved mice + no live Mouse -> home-searching + automatic bounded saved search
+no saved -> searching-first + repeated 8s FIRST_MOUSE cycles
+saved + live -> home-connected
+saved + no live -> home-searching + 8s SEARCH_SAVED
+SEARCH_SAVED expiry/cancel -> home-retry / DEVICE NOT FOUND
 ```
 
-If saved search expires, transition to `home-retry` / `DEVICE NOT FOUND`.
+A disconnect while HOME is visible invokes this resolver immediately. A disconnect on another page updates connection truth; resolver runs on next HOME access.
 
-If the live Mouse disconnects/powers off and saved records remain, clear/release the session and invoke this same resolver. Do not add a hidden reconnect loop with different behavior.
+## 7. Frozen Pair New policy
 
-## 7. Pair New replacement invariant
+PAIR_NEW is a 15-second new-only search.
 
-Pair New is not additive.
+If current Mouse is healthy:
 
-If a live Mouse exists:
+1. keep it authoritative/usable during search;
+2. ignore already-saved candidates as Pair New winners;
+3. qualify first valid unsaved candidate to non-authoritative replacement-ready;
+4. handoff by freezing old input, releasing old held state, disconnecting/clearing old session while preserving saved record/bond, confirming new product state, then promoting candidate;
+5. never have two authoritative ready mice.
 
-1. stop accepting new events from it;
-2. release held Mouse/Escape state;
-3. disconnect/clear it;
-4. preserve its saved record and bond;
-5. start new-only search;
-6. accept at most one winning unsaved Mouse.
+Timeout/cancel before handoff leaves old Mouse connected.
 
-A failed/canceled Pair New must not delete the previous saved Mouse and must not silently reconnect it. When HOME is later entered with no live Mouse, normal saved search applies.
+If user manually unplugs old Mouse while Pair New/help is visible, Pair New remains new-only. HOME later starts saved search.
 
-## 8. Automated evidence
+## 8. Frozen UI literals/policy
+
+- canonical screen/control table: destination `docs/manual/06-screen-reference.md`;
+- exact Pair New Help text is immutable unless product docs change;
+- canonical profile word `STANDARD`;
+- disconnected status `STATUS: DISCONNECTED`;
+- names: first 21 supported characters, fallback `UNKNOWN MOUSE`;
+- no hidden Lock controls;
+- instructional First Connected/Learn B/X/Y behavior as frozen;
+- `escape-active` GO TO HOME is intentional;
+- actions execute on release;
+- white selection/press overrides cyan current/connected.
+
+## 9. Frozen USB identity
+
+- VID `0xCAFE`, PID `0x4011`, bcdDevice `0x0100`;
+- manufacturer `tiagooliveirajs`;
+- product `Mouse Bridge Remapper`;
+- no serial;
+- HID Mouse interface 0;
+- minimal synthetic-Escape HID Keyboard interface 1;
+- no CDC/debug interface;
+- no Bluetooth-driven re-enumeration.
+
+Any later identity change requires planning/documentation change and revalidation from mbr-04 onward.
+
+## 10. Automated evidence
 
 Every implementation gate records:
 
-- source commit/tree;
-- clean/dirty state;
+- source commit/tree and clean state;
 - board target;
-- Pico SDK version/revision;
-- compiler/toolchain version;
-- configure/build commands;
-- host test commands/results;
+- Pico SDK/compiler/toolchain versions;
+- configure/build commands/results;
+- host tests;
 - architecture/static checks;
-- produced artifact path/name where applicable;
+- produced artifact path/name;
 - UF2 size/SHA-256 where applicable;
-- CI workflow/run/job/artifact identifiers when remote evidence is used.
+- CI workflow/run/job/artifact identifiers where used.
 
-A successful build alone is not behavioral acceptance.
+Build success alone is not behavioral acceptance.
 
-## 9. Physical evidence
+## 11. Physical evidence
 
-Human/operator hardware evidence is required where `05-gates.md` says Yes.
-
-The executor must provide in the same handoff:
+For gates marked physical:
 
 - exact candidate source SHA;
-- exact `.uf2` file;
+- exact UF2;
 - UF2 SHA-256 and size;
 - board/SDK/toolchain metadata;
-- enumerated scenarios with expected observable result;
-- explicit predecessor regressions included.
+- numbered scenarios with expected observable result;
+- predecessor regressions included.
 
-The agent must not mark a physical scenario PASS unless the operator reports it.
+Only the operator may report a physical PASS.
 
-If one scenario fails:
+Failure keeps the same gate open; fix, create a new candidate, invalidate affected evidence and rerun impacted scenarios before advancing.
 
-- the same gate stays open;
-- diagnose/correct within gate scope;
-- produce a new uniquely identified candidate;
-- invalidate affected evidence;
-- rerun failed and behaviorally impacted scenarios;
-- do not advance.
+## 12. High-risk regression triggers
 
-## 10. High-risk regression triggers
-
-Changes touching the following require focused predecessor regression:
+Focused predecessor regression is mandatory when changing:
 
 - BTstack/CYW43 ownership/timing;
-- HIDS session management;
-- Report Map parsing/framing;
+- HOGP live/candidate session management;
+- Report Map/framing;
 - held Mouse/Escape output state;
+- Pair New handoff;
+- HOME/search coordinator;
 - USB descriptors/report submission;
-- profile/remap engine;
-- Logitech HID++;
-- product storage/flash layout;
-- Bluetooth credential handling;
-- HOME/search/Pair New coordinator logic;
-- UI navigation/lock/help;
+- profiles/remap/HID++;
+- product storage/credentials;
+- UI navigation/Help/Lock;
 - renderer geometry/color priority;
-- device removal/reconnect policy.
-
-## 11. Release safety
-
-Production candidates require:
-
-- committed clean source revision;
-- no `-dirty` acceptance candidate;
-- no diagnostic CDC/UART dependency;
-- no hidden debug USB identity;
-- no unapproved Bluetooth Keyboard/Composite module/interface;
-- only the documented minimal USB Keyboard Escape output capability;
-- no forced USB re-enumeration triggered by Bluetooth/profile/UI state;
-- no more than one ready Mouse session;
-- no unresolved blocker relevant to the candidate;
-- all relevant predecessor regressions green;
-- physical evidence where required.
-
-## 12. Persistence safety
-
-For gates that mutate product state:
-
-- keep product state separate from BTstack credentials;
-- use schema version/integrity checks;
-- preserve a previous valid generation until the new generation is verified;
-- test corrupt/torn newest-record fallback;
-- test removal with power cycle;
-- Pair New disconnects but never erases the old saved Mouse as a side effect;
-- removing one disconnected saved Mouse must not disturb the current live Mouse;
-- release the live Mouse before making its removal authoritative so the host cannot retain stuck output.
+- removal/reconnect policy.
 
 ## 13. Held-state safety
 
-Cross-Mouse aggregation is not needed, but held-state correctness remains mandatory.
-
-Tests must include:
+Tests include:
 
 - duplicate Down/Up idempotence;
-- two physical buttons from the current Mouse mapping to the same target;
-- release one while the other remains held;
-- disconnect/replacement while a target is held;
-- profile change while held;
+- two physical current-Mouse buttons mapped to same target;
+- release one while other stays held;
+- disconnect while held;
+- Pair New handoff while held;
+- profile transition while held;
 - synthetic Escape hold/release;
 - parser/queue failure cleanup;
-- stale old-session callback after replacement.
+- stale old-session callback after handoff.
 
-## 14. UI/layout safety
+## 14. Persistence safety
 
-- Original 2026-09-19 rules remain provenance, but 2026-09-20 single-live-Mouse rules supersede conflicting multi-Mouse behavior.
-- Final canonical text comes from the mbr-00 frozen screen table, never opportunistic renderer spelling correction.
-- Dynamic annotations in parentheses are specification metadata, not display text.
-- Exact token-column tests match the intended token, not an earlier coincidental character.
-- New wording does not authorize reverting accepted physical pixel relocation.
-- UI async transitions are driven by semantic runtime events and are host-testable.
-- `home-connected` never has a multi-device count variant.
-- at most one Saved Devices page can project connected/cyan.
+- product state separate from BT credentials;
+- schema version/integrity checks;
+- previous valid generation preserved until new one verified;
+- corrupt/torn newest fallback tested;
+- removal with power cycle tested;
+- Pair New never deletes old saved Mouse/bond as side effect;
+- removing disconnected saved Mouse does not disturb current live Mouse.
 
-## 15. No silent scope expansion
+## 15. Release safety
 
-The following require a planning/documentation change before implementation:
+Production candidates require:
 
-- adding physical Bluetooth Keyboard transport;
-- adding Bluetooth Composite support;
-- adding Bluetooth Classic Mouse transport;
-- allowing more than one live Mouse;
-- reintroducing multi-connected UI/focus/capacity behavior;
-- expanding USB Keyboard output beyond the documented synthetic Escape use;
-- changing global CustomTemplate into per-Mouse Custom mappings;
-- changing USB VID/PID/product strings after mbr-04 acceptance;
-- changing profile mapping semantics;
-- changing persistence schema incompatibly without migration/reset policy.
+- committed clean revision;
+- no debug CDC/UART dependency;
+- no hidden debug USB identity;
+- no Bluetooth Keyboard/Composite product module;
+- only documented synthetic-Escape Keyboard output;
+- <=1 authoritative ready Mouse;
+- no unresolved relevant contract contradiction;
+- all predecessor regressions green;
+- physical evidence where required.
 
-## 16. Gate completion report
+## 16. No silent scope expansion
 
-Every completed gate leaves a durable report containing:
+Requires documentation/planning change before implementation:
 
-- gate ID/status;
-- objective achieved;
-- predecessor accepted SHA;
+- Bluetooth Keyboard/Composite support;
+- Bluetooth Classic Mouse;
+- >1 authoritative live Mouse;
+- multi-connected UI/focus/capacity behavior;
+- USB Keyboard output beyond synthetic Escape;
+- per-Mouse private Custom templates;
+- accepted USB identity changes;
+- profile mapping changes;
+- incompatible persistence schema changes without migration/reset policy;
+- timing changes to FIRST_MOUSE/SEARCH_SAVED/PAIR_NEW.
+
+## 17. Gate completion report
+
+Every completed gate leaves durable documentation with:
+
+- gate/status/objective;
+- predecessor/base SHA;
 - implementation SHA;
 - changed files/modules;
-- architecture/product decisions used;
-- migrations/reuse provenance;
+- product decisions used;
+- migration/reuse provenance;
 - automated evidence;
 - physical evidence or `not required`;
-- known limitations;
-- deviations and authorization;
+- limitations/deviations;
 - exact next gate and entry conditions.
-
-This makes the next execution independent from chat history.
