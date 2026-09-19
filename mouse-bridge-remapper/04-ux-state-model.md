@@ -1,174 +1,270 @@
 # UX state model and layout planning
 
-Status: **PLANNED / LITERAL NORMALIZATION PENDING AMBIGUITIES**.
+Status: **PLANNED / CANONICAL BEHAVIOR WITH SOME LITERAL DECISIONS STILL OPEN**.
 
-The verbatim 2026-09-19 source is `requirements/2026-09-19-user-rules.md`. That file is never silently corrected. This document converts it into an implementation-oriented state model while preserving unresolved contradictions in `02-ambiguity-register.md`.
+The current product authority is the combination of:
 
-## 1. Inherited interaction rules
+- `requirements/2026-09-19-user-rules.md` for original screen/layout intent;
+- `requirements/2026-09-20-single-connected-mouse.md` for the later simplification;
+- current user-facing documentation in `tiagooliveirajs/mouse-bridge-remapper`.
 
-Unless explicitly superseded by a final per-screen control map:
+The 2026-09-20 decision supersedes every earlier simultaneous-Mouse rule.
+
+## 1. Global interaction rules
+
+Unless a final per-screen control map explicitly says otherwise:
 
 - actions execute on release;
-- held visible control text becomes white and returns to its resting semantic color on release;
-- option selection wraps where Up/Down selection exists;
+- visible held control text becomes white and returns to its resting semantic color on release;
 - selected/current cyan rows are white while selected and return to cyan when selection moves away;
 - Help owns all HAT input and `ANY KEY: BACK` returns to its owner;
-- lock affects presentation only, not Mouse USB/Bluetooth/remap/reconnect;
+- lock affects presentation only, not Mouse USB/Bluetooth/remap/search;
 - the unlocking interaction is consumed;
-- UI reacts immediately to async connection/disconnection/profile-confirmation events; it does not wait for another HAT input;
-- screen code sends semantic commands and does not invoke Bluetooth/storage/USB directly.
+- UI reacts immediately to semantic async connection/disconnection/profile/search events;
+- screen code emits semantic commands and never calls Bluetooth/storage/USB directly.
 
-The old G06 universal `KEY B = one-page Back` rule is inherited only where the new screen contract does not explicitly contradict it. `retry-pair-new` and `escape-active` require explicit decisions before implementation.
+## 2. Single HOME resolver
 
-## 2. Root state selection
-
-At boot after product-state validation:
+HOME is not a collection of unrelated entry rules. It is resolved from saved state and the single live connection slot:
 
 ```text
-saved_mice.empty()
-  -> searching-first
+if saved_mice.empty():
+  searching-first
+  ensure FIRST_MOUSE search active
 
-saved_mice.not_empty()
-  -> home-searching + start bounded saved-search transaction
+else if live_mouse.ready():
+  home-connected
+  no saved-search transaction
+
+else:
+  home-searching
+  start bounded SEARCH_SAVED transaction automatically
 ```
 
-No screen choice is based on stale flash count before persistence integrity/schema validation completes.
+This same resolver is used for:
+
+- boot;
+- returning to HOME from another screen;
+- leaving Learn through its HOME action;
+- unlocking when the destination is HOME;
+- live Mouse disconnect/power-off;
+- return from failed/canceled Pair New when no new Mouse connected.
+
+`SEARCH_SAVED` accepts the first saved Mouse that becomes ready and stops. If it expires, UI transitions to `home-retry` / `DEVICE NOT FOUND`.
 
 ## 3. Screen families
 
 ### 3.1 No-saved onboarding/search
 
-- `searching-first`
-  - root when no saved Mouse exists;
-  - starts logically indefinite first-Mouse search made of restartable finite scan/connection cycles;
-  - didactic HAT labels provide press/release visual feedback only according to the final control-map decision;
-  - never creates a second hidden navigation route.
+#### `searching-first`
 
-- `first-mouse-connected`
-  - feedback/onboarding after the first successfully persisted+ready Mouse;
-  - lifetime/exit semantics are `AMB-014`;
-  - must not declare connection before the candidate is classified, secured, persisted and ready.
+- root when no saved Mouse exists;
+- starts logically indefinite first-Mouse search using restartable finite BLE cycles;
+- accepts exactly one first valid Mouse;
+- didactic HAT labels provide visual press feedback only according to final control table;
+- no hidden navigation route.
 
-### 3.2 Saved-device home/search
+#### `first-mouse-connected`
 
-- `home-searching`
-  - root when one or more saved mice exist and a saved-search transaction is active;
-  - list entries: Pair New Mouse, Saved Devices, Learn The Keys;
-  - async saved connection may transition to connected presentation according to final focus policy;
-  - `KEY B: CANCEL SEARCH` must cancel only the search transaction, not remove saved mice or disconnect already-ready sessions.
+- appears only after the first Mouse is authenticated/classified/persisted/ready;
+- exact lifetime/control semantics remain `AMB-010`;
+- after it exits to HOME, HOME resolves to `home-connected` because the first Mouse is live.
 
-- `home-searching-help`
-  - explains bounded saved search.
+### 3.2 Saved-device HOME search
 
-- `home-retry`
-  - entered when the saved-search window ends without the qualifying result;
-  - `KEY A` restarts saved search;
-  - list remains usable.
+#### `home-searching`
 
-- `home-retry-help`
-  - explains that only saved devices were attempted.
+Precondition:
 
-### 3.3 Pair New
+- one or more saved mice;
+- no live Mouse.
 
-- `pair-new`
-  - starts a bounded transaction restricted to valid Mouse candidates not already accepted as saved under the final `AMB-010` rule;
-  - existing ready Mouse sessions continue functioning;
-  - cancellation never deletes/replaces an existing saved record.
+Entry side effect:
 
-- `help-pair-new`
-  - contextual Help.
+- automatically start a bounded `SEARCH_SAVED` transaction.
 
-- `retry-pair-new`
-  - no acceptable new Mouse found in the bounded window;
-  - A retries Pair New;
-  - B destination/side effect is `AMB-011`.
+Visible options:
 
-- `help-retry-pair-new`
-  - explains new-only search scope.
+- Pair New Mouse;
+- Saved Devices;
+- Learn The Keys.
 
-### 3.4 Connected home
+`KEY B: CANCEL SEARCH` cancels only that search transaction; it does not delete saved records.
 
-- `home-connected`
-  - shows one UI-focused Mouse name, not the complete runtime connection set;
-  - selected Mouse/focus semantics are unresolved in `AMB-002`, `AMB-003`, `AMB-022`;
-  - options: focused Mouse remapper, Saved Devices, Learn The Keys;
-  - dynamic remapper summary projects the **confirmed** profile kind, never an optimistic draft;
-  - profile-label spelling is `AMB-006`/`AMB-020`.
+If the connected Mouse powers off while `home-connected` is visible, the runtime publishes disconnect, clears the live slot, resolves HOME and enters this screen automatically with a fresh saved search.
 
-- `help-home-connected`
-  - removal directions through Saved Devices;
-  - with multi-Mouse, “currently connected Mouse” language must be reconciled with focus semantics before literal freeze.
+#### `home-searching-help`
+
+Explains the bounded saved search and that accessing the screen triggers it.
+
+#### `home-retry`
+
+Entered only after the current saved-search window expires without a ready Mouse.
+
+`KEY A: RETRY SEARCH` starts a fresh saved search and returns to `home-searching`.
+
+#### `home-retry-help`
+
+Explains that only saved devices were searched.
+
+### 3.3 Pair New — replacement transaction
+
+#### `pair-new`
+
+Entering Pair New means the user explicitly wants one unsaved Mouse.
+
+If a Mouse is currently connected, application behavior before/while entering Pair New is:
+
+```text
+stop accepting current-session events
+ -> release held Mouse/Escape output
+ -> disconnect current Mouse
+ -> clear live slot
+ -> keep SavedMouse record + bond
+ -> start PAIR_NEW search
+```
+
+Pair New then:
+
+- accepts only an unsaved valid Mouse;
+- accepts at most one winner;
+- stops immediately after the first accepted new Mouse becomes ready;
+- never leaves the old and new Mouse simultaneously ready.
+
+If Pair New fails/cancels, the old Mouse remains saved but disconnected. Pair New itself does not silently reconnect it.
+
+#### `help-pair-new`
+
+Contextual Help.
+
+#### `retry-pair-new`
+
+Displayed after bounded Pair New expires without an acceptable unsaved Mouse.
+
+- A retries Pair New;
+- B exact one-step transition remains `AMB-007`, but once navigation reaches HOME with no live Mouse the standard HOME resolver automatically starts saved search;
+- X Help;
+- Y Lock if confirmed by final control map.
+
+#### `help-retry-pair-new`
+
+Explains new-only search scope.
+
+### 3.4 Connected HOME
+
+#### `home-connected`
+
+Precondition: exactly one live Mouse.
+
+- line 2 shows that Mouse name;
+- first option shows the **confirmed** profile summary for that same Mouse;
+- first option opens remapper options for that same Mouse;
+- Saved Devices and Learn remain available.
+
+There is no connected-device count form, focus Mouse or multi-Mouse profile target.
+
+If the live Mouse disconnects, this screen leaves immediately through the HOME resolver and becomes `home-searching` while saved search starts.
+
+#### `help-home-connected`
+
+Removal directions refer to the one currently connected Mouse.
 
 ### 3.5 Remapper
 
-- `remapper-options`
-  - options: Passthrough, Default/Standard, Escape, Custom;
-  - current confirmed profile gets cyan when unselected, white while selected;
-  - Joy Left Back conflicts/overlaps inherited Back policy only if the final control map says so.
+#### `remapper-options`
 
-- `help-remapper-options`
-  - contextual Help.
+Options:
 
-- `passthrough-not-active` -> Apply request -> runtime/persistence confirmation -> `passthrough-active`.
-- already-current Passthrough may enter `passthrough-active` directly, preserving G06 semantics unless explicitly superseded.
+- Passthrough;
+- Default/Standard;
+- Escape;
+- Custom.
 
-- `standard-not-active` -> Apply request -> runtime/persistence confirmation -> `standard-active`.
-- already-current Standard may enter `standard-active` directly.
+All actions target the single currently connected Mouse.
 
-- `escape-not-active` / `escape-active`
-  - architecturally present in the supplied UX plan but implementation is blocked by `AMB-001`;
-  - `JOY LEFT: GO TO HOME` is separately blocked by `AMB-012`.
+Current confirmed profile is cyan when unselected and white when selected.
 
-- `custom-edit`
-  - five dynamic rows from the live Custom draft;
-  - per-source edit pages: `left`, `right`, `middle`, `forward`, `backward`;
-  - Apply-And-Back updates/persists the draft according to inherited G06 semantics and immediately reprojects the parent row;
-  - `APPLY CUSTOM` only produces success/current state after runtime + persistence confirmation;
-  - Escape target remains blocked by `AMB-001`.
+#### Profile detail/apply pages
 
-The new source does not define a separate `CUSTOM APPLIED` page. Therefore the old G06 success-page behavior is not automatically inserted; the final Custom success presentation must follow the new explicit screen set or an explicit decision.
+- `passthrough-not-active` -> confirmed Apply -> `passthrough-active`;
+- `standard-not-active` -> confirmed Apply -> `standard-active`;
+- `escape-not-active` -> confirmed Apply -> `escape-active`;
+- current profile may enter the active page directly.
+
+No profile page may claim success before runtime + persistence confirmation.
+
+`JOY LEFT: GO TO HOME` on `escape-active` remains `AMB-008` until mbr-00 freezes the final navigation contract.
+
+#### `custom-edit`
+
+Five dynamic draft rows.
+
+Per-source pages:
+
+- `left`;
+- `right`;
+- `middle`;
+- `forward`;
+- `backward`.
+
+Allowed targets include Escape.
+
+Apply-and-Back updates the draft immediately; full Apply becomes active only after runtime + persistence confirmation.
 
 ### 3.6 Saved Devices
 
-- `saved-devices`
-  - one page per saved Mouse in the supplied design, with title `N OF M`;
-  - name is dynamic;
-  - `STATUS` derives independently per Mouse from the live session set;
-  - `PROFILE` derives from that Mouse's confirmed saved profile kind;
-  - Left/Right page navigation wraps only if explicitly retained by final control map;
-  - `REMOVE DEVICE` is the selectable action.
+#### `saved-devices`
 
-This is intentionally different from G06's “up to four saved devices per page” layout. The new one-Mouse-per-page layout supersedes it.
+- one saved Mouse per page;
+- title `N OF M`;
+- Mouse name line;
+- status;
+- confirmed profile;
+- Remove Device.
 
-- `remove-this`
-  - shows the selected saved Mouse name;
-  - A requests transactional removal;
-  - B cancels/back according to final transition table;
-  - removal does not visually complete until source release/disconnect/product-state/credential cleanup reaches the gate-defined commit point;
-  - if the removed Mouse is the last saved record, successful removal leads to `searching-first` and first-pair search;
-  - otherwise successful removal returns to `saved-devices` on a valid remaining page.
+Connection projection:
 
-- `help-remove-this`
-  - explains loss of automatic reconnect and remap profile.
+- if this page is the single live Mouse, name line is cyan and status is connected;
+- all other saved Mouse pages are disconnected/non-cyan;
+- at most one page can be connected/cyan.
+
+Exact disconnected status word remains `AMB-011`.
+
+#### `remove-this`
+
+If the target is currently live:
+
+1. stop new session events;
+2. release held output;
+3. disconnect/clear live session;
+4. delete product association/credentials transactionally;
+5. persist verified state;
+6. publish confirmed removal.
+
+If it is disconnected, no live-session teardown is needed.
+
+Destination:
+
+- last saved Mouse removed -> `searching-first` + automatic first search;
+- saved mice remain -> return to a valid Saved Devices page.
+
+A later HOME entry with saved mice but no live connection starts saved search automatically.
 
 ### 3.7 Learn
 
-- `learn-the-keys`
-  - never boot root under the new contract;
-  - displays the HAT didactic map;
-  - literal title/coordinates are blocked by `AMB-007`/`AMB-008`;
-  - no Bluetooth/remap side effects from didactic presses;
-  - exact Key Y lock/open-home semantics must be frozen because the new layout text and inherited Learn behavior are not fully aligned.
+`learn-the-keys` is never the boot root.
 
-## 4. Async transitions
+Its HOME action delegates to the single HOME resolver rather than hard-coding a destination.
 
-Screens must subscribe to semantic application events rather than poll incidental input.
+Exact title/coordinates/control semantics are frozen by mbr-00 from the canonical product screen reference.
 
-Examples:
+## 4. Async events
+
+Screens consume semantic events such as:
 
 ```text
-MouseReady(mouse_id)
-MouseDisconnected(mouse_id, reason)
+MouseReady(mouse_id, session_id)
+MouseDisconnected(mouse_id, session_id, reason)
 SavedSearchExpired(transaction_id)
 PairNewExpired(transaction_id)
 ProfileApplyConfirmed(mouse_id, profile)
@@ -178,17 +274,23 @@ RemoveFailed(mouse_id, reason)
 PersistenceRecovered(previous_generation)
 ```
 
-Every event includes enough transaction/session identity to ignore stale completion from an operation that has already been canceled/replaced.
+Transaction/session identity prevents stale completion from canceled/replaced operations from mutating current state.
 
-## 5. Multi-Mouse UI invariant
+## 5. Single-live-Mouse UI invariant
 
-A UI focus Mouse, once defined, is only a presentation/edit target. It never means:
+The UI never needs a `focused_mouse_id` separate from live connection truth.
 
-- disconnect every other Mouse;
-- suppress input from every other Mouse;
-- make other connected mice report `SAVED` instead of `CONNECTED`;
-- allow profile actions for one Mouse to mutate another Mouse's profile kind;
-- change source ownership identity.
+When a Mouse is connected:
+
+- it is the HOME name;
+- it is the HOME profile summary target;
+- it is the remapper target;
+- its Saved Devices page is the only connected/cyan page.
+
+When no Mouse is connected:
+
+- remapper is not given an arbitrary saved target through HOME;
+- HOME uses saved-search/retry states instead.
 
 ## 6. Layout geometry
 
@@ -204,45 +306,47 @@ Starting physical renderer baseline inherited from accepted G06:
 - standard body advance 26 px;
 - final standard hint y 214, bottom anchored;
 - dark-magenta hint region begins 11 px above first visible hint;
-- didactic Learn-style body used the accepted special row spacing in G06.
+- didactic screens use their explicitly frozen token columns.
 
-The new source changes horizontal character coordinates for didactic layouts. Those explicit new coordinates take precedence once normalized, but physical vertical relocation is retained unless explicitly changed.
+There is no count line such as `N DEVICES CONNECTED` to format or capacity-test.
 
-## 7. Dynamic text policy to freeze before renderer gate
+## 7. Dynamic text policy to freeze
 
-The final UX contract must define:
+Before renderer acceptance freeze:
 
 - Mouse-name truncation/ellipsis/scroll behavior;
 - exact profile display strings (`DEFAULT` vs `STANDARD`);
 - exact disconnected status text;
-- max `N OF M` representation that fits 21 columns;
-- behavior when a persisted Mouse has no readable name (address-derived fallback vs generic name);
-- capitalization and typo corrections listed in `AMB-020`.
+- capitalization/typo normalization;
+- exact canonical didactic title and token columns.
 
-No renderer should guess these based on available pixels.
+No renderer guesses these from available pixels.
 
-## 8. Golden layout tests
+## 8. Golden layout/state tests
 
-Before physical HAT acceptance, host tests must project every screen with representative states and assert:
+Host tests must assert:
 
-- 9-row/21-column constraints where retained;
 - exact frozen literal rows;
-- dynamic field substitution without leftover annotation text such as `(nome do mouse)` or `(customizável)`;
-- exact token start columns for didactic screens;
+- dynamic field substitution without metadata annotations;
+- exact token start columns;
 - selection/current/pressed color precedence;
 - hint count/anchoring;
-- hidden-control map separate from visible text;
-- no `Keyboard`/`Composite` product pages;
-- no accidental old `HOME`/`OTHER OPTIONS` path unless explicitly reintroduced by a resolved rule;
-- all declared screen IDs reachable only through permitted transitions.
+- hidden controls separated from visible text;
+- no Keyboard/Composite product pages;
+- no multi-connected HOME/count/focus state;
+- `home-connected` requires exactly one live Mouse;
+- `home-searching` requires saved mice + no live Mouse and emits/owns saved-search start semantics through application state;
+- disconnect from `home-connected` immediately leads to `home-searching` and active saved search;
+- saved-search timeout leads to `home-retry`;
+- Pair New replacement never projects two connected mice.
 
-## 9. Required mbr-00 output for UX
+## 9. Required mbr-00 UX output
 
-Before `mbr-02`/`mbr-03` can be accepted, mbr-00 must produce one canonical screen table derived from the verbatim requirement source with:
+mbr-00 must produce one canonical screen/control/transition table containing:
 
 ```text
 screen_id
-literal/dynamic rows 0..8
+literal/dynamic rows
 field formatting rules
 selectable rows/order
 visible controls
@@ -252,8 +356,9 @@ release actions
 async transitions
 Back target
 lock policy
-focus-Mouse requirement
-source ambiguity decisions
+live-Mouse requirement
+search side effects
+source decision
 ```
 
-That table, not informal resemblance to the old BLU2USB UI, becomes the executable UX specification.
+That table, not informal resemblance to BLU2USB, becomes the executable UX specification.
