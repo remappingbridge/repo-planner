@@ -1,83 +1,80 @@
 # Mouse Bridge Remapper planning
 
-Status: **PLANNED ONLY. No `mbr-*` gate has been executed.**
+Status: **MBR-00 COMPLETE / ACCEPTED. NEXT GATE: MBR-01.**
 
 This directory is the planning source of truth for `tiagooliveirajs/mouse-bridge-remapper`.
 
 ## Goal
 
-Rebuild the Mouse portion of the physically accepted BLU2USB product through G06, then adapt it to the Mouse Bridge Remapper product and its new UX.
+Rebuild the Mouse portion of physically accepted BLU2USB through G06 as a cleaner Mouse-only Bluetooth product with:
 
-The product may keep multiple mice saved, but **only one mouse may be connected at a time**. Keyboard pairing and Composite devices are intentionally outside scope. Escape remains as synthetic USB Keyboard output generated only by mouse remapping.
+- BLE HOGP Mouse transport only;
+- multiple saved Mouse records;
+- zero or one authoritative live Mouse;
+- Pair New new-only replacement handoff;
+- frozen Mouse remap profiles including synthetic Escape;
+- HOME-driven saved reconnect;
+- documentation as product, code as consequence.
 
-Accepted migration reference:
+Accepted historical migration reference:
 
-- `tiagooliveirajs/blu2usb`
-- branch `gate/g06-profiles-remap-logitech-hidpp`
-- physically accepted SHA `7eee024ad4ee726c5a85ffa2f32b9f47187878af`
-- PR #8 physical acceptance
+- repo `tiagooliveirajs/blu2usb`;
+- branch `gate/g06-profiles-remap-logitech-hidpp`;
+- accepted SHA `7eee024ad4ee726c5a85ffa2f32b9f47187878af`;
+- accepted UF2 SHA-256 `d32819b99ec349cc36882aaeaf9e84000a98dc3dcd86238ed364fd01301c8f88`.
 
-Do not use G07+ Keyboard branches as a production base.
+G07+ Keyboard work is research evidence only.
 
-## Current product decisions
+## Current frozen product highlights
 
-The 2026-09-20 simplification supersedes earlier simultaneous-mouse planning:
-
-- zero or one live mouse connection;
-- multiple saved mice remain supported;
-- `home-connected` always refers to the one connected mouse;
-- HOME with saved mice and no live connection enters `home-searching` and automatically starts bounded saved-device search;
-- if the saved search expires, HOME becomes `DEVICE NOT FOUND`;
-- if the connected mouse powers off/disconnects, the same HOME/saved-search flow starts automatically;
-- `PAIR NEW MOUSE` first releases/disconnects the current live mouse, keeps it saved, then searches for one unsaved replacement;
-- one discovery transaction accepts only one winner;
-- there is no simultaneous-Mouse capacity requirement, `N DEVICES CONNECTED` UI, multi-Mouse focus model or cross-mouse HID aggregation.
+- one authoritative connected Mouse maximum;
+- current Mouse stays live while Pair New searches;
+- first valid unsaved replacement candidate triggers a safe handoff;
+- Pair New timeout/cancel before handoff leaves current Mouse live;
+- saved candidates are ignored as Pair New winners;
+- to reconnect saved instead, unplug current Mouse and Back until HOME reaches SEARCHING;
+- HOME with saved mice + no live Mouse starts 8-second saved search automatically;
+- first-Mouse search repeats 8-second cycles until success;
+- Pair New window is 15 seconds;
+- canonical profile word is STANDARD;
+- disconnected Saved Devices word is DISCONNECTED;
+- names render first 21 supported characters, fallback `UNKNOWN MOUSE`;
+- BLE HOGP only;
+- Escape retained through minimal fixed USB Keyboard output;
+- no Bluetooth Keyboard/Composite product support.
 
 ## Documents
 
-1. [`00-authority-scope-and-precedence.md`](00-authority-scope-and-precedence.md) — authority order, scope and exact G06 baseline.
-2. [`01-g06-migration-ledger.md`](01-g06-migration-ledger.md) — preserve/adapt/exclude ledger and historical bug lessons.
-3. [`02-ambiguity-register.md`](02-ambiguity-register.md) — remaining contradictions/incomplete rules that implementation may not resolve silently.
-4. [`03-target-architecture.md`](03-target-architecture.md) — clean single-live-session architecture, persistence, BLE, USB and UI boundaries.
-5. [`04-ux-state-model.md`](04-ux-state-model.md) — implementation-oriented state/transition/layout model.
-6. [`05-gates.md`](05-gates.md) — planned sequence `mbr-00` through `mbr-10`.
-7. [`06-execution-rules.md`](06-execution-rules.md) — branch, evidence, regression, UF2 and physical-acceptance discipline.
-8. [`requirements/2026-09-19-user-rules.md`](requirements/2026-09-19-user-rules.md) — original supplied layout/rules preserved as provenance.
-9. [`requirements/2026-09-20-single-connected-mouse.md`](requirements/2026-09-20-single-connected-mouse.md) — current simplification that supersedes simultaneous-mouse rules.
-
-## Remaining contract decisions
-
-The major simultaneous-mouse ambiguities are closed by design and must not be reintroduced.
-
-Remaining decisions include:
-
-- exact final USB VID/PID/manufacturer/product strings;
-- final visible naming `DEFAULT REMAP` vs `STANDARD REMAP`;
-- exact saved-search and Pair New timeout constants;
-- exact long-mouse-name rendering policy;
-- final control semantics for `FIRST MOUSE CONNECTED`;
-- exact one-step navigation effect of `KEY B: BACK TRY SAVED`;
-- exact disconnected status word in Saved Devices;
-- any unresolved literal/coordinate/navigation issue retained in `02-ambiguity-register.md`.
-
-Escape is no longer an architecture blocker: the product explicitly permits a minimal fixed USB Keyboard output capability solely for synthetic Escape while continuing to prohibit Bluetooth Keyboard/Composite pairing.
+1. [`00-authority-scope-and-precedence.md`](00-authority-scope-and-precedence.md) — authority and hard scope.
+2. [`01-g06-migration-ledger.md`](01-g06-migration-ledger.md) — inherited G06 no-regression behavior.
+3. [`02-ambiguity-register.md`](02-ambiguity-register.md) — closed MBR-00 decisions.
+4. [`03-target-architecture.md`](03-target-architecture.md) — frozen architecture.
+5. [`04-ux-state-model.md`](04-ux-state-model.md) — frozen UX state/transition semantics.
+6. [`05-gates.md`](05-gates.md) — gates mbr-00 through mbr-10 and current status.
+7. [`06-execution-rules.md`](06-execution-rules.md) — execution/evidence discipline.
+8. [`07-mbr-00-frozen-contract.md`](07-mbr-00-frozen-contract.md) — gate-level frozen contract.
+9. [`08-mbr-00-migration-manifest.md`](08-mbr-00-migration-manifest.md) — G06 reuse/adapt/exclude manifest.
+10. [`executions/mbr-00/completion.md`](executions/mbr-00/completion.md) — durable MBR-00 completion report.
+11. [`requirements/2026-09-19-user-rules.md`](requirements/2026-09-19-user-rules.md) — original verbatim UX source.
+12. [`requirements/2026-09-20-single-connected-mouse.md`](requirements/2026-09-20-single-connected-mouse.md) — single-live-Mouse simplification.
+13. [`requirements/2026-09-20-pair-new-help-and-handoff.md`](requirements/2026-09-20-pair-new-help-and-handoff.md) — newest Pair New Help/handoff clarification.
 
 ## Gate summary
 
-| Gate | Purpose |
-|---|---|
-| mbr-00 | provenance + remaining decisions + canonical contract freeze |
-| mbr-01 | clean bootstrap and architecture guards |
-| mbr-02 | host interaction/state/projector and golden layouts |
-| mbr-03 | physical Waveshare renderer/HAT acceptance |
-| mbr-04 | fixed USB Mouse + synthetic Escape identity/output |
-| mbr-05 | canonical single-session Mouse core + BLE HOGP passthrough |
-| mbr-06 | accepted G06 profiles/persistence/reconnect/HID++ migration |
-| mbr-07 | saved/new search, single-connection replacement, registry and removal |
-| mbr-08 | complete new UX integration |
-| mbr-09 | resilience/regression qualification |
-| mbr-10 | final physical release qualification |
+| Gate | Status | Purpose |
+|---|---|---|
+| mbr-00 | **COMPLETE** | provenance + contract freeze |
+| mbr-01 | NEXT / PLANNED | clean bootstrap and architecture guards |
+| mbr-02 | PLANNED | host interaction/state/projector/golden UX |
+| mbr-03 | PLANNED | physical renderer/HAT |
+| mbr-04 | PLANNED | fixed USB identity |
+| mbr-05 | PLANNED | BLE HOGP passthrough core |
+| mbr-06 | PLANNED | G06 profile/persistence/reconnect/HID++ parity |
+| mbr-07 | PLANNED | lifecycle/Pair New handoff/registry/removal |
+| mbr-08 | PLANNED | complete real UX integration |
+| mbr-09 | PLANNED | resilience/regression |
+| mbr-10 | PLANNED | final release qualification |
 
-## Planning boundary
+## MBR-00 evidence boundary
 
-Updating these documents does not execute `mbr-00`, build firmware, flash a Pico, produce an accepted UF2 or make a physical acceptance claim.
+MBR-00 changed documentation/planning only. It did **not** implement firmware, build code, produce a UF2, flash hardware or make a new physical acceptance claim.
