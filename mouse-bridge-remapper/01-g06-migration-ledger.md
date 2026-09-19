@@ -2,43 +2,43 @@
 
 Status: **PLANNED**. Source baseline: BLU2USB G06 accepted SHA `7eee024ad4ee726c5a85ffa2f32b9f47187878af`.
 
-This ledger defines what Mouse Bridge Remapper must preserve, adapt or exclude from the accepted BLU2USB history. It is deliberately stricter than a source-file copy list: observable behavior and failure protections are what matter.
+This ledger defines what Mouse Bridge Remapper must preserve, adapt or exclude from accepted BLU2USB history. Observable behavior and failure protections matter more than source-file similarity.
 
 ## 1. PRESERVE — interaction and visual lessons
 
-Unless the 2026-09-19 Mouse Bridge Remapper rules explicitly replace a screen or control, preserve these accepted G03-G06 rules:
+Unless current Mouse Bridge Remapper documentation explicitly replaces a screen/control:
 
 - HAT actions execute on **release**, not initial press.
-- Pressed visible controls turn white while held; their action occurs only after release.
-- Help owns interaction: `ANY KEY: BACK` consumes the control and returns to the owning page; Key Y must not accidentally lock while Help owns input.
+- Pressed visible controls turn white while held; actions occur after release.
+- Help owns interaction: `ANY KEY: BACK` consumes the input and returns to the owning page.
 - Lock affects display/presentation only. Mouse forwarding, Bluetooth, reconnect and remap continue while locked.
-- The first complete HAT interaction while locked is consumed only to unlock, restore display and navigate to the product home state; it cannot also activate another command.
-- Selection white has priority over cyan/current/connected state; when selection leaves, a still-current row returns to cyan.
-- Static/example body text uses the accepted off-white-yellow semantics; resting options are gray; selected/pressed options are white; positive/current/connected state is cyan unless a new screen explicitly overrides it.
-- The accepted Waveshare 240x240 renderer geometry and G03 pixel-relocation rules remain the starting renderer contract. New explicit character coordinates override old character coordinates for the affected screen only.
-- Pixel positions are tested from the actual target string/token, never from the first coincidental character in the row. This preserves the G02 lesson where an assertion accidentally matched the `K` in `LOCK/UNLOCK` instead of the `KEY` label.
-- Literal screen wording and character coordinates require regression tests/golden projections before physical validation.
+- The first complete HAT interaction while locked is consumed only to unlock and cannot also activate another command.
+- Selection white has priority over cyan/current/connected state; leaving selection restores cyan if still current.
+- Static/body text, resting options, selected/pressed options and connected/current state retain accepted semantic colors unless a new screen explicitly overrides them.
+- Accepted Waveshare 240x240 geometry and G03 pixel-relocation lessons remain the renderer baseline.
+- Token-position tests target the actual token, preserving the historical lesson where a test matched the wrong `K`.
+- Literal screen wording/coordinates require host golden tests before physical validation.
 
 ## 2. PRESERVE — canonical Mouse input safety
 
-The strongest reusable G05/G06 invariant is source-aware ownership. Preserve it and extend source identity from “BLE Mouse” to individual connected mice.
+The current product has only one live Mouse session, but it still needs the G05/G06 release-safety model.
 
-- Transport-specific report layouts never enter USB/application-domain logic.
-- Report Map must classify the peer as Mouse before it is accepted.
-- Decode canonical buttons, signed relative X/Y, vertical wheel and horizontal pan.
-- Normalize the accepted duplicated Report-ID framing variants and reject malformed/truncated/shifted frames.
-- Persistent button ownership is idempotent: duplicate press/release cannot corrupt state.
-- A target Mouse button remains held until the last source that owns it releases it.
-- Disconnect, parser/runtime failure, queue overflow, profile transition and device removal release **only the affected source's** ownership.
-- Relative X/Y/wheel/pan are transient. They are accumulated in bounded form and consumed only after the USB owner accepts the corresponding report/chunk.
-- Runtime failure must fail release-safe rather than leave the host with a stuck button.
+Preserve:
+
+- transport-specific report layouts never enter USB/UI/profile domain logic;
+- Report Map classifies a peer as Mouse before acceptance;
+- canonical buttons, signed X/Y, vertical wheel and horizontal pan;
+- duplicated Report-ID framing normalization and malformed/truncated-frame rejection;
+- idempotent button press/release handling;
+- bounded relative-event buffering consumed only after USB submission is accepted;
+- disconnect/parser failure/queue continuity loss/profile transition/removal are release-safe;
 - LCD lock never pauses Mouse forwarding.
 
-### Multi-Mouse adaptation
+### Single-session adaptation
 
-Every live Mouse session gets a stable runtime `MouseSourceId` derived from the persistent device identity plus a connection generation. Late events from an obsolete generation must not affect a newly reconnected session.
+The runtime carries one optional `MouseSessionId` with a generation/token. Late callbacks from an obsolete generation must not affect a replacement session.
 
-For a target button, aggregation is conceptually `target -> set(source owners)`, not “last report wins”. Disconnecting Mouse A must not release a target still held by Mouse B.
+Cross-mouse ownership sets are **not** required. However, two physical buttons on the same mouse may map to the same output target, so held-state ownership/refcounting must still prevent premature release within the current session.
 
 ## 3. PRESERVE — BLE HOGP behavior
 
@@ -46,19 +46,21 @@ For a target button, aggregation is conceptually `target -> set(source owners)`,
 - Security/bonding and Report Protocol remain transport concerns, not UI concerns.
 - Generic mice must function without Logitech-specific behavior.
 - HIDS/report/security errors recover through bounded state transitions; they do not trap the main UI/USB loop.
-- Previously bonded peers are restored through BTstack credential state and attempted before generic discovery according to reconnect policy.
-- The G06 bonded reconnect path used resolving/accept-list data and a bounded attempt (8 seconds in G06) before generic fallback. The new multi-Mouse coordinator may adapt scheduling, but it may not regress into an unbounded “missing saved peer blocks all other mice” state.
+- Previously bonded peers are reused through BTstack credential state.
+- Saved reconnect is bounded so an absent peer cannot block HOME indefinitely.
 
-## 4. PRESERVE — Mouse profiles and exact preset semantics
+G06 used resolving/accept-list state and an 8-second preferred bonded reconnect window. The exact new timeout remains a product constant to freeze, but the bounded-reconnect lesson is preserved.
 
-The inherited profile families are:
+## 4. PRESERVE — profiles and exact mappings
+
+Profiles retained:
 
 - `PASSTHROUGH`;
-- G06 `DEFAULT REMAP`, renamed by the new rules in some places to `STANDARD REMAP` — naming remains unresolved in `AMB-006`;
-- `ESCAPE REMAP` — behavior blocked by `AMB-001` because the new project excludes Keyboard/USB Composite;
+- `DEFAULT/STANDARD REMAP`;
+- `ESCAPE REMAP`;
 - `CUSTOM REMAP`.
 
-Inherited exact preset mapping semantics:
+Exact preset semantics:
 
 | Source button | Passthrough | Default/Standard | Escape |
 |---|---|---|---|
@@ -70,145 +72,167 @@ Inherited exact preset mapping semantics:
 
 Movement, vertical wheel and horizontal pan are never altered by button profiles.
 
-A profile change must release stale old-profile ownership before the new mapping becomes authoritative. UI success may appear only after runtime acceptance and the required persistent commit succeed.
+Profile change releases stale held state from the old mapping before the new mapping becomes authoritative. UI success appears only after runtime acceptance and required persistent commit succeed.
 
 ## 5. PRESERVE/ADAPT — CustomTemplate semantics
 
-Unless explicitly superseded later:
+Unless explicitly superseded:
 
 - retain one persistent Pico-global `CustomTemplate`;
-- sources are Left, Right, Middle, Forward and Backward;
-- Mouse-button targets remain Left, Right, Middle, Forward and Backward;
-- Escape remains listed by the supplied new UX but is blocked by `AMB-001` until the output contradiction is resolved;
-- a `WILL BECOME` selection updates the draft immediately and the returning Custom editor must show that draft value;
-- the accepted draft survives reboot even before full `APPLY CUSTOM`;
-- applying another preset does not erase the Custom draft;
-- the last actually applied profile remains active across reboot while an unapplied dirty Custom draft is restored separately;
-- successful `APPLY CUSTOM` requires runtime + persistent confirmation before success feedback.
+- sources: Left, Right, Middle, Forward, Backward;
+- targets: Left, Right, Middle, Escape, Forward, Backward;
+- per-source Apply-and-Back updates the draft immediately;
+- returning to Custom editor reflects the just-accepted draft;
+- dirty/unapplied draft survives reboot independently of the last active profile;
+- applying another preset does not erase the draft;
+- successful full Apply requires runtime + persistence confirmation.
 
-### Multi-Mouse adaptation
+Profile **kind** remains per saved Mouse. The global Custom template is shared by any saved Mouse whose confirmed profile kind is Custom.
 
-The profile **kind** becomes per saved Mouse. The global CustomTemplate remains shared unless a later explicit decision changes it. A Mouse whose profile kind is Custom references that global template.
+Because only one Mouse is live, HOME/remapper actions always target the connected Mouse; there is no focus-selection ambiguity.
 
-How the new `home-connected` page chooses which connected Mouse receives a profile change is unresolved by the supplied UX and is tracked in `AMB-002`/`AMB-003`.
+## 6. PRESERVE — persistence quality
 
-## 6. PRESERVE — product persistence quality
-
-Carry forward the G06 power-loss lessons:
+Carry forward:
 
 - schema-versioned product state;
-- integrity protection (CRC or stronger equivalent);
-- two alternating generations/slots or an equivalently power-loss-safe strategy;
-- a corrupt/torn newest generation falls back to the previous valid generation;
-- product-state flash is separated from BTstack credential storage;
-- boot reconstructs profiles/remap/UI/vendor-fix requirements before input becomes authoritative;
+- integrity protection;
+- two alternating generations/slots or equivalent power-loss-safe strategy;
+- corrupt/torn newest generation falls back to previous valid generation;
+- product state is separated from BTstack credential storage;
+- boot reconstructs profiles/remap/UI/vendor requirements before input becomes authoritative;
 - no valid product record falls back to safe defaults.
 
-The new persistent schema additionally needs, per Mouse:
+Per saved Mouse persist:
 
-- stable device identity sufficient to correlate the product record with BTstack credentials;
-- display name/model text when available;
-- saved state;
-- per-device profile kind;
-- capability/vendor metadata required for automatic HID++ behavior;
-- no Keyboard or Composite logical type.
+- stable device identity;
+- display name/model when available;
+- confirmed profile kind;
+- capability/vendor metadata required for safe behavior;
+- no Keyboard/Composite logical type.
 
-A device removal transaction must coordinate application record deletion, profile association cleanup, live-source release/disconnect and Bluetooth credential removal without leaving a half-removed Mouse.
+Transient live session state is not persisted as an active connection.
 
 ## 7. PRESERVE — Logitech Lift HID++
 
-- HID++ remains an automatic vendor backend; never expose it as a user-selectable transport/profile.
-- Preserve the accepted `REPROG_CONTROLS_V4` feature `0x1b04` / Forward CID `0x0056` behavior where supported and needed.
-- When Forward is remapped and diversion is acknowledged, true physical down/hold/up must survive so Forward->Left dragging works for the full hold.
-- Passthrough must remove/not require Forward diversion and restore native Forward behavior.
-- Unsupported/non-Logitech peers fail safe to Standard HID without breaking generic input.
-- Disconnect/profile change releases vendor-derived held ownership.
+- HID++ remains an automatic vendor backend, never a user-selectable transport/profile.
+- Preserve accepted `REPROG_CONTROLS_V4` feature `0x1b04` / Forward CID `0x0056` behavior where needed.
+- Forward remapping preserves physical down/hold/up so dragging works.
+- Passthrough removes/unrequires Forward diversion and restores native Forward.
+- Unsupported/non-Logitech peers fail safe to Standard HID.
+- Disconnect/profile change releases vendor-derived held state.
 
-### Multi-Mouse adaptation
-
-HID++ state is per Mouse session. Probing/diversion for Mouse A may not alter Mouse B. Vendor responses must be correlated to the correct connection/session generation.
+HID++ state belongs only to the current session and is discarded safely when that session is replaced.
 
 ## 8. ADAPT — live connection model
 
-G06 had one logical active Mouse. The new product explicitly permits multiple simultaneous connected mice.
+The current product intentionally uses:
 
-Replace singular `active_mouse` as transport truth with:
+```text
+saved_mice: persistent collection
+live_mouse: None | one MouseSession
+```
 
-- `saved_mice`: persistent collection;
-- `sessions`: zero or more simultaneous live Mouse sessions;
-- `connected_mouse_ids`: runtime set;
-- optional UI `focused_mouse_id`: presentation/editing context only, never the authority for whether other mice remain connected or forward input.
+`CONNECTED`/`DISCONNECTED` events remain authoritative; recent motion is never a connection proxy.
 
-Runtime `CONNECTED`/`DISCONNECTED` events remain authoritative; recent movement is never a connection proxy.
+There is no:
 
-The rule for choosing `focused_mouse_id` is **not yet defined** by the supplied UX and must not be invented during implementation.
+- `connected_mouse_ids` set;
+- multi-live focus Mouse;
+- simultaneous HIDS-session requirement;
+- `N DEVICES CONNECTED` state;
+- simultaneous-Mouse capacity target.
 
-## 9. ADAPT — reconnect behavior
+## 9. ADAPT — HOME and reconnect behavior
 
-G06 preferred one bonded Mouse, then fell back to generic scan. New requirements distinguish:
+Current policy:
 
-- no saved mice -> search for first new Mouse indefinitely/logically indefinitely;
-- saved mice exist -> bounded search for saved Mouse(s), then `home-retry` if none found;
-- explicit Pair New -> search only for a Mouse not already saved, then retry page if none is found.
+- no saved mice -> logically indefinite first new-Mouse search;
+- saved mice + live Mouse -> `home-connected`;
+- saved mice + no live Mouse -> `home-searching` and automatic bounded saved-device search;
+- first saved Mouse that becomes ready wins and search stops;
+- saved search timeout -> `home-retry` / `DEVICE NOT FOUND`;
+- connected Mouse disconnect/power-off -> same HOME resolver starts saved search automatically;
+- `KEY A: RETRY SEARCH` starts a fresh bounded saved search from `home-retry`.
 
-What “search saved” means when several saved mice exist — first match only vs reconnect as many saved peers as possible — is unresolved in `AMB-004`. The runtime must be designed to support a policy without coupling that decision into the BLE parser.
+This replaces older planning questions about reconnecting several saved mice simultaneously.
 
-## 10. ADAPT — USB identity
+## 10. ADAPT — Pair New
+
+Pair New is a **replacement** transaction.
+
+If a Mouse is connected:
+
+1. stop accepting new events from it;
+2. release held Mouse/Escape state;
+3. disconnect it;
+4. keep its saved record and bond;
+5. search for one unsaved Mouse;
+6. first valid accepted candidate becomes the sole live Mouse;
+7. stop the transaction.
+
+Pair New failure/cancel does not delete the old saved Mouse and does not silently reconnect it. Returning to HOME with no live session invokes the normal saved search.
+
+## 11. ADAPT — USB identity
 
 Preserve G04/G06 structural safety:
 
 - USB descriptor is firmware-owned and stable from boot;
-- Bluetooth connect/disconnect, pairing, profile changes, lock/unlock and reconnect never force USB re-enumeration;
-- `usb_hid`/`usb_mouse` is the only descriptor/report owner;
-- no CDC/MSC/MIDI/vendor debug interface.
+- Bluetooth/profile/UI state never forces USB re-enumeration;
+- one USB module owns descriptors/report submission;
+- no diagnostic CDC/MSC/MIDI/vendor-debug interface.
 
-But do **not** preserve the literal old BLU2USB Mouse+Keyboard descriptor: the new project declares Mouse-only scope. Exact VID/PID/product strings and the Escape contradiction are unresolved (`AMB-001`, `AMB-018`).
+Current scope explicitly permits Mouse HID plus a minimal Keyboard output capability solely for synthetic Escape. This does not authorize Bluetooth Keyboard support.
 
-## 11. ADAPT — UX
+Exact project VID/PID/product strings remain to be frozen.
 
-The new `requirements/2026-09-19-user-rules.md` replaces the old BLU2USB page hierarchy for the screens it specifies. In particular:
+## 12. ADAPT — UX
 
-- the old `HOME`, `STATUS`, `OTHER DEVICES STATUS`, `OTHER OPTIONS`, Keyboard and Composite pages are not retained as product screens;
-- new boot roots are `searching-first` when no Mouse is saved and `home-searching` when at least one Mouse is saved;
-- new `home-connected`, per-Mouse `saved-devices`, Pair New and retry/help flows replace the old G06 discovery/status hierarchy;
-- new explicit character coordinates override the old Learn coordinates on affected new screens, once internal contradictions are resolved.
+The current `mouse-bridge-remapper` documentation is the product-facing UX authority. Key lifecycle rules:
 
-Accepted renderer/color/release/lock/help behavior remains inherited when the new rule set does not override it.
+- `searching-first` when no Mouse is saved;
+- `home-connected` always shows the one live Mouse name/profile;
+- `home-searching` is entered whenever HOME has saved mice but no live connection and starts saved search automatically;
+- `home-retry` appears after saved-search timeout;
+- Pair New replaces, rather than adds to, the current live connection;
+- Saved Devices has one saved Mouse per page; at most one page can be connected/cyan;
+- no multi-connected count/focus UI exists.
 
-## 12. EXCLUDE — Keyboard/Composite implementation
+Accepted renderer/color/release/lock/help behavior remains inherited where not superseded.
+
+## 13. EXCLUDE — Keyboard/Composite and obsolete multi-Mouse machinery
 
 Never import as production behavior:
 
 - BLU2USB G07 Classic Keyboard branches;
-- `classic_hid`;
-- `keyboard_transport`;
+- `classic_hid` / `keyboard_transport`;
 - BLE Keyboard product classification;
-- physical Keyboard canonical sources;
 - Composite logical device support;
-- Keyboard/Composite saved/preferred/active registries;
-- Keyboard/Composite pairing and detail pages.
+- Keyboard/Composite registries/pairing/detail pages;
+- multiple simultaneously ready Mouse sessions;
+- cross-mouse button aggregation;
+- multi-Mouse UI focus/selection;
+- simultaneous-BLE Mouse capacity experiments/gates.
 
-Synthetic Escape from a Mouse is not silently exempted from this rule. It is exactly the unresolved conflict in `AMB-001`.
+Synthetic Escape output is the only Keyboard-related exception.
 
-## 13. Bugs/corrections that must not be rediscovered
+## 14. Historical bugs/corrections that must not be rediscovered
 
-The new project must start with regression coverage for these known historical mistakes/corrections:
-
-1. **Pixel relocation regression:** semantic row numbers do not justify reverting to naive uniform pixel placement. Preserve accepted G03 relocation rules and assert new screen coordinates.
-2. **Learn wording/coordinate drift:** old accepted title/coordinates changed multiple times. The new contract must freeze one literal string and token position before implementation.
-3. **Wrong-help-key typo:** historical `KEY C: HELP` had to become physical `KEY X: HELP`; do not infer labels independently from HAT wiring.
-4. **Action-on-press bug class:** all actions remain release-triggered; a press is visual feedback only.
-5. **Back-stack bug class:** G06 corrected feedback pages so one Back returned to the logical parent rather than an obsolete Apply page. New navigation must explicitly model feedback-state return targets.
-6. **Selection/current-color collision:** selected current rows are white; when selection leaves they return to cyan.
-7. **Stale connection display:** UI updates from connection events immediately, not from the next HAT event or Mouse movement.
-8. **Static-profile display:** status/home projection comes from confirmed/restored runtime profile, not a hard-coded default.
-9. **Optimistic Apply:** do not show applied/success state before runtime + persistence confirmation.
-10. **Custom draft stale UI:** returning from a per-button editor must render the just-accepted draft immediately.
-11. **Custom draft reboot loss:** accepted-but-not-applied draft is distinct persistent state.
-12. **Bonded Logitech reconnect:** restore resolving/accept-list-based bonded reconnect before generic fallback so Lift can reconnect after Pico power loss without forced fresh pairing.
-13. **HID Report-ID framing:** normalize known duplicated framing and reject malformed lengths; do not shift fields silently.
-14. **Stuck ownership on failure:** disconnect, queue overflow, profile change and removal are source-scoped release events.
-15. **Logitech Forward click-only behavior:** HID++ diversion must preserve down/hold/up, not synthesize a momentary click, so drag works.
-16. **Toolchain bootstrap traps:** normalize external Pico SDK path handling and allow SDK-required GNU extensions rather than misdiagnosing SDK source `asm` as product code failure.
+1. Pixel relocation regression: preserve accepted physical geometry and assert new screen coordinates.
+2. Learn wording/coordinate drift: freeze literal text and token positions before rendering implementation.
+3. Wrong-help-key typo: physical Help is Key X where documented; never infer labels independently from HAT wiring.
+4. Action-on-press bug class: actions remain release-triggered.
+5. Back-stack bug class: explicit logical parent transitions; no obsolete Apply-page detours.
+6. Selection/current-color collision: selected current rows white, return to cyan when selection leaves.
+7. Stale connection display: UI updates immediately from runtime connection events.
+8. Static-profile display: projection comes from confirmed/restored profile, not hard-coded default.
+9. Optimistic Apply: no success before runtime + persistence confirmation.
+10. Custom draft stale UI: returning from per-button editor shows accepted draft immediately.
+11. Custom draft reboot loss: dirty unapplied draft is distinct persistent state.
+12. Bonded Logitech reconnect: reuse bond/resolving data before bounded fallback behavior.
+13. HID Report-ID framing: normalize accepted variants; reject malformed lengths.
+14. Stuck output on failure: disconnect, queue failure, profile change, replacement and removal release safely.
+15. Logitech Forward click-only behavior: preserve down/hold/up, not momentary click synthesis.
+16. Toolchain bootstrap traps: normalize Pico SDK path handling and retain SDK-required GNU extensions.
 
 Every applicable item above belongs in predecessor regressions of later gates.
