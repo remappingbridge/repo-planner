@@ -1,6 +1,6 @@
 # Mouse Bridge Remapper planning
 
-Status: **MBR-03 IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING — renderer/HAT candidate built.**
+Status: **ALL MBR GATES BACKLOG — clean implementation baseline reset.**
 
 This directory is the planning source of truth for `tiagooliveirajs/mouse-bridge-remapper`.
 
@@ -46,7 +46,7 @@ G07+ Keyboard work is research evidence only.
 - Escape retained through minimal fixed USB Keyboard output;
 - no Bluetooth Keyboard/Composite product support.
 
-## Accepted implementation baseline
+## Historical implementation baseline
 
 Accepted product `main` now includes MBR-02:
 
@@ -58,7 +58,7 @@ MBR-01 established the compileable host/Pico 2 W scaffold, frozen module/depende
 
 The 2026-09-20 connected-HOME amendment is recorded in `requirements/2026-09-20-connected-home-pair-new.md`. A later 2026-09-20 amendment for `home-searching-help` is recorded in `requirements/2026-09-20-home-searching-help.md` and changes only that screen's literal wording.
 
-## MBR-02 implementation state
+## Historical MBR-02 implementation state
 
 MBR-02 implementation was integrated from product branch `mbr/mbr-02-host-ux-model`, PR #2. Amended implementation head: `ec21f11685e3e80cbb119560a4e8d5cd4e8a6ff0`. Integrated main: `34f5806763503c79aa98e54923a3ec854b11d270`.
 
@@ -71,7 +71,7 @@ Host CI on that exact SHA passed all four contracts:
 
 The implementation covers the 30 canonical screens, release interaction, Help/Lock, HOME/search transactions, stale IDs, Pair New candidate/handoff semantics, name/status/profile projection, Custom draft, confirmation-only success and semantic colors.
 
-Acceptance is complete. The connected-HOME amendment is integrated in product main; exact-head CI and post-merge CI both passed. The former blocker is retained as historical evidence and marked resolved.
+The historical MBR-02 acceptance record is retained below as evidence. Current task status has been reset to BACKLOG.
 
 ## Documents
 
@@ -101,23 +101,23 @@ Acceptance is complete. The connected-HOME amendment is integrated in product ma
 
 | Gate | Status | Purpose |
 |---|---|---|
-| mbr-00 | **COMPLETE / ACCEPTED** | provenance + contract freeze |
-| mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap and architecture guards |
-| mbr-02 | **COMPLETE / ACCEPTED** | host interaction/state/projector/golden UX; connected HOME Pair New amended |
-| mbr-03 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | Waveshare renderer/HAT candidate |
-| mbr-04 | PLANNED | fixed USB identity |
-| mbr-05 | PLANNED | BLE HOGP passthrough core |
-| mbr-06 | PLANNED | G06 profile/persistence/reconnect/HID++ parity |
-| mbr-07 | PLANNED | lifecycle/Pair New handoff/registry/removal |
-| mbr-08 | PLANNED | complete real UX integration |
-| mbr-09 | PLANNED | resilience/regression |
+| mbr-00 | **BACKLOG** | provenance + contract freeze |
+| mbr-01 | **BACKLOG** | clean bootstrap and architecture guards |
+| mbr-02 | **BACKLOG** | host interaction/state/projector/golden UX; connected HOME Pair New amended |
+| mbr-03 | **BACKLOG** | Waveshare renderer/HAT candidate |
+| mbr-04 | **BACKLOG** | fixed USB identity |
+| mbr-05 | **BACKLOG** | BLE HOGP passthrough core |
+| mbr-06 | **BACKLOG** | G06 profile/persistence/reconnect/HID++ parity |
+| mbr-07 | **BACKLOG** | lifecycle/Pair New handoff/registry/removal |
+| mbr-08 | **BACKLOG** | complete real UX integration |
+| mbr-09 | **BACKLOG** | resilience/regression |
 | mbr-10 | PLANNED | final release qualification |
 
 ## Evidence boundary
 
-MBR-02 is **COMPLETE / ACCEPTED**. MBR-03 now has an implemented Waveshare renderer/HAT candidate with automated evidence pending CI completion and physical acceptance still open.
+Historical implementation and acceptance evidence remains preserved in the execution records. No MBR gate is currently accepted or in progress; all gates are BACKLOG.
 
 
-## MBR-03 implementation evidence
+## MBR-03 historical implementation evidence
 
 The renderer/HAT candidate is built and green in CI, with exact production and qualification UF2 hashes recorded in `executions/mbr-03/candidate.md`. Physical acceptance remains the only open condition for mbr-03.
