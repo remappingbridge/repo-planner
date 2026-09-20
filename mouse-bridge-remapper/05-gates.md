@@ -8,7 +8,7 @@ Current plan after the 2026-09-20 connected-HOME product amendment and MBR-02 re
 |---|---|---|---|
 | mbr-00 | **COMPLETE / ACCEPTED** | provenance, decisions, canonical contract freeze | No |
 | mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap, module ownership, architecture guards | No |
-| mbr-02 | **IMPLEMENTED / ACCEPTANCE READY** | host-pure interaction/state/projector + golden UX tests; connected HOME Pair New entry amended | No |
+| mbr-02 | **COMPLETE / ACCEPTED** | host-pure interaction/state/projector + golden UX tests; connected HOME Pair New entry amended | No |
 | mbr-03 | PLANNED | Waveshare renderer/HAT physical acceptance | Yes |
 | mbr-04 | PLANNED | fixed USB Mouse + synthetic Escape identity | Yes |
 | mbr-05 | PLANNED | canonical single-session BLE HOGP Mouse passthrough | Yes |
@@ -86,7 +86,7 @@ No UI behavior, renderer/HAT behavior, final USB HID behavior, real BLE forwardi
 
 # mbr-02 — Interaction engine, UI projector and golden screen model
 
-**Status: IMPLEMENTED / ACCEPTANCE READY.**
+**Status: COMPLETE / ACCEPTED.**
 
 **Depends on:** mbr-01.
 
@@ -102,7 +102,7 @@ No UI behavior, renderer/HAT behavior, final USB HID behavior, real BLE forwardi
 
 **Host tests:** `bootstrap_contract`, `ux_golden_contract`, `ux_behavior_contract`, `architecture_contract` all PASS.
 
-**Structural Pico regression UF2:** 13824 bytes, SHA-256 `8c64c429e3c366a36ff46740357a3f233efff62cf2d8e5e573104d82f03c3877`; build evidence only, not physical acceptance.
+**Structural Pico regression artifact:** `mbr-01-pico2w-scaffold-uf2`; Actions artifact ID `10594988821`; artifact archive digest `sha256:d7a71a2c7add6fd54c52a754d34a82d10ea6cd0d70dc85e816927ed1ccd4dea3`; build evidence only, not physical acceptance.
 
 **Historical blocker evidence:** `executions/mbr-02/blocker.md`, resolved by `requirements/2026-09-20-connected-home-pair-new.md`.
 
@@ -129,15 +129,17 @@ No UI behavior, renderer/HAT behavior, final USB HID behavior, real BLE forwardi
 - transition/async behavior tests;
 - repair of latent MBR-01 static-library link-order wiring without changing the frozen module graph.
 
-### Former blocker — resolved
+### Former blocker — resolved by the connected-HOME amendment
 
 The former contradiction is closed. The amended `home-connected` screen has a visible first option, `PAIR NEW MOUSE`, that opens `pair-new` while the current Mouse remains authoritative/usable. No hidden control is introduced.
 
-### Required closure before acceptance
+### Acceptance closure
 
-- exact-head host/architecture and Pico structural CI on the amended implementation;
-- merge PR #2 after CI passes;
-- record `executions/mbr-02/completion.md` and post-merge revalidation.
+- connected-HOME amendment documented and implemented;
+- exact-head host/architecture and Pico structural CI passed;
+- PR #2 merged into product main;
+- post-merge host/architecture and Pico structural CI passed;
+- durable completion report recorded in `executions/mbr-02/completion.md`.
 
 No physical acceptance is required for mbr-02.
 
