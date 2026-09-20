@@ -13,7 +13,7 @@ This execution is intentionally isolated from the accepted baseline.
 - base: MBR-05 `7f294a7fac9eebe226ad66c6b572582c5e483421`
 - integrated implementation commit: `f13611d9bc6d28c54250445cbb268271f58c8efa`
 - integrated firmware/manifest head before simulator tooling: `4297054d0573ce908ec81b2e2b82d9d428a5eee8`
-- current product branch HEAD with host LCD simulator/backlight model: `6c0379ce40d083b09ba4f1edaa148a0daa28744a`
+- current product branch HEAD with desktop + static web simulators: `93f4fa3a7eb792c3f32ba431252485b142eee063`
 - no merge into `main`, `mbr/rebuild-00-through-04`, or `mbr/mbr-05-ble-mouse`
 
 The user explicitly authorized bypassing intermediate physical-gate dependency so MBR-06, MBR-07 and MBR-08 could be implemented and corrected together. That bypass permits implementation sequencing only; it does not declare physical PASS.
@@ -148,3 +148,45 @@ Current host verification run: `35539637957`.
 Host result: **17/17 PASS**, including simulator smoke, GUI syntax, scale-preset contract, architecture and canonical screens.
 
 This is a visual inspection model, not a photometrically calibrated model of Waveshare backlight PWM/nits.
+
+
+## Static browser simulator
+
+A fully static browser simulator now lives under `web/`.
+
+Runtime:
+- `web/index.html`
+- `web/simulator.css`
+- `web/simulator-core.js`
+- `web/simulator.js`
+
+Properties:
+- no backend, framework, WebAssembly or network dependency;
+- works from local static files and may also be served by any static HTTP server;
+- 240×240 canvas with ported canonical 5×7 glyph renderer and RGB565 palette;
+- all 30 canonical screen templates;
+- virtual HAT + keyboard controls;
+- virtual Mouse connect/disconnect, deterministic +1/+8/+15 second clock controls;
+- HOME, Pair New, Saved Devices/removal, profile/Custom UI state, Help and Lock flows;
+- global backlight gain 0–1000%, with Lock forcing effective 0%;
+- visual scale presets 75/100/125/150/200/300%;
+- optional browser localStorage persistence for simulated product state;
+- screen inspector and event/state panels.
+
+Final product HEAD: `93f4fa3a7eb792c3f32ba431252485b142eee063`.
+GitHub Actions run: `35540203883`.
+
+Host:
+- **19/19 PASS**
+- `web_simulator_core_contract`: PASS
+- `web_simulator_ui_syntax`: PASS
+- all existing host/radio/architecture/canonical tests: PASS
+
+Pico 2 W:
+- build + UF2 verification: PASS
+- production UF2 unchanged: 880,640 bytes, SHA-256 `c9ded48b8c4e61459829eaa8cb2db777d8a2bd246ea57055aeedcde25846427e`
+- qualification UF2 unchanged: 96,256 bytes, SHA-256 `97836b2e2db8670ff8b6ef3759afa37e9a97fb86d1656436f52d24a331e8b2ba`
+- artifact ID: `10614686174`
+- artifact archive SHA-256: `56c1551a52f66ef9d3ca491434c9eddb29084b5a5df847523652917b39f47820`
+
+The web simulator is an inspection target and does not replace physical acceptance.
