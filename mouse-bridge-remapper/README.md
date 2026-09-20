@@ -1,6 +1,6 @@
 # Mouse Bridge Remapper planning
 
-Status: **MBR-05 IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING. MBR-00 through MBR-04 are physically accepted on the clean rebuild baseline.**
+Status: **EXPERIMENTAL RECOVERY IMPLEMENTED THROUGH MBR-08 / PHYSICAL ACCEPTANCE PENDING. MBR-00 through MBR-04 remain physically accepted; MBR-05 through MBR-08 are isolated on the experimental branch.**
 
 This directory is the planning source of truth for `tiagooliveirajs/mouse-bridge-remapper`.
 
@@ -106,16 +106,16 @@ Historical pre-reset MBR-02 evidence is retained below. The active clean rebuild
 | mbr-02 | **COMPLETE / ACCEPTED** | host interaction/state/projector/golden UX; connected HOME Pair New amended |
 | mbr-03 | **COMPLETE / ACCEPTED** | Waveshare renderer/HAT candidate |
 | mbr-04 | **COMPLETE / ACCEPTED** | fixed USB identity |
-| mbr-05 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | BLE HOGP passthrough core |
-| mbr-06 | **BLOCKED BY MBR-05 PHYSICAL ACCEPTANCE** | G06 profile/persistence/reconnect/HID++ parity |
-| mbr-07 | **BACKLOG** | lifecycle/Pair New handoff/registry/removal |
-| mbr-08 | **BACKLOG** | complete real UX integration |
+| mbr-05 | **IMPLEMENTED / REWORKED IN EXPERIMENTAL RECOVERY / PHYSICAL ACCEPTANCE PENDING** | BLE HOGP passthrough core |
+| mbr-06 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | G06 profile/persistence/reconnect/HID++ parity |
+| mbr-07 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | lifecycle/Pair New handoff/registry/removal |
+| mbr-08 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | complete real UX integration |
 | mbr-09 | **BACKLOG** | resilience/regression |
 | mbr-10 | PLANNED | final release qualification |
 
 ## Evidence boundary
 
-Active execution has advanced through the clean rebuild. MBR-00 through MBR-04 are physically accepted. MBR-05 automated evidence is complete on exact head `7f294a7fac9eebe226ad66c6b572582c5e483421`; only operator physical acceptance remains open. MBR-06 must not start until MBR-05 is physically accepted.
+This planner branch records the user's explicit bypass of intermediate physical-gate dependency for an isolated recovery. The product branch `experimental/mbr08-integrated-recovery-20260920` reworks the MBR-05 connection path and implements MBR-06, MBR-07 and MBR-08 together. Automated host/radio/Pico verification is green; physical acceptance is not inferred. MBR-09 and MBR-10 remain outside this candidate.
 
 
 ## MBR-03 historical implementation evidence
@@ -136,3 +136,16 @@ The renderer/HAT candidate is built and green in CI, with exact production and q
 - physical acceptance: pending operator execution of the numbered MBR-05 scenarios
 
 Durable evidence: `executions/rebuild-mbr-05/candidate-evidence.md`.
+
+
+## Experimental integrated recovery through MBR-08
+
+- planner branch: `experimental/mbr08-integrated-recovery-20260920`
+- product branch: `experimental/mbr08-integrated-recovery-20260920`
+- MBR-05 base: `7f294a7fac9eebe226ad66c6b572582c5e483421`
+- integrated implementation commit: `f13611d9bc6d28c54250445cbb268271f58c8efa`
+- manifest/documentation head: `4297054d0573ce908ec81b2e2b82d9d428a5eee8`
+- MBR-06/07/08: implemented together under explicit user bypass; physical acceptance pending
+- MBR-09/10: not implemented by this recovery
+
+Durable evidence: `executions/experimental-mbr08-integrated-recovery/candidate-evidence.md`.
