@@ -2,26 +2,26 @@
 
 Current plan after the 2026-09-20 connected-HOME product amendment and MBR-02 rework.
 
-> **2026-09-20 reset:** all MBR task statuses were intentionally returned to **BACKLOG** so the next execution can start from mbr-00 on a clean implementation baseline. The detailed implementation/acceptance records below are retained as **historical evidence only**; they do not imply that the current product implementation is accepted or present.
+> **2026-09-20 active execution update:** the clean rebuild progressed through MBR-04 and the operator physically accepted MBR-00 through MBR-04. MBR-05 is implemented and fully green in automated verification; physical acceptance is pending.
 
 
 ## Sequence status
 
 | Gate | Status | Purpose | Physical acceptance |
 |---|---|---|---|
-| mbr-00 | **BACKLOG** | provenance, decisions, canonical contract freeze | No |
-| mbr-01 | **BACKLOG** | clean bootstrap, module ownership, architecture guards | No |
-| mbr-02 | **BACKLOG** | host-pure interaction/state/projector + golden UX tests; connected HOME Pair New entry amended | No |
-| mbr-03 | **BACKLOG** | Waveshare renderer/HAT physical acceptance | Yes |
-| mbr-04 | **BACKLOG** | fixed USB Mouse + synthetic Escape identity | Yes |
-| mbr-05 | **BACKLOG** | canonical single-session BLE HOGP Mouse passthrough | Yes |
-| mbr-06 | **BACKLOG** | G06 profiles/persistence/reconnect/HID++ parity | Yes |
+| mbr-00 | **COMPLETE / ACCEPTED** | provenance, decisions, canonical contract freeze | No |
+| mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap, module ownership, architecture guards | No |
+| mbr-02 | **COMPLETE / ACCEPTED** | host-pure interaction/state/projector + golden UX tests; connected HOME Pair New entry amended | No |
+| mbr-03 | **COMPLETE / ACCEPTED** | Waveshare renderer/HAT physical acceptance | Yes |
+| mbr-04 | **COMPLETE / ACCEPTED** | fixed USB Mouse + synthetic Escape identity | Yes |
+| mbr-05 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | canonical single-session BLE HOGP Mouse passthrough | Yes |
+| mbr-06 | **BLOCKED BY MBR-05 PHYSICAL ACCEPTANCE** | G06 profiles/persistence/reconnect/HID++ parity | Yes |
 | mbr-07 | **BACKLOG** | saved/new search, Pair New handoff, registry/reconnect/removal | Yes |
 | mbr-08 | **BACKLOG** | complete real UX integration | Yes |
 | mbr-09 | **BACKLOG** | resilience/regression qualification | Yes |
 | mbr-10 | **BACKLOG** | final release qualification | Yes |
 
-Executor starts with mbr-00. No gate is currently accepted or in progress; the former implementation/acceptance state is historical evidence retained below.
+Active execution is at mbr-05. MBR-00 through MBR-04 are accepted. MBR-05 exact-head automated verification is complete; only the required physical scenarios remain. MBR-06 is blocked until operator acceptance.
 
 ---
 
@@ -220,7 +220,15 @@ Verify exact host descriptors/interfaces/strings, stable enumeration, Mouse repo
 
 # mbr-05 — Canonical Mouse core and one BLE HOGP passthrough
 
-**Depends on:** mbr-04.
+**Status: IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING.**
+
+**Active candidate:** branch `mbr/mbr-05-ble-mouse`, head `7724de294787b33d452616b2cd9124a5199e4419`, PR #7.
+
+**Automated evidence:** CI run `35509056712` SUCCESS; 10/10 host tests PASS; pico2-w build/UF2 verification PASS; production UF2 SHA-256 `be40b08c473c06f558b9769a661a8f197f10d3cea403e5a8b82ff21dd297b3d8`; qualification UF2 SHA-256 `fd8bb312bd13549ef28c60803e0ee9b483e21329cb9d81b1450510b760960df6`.
+
+**Durable evidence:** `executions/rebuild-mbr-05/candidate-evidence.md`.
+
+**Depends on:** accepted mbr-04.
 
 **Purpose:** reproduce accepted G05 BLE Mouse path under single-authoritative-session architecture.
 
