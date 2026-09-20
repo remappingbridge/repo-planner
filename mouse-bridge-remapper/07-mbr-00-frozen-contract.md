@@ -199,6 +199,17 @@ No:
 - production diagnostic CDC;
 - G07 Keyboard implementation as production base.
 
-## 15. Gate exit
+## 15. MBR-02 connected HOME amendment
 
-There is no unresolved product decision required for mbr-01 through mbr-07. Any future contract change must be documented before code and may invalidate downstream evidence.
+The MBR-00 contract remains the historical accepted baseline, with this later product amendment superseding only the former `home-connected` layout/reachability rule:
+
+- connected Mouse name is the dynamic `home-connected` title;
+- visible options are Pair New, current remap summary, Saved Devices, Learn the Keys;
+- Pair New is the first visible connected-Mouse entry and opens `pair-new` without disconnecting the current Mouse;
+- selecting the remap summary opens `remapper-options`.
+
+All other MBR-00 decisions remain in force. See `requirements/2026-09-20-connected-home-pair-new.md`.
+
+## 16. Gate exit
+
+There is no unresolved product decision required for mbr-01 through mbr-07 after this amendment. Any future contract change must be documented before code and may invalidate downstream evidence.
