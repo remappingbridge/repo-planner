@@ -1,6 +1,6 @@
 # Mouse Bridge Remapper gate plan
 
-Current plan after MBR-02 implementation reached a material frozen-contract blocker.
+Current plan after the 2026-09-20 connected-HOME product amendment and MBR-02 rework.
 
 ## Sequence status
 
@@ -8,8 +8,8 @@ Current plan after MBR-02 implementation reached a material frozen-contract bloc
 |---|---|---|---|
 | mbr-00 | **COMPLETE / ACCEPTED** | provenance, decisions, canonical contract freeze | No |
 | mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap, module ownership, architecture guards | No |
-| mbr-02 | **IMPLEMENTED / ACCEPTANCE BLOCKED** | host-pure interaction/state/projector + golden UX tests; Pair New connected-entry unresolved | No |
-| mbr-03 | **BLOCKED BY MBR-02** | Waveshare renderer/HAT physical acceptance | Yes |
+| mbr-02 | **IMPLEMENTED / ACCEPTANCE READY** | host-pure interaction/state/projector + golden UX tests; connected HOME Pair New entry amended | No |
+| mbr-03 | PLANNED | Waveshare renderer/HAT physical acceptance | Yes |
 | mbr-04 | PLANNED | fixed USB Mouse + synthetic Escape identity | Yes |
 | mbr-05 | PLANNED | canonical single-session BLE HOGP Mouse passthrough | Yes |
 | mbr-06 | PLANNED | G06 profiles/persistence/reconnect/HID++ parity | Yes |
@@ -18,7 +18,7 @@ Current plan after MBR-02 implementation reached a material frozen-contract bloc
 | mbr-09 | PLANNED | resilience/regression qualification | Yes |
 | mbr-10 | PLANNED | final release qualification | Yes |
 
-Executor always selects the first incomplete dependency-complete gate. MBR-02 remains the current gate until the documented Pair New connected-entry contradiction is resolved and the gate is revalidated/integrated. Do not advance to mbr-03.
+Executor always selects the first incomplete dependency-complete gate. MBR-02 remains the current implementation gate until the amended implementation is revalidated/integrated. The former connected-entry blocker is closed by the 2026-09-20 product amendment.
 
 ---
 
@@ -86,15 +86,17 @@ No UI behavior, renderer/HAT behavior, final USB HID behavior, real BLE forwardi
 
 # mbr-02 — Interaction engine, UI projector and golden screen model
 
-**Status: IMPLEMENTED / ACCEPTANCE BLOCKED.**
+**Status: IMPLEMENTED / ACCEPTANCE READY.**
 
 **Depends on:** mbr-01.
 
 **Implementation branch:** `mbr/mbr-02-host-ux-model`.
 
-**PR:** `#2 — MBR-02: host UX model and golden screen contract — BLOCKED` (kept draft/unmerged).
+**PR:** `#2 — MBR-02: host UX model and golden screen contract` (amended; acceptance pending exact-head CI and integration).
 
-**Exact implementation head at blocker discovery:** `13cad3fec43eeed0353b0271a018012d115f2845`.
+**Previous implementation head:** `13cad3fec43eeed0353b0271a018012d115f2845`.
+
+**Amendment:** connected HOME now exposes Pair New as its first visible option and maps the current remap summary to `remapper-options`.
 
 **Exact-head CI:** run `35479112051`; `host-architecture` SUCCESS and `pico2-w-production` SUCCESS.
 
@@ -102,7 +104,7 @@ No UI behavior, renderer/HAT behavior, final USB HID behavior, real BLE forwardi
 
 **Structural Pico regression UF2:** 13824 bytes, SHA-256 `8c64c429e3c366a36ff46740357a3f233efff62cf2d8e5e573104d82f03c3877`; build evidence only, not physical acceptance.
 
-**Durable blocker evidence:** `executions/mbr-02/blocker.md`.
+**Historical blocker evidence:** `executions/mbr-02/blocker.md`, resolved by `requirements/2026-09-20-connected-home-pair-new.md`.
 
 ### Implemented work
 
@@ -127,18 +129,14 @@ No UI behavior, renderer/HAT behavior, final USB HID behavior, real BLE forwardi
 - transition/async behavior tests;
 - repair of latent MBR-01 static-library link-order wiring without changing the frozen module graph.
 
-### Material acceptance blocker
+### Former blocker — resolved
 
-The frozen contract requires `PAIR NEW` to be startable while a current Mouse remains connected and usable, but the visible canonical UX exposes `PAIR NEW MOUSE` only on `home-searching` and `home-retry`, whose HOME precondition is no live Mouse. `home-connected` has no visible Pair New action, and hidden controls are forbidden.
-
-Therefore the semantic state machine can represent and test “live Mouse + Pair New candidate”, but the frozen control map has no documented user-reachable transition into that state. MBR-02 must not be accepted by inventing a hidden control or silently changing a canonical screen.
+The former contradiction is closed. The amended `home-connected` screen has a visible first option, `PAIR NEW MOUSE`, that opens `pair-new` while the current Mouse remains authoritative/usable. No hidden control is introduced.
 
 ### Required closure before acceptance
 
-- update the product documentation to define a visible reachable way to start Pair New while a Mouse is connected, **or** explicitly change the requirement that Pair New can start with a live Mouse;
-- update the canonical control/transition model and affected golden tests;
-- rerun exact-head host/architecture and Pico structural CI;
-- merge PR #2 only after the contradiction is closed;
+- exact-head host/architecture and Pico structural CI on the amended implementation;
+- merge PR #2 after CI passes;
 - record `executions/mbr-02/completion.md` and post-merge revalidation.
 
 No physical acceptance is required for mbr-02.
