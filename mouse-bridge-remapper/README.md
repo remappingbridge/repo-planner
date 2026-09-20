@@ -1,6 +1,6 @@
 # Mouse Bridge Remapper planning
 
-Status: **MBR-02 COMPLETE / ACCEPTED — connected HOME Pair New entry amended and integrated.**
+Status: **MBR-03 IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING — renderer/HAT candidate prepared.**
 
 This directory is the planning source of truth for `tiagooliveirajs/mouse-bridge-remapper`.
 
@@ -56,7 +56,7 @@ MBR-01 established the compileable host/Pico 2 W scaffold, frozen module/depende
 
 ## Current UX amendment
 
-The 2026-09-20 connected-HOME amendment is recorded in `requirements/2026-09-20-connected-home-pair-new.md`. It supersedes only the former `home-connected` layout/reachability rule. The connected Mouse name is now the dynamic title; Pair New is the first visible option and directly opens `pair-new` without disconnecting the current Mouse.
+The 2026-09-20 connected-HOME amendment is recorded in `requirements/2026-09-20-connected-home-pair-new.md`. A later 2026-09-20 amendment for `home-searching-help` is recorded in `requirements/2026-09-20-home-searching-help.md` and changes only that screen's literal wording.
 
 ## MBR-02 implementation state
 
@@ -93,6 +93,8 @@ Acceptance is complete. The connected-HOME amendment is integrated in product ma
 16. [`requirements/2026-09-20-single-connected-mouse.md`](requirements/2026-09-20-single-connected-mouse.md) — single-live-Mouse simplification.
 17. [`requirements/2026-09-20-connected-home-pair-new.md`](requirements/2026-09-20-connected-home-pair-new.md) — connected HOME Pair New entry amendment.
 18. [`requirements/2026-09-20-pair-new-help-and-handoff.md`](requirements/2026-09-20-pair-new-help-and-handoff.md) — newest Pair New Help/handoff clarification.
+19. [`requirements/2026-09-20-home-searching-help.md`](requirements/2026-09-20-home-searching-help.md) — current `home-searching-help` literal amendment.
+20. [`executions/mbr-03/pre-implementation.md`](executions/mbr-03/pre-implementation.md) — exact renderer/HAT gate subject before implementation.
 
 ## Gate summary
 
@@ -100,8 +102,8 @@ Acceptance is complete. The connected-HOME amendment is integrated in product ma
 |---|---|---|
 | mbr-00 | **COMPLETE / ACCEPTED** | provenance + contract freeze |
 | mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap and architecture guards |
-| mbr-02 | **IMPLEMENTED / BLOCKED** | host interaction/state/projector/golden UX; Pair New connected-entry contract unresolved |
-| mbr-03 | BLOCKED BY MBR-02 | physical renderer/HAT |
+| mbr-02 | **COMPLETE / ACCEPTED** | host interaction/state/projector/golden UX; connected HOME Pair New amended |
+| mbr-03 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | Waveshare renderer/HAT candidate |
 | mbr-04 | PLANNED | fixed USB identity |
 | mbr-05 | PLANNED | BLE HOGP passthrough core |
 | mbr-06 | PLANNED | G06 profile/persistence/reconnect/HID++ parity |
@@ -112,4 +114,4 @@ Acceptance is complete. The connected-HOME amendment is integrated in product ma
 
 ## Evidence boundary
 
-MBR-02 is **COMPLETE / ACCEPTED**. Host-pure UX behavior, exact connected-HOME golden layout, all connected-HOME destinations, architecture guards and the Pico structural regression passed on the exact amended head; the integrated product main was revalidated after merge. No physical acceptance is claimed by mbr-02.
+MBR-02 is **COMPLETE / ACCEPTED**. MBR-03 now has an implemented Waveshare renderer/HAT candidate with automated evidence pending CI completion and physical acceptance still open.
