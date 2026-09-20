@@ -12,7 +12,7 @@ These rules govern mbr-01 onward.
 - Record exact base SHA.
 - Use an explicit `mbr/...` implementation branch; never use destination `main` as scratch space.
 
-MBR-00 is accepted. The next executable gate is mbr-01.
+MBR-00 and MBR-01 are accepted. MBR-02 is now accepted after its connected-HOME amendment; the next executable gate is mbr-03.
 
 ## 2. Authority order
 
