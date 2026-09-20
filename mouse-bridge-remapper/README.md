@@ -1,6 +1,6 @@
 # Mouse Bridge Remapper planning
 
-Status: **MBR-00 COMPLETE / ACCEPTED. NEXT GATE: MBR-01.**
+Status: **MBR-01 COMPLETE / ACCEPTED. NEXT GATE: MBR-02.**
 
 This directory is the planning source of truth for `tiagooliveirajs/mouse-bridge-remapper`.
 
@@ -43,6 +43,16 @@ G07+ Keyboard work is research evidence only.
 - Escape retained through minimal fixed USB Keyboard output;
 - no Bluetooth Keyboard/Composite product support.
 
+## Implementation baseline after MBR-01
+
+Accepted product `main` after mbr-01:
+
+`tiagooliveirajs/mouse-bridge-remapper@cee10ee157ce0d7f6655df203327422c3c40e6b3`
+
+MBR-01 established the compileable host/Pico 2 W scaffold, frozen module/dependency graph, single-authoritative-Mouse slot, separate non-authoritative Pair New candidate scaffold, architecture ownership guards and pinned G06-derived CI/toolchain baseline. The exact accepted implementation branch head was `826c50dab3b105c6bcecef6a6dbba401506aefc9`; exact-head CI run `35477941473` passed host/architecture and Pico 2 W production jobs.
+
+The mbr-01 UF2 is build/scaffold evidence only; it is not a behavioral firmware candidate and requires no physical acceptance.
+
 ## Documents
 
 1. [`00-authority-scope-and-precedence.md`](00-authority-scope-and-precedence.md) — authority and hard scope.
@@ -55,17 +65,19 @@ G07+ Keyboard work is research evidence only.
 8. [`07-mbr-00-frozen-contract.md`](07-mbr-00-frozen-contract.md) — gate-level frozen contract.
 9. [`08-mbr-00-migration-manifest.md`](08-mbr-00-migration-manifest.md) — G06 reuse/adapt/exclude manifest.
 10. [`executions/mbr-00/completion.md`](executions/mbr-00/completion.md) — durable MBR-00 completion report.
-11. [`requirements/2026-09-19-user-rules.md`](requirements/2026-09-19-user-rules.md) — original verbatim UX source.
-12. [`requirements/2026-09-20-single-connected-mouse.md`](requirements/2026-09-20-single-connected-mouse.md) — single-live-Mouse simplification.
-13. [`requirements/2026-09-20-pair-new-help-and-handoff.md`](requirements/2026-09-20-pair-new-help-and-handoff.md) — newest Pair New Help/handoff clarification.
+11. [`executions/mbr-01/pre-implementation.md`](executions/mbr-01/pre-implementation.md) — exact MBR-01 execution subject before implementation.
+12. [`executions/mbr-01/completion.md`](executions/mbr-01/completion.md) — durable MBR-01 implementation/build/CI/integration record.
+13. [`requirements/2026-09-19-user-rules.md`](requirements/2026-09-19-user-rules.md) — original verbatim UX source.
+14. [`requirements/2026-09-20-single-connected-mouse.md`](requirements/2026-09-20-single-connected-mouse.md) — single-live-Mouse simplification.
+15. [`requirements/2026-09-20-pair-new-help-and-handoff.md`](requirements/2026-09-20-pair-new-help-and-handoff.md) — newest Pair New Help/handoff clarification.
 
 ## Gate summary
 
 | Gate | Status | Purpose |
 |---|---|---|
-| mbr-00 | **COMPLETE** | provenance + contract freeze |
-| mbr-01 | NEXT / PLANNED | clean bootstrap and architecture guards |
-| mbr-02 | PLANNED | host interaction/state/projector/golden UX |
+| mbr-00 | **COMPLETE / ACCEPTED** | provenance + contract freeze |
+| mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap and architecture guards |
+| mbr-02 | **NEXT / PLANNED** | host interaction/state/projector/golden UX |
 | mbr-03 | PLANNED | physical renderer/HAT |
 | mbr-04 | PLANNED | fixed USB identity |
 | mbr-05 | PLANNED | BLE HOGP passthrough core |
@@ -75,6 +87,6 @@ G07+ Keyboard work is research evidence only.
 | mbr-09 | PLANNED | resilience/regression |
 | mbr-10 | PLANNED | final release qualification |
 
-## MBR-00 evidence boundary
+## Evidence boundary
 
-MBR-00 changed documentation/planning only. It did **not** implement firmware, build code, produce a UF2, flash hardware or make a new physical acceptance claim.
+MBR-00 froze documentation/product behavior only. MBR-01 then implemented and CI-validated the structural code/build baseline. It still does **not** claim the product UI, physical renderer/HAT, final USB descriptor/report behavior, real BLE HOGP forwarding, profiles/persistence/HID++, lifecycle transactions or final product behavior are implemented.
