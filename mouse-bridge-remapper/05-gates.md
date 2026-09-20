@@ -1,14 +1,14 @@
 # Mouse Bridge Remapper gate plan
 
-Current plan after MBR-00 contract freeze.
+Current plan after accepted MBR-01 clean bootstrap.
 
 ## Sequence status
 
 | Gate | Status | Purpose | Physical acceptance |
 |---|---|---|---|
 | mbr-00 | **COMPLETE / ACCEPTED** | provenance, decisions, canonical contract freeze | No |
-| mbr-01 | PLANNED | clean bootstrap, module ownership, architecture guards | No |
-| mbr-02 | PLANNED | host-pure interaction/state/projector + golden UX tests | No |
+| mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap, module ownership, architecture guards | No |
+| mbr-02 | **NEXT / PLANNED** | host-pure interaction/state/projector + golden UX tests | No |
 | mbr-03 | PLANNED | Waveshare renderer/HAT physical acceptance | Yes |
 | mbr-04 | PLANNED | fixed USB Mouse + synthetic Escape identity | Yes |
 | mbr-05 | PLANNED | canonical single-session BLE HOGP Mouse passthrough | Yes |
@@ -18,7 +18,7 @@ Current plan after MBR-00 contract freeze.
 | mbr-09 | PLANNED | resilience/regression qualification | Yes |
 | mbr-10 | PLANNED | final release qualification | Yes |
 
-Executor always selects the first incomplete dependency-complete gate. MBR-00 does not authorize skipping mbr-01.
+Executor always selects the first incomplete dependency-complete gate. After accepted mbr-01, the first executable gate is mbr-02.
 
 ---
 
@@ -49,46 +49,38 @@ Frozen decisions include:
 - deterministic 21-character Mouse-name projection;
 - intentional `JOY LEFT: GO TO HOME` on `escape-active`.
 
-**Next gate:** `mbr-01`.
-
 ---
 
 # mbr-01 — Clean bootstrap and architecture enforcement
 
+**Status: COMPLETE / ACCEPTED.**
+
 **Depends on:** accepted mbr-00.
 
-**Purpose:** establish implementation scaffold whose boundaries encode the frozen product rather than historical BLU2USB structure.
+**Accepted product implementation head:** `826c50dab3b105c6bcecef6a6dbba401506aefc9`.
 
-### Required work
+**Integrated product main:** `cee10ee157ce0d7f6655df203327422c3c40e6b3` via PR #1.
 
-- branch `mbr/mbr-01-*` from approved destination base;
-- host/Pico CMake composition with pinned SDK/toolchain inputs based on G06 evidence unless deliberately updated with justification;
-- materialize conceptual modules:
-  - `domain`, `mouse_registry`, `mouse_session`, `output_state`;
-  - `profiles`, `remap`, `pairing_coordinator`;
-  - `bt_runtime`, `ble_hogp`, `logitech_hidpp`;
-  - `product_storage`, `usb_hid`;
-  - `interaction`, `ui_projector`, `renderer`, `hat`, `app`;
-- architecture guards reject:
-  - >1 authoritative ready Mouse;
-  - speculative simultaneous-Mouse aggregators/focus/capacity code;
-  - Bluetooth Keyboard/Composite product modules;
-  - `classic_hid` / `keyboard_transport`;
-  - duplicate TinyUSB/BTstack ownership;
-  - raw BTstack outside adapters/runtime;
-  - raw GPIO/SPI outside HAT/renderer adapters;
-  - flash writes outside storage;
-  - UI transport calls;
-  - `.c` textual includes/macro interception;
-  - production diagnostic CDC.
+**Exact-head acceptance CI:** run `35477941473`, with both `host-architecture` and `pico2-w-production` successful.
 
-### Automated evidence
+**Structural UF2:** 12288 bytes, SHA-256 `3110c90819a67eab761d75fae8ab396823e343dc3a0ea3ac16e9868c5155d452`; scaffold/build evidence only, not behavioral or physical acceptance.
 
-Host configure/build, architecture guard suite, Pico 2 W production configure/build, non-empty UF2 structural check, source/toolchain metadata.
+**Durable execution evidence:** `executions/mbr-01/pre-implementation.md` and `executions/mbr-01/completion.md`.
 
-### Physical acceptance
+Accepted implementation established:
 
-None. A scaffold UF2 is not behavioral acceptance.
+- host/Pico 2 W CMake composition with G06-derived pinned SDK/toolchain inputs;
+- all frozen conceptual modules materialized;
+- one authoritative Mouse slot plus a separate non-authoritative Pair New candidate representation;
+- exact module/dependency facade;
+- architecture guards against Keyboard/Composite/Classic-HID/simultaneous-authoritative-Mouse scope;
+- one BT lifecycle owner (`bt_runtime`) and one future TinyUSB owner (`usb_hid`) encoded as guard boundaries;
+- no G07 multicore/Core1 architecture;
+- no `.c` textual includes, transport/HAL macro interception, forced USB re-enumeration or diagnostic production stdio/CDC;
+- host bootstrap tests and architecture tests;
+- Pico 2 W production scaffold build under SDK 2.2.0 and ARM GCC 13.2.1.
+
+No UI behavior, renderer/HAT behavior, final USB HID behavior, real BLE forwarding, profiles/persistence/HID++, saved/new lifecycle or physical acceptance is implied by mbr-01.
 
 ---
 
