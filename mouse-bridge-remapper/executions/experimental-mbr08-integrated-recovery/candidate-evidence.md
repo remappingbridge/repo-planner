@@ -12,7 +12,8 @@ This execution is intentionally isolated from the accepted baseline.
 - planner branch: `experimental/mbr08-integrated-recovery-20260920`
 - base: MBR-05 `7f294a7fac9eebe226ad66c6b572582c5e483421`
 - integrated implementation commit: `f13611d9bc6d28c54250445cbb268271f58c8efa`
-- final product branch HEAD: `4297054d0573ce908ec81b2e2b82d9d428a5eee8`
+- integrated firmware/manifest head before simulator tooling: `4297054d0573ce908ec81b2e2b82d9d428a5eee8`
+- current product branch HEAD with host LCD simulator: `dd6bdff208f455cc3a03b0c27c209617dbfda21d`
 - no merge into `main`, `mbr/rebuild-00-through-04`, or `mbr/mbr-05-ble-mouse`
 
 The user explicitly authorized bypassing intermediate physical-gate dependency so MBR-06, MBR-07 and MBR-08 could be implemented and corrected together. That bypass permits implementation sequencing only; it does not declare physical PASS.
@@ -110,3 +111,20 @@ Physical acceptance remains pending. Execute the 37 numbered scenarios in produc
 `docs/implementation/08-manual-tests.md` using the production UF2 above.
 
 MBR-09 and MBR-10 are outside this recovery and remain backlog.
+
+
+## Host virtual LCD/HAT simulator
+
+The experimental branch now contains an interactive host simulator that directly reuses the production application state machine, UI projector and RGB565 renderer.
+
+- backend: `tools/lcd_simulator/mbr_lcd_simulator.c`
+- GUI: `tools/lcd_simulator.py`
+- documentation: `docs/implementation/09-host-lcd-simulator.md`
+- default virtual LCD scale: 3x = 720x720
+- HAT controls: keyboard arrows, Enter/Space and A/B/X/Y, plus on-screen buttons
+- deterministic event injection: Mouse READY/disconnect, +1s/+8s/+15s, HOME, reboot and factory-reset
+- simulated profile/draft/removal operations are auto-confirmed so complete UI flows can be exercised
+- final simulator host CI run: `35537812476`
+- host result: **16/16 PASS**, including `lcd_simulator_smoke` and `lcd_simulator_gui_syntax`
+
+The simulator does not emulate RP2350, CYW43/BTstack, TinyUSB, physical flash interruption or ST7789 electrical/SPI timing; physical-gate acceptance remains unchanged.
