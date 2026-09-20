@@ -42,9 +42,13 @@ Amended implementation head:
 
 `ec21f11685e3e80cbb119560a4e8d5cd4e8a6ff0`
 
-Integrated product main:
+Integrated product main at merge:
 
 `34f5806763503c79aa98e54923a3ec854b11d270`
+
+Final product main after documentation-only acceptance-status commit:
+
+`643278c0ec94ab0c64ad88bcba2a770b2d368f61`
 
 PR #2:
 
@@ -96,9 +100,16 @@ PR #2 merged with integrated SHA:
 
 `34f5806763503c79aa98e54923a3ec854b11d270`
 
-Post-merge CI:
+Post-merge CI on merge SHA:
 
 Run `35480184381`
+
+- host-architecture: SUCCESS
+- Pico 2 W production: SUCCESS
+
+Final-main revalidation after the documentation-only README status commit:
+
+Run `35480324704`
 
 - host-architecture: SUCCESS
 - Pico 2 W production: SUCCESS
