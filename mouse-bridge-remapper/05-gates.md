@@ -222,9 +222,9 @@ Verify exact host descriptors/interfaces/strings, stable enumeration, Mouse repo
 
 **Status: IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING.**
 
-**Active candidate:** branch `mbr/mbr-05-ble-mouse`, head `7724de294787b33d452616b2cd9124a5199e4419`, PR #7.
+**Active candidate:** branch `mbr/mbr-05-ble-mouse`, head `7f294a7fac9eebe226ad66c6b572582c5e483421`, PR #7.
 
-**Automated evidence:** CI run `35509056712` SUCCESS; 10/10 host tests PASS; pico2-w build/UF2 verification PASS; production UF2 SHA-256 `be40b08c473c06f558b9769a661a8f197f10d3cea403e5a8b82ff21dd297b3d8`; qualification UF2 SHA-256 `fd8bb312bd13549ef28c60803e0ee9b483e21329cb9d81b1450510b760960df6`.
+**Automated evidence:** CI run `35533201112` SUCCESS; 10/10 host tests PASS; pico2-w build/UF2 verification PASS; production UF2 SHA-256 `be40b08c473c06f558b9769a661a8f197f10d3cea403e5a8b82ff21dd297b3d8`; qualification UF2 SHA-256 `fd8bb312bd13549ef28c60803e0ee9b483e21329cb9d81b1450510b760960df6`.
 
 **Durable evidence:** `executions/rebuild-mbr-05/candidate-evidence.md`.
 
