@@ -1,6 +1,6 @@
 # Mouse Bridge Remapper planning
 
-Status: **MBR-01 COMPLETE / ACCEPTED. NEXT GATE: MBR-02.**
+Status: **MBR-02 IMPLEMENTED / ACCEPTANCE BLOCKED — Pair New has no documented connected-Mouse entry path.**
 
 This directory is the planning source of truth for `tiagooliveirajs/mouse-bridge-remapper`.
 
@@ -43,15 +43,30 @@ G07+ Keyboard work is research evidence only.
 - Escape retained through minimal fixed USB Keyboard output;
 - no Bluetooth Keyboard/Composite product support.
 
-## Implementation baseline after MBR-01
+## Accepted implementation baseline
 
-Accepted product `main` after mbr-01:
+Accepted product `main` remains the MBR-01 baseline:
 
 `tiagooliveirajs/mouse-bridge-remapper@cee10ee157ce0d7f6655df203327422c3c40e6b3`
 
 MBR-01 established the compileable host/Pico 2 W scaffold, frozen module/dependency graph, single-authoritative-Mouse slot, separate non-authoritative Pair New candidate scaffold, architecture ownership guards and pinned G06-derived CI/toolchain baseline. The exact accepted implementation branch head was `826c50dab3b105c6bcecef6a6dbba401506aefc9`; exact-head CI run `35477941473` passed host/architecture and Pico 2 W production jobs.
 
-The mbr-01 UF2 is build/scaffold evidence only; it is not a behavioral firmware candidate and requires no physical acceptance.
+## MBR-02 implementation state
+
+MBR-02 implementation exists on product branch `mbr/mbr-02-host-ux-model`, PR #2. Exact implementation head at blocker discovery: `13cad3fec43eeed0353b0271a018012d115f2845`.
+
+Host CI on that exact SHA passed all four contracts:
+
+- `bootstrap_contract`;
+- `ux_golden_contract`;
+- `ux_behavior_contract`;
+- `architecture_contract`.
+
+The implementation covers the 30 canonical screens, release interaction, Help/Lock, HOME/search transactions, stale IDs, Pair New candidate/handoff semantics, name/status/profile projection, Custom draft, confirmation-only success and semantic colors.
+
+**Acceptance is blocked** because the frozen UX exposes `PAIR NEW MOUSE` only in HOME states whose precondition is no live Mouse, while the same product contract requires starting Pair New with a current Mouse connected and usable. `home-connected` has no visible Pair New action and hidden controls are forbidden. See [`executions/mbr-02/blocker.md`](executions/mbr-02/blocker.md).
+
+PR #2 must not be merged as the accepted baseline and mbr-03 must not start until the product documentation defines the reachable Pair New connected-entry transition, the implementation/goldens are updated, CI reruns, and mbr-02 is accepted.
 
 ## Documents
 
@@ -67,9 +82,11 @@ The mbr-01 UF2 is build/scaffold evidence only; it is not a behavioral firmware 
 10. [`executions/mbr-00/completion.md`](executions/mbr-00/completion.md) — durable MBR-00 completion report.
 11. [`executions/mbr-01/pre-implementation.md`](executions/mbr-01/pre-implementation.md) — exact MBR-01 execution subject before implementation.
 12. [`executions/mbr-01/completion.md`](executions/mbr-01/completion.md) — durable MBR-01 implementation/build/CI/integration record.
-13. [`requirements/2026-09-19-user-rules.md`](requirements/2026-09-19-user-rules.md) — original verbatim UX source.
-14. [`requirements/2026-09-20-single-connected-mouse.md`](requirements/2026-09-20-single-connected-mouse.md) — single-live-Mouse simplification.
-15. [`requirements/2026-09-20-pair-new-help-and-handoff.md`](requirements/2026-09-20-pair-new-help-and-handoff.md) — newest Pair New Help/handoff clarification.
+13. [`executions/mbr-02/pre-implementation.md`](executions/mbr-02/pre-implementation.md) — exact MBR-02 execution subject before implementation.
+14. [`executions/mbr-02/blocker.md`](executions/mbr-02/blocker.md) — material Pair New connected-entry contradiction and current implementation evidence.
+15. [`requirements/2026-09-19-user-rules.md`](requirements/2026-09-19-user-rules.md) — original verbatim UX source.
+16. [`requirements/2026-09-20-single-connected-mouse.md`](requirements/2026-09-20-single-connected-mouse.md) — single-live-Mouse simplification.
+17. [`requirements/2026-09-20-pair-new-help-and-handoff.md`](requirements/2026-09-20-pair-new-help-and-handoff.md) — newest Pair New Help/handoff clarification.
 
 ## Gate summary
 
@@ -77,8 +94,8 @@ The mbr-01 UF2 is build/scaffold evidence only; it is not a behavioral firmware 
 |---|---|---|
 | mbr-00 | **COMPLETE / ACCEPTED** | provenance + contract freeze |
 | mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap and architecture guards |
-| mbr-02 | **NEXT / PLANNED** | host interaction/state/projector/golden UX |
-| mbr-03 | PLANNED | physical renderer/HAT |
+| mbr-02 | **IMPLEMENTED / BLOCKED** | host interaction/state/projector/golden UX; Pair New connected-entry contract unresolved |
+| mbr-03 | BLOCKED BY MBR-02 | physical renderer/HAT |
 | mbr-04 | PLANNED | fixed USB identity |
 | mbr-05 | PLANNED | BLE HOGP passthrough core |
 | mbr-06 | PLANNED | G06 profile/persistence/reconnect/HID++ parity |
@@ -89,4 +106,4 @@ The mbr-01 UF2 is build/scaffold evidence only; it is not a behavioral firmware 
 
 ## Evidence boundary
 
-MBR-00 froze documentation/product behavior only. MBR-01 then implemented and CI-validated the structural code/build baseline. It still does **not** claim the product UI, physical renderer/HAT, final USB descriptor/report behavior, real BLE HOGP forwarding, profiles/persistence/HID++, lifecycle transactions or final product behavior are implemented.
+MBR-02 has substantial implemented and CI-validated host-pure behavior, but it is **not accepted** because one required product flow is not reachable from the frozen visible control map. Accepted product `main` therefore remains the MBR-01 baseline until the contradiction is resolved and MBR-02 is revalidated/integrated.
