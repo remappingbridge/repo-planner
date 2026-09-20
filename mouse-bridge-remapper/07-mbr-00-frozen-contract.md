@@ -210,6 +210,24 @@ The MBR-00 contract remains the historical accepted baseline, with this later pr
 
 All other MBR-00 decisions remain in force. See `requirements/2026-09-20-connected-home-pair-new.md`.
 
-## 16. Gate exit
+## 16. Post-MBR-02 home-searching Help amendment
 
-There is no unresolved product decision required for mbr-01 through mbr-07 after this amendment. Any future contract change must be documented before code and may invalidate downstream evidence.
+A later product amendment supersedes only the literal layout of `home-searching-help`:
+
+```text
+HOME SEARCHING HELP
+THE MATCHING ATTEMPT
+TOOK PLACE ONLY FOR
+DEVICES ALREADY SAVED
+IN THE PREFERENCES,
+BUT NOT FOR DEVICES
+THAT WERE NOT SAVED.
+
+ANY KEY: BACK
+```
+
+The amendment does not change saved-search eligibility, the 8-second `SEARCH_SAVED` timing, Help ownership, or any other screen. See `requirements/2026-09-20-home-searching-help.md`.
+
+## 17. Gate exit
+
+There is no unresolved product decision required for mbr-01 through mbr-07 after the current amendments. Any future contract change must be documented before code and may invalidate downstream evidence.

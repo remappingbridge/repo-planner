@@ -218,3 +218,22 @@ Stale transaction/session completions are ignored by ID/generation.
 ## 12. Golden-test obligation
 
 mbr-02 must assert exact rows, control maps, transitions, dynamic fields, token columns, color priority, Pair New handoff state projections, long-name policy, and absence of Keyboard/Composite/multi-connected states.
+
+
+## 13. Home searching Help layout amendment
+
+The current literal for `home-searching-help` is the 2026-09-20 product amendment:
+
+```text
+HOME SEARCHING HELP
+THE MATCHING ATTEMPT
+TOOK PLACE ONLY FOR
+DEVICES ALREADY SAVED
+IN THE PREFERENCES,
+BUT NOT FOR DEVICES
+THAT WERE NOT SAVED.
+
+ANY KEY: BACK
+```
+
+This changes only the rendered wording. The page remains Help-owned, any HAT input returns to `home-searching` and is consumed, and the underlying `SEARCH_SAVED` transaction remains an automatic 8-second saved-device search.

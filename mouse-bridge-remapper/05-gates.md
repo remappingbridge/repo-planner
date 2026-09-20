@@ -9,7 +9,7 @@ Current plan after the 2026-09-20 connected-HOME product amendment and MBR-02 re
 | mbr-00 | **COMPLETE / ACCEPTED** | provenance, decisions, canonical contract freeze | No |
 | mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap, module ownership, architecture guards | No |
 | mbr-02 | **COMPLETE / ACCEPTED** | host-pure interaction/state/projector + golden UX tests; connected HOME Pair New entry amended | No |
-| mbr-03 | PLANNED | Waveshare renderer/HAT physical acceptance | Yes |
+| mbr-03 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | Waveshare renderer/HAT physical acceptance | Yes |
 | mbr-04 | PLANNED | fixed USB Mouse + synthetic Escape identity | Yes |
 | mbr-05 | PLANNED | canonical single-session BLE HOGP Mouse passthrough | Yes |
 | mbr-06 | PLANNED | G06 profiles/persistence/reconnect/HID++ parity | Yes |
@@ -18,7 +18,7 @@ Current plan after the 2026-09-20 connected-HOME product amendment and MBR-02 re
 | mbr-09 | PLANNED | resilience/regression qualification | Yes |
 | mbr-10 | PLANNED | final release qualification | Yes |
 
-Executor always selects the first incomplete dependency-complete gate. MBR-02 remains the current implementation gate until the amended implementation is revalidated/integrated. The former connected-entry blocker is closed by the 2026-09-20 product amendment.
+Executor always selects the first incomplete dependency-complete gate. MBR-03 is now implemented and is the current open physical gate; mbr-04 and later remain blocked until the operator closes the numbered mbr-03 scenarios. The former connected-entry blocker is closed by the 2026-09-20 product amendment.
 
 ---
 
@@ -170,6 +170,19 @@ No physical acceptance is required for mbr-02.
 - Help ownership;
 - ordinary Lock and instructional B/X/Y behavior;
 - framebuffer/renderer-command golden tests where practical.
+
+### Implementation evidence
+
+- product branch: `mbr/mbr-03-renderer-hat`;
+- candidate head: `4d4c2b9852e0db7390d75fac943294437db0d762`;
+- PR #3: `MBR-03: Waveshare ST7789 renderer and HAT`;
+- CI run: `35481175036` — host/architecture and Pico 2 W production jobs SUCCESS;
+- Actions artifact: `mbr-03-pico2w-renderer-hat-uf2`, ID `10594974918`, archive digest `sha256:cc8e496331f6cb3e92e66627d01b51509fee4bbb880573ad8d99824d6c8d1e6f`;
+- production UF2: 77312 bytes, SHA-256 `382afe84c787a34e4c7bde6e70327de03e449fb62f7d06c758bb435202459cc2`;
+- qualification UF2: 78336 bytes, SHA-256 `9e9151d674b166ee546e4e82099243d75f01f44bdaa63bcb81ea063b3fb9dd41`;
+- qualification firmware is isolated from the production executable and has no serial/CDC diagnostics.
+
+Durable evidence: `executions/mbr-03/pre-implementation.md` and `executions/mbr-03/candidate.md`.
 
 ### Physical closure
 
