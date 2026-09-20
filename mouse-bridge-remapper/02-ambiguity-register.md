@@ -133,6 +133,14 @@ Source uses of “linha 16” in this coordinate context are normalized as colum
 
 **RESOLVED:** BLE HOGP only. Bluetooth Classic Mouse is not included.
 
+## D-019 — Connected HOME Pair New entry
+
+**RESOLVED by 2026-09-20 product amendment:** `home-connected` uses the current connected Mouse name as its dynamic title and exposes four visible options in this order: `PAIR NEW MOUSE`, current remap summary, `SAVED DEVICES`, `LEARN THE KEYS`. The first option opens `pair-new` while the current Mouse remains authoritative and usable. The remap summary opens `remapper-options`.
+
+Authority: `requirements/2026-09-20-connected-home-pair-new.md`.
+
+This closes the MBR-02 reachability blocker without introducing hidden controls or changing the one-authoritative-Mouse invariant.
+
 ## Change discipline
 
 Any future change to these choices is a product-contract change and must update documentation/planning before code. The executor may not treat a later implementation convenience as authority to reopen a closed decision.
