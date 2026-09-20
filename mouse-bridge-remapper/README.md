@@ -1,6 +1,6 @@
 # Mouse Bridge Remapper planning
 
-Status: **MBR-02 IMPLEMENTED / ACCEPTANCE BLOCKED — Pair New has no documented connected-Mouse entry path.**
+Status: **MBR-02 IMPLEMENTED / ACCEPTANCE READY — connected HOME Pair New entry amended and revalidated pending CI/integration.**
 
 This directory is the planning source of truth for `tiagooliveirajs/mouse-bridge-remapper`.
 
@@ -31,6 +31,9 @@ G07+ Keyboard work is research evidence only.
 - current Mouse stays live while Pair New searches;
 - first valid unsaved replacement candidate triggers a safe handoff;
 - Pair New timeout/cancel before handoff leaves current Mouse live;
+- connected HOME presents the current Mouse name as title and exposes `PAIR NEW MOUSE` as its first visible option;
+- connected HOME remap summary is the second option and opens `remapper-options`;
+- connected HOME Saved Devices and Learn the Keys remain the third and fourth options;
 - saved candidates are ignored as Pair New winners;
 - to reconnect saved instead, unplug current Mouse and Back until HOME reaches SEARCHING;
 - HOME with saved mice + no live Mouse starts 8-second saved search automatically;
@@ -51,6 +54,10 @@ Accepted product `main` remains the MBR-01 baseline:
 
 MBR-01 established the compileable host/Pico 2 W scaffold, frozen module/dependency graph, single-authoritative-Mouse slot, separate non-authoritative Pair New candidate scaffold, architecture ownership guards and pinned G06-derived CI/toolchain baseline. The exact accepted implementation branch head was `826c50dab3b105c6bcecef6a6dbba401506aefc9`; exact-head CI run `35477941473` passed host/architecture and Pico 2 W production jobs.
 
+## Current UX amendment
+
+The 2026-09-20 connected-HOME amendment is recorded in `requirements/2026-09-20-connected-home-pair-new.md`. It supersedes only the former `home-connected` layout/reachability rule. The connected Mouse name is now the dynamic title; Pair New is the first visible option and directly opens `pair-new` without disconnecting the current Mouse.
+
 ## MBR-02 implementation state
 
 MBR-02 implementation exists on product branch `mbr/mbr-02-host-ux-model`, PR #2. Exact implementation head at blocker discovery: `13cad3fec43eeed0353b0271a018012d115f2845`.
@@ -64,9 +71,7 @@ Host CI on that exact SHA passed all four contracts:
 
 The implementation covers the 30 canonical screens, release interaction, Help/Lock, HOME/search transactions, stale IDs, Pair New candidate/handoff semantics, name/status/profile projection, Custom draft, confirmation-only success and semantic colors.
 
-**Acceptance is blocked** because the frozen UX exposes `PAIR NEW MOUSE` only in HOME states whose precondition is no live Mouse, while the same product contract requires starting Pair New with a current Mouse connected and usable. `home-connected` has no visible Pair New action and hidden controls are forbidden. See [`executions/mbr-02/blocker.md`](executions/mbr-02/blocker.md).
-
-PR #2 must not be merged as the accepted baseline and mbr-03 must not start until the product documentation defines the reachable Pair New connected-entry transition, the implementation/goldens are updated, CI reruns, and mbr-02 is accepted.
+Acceptance is now unblocked by the explicit connected-HOME amendment: `home-connected` has a visible `PAIR NEW MOUSE` first option that opens `pair-new` while the current Mouse remains live. The former blocker is retained as historical evidence and marked resolved. PR #2 can be accepted after the amended implementation and exact-head CI are green.
 
 ## Documents
 
@@ -83,9 +88,10 @@ PR #2 must not be merged as the accepted baseline and mbr-03 must not start unti
 11. [`executions/mbr-01/pre-implementation.md`](executions/mbr-01/pre-implementation.md) — exact MBR-01 execution subject before implementation.
 12. [`executions/mbr-01/completion.md`](executions/mbr-01/completion.md) — durable MBR-01 implementation/build/CI/integration record.
 13. [`executions/mbr-02/pre-implementation.md`](executions/mbr-02/pre-implementation.md) — exact MBR-02 execution subject before implementation.
-14. [`executions/mbr-02/blocker.md`](executions/mbr-02/blocker.md) — material Pair New connected-entry contradiction and current implementation evidence.
+14. [`executions/mbr-02/blocker.md`](executions/mbr-02/blocker.md) — historical Pair New connected-entry contradiction, now resolved by the 2026-09-20 amendment.
 15. [`requirements/2026-09-19-user-rules.md`](requirements/2026-09-19-user-rules.md) — original verbatim UX source.
 16. [`requirements/2026-09-20-single-connected-mouse.md`](requirements/2026-09-20-single-connected-mouse.md) — single-live-Mouse simplification.
+17. [`requirements/2026-09-20-connected-home-pair-new.md`](requirements/2026-09-20-connected-home-pair-new.md) — connected HOME Pair New entry amendment.
 17. [`requirements/2026-09-20-pair-new-help-and-handoff.md`](requirements/2026-09-20-pair-new-help-and-handoff.md) — newest Pair New Help/handoff clarification.
 
 ## Gate summary

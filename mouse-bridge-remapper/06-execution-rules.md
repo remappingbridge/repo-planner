@@ -18,8 +18,8 @@ MBR-00 is accepted. The next executable gate is mbr-01.
 
 At every gate revalidate:
 
-1. current product docs in `tiagooliveirajs/mouse-bridge-remapper`;
-2. current `repo-planner/mouse-bridge-remapper` frozen contract/gate plan;
+1. current product docs in `tiagooliveirajs/mouse-bridge-remapper`, including later accepted amendments;
+2. current `repo-planner/mouse-bridge-remapper` frozen contract/gate plan and active product amendments;
 3. accepted predecessor MBR evidence;
 4. immutable BLU2USB G06 SHA `7eee024ad4ee726c5a85ffa2f32b9f47187878af` for inherited behavior;
 5. destination current code/toolchain/CI truth.

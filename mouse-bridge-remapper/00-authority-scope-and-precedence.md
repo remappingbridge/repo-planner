@@ -14,13 +14,14 @@ The product may keep multiple mice saved, but only one Mouse may be authoritativ
 
 Use this order when requirements overlap:
 
-1. current product documentation in `tiagooliveirajs/mouse-bridge-remapper` after accepted MBR-00;
-2. `requirements/2026-09-20-pair-new-help-and-handoff.md` for the latest Pair New/help clarification;
-3. `requirements/2026-09-20-single-connected-mouse.md` for single-live-Mouse simplification;
-4. `requirements/2026-09-19-user-rules.md` for original layout/behavior not superseded later;
-5. accepted BLU2USB G06 at SHA `7eee024ad4ee726c5a85ffa2f32b9f47187878af` for inherited Mouse behavior;
-6. earlier accepted G01-G05 corrections inherited by G06 where not superseded;
-7. infra-planner historical material and G07+ work as research/process evidence only.
+1. current product documentation in `tiagooliveirajs/mouse-bridge-remapper`, including later accepted product amendments;
+2. `requirements/2026-09-20-connected-home-pair-new.md` for the connected-HOME amendment;
+3. `requirements/2026-09-20-pair-new-help-and-handoff.md` for the latest Pair New/help clarification;
+4. `requirements/2026-09-20-single-connected-mouse.md` for single-live-Mouse simplification;
+5. `requirements/2026-09-19-user-rules.md` for original layout/behavior not superseded later;
+6. accepted BLU2USB G06 at SHA `7eee024ad4ee726c5a85ffa2f32b9f47187878af` for inherited Mouse behavior;
+7. earlier accepted G01-G05 corrections inherited by G06 where not superseded;
+8. infra-planner historical material and G07+ work as research/process evidence only.
 
 `07-mbr-00-frozen-contract.md` records the resolved decisions. `02-ambiguity-register.md` is closed by MBR-00.
 
@@ -97,14 +98,19 @@ Project/development identity frozen by MBR-00:
 
 The VID convention is not a claim of commercial USB-IF allocation.
 
-## 9. Gate state
+## 9. Connected HOME amendment
 
-- `mbr-00`: **COMPLETE / ACCEPTED**;
-- `mbr-01` is the next executable gate;
-- all later gates remain planned/dependency-gated.
+The 2026-09-20 connected-HOME amendment is a product-contract change approved before MBR-02 acceptance. It supersedes only the former `home-connected` layout/reachability rule: the connected Mouse name is the title; Pair New is the first visible option; the remap summary is second; Saved Devices and Learn the Keys are third/fourth. Pair New remains new-only and does not disconnect the current Mouse at entry.
+
+## 10. Gate state
+
+- `mbr-00`: **COMPLETE / ACCEPTED**, with the connected-HOME amendment superseding only its former HOME layout;
+- `mbr-01`: **COMPLETE / ACCEPTED**;
+- `mbr-02`: current implementation gate, acceptance pending exact-head CI/integration;
+- later gates remain dependency-gated.
 
 MBR-00 performed documentation/provenance/contract work only. It produced no firmware implementation, build, UF2 or physical acceptance claim.
 
-## 10. No-regression principle
+## 11. No-regression principle
 
 Later gates may not weaken release safety, generic Mouse fallback, bonded reconnect, persistence integrity, HID++ hold semantics, release-triggered HAT behavior, accepted renderer geometry/color priority, fixed USB identity, or Bluetooth Keyboard/Composite exclusions without an explicit contract change and revalidation.

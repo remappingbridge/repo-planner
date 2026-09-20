@@ -131,7 +131,14 @@ If the user manually unplugs current Mouse while Pair New/help/retry is visible,
 
 ## 6. Connected HOME / remapper
 
-`home-connected` requires exactly one authoritative Mouse. Its name, profile summary and remapper target are that Mouse.
+`home-connected` requires exactly one authoritative Mouse. Its projected name is the dynamic title. Its four visible options are:
+
+1. `PAIR NEW MOUSE` -> `pair-new`;
+2. current confirmed remap summary -> `remapper-options`;
+3. `SAVED DEVICES`;
+4. `LEARN THE KEYS`.
+
+Selecting Pair New is the normal visible connected-Mouse entry into the existing 15-second new-only replacement transaction. The current Mouse remains authoritative/usable until handoff.
 
 Canonical profile vocabulary:
 
