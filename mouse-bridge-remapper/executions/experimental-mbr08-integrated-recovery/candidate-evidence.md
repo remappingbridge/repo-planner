@@ -13,7 +13,7 @@ This execution is intentionally isolated from the accepted baseline.
 - base: MBR-05 `7f294a7fac9eebe226ad66c6b572582c5e483421`
 - integrated implementation commit: `f13611d9bc6d28c54250445cbb268271f58c8efa`
 - integrated firmware/manifest head before simulator tooling: `4297054d0573ce908ec81b2e2b82d9d428a5eee8`
-- current product branch HEAD with host LCD simulator: `dd6bdff208f455cc3a03b0c27c209617dbfda21d`
+- current product branch HEAD with host LCD simulator/backlight model: `62d19fcd14e16131c2d9e17d1cd7b9cc6c1a2955`
 - no merge into `main`, `mbr/rebuild-00-through-04`, or `mbr/mbr-05-ble-mouse`
 
 The user explicitly authorized bypassing intermediate physical-gate dependency so MBR-06, MBR-07 and MBR-08 could be implemented and corrected together. That bypass permits implementation sequencing only; it does not declare physical PASS.
@@ -128,3 +128,22 @@ The experimental branch now contains an interactive host simulator that directly
 - host result: **16/16 PASS**, including `lcd_simulator_smoke` and `lcd_simulator_gui_syntax`
 
 The simulator does not emulate RP2350, CYW43/BTstack, TinyUSB, physical flash interruption or ST7789 electrical/SPI timing; physical-gate acceptance remains unchanged.
+
+
+### Backlight simulation
+
+The virtual LCD now separates the logical RGB565 framebuffer from display illumination.
+
+- 100% = digital RGB565 reference;
+- 0–400% global virtual backlight gain, applied equally to all RGB channels;
+- values above 100% are inspection gain only, useful for the frozen dark-magenta `0x0801` that is nearly black at digital reference;
+- black remains black;
+- channel values saturate at 255;
+- Lock on a screen that owns `KEY Y: LOCK` forces effective backlight to 0% while preserving the selected gain and logical framebuffer;
+- unlock restores the selected gain;
+- desktop GUI uses a dark theme and exposes 100/200/300/400% presets plus a 0–400% slider.
+
+Current host verification run: `35539030541`.
+Host result: **16/16 PASS**, including simulator smoke, GUI syntax, architecture and canonical screens.
+
+This is a visual inspection model, not a photometrically calibrated model of Waveshare backlight PWM/nits.
