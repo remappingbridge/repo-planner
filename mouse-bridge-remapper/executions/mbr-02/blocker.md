@@ -1,11 +1,11 @@
 # MBR-02 contract blocker — Pair New connected entry path
 
 Gate: `mbr-02 — Interaction engine, UI projector and golden screen model`  
-Status: **IMPLEMENTED / ACCEPTANCE BLOCKED**
+Status: **RESOLVED — superseded by 2026-09-20 connected HOME amendment**
 
 ## Finding
 
-During executable transition modeling, the frozen MBR-00 product contract exposed a reachability contradiction that cannot be resolved in code without silently changing the documented UX.
+During executable transition modeling, the then-current MBR-00 product contract exposed a reachability contradiction. This record is retained as historical evidence; it was subsequently resolved by an explicit product amendment before MBR-02 acceptance.
 
 The product contract requires a supported case in which `PAIR NEW` begins while one Mouse is already authoritative/connected and remains usable during discovery. However, the canonical screen/control inventory exposes `PAIR NEW MOUSE` only on:
 
@@ -21,7 +21,13 @@ The canonical `home-connected` screen contains only:
 
 It contains no visible Pair New action. The same contract explicitly forbids inheriting hidden controls.
 
-Therefore there is currently no documented user-reachable transition from a valid `saved + live Mouse -> home-connected` state into `pair-new` while preserving that live Mouse.
+Therefore the historical control map had no documented user-reachable transition from a valid `saved + live Mouse -> home-connected` state into `pair-new` while preserving that live Mouse.
+
+## Resolution
+
+The 2026-09-20 product amendment adds `PAIR NEW MOUSE` as the first visible option on `home-connected`, makes the connected Mouse name the dynamic title, maps the current remap summary to `remapper-options`, and retains Saved Devices/Learn the Keys as the third/fourth options. Selecting Pair New starts the existing 15-second new-only transaction without disconnecting the current Mouse.
+
+The amended canonical screen and transition model are now authoritative.
 
 ## Why implementation did not guess
 
@@ -82,12 +88,6 @@ When MBR-02 replaced MBR-01 stubs with real dependent static libraries, the MBR-
 
 ## Acceptance impact
 
-MBR-02 must not be marked `COMPLETE / ACCEPTED` and PR #2 must not be merged as the accepted gate baseline while the Pair New connected-entry contradiction remains unresolved.
+The blocker is closed. MBR-02 may proceed to exact-head CI, integration and completion reporting. No physical acceptance is required for MBR-02.
 
-No later gate may be started from this blocked state.
-
-## Required product decision
-
-The documentation must explicitly define a visible, reachable way to start `PAIR NEW` while `home-connected` has a live Mouse, or explicitly change the product requirement so Pair New is not available while a Mouse is live.
-
-After that decision is documented, MBR-02 must update the canonical screen/control transition model and golden tests, rerun exact-head CI, integrate the PR, and record a completion report before mbr-03 can begin.
+The next gate after MBR-02 acceptance is mbr-03.
