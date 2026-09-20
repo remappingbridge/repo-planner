@@ -92,17 +92,21 @@ No UI behavior, renderer/HAT behavior, final USB HID behavior, real BLE forwardi
 
 **Implementation branch:** `mbr/mbr-02-host-ux-model`.
 
-**PR:** `#2 — MBR-02: host UX model and golden screen contract` (amended; acceptance pending exact-head CI and integration).
+**PR:** `#2 — MBR-02: host UX model and connected HOME Pair New flow` (merged and accepted).
 
 **Previous implementation head:** `13cad3fec43eeed0353b0271a018012d115f2845`.
 
 **Amendment:** connected HOME now exposes Pair New as its first visible option and maps the current remap summary to `remapper-options`.
 
-**Exact-head CI:** run `35479112051`; `host-architecture` SUCCESS and `pico2-w-production` SUCCESS.
+**Amended exact-head CI:** run `35480099428`; `host-architecture` SUCCESS and `pico2-w-production` SUCCESS.
 
 **Host tests:** `bootstrap_contract`, `ux_golden_contract`, `ux_behavior_contract`, `architecture_contract` all PASS.
 
-**Structural Pico regression artifact:** `mbr-01-pico2w-scaffold-uf2`; Actions artifact ID `10594988821`; artifact archive digest `sha256:d7a71a2c7add6fd54c52a754d34a82d10ea6cd0d70dc85e816927ed1ccd4dea3`; build evidence only, not physical acceptance.
+**Amended structural Pico regression artifact:** `mbr-01-pico2w-scaffold-uf2`; Actions artifact ID `10595591576`; artifact archive digest `sha256:fd64a7d875beeb1633dbcc7118ced97489a53258fcb66cd6c14eac10227d38c8`; build evidence only, not physical acceptance.
+
+**Integrated product main:** `34f5806763503c79aa98e54923a3ec854b11d270`.
+
+**Post-merge CI:** run `35480184381`; `host-architecture` SUCCESS and `pico2-w-production` SUCCESS.
 
 **Historical blocker evidence:** `executions/mbr-02/blocker.md`, resolved by `requirements/2026-09-20-connected-home-pair-new.md`.
 
@@ -147,7 +151,7 @@ No physical acceptance is required for mbr-02.
 
 # mbr-03 — Waveshare renderer and HAT physical acceptance
 
-**Depends on:** accepted mbr-02. **Currently blocked.**
+**Depends on:** accepted mbr-02.
 
 **Purpose:** port/adapt accepted G03 renderer/HAT behavior to frozen MBR UX.
 
