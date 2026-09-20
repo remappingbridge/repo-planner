@@ -11,11 +11,11 @@ Date: 2026-09-20
 - PR: #7 — MBR-05: BLE Mouse passthrough and HOME visual amendment
 - base: `mbr/rebuild-00-through-04`
 - accepted predecessor: `8bebe26ff7554ffa811a58ea024cae5fe80a4a84`
-- exact candidate head: `7724de294787b33d452616b2cd9124a5199e4419`
+- exact candidate head: `7f294a7fac9eebe226ad66c6b572582c5e483421`
 
 ## Automated verification
 
-GitHub Actions run `35509056712` completed successfully on the exact candidate head.
+The final branch HEAD differs from the code-complete HEAD only by documentation evidence; the final HEAD was rebuilt and re-tested. GitHub Actions run `35533201112` completed successfully on the exact candidate head.
 
 Host job:
 - configure/build: PASS
@@ -33,9 +33,9 @@ Pico 2 W job:
 
 Actions artifact:
 - name: `mbr-05-pico2w-production-and-qualification`
-- artifact ID: `10604858272`
+- artifact ID: `10612321695`
 - archive size: 1,918,227 bytes
-- archive SHA-256: `9ce6d1b0809f0be1c1b78cc57092ac53480291762d86fda15327f2bbcdef0b21`
+- archive SHA-256: `ead4a3b57b29e9579b23d491b44eecfc24e09e3f003eb62146dee4cf564cbfa7`
 
 Files:
 - `mouse_bridge_remapper.uf2` — 861,696 bytes — SHA-256 `be40b08c473c06f558b9769a661a8f197f10d3cea403e5a8b82ff21dd297b3d8`
