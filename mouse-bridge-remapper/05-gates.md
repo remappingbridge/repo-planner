@@ -2,7 +2,7 @@
 
 Current plan after the 2026-09-20 connected-HOME product amendment and MBR-02 rework.
 
-> **2026-09-20 active execution update:** the clean rebuild progressed through MBR-04 and the operator physically accepted MBR-00 through MBR-04. MBR-05 is implemented and fully green in automated verification; physical acceptance is pending.
+> **2026-09-20 experimental recovery:** by explicit user bypass, MBR-06/07/08 were implemented together on the exclusive branch `experimental/mbr08-integrated-recovery-20260920`, including rework of the MBR-05 connection path. This does not merge into the accepted baseline and does not infer physical PASS.
 
 
 ## Sequence status
@@ -14,14 +14,14 @@ Current plan after the 2026-09-20 connected-HOME product amendment and MBR-02 re
 | mbr-02 | **COMPLETE / ACCEPTED** | host-pure interaction/state/projector + golden UX tests; connected HOME Pair New entry amended | No |
 | mbr-03 | **COMPLETE / ACCEPTED** | Waveshare renderer/HAT physical acceptance | Yes |
 | mbr-04 | **COMPLETE / ACCEPTED** | fixed USB Mouse + synthetic Escape identity | Yes |
-| mbr-05 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | canonical single-session BLE HOGP Mouse passthrough | Yes |
-| mbr-06 | **BLOCKED BY MBR-05 PHYSICAL ACCEPTANCE** | G06 profiles/persistence/reconnect/HID++ parity | Yes |
-| mbr-07 | **BACKLOG** | saved/new search, Pair New handoff, registry/reconnect/removal | Yes |
-| mbr-08 | **BACKLOG** | complete real UX integration | Yes |
+| mbr-05 | **IMPLEMENTED / REWORKED IN EXPERIMENTAL RECOVERY / PHYSICAL ACCEPTANCE PENDING** | canonical single-session BLE HOGP Mouse passthrough | Yes |
+| mbr-06 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | G06 profiles/persistence/reconnect/HID++ parity | Yes |
+| mbr-07 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | saved/new search, Pair New handoff, registry/reconnect/removal | Yes |
+| mbr-08 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | complete real UX integration | Yes |
 | mbr-09 | **BACKLOG** | resilience/regression qualification | Yes |
 | mbr-10 | **BACKLOG** | final release qualification | Yes |
 
-Active execution is at mbr-05. MBR-00 through MBR-04 are accepted. MBR-05 exact-head automated verification is complete; only the required physical scenarios remain. MBR-06 is blocked until operator acceptance.
+On this experimental planner branch, implementation reaches mbr-08 under the user's explicit bypass. MBR-00 through MBR-04 remain accepted; mbr-05 through mbr-08 require physical validation of the integrated experimental firmware. mbr-09 and mbr-10 remain backlog.
 
 ---
 
@@ -255,7 +255,9 @@ Fresh BLE HOGP pairing, movement/buttons/holds, scroll/pan, Forward/Back if avai
 
 # mbr-06 — G06 Mouse feature parity
 
-**Depends on:** mbr-05.
+**Experimental status: IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING on `experimental/mbr08-integrated-recovery-20260920`.**
+
+**Depends on:** mbr-05; intermediate physical dependency bypassed only for this isolated recovery by explicit user instruction.
 
 **Purpose:** migrate every applicable physically accepted G06 Mouse behavior before new lifecycle UX is integrated.
 
@@ -283,7 +285,9 @@ Re-run applicable G06 Mouse/profile/persistence/reconnect/HID++ scenarios on the
 
 # mbr-07 — Saved/new lifecycle, Pair New handoff, registry and removal
 
-**Depends on:** mbr-06.
+**Experimental status: IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING on `experimental/mbr08-integrated-recovery-20260920`.**
+
+**Depends on:** mbr-06; implemented in the same isolated recovery.
 
 **Purpose:** implement frozen MBR lifecycle semantics over the accepted one-Mouse feature baseline.
 
@@ -328,7 +332,9 @@ Re-run applicable G06 Mouse/profile/persistence/reconnect/HID++ scenarios on the
 
 # mbr-08 — Complete real UX integration
 
-**Depends on:** mbr-07.
+**Experimental status: IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING on `experimental/mbr08-integrated-recovery-20260920`.**
+
+**Depends on:** mbr-07; implemented in the same isolated recovery.
 
 **Purpose:** bind host-tested UI model to real runtime and close full screen/control contract.
 
