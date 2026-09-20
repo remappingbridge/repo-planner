@@ -1,6 +1,6 @@
 # Mouse Bridge Remapper planning
 
-Status: **MBR-02 IMPLEMENTED / ACCEPTANCE READY — connected HOME Pair New entry amended and revalidated pending CI/integration.**
+Status: **MBR-02 COMPLETE / ACCEPTED — connected HOME Pair New entry amended and integrated.**
 
 This directory is the planning source of truth for `tiagooliveirajs/mouse-bridge-remapper`.
 
@@ -71,7 +71,7 @@ Host CI on that exact SHA passed all four contracts:
 
 The implementation covers the 30 canonical screens, release interaction, Help/Lock, HOME/search transactions, stale IDs, Pair New candidate/handoff semantics, name/status/profile projection, Custom draft, confirmation-only success and semantic colors.
 
-Acceptance is now unblocked by the explicit connected-HOME amendment: `home-connected` has a visible `PAIR NEW MOUSE` first option that opens `pair-new` while the current Mouse remains live. The former blocker is retained as historical evidence and marked resolved. PR #2 can be accepted after the amended implementation and exact-head CI are green.
+Acceptance is complete. The connected-HOME amendment is integrated in product main; exact-head CI and post-merge CI both passed. The former blocker is retained as historical evidence and marked resolved.
 
 ## Documents
 
@@ -112,4 +112,4 @@ Acceptance is now unblocked by the explicit connected-HOME amendment: `home-conn
 
 ## Evidence boundary
 
-MBR-02 has substantial implemented and CI-validated host-pure behavior, but it is **not accepted** because one required product flow is not reachable from the frozen visible control map. Accepted product `main` therefore remains the MBR-01 baseline until the contradiction is resolved and MBR-02 is revalidated/integrated.
+MBR-02 is **COMPLETE / ACCEPTED**. Host-pure UX behavior, exact connected-HOME golden layout, all connected-HOME destinations, architecture guards and the Pico structural regression passed on the exact amended head; the integrated product main was revalidated after merge. No physical acceptance is claimed by mbr-02.
