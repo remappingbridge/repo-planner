@@ -186,6 +186,18 @@ MBR-00 identity:
 
 Canonical screen/control authority is destination `docs/manual/06-screen-reference.md`.
 
+Connected HOME is explicitly reachable and has this semantic option graph:
+
+```text
+home-connected
+  selection 0 -> PAIR NEW MOUSE -> pair-new
+  selection 1 -> current remap summary -> remapper-options
+  selection 2 -> SAVED DEVICES
+  selection 3 -> LEARN THE KEYS
+```
+
+The title is the current authoritative Mouse name. Selecting Pair New does not disconnect the current Mouse; it starts the existing 15-second new-only replacement transaction.
+
 Key rules:
 
 - `home-connected` shows sole live Mouse name/profile;
