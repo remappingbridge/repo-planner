@@ -1,6 +1,6 @@
 # Mouse Bridge Remapper planning
 
-Status: **MBR-03 IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING — renderer/HAT candidate prepared.**
+Status: **MBR-03 IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING — renderer/HAT candidate built.**
 
 This directory is the planning source of truth for `tiagooliveirajs/mouse-bridge-remapper`.
 
@@ -95,6 +95,7 @@ Acceptance is complete. The connected-HOME amendment is integrated in product ma
 18. [`requirements/2026-09-20-pair-new-help-and-handoff.md`](requirements/2026-09-20-pair-new-help-and-handoff.md) — newest Pair New Help/handoff clarification.
 19. [`requirements/2026-09-20-home-searching-help.md`](requirements/2026-09-20-home-searching-help.md) — current `home-searching-help` literal amendment.
 20. [`executions/mbr-03/pre-implementation.md`](executions/mbr-03/pre-implementation.md) — exact renderer/HAT gate subject before implementation.
+21. [`executions/mbr-03/candidate.md`](executions/mbr-03/candidate.md) — implementation/CI/UF2 evidence and physical acceptance matrix.
 
 ## Gate summary
 
@@ -115,3 +116,8 @@ Acceptance is complete. The connected-HOME amendment is integrated in product ma
 ## Evidence boundary
 
 MBR-02 is **COMPLETE / ACCEPTED**. MBR-03 now has an implemented Waveshare renderer/HAT candidate with automated evidence pending CI completion and physical acceptance still open.
+
+
+## MBR-03 implementation evidence
+
+The renderer/HAT candidate is built and green in CI, with exact production and qualification UF2 hashes recorded in `executions/mbr-03/candidate.md`. Physical acceptance remains the only open condition for mbr-03.
