@@ -2,29 +2,32 @@
 
 Current plan after the 2026-09-20 connected-HOME product amendment and MBR-02 rework.
 
+> **2026-09-20 reset:** all MBR task statuses were intentionally returned to **BACKLOG** so the next execution can start from mbr-00 on a clean implementation baseline. The detailed implementation/acceptance records below are retained as **historical evidence only**; they do not imply that the current product implementation is accepted or present.
+
+
 ## Sequence status
 
 | Gate | Status | Purpose | Physical acceptance |
 |---|---|---|---|
-| mbr-00 | **COMPLETE / ACCEPTED** | provenance, decisions, canonical contract freeze | No |
-| mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap, module ownership, architecture guards | No |
-| mbr-02 | **COMPLETE / ACCEPTED** | host-pure interaction/state/projector + golden UX tests; connected HOME Pair New entry amended | No |
-| mbr-03 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | Waveshare renderer/HAT physical acceptance | Yes |
-| mbr-04 | PLANNED | fixed USB Mouse + synthetic Escape identity | Yes |
-| mbr-05 | PLANNED | canonical single-session BLE HOGP Mouse passthrough | Yes |
-| mbr-06 | PLANNED | G06 profiles/persistence/reconnect/HID++ parity | Yes |
-| mbr-07 | PLANNED | saved/new search, Pair New handoff, registry/reconnect/removal | Yes |
-| mbr-08 | PLANNED | complete real UX integration | Yes |
-| mbr-09 | PLANNED | resilience/regression qualification | Yes |
-| mbr-10 | PLANNED | final release qualification | Yes |
+| mbr-00 | **BACKLOG** | provenance, decisions, canonical contract freeze | No |
+| mbr-01 | **BACKLOG** | clean bootstrap, module ownership, architecture guards | No |
+| mbr-02 | **BACKLOG** | host-pure interaction/state/projector + golden UX tests; connected HOME Pair New entry amended | No |
+| mbr-03 | **BACKLOG** | Waveshare renderer/HAT physical acceptance | Yes |
+| mbr-04 | **BACKLOG** | fixed USB Mouse + synthetic Escape identity | Yes |
+| mbr-05 | **BACKLOG** | canonical single-session BLE HOGP Mouse passthrough | Yes |
+| mbr-06 | **BACKLOG** | G06 profiles/persistence/reconnect/HID++ parity | Yes |
+| mbr-07 | **BACKLOG** | saved/new search, Pair New handoff, registry/reconnect/removal | Yes |
+| mbr-08 | **BACKLOG** | complete real UX integration | Yes |
+| mbr-09 | **BACKLOG** | resilience/regression qualification | Yes |
+| mbr-10 | **BACKLOG** | final release qualification | Yes |
 
-Executor always selects the first incomplete dependency-complete gate. MBR-03 is now implemented and is the current open physical gate; mbr-04 and later remain blocked until the operator closes the numbered mbr-03 scenarios. The former connected-entry blocker is closed by the 2026-09-20 product amendment.
+Executor starts with mbr-00. No gate is currently accepted or in progress; the former implementation/acceptance state is historical evidence retained below.
 
 ---
 
 # mbr-00 — Provenance, decisions and contract freeze
 
-**Status: COMPLETE / ACCEPTED.**
+**Status: BACKLOG.**
 
 **Accepted output:** see `07-mbr-00-frozen-contract.md`, `08-mbr-00-migration-manifest.md`, and `executions/mbr-00/completion.md`.
 
@@ -53,7 +56,7 @@ Frozen decisions include:
 
 # mbr-01 — Clean bootstrap and architecture enforcement
 
-**Status: COMPLETE / ACCEPTED.**
+**Status: BACKLOG.**
 
 **Depends on:** accepted mbr-00.
 
@@ -86,7 +89,7 @@ No UI behavior, renderer/HAT behavior, final USB HID behavior, real BLE forwardi
 
 # mbr-02 — Interaction engine, UI projector and golden screen model
 
-**Status: COMPLETE / ACCEPTED.**
+**Status: BACKLOG.**
 
 **Depends on:** mbr-01.
 
