@@ -1,6 +1,6 @@
 # Mouse Bridge Remapper planning
 
-Status: **ALL MBR GATES BACKLOG — clean implementation baseline reset.**
+Status: **MBR-05 IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING. MBR-00 through MBR-04 are physically accepted on the clean rebuild baseline.**
 
 This directory is the planning source of truth for `tiagooliveirajs/mouse-bridge-remapper`.
 
@@ -46,7 +46,7 @@ G07+ Keyboard work is research evidence only.
 - Escape retained through minimal fixed USB Keyboard output;
 - no Bluetooth Keyboard/Composite product support.
 
-## Historical implementation baseline
+## Accepted clean rebuild baseline
 
 Accepted product `main` now includes MBR-02:
 
@@ -71,7 +71,7 @@ Host CI on that exact SHA passed all four contracts:
 
 The implementation covers the 30 canonical screens, release interaction, Help/Lock, HOME/search transactions, stale IDs, Pair New candidate/handoff semantics, name/status/profile projection, Custom draft, confirmation-only success and semantic colors.
 
-The historical MBR-02 acceptance record is retained below as evidence. Current task status has been reset to BACKLOG.
+Historical pre-reset MBR-02 evidence is retained below. The active clean rebuild baseline is `mbr/rebuild-00-through-04` at `8bebe26ff7554ffa811a58ea024cae5fe80a4a84`; the operator accepted MBR-00 through MBR-04 physically on 2026-09-20. MBR-05 is implemented on `mbr/mbr-05-ble-mouse` at `7724de294787b33d452616b2cd9124a5199e4419` with green host/Pico CI; physical acceptance is pending.
 
 ## Documents
 
@@ -101,13 +101,13 @@ The historical MBR-02 acceptance record is retained below as evidence. Current t
 
 | Gate | Status | Purpose |
 |---|---|---|
-| mbr-00 | **BACKLOG** | provenance + contract freeze |
-| mbr-01 | **BACKLOG** | clean bootstrap and architecture guards |
-| mbr-02 | **BACKLOG** | host interaction/state/projector/golden UX; connected HOME Pair New amended |
-| mbr-03 | **BACKLOG** | Waveshare renderer/HAT candidate |
-| mbr-04 | **BACKLOG** | fixed USB identity |
-| mbr-05 | **BACKLOG** | BLE HOGP passthrough core |
-| mbr-06 | **BACKLOG** | G06 profile/persistence/reconnect/HID++ parity |
+| mbr-00 | **COMPLETE / ACCEPTED** | provenance + contract freeze |
+| mbr-01 | **COMPLETE / ACCEPTED** | clean bootstrap and architecture guards |
+| mbr-02 | **COMPLETE / ACCEPTED** | host interaction/state/projector/golden UX; connected HOME Pair New amended |
+| mbr-03 | **COMPLETE / ACCEPTED** | Waveshare renderer/HAT candidate |
+| mbr-04 | **COMPLETE / ACCEPTED** | fixed USB identity |
+| mbr-05 | **IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING** | BLE HOGP passthrough core |
+| mbr-06 | **BLOCKED BY MBR-05 PHYSICAL ACCEPTANCE** | G06 profile/persistence/reconnect/HID++ parity |
 | mbr-07 | **BACKLOG** | lifecycle/Pair New handoff/registry/removal |
 | mbr-08 | **BACKLOG** | complete real UX integration |
 | mbr-09 | **BACKLOG** | resilience/regression |
@@ -115,9 +115,24 @@ The historical MBR-02 acceptance record is retained below as evidence. Current t
 
 ## Evidence boundary
 
-Historical implementation and acceptance evidence remains preserved in the execution records. No MBR gate is currently accepted or in progress; all gates are BACKLOG.
+Active execution has advanced through the clean rebuild. MBR-00 through MBR-04 are physically accepted. MBR-05 automated evidence is complete on exact head `7724de294787b33d452616b2cd9124a5199e4419`; only operator physical acceptance remains open. MBR-06 must not start until MBR-05 is physically accepted.
 
 
 ## MBR-03 historical implementation evidence
 
 The renderer/HAT candidate is built and green in CI, with exact production and qualification UF2 hashes recorded in `executions/mbr-03/candidate.md`. Physical acceptance remains the only open condition for mbr-03.
+
+
+## MBR-05 active candidate evidence
+
+- branch: `mbr/mbr-05-ble-mouse`
+- exact head: `7724de294787b33d452616b2cd9124a5199e4419`
+- CI run: `35509056712` — host and pico2-w SUCCESS
+- host tests: 10/10 PASS
+- Actions artifact ID: `10604858272`
+- artifact archive SHA-256: `9ce6d1b0809f0be1c1b78cc57092ac53480291762d86fda15327f2bbcdef0b21`
+- production UF2: 861696 bytes, SHA-256 `be40b08c473c06f558b9769a661a8f197f10d3cea403e5a8b82ff21dd297b3d8`
+- qualification UF2: 95744 bytes, SHA-256 `fd8bb312bd13549ef28c60803e0ee9b483e21329cb9d81b1450510b760960df6`
+- physical acceptance: pending operator execution of the numbered MBR-05 scenarios
+
+Durable evidence: `executions/rebuild-mbr-05/candidate-evidence.md`.
