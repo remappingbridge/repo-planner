@@ -104,9 +104,13 @@ No UI behavior, renderer/HAT behavior, final USB HID behavior, real BLE forwardi
 
 **Amended structural Pico regression artifact:** `mbr-01-pico2w-scaffold-uf2`; Actions artifact ID `10595591576`; artifact archive digest `sha256:fd64a7d875beeb1633dbcc7118ced97489a53258fcb66cd6c14eac10227d38c8`; build evidence only, not physical acceptance.
 
-**Integrated product main:** `34f5806763503c79aa98e54923a3ec854b11d270`.
+**Integrated product main at merge:** `34f5806763503c79aa98e54923a3ec854b11d270`.
 
 **Post-merge CI:** run `35480184381`; `host-architecture` SUCCESS and `pico2-w-production` SUCCESS.
+
+**Final product main:** `643278c0ec94ab0c64ad88bcba2a770b2d368f61`.
+
+**Final-main revalidation:** run `35480324704`; `host-architecture` SUCCESS and `pico2-w-production` SUCCESS.
 
 **Historical blocker evidence:** `executions/mbr-02/blocker.md`, resolved by `requirements/2026-09-20-connected-home-pair-new.md`.
 
