@@ -107,7 +107,7 @@ Most modules are intentionally minimal compileable scaffolds; later gates own th
 
 ## Exact automated acceptance evidence
 
-Final exact-head GitHub Actions run:
+Final exact-head pre-merge GitHub Actions run:
 
 - run ID: `35477941473`;
 - source SHA: `826c50dab3b105c6bcecef6a6dbba401506aefc9`;
@@ -159,7 +159,7 @@ Uploaded workflow artifact:
 
 The UF2 is a structural scaffold artifact only. It is not a functional firmware candidate and requires no physical operator test in mbr-01.
 
-## Integration
+## Integration and post-merge revalidation
 
 Before merge, the product branch was 3 commits ahead of `main` and 0 behind.
 
@@ -170,6 +170,14 @@ Integrated product subject:
 `tiagooliveirajs/mouse-bridge-remapper@cee10ee157ce0d7f6655df203327422c3c40e6b3`
 
 The merge commit has parents `efe3660eece4a2866615ec19270a04e498d485e9` and accepted implementation head `826c50dab3b105c6bcecef6a6dbba401506aefc9`.
+
+The `main` push triggered a second complete CI run on the exact integrated merge SHA:
+
+- run ID: `35478020586`;
+- source SHA: `cee10ee157ce0d7f6655df203327422c3c40e6b3`;
+- workflow conclusion: **SUCCESS**.
+
+This post-merge run revalidates the same tree under `main`, so integration did not invalidate the host/architecture or Pico 2 W build evidence.
 
 ## Physical acceptance
 
@@ -189,7 +197,7 @@ Those capabilities remain assigned to later gates.
 
 ## Gate conclusion
 
-**MBR-01 acceptance criteria are satisfied.** The clean bootstrap, frozen module graph, architecture ownership guards, host build/tests, Pico 2 W production build and structural UF2 evidence are complete.
+**MBR-01 acceptance criteria are satisfied.** The clean bootstrap, frozen module graph, architecture ownership guards, host build/tests, Pico 2 W production build, structural UF2 evidence, PR integration and post-merge revalidation are complete.
 
 ## Next executable point
 
