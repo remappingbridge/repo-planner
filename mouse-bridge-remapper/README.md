@@ -71,7 +71,7 @@ Host CI on that exact SHA passed all four contracts:
 
 The implementation covers the 30 canonical screens, release interaction, Help/Lock, HOME/search transactions, stale IDs, Pair New candidate/handoff semantics, name/status/profile projection, Custom draft, confirmation-only success and semantic colors.
 
-Historical pre-reset MBR-02 evidence is retained below. The active clean rebuild baseline is `mbr/rebuild-00-through-04` at `8bebe26ff7554ffa811a58ea024cae5fe80a4a84`; the operator accepted MBR-00 through MBR-04 physically on 2026-09-20. MBR-05 is implemented on `mbr/mbr-05-ble-mouse` at `7724de294787b33d452616b2cd9124a5199e4419` with green host/Pico CI; physical acceptance is pending.
+Historical pre-reset MBR-02 evidence is retained below. The active clean rebuild baseline is `mbr/rebuild-00-through-04` at `8bebe26ff7554ffa811a58ea024cae5fe80a4a84`; the operator accepted MBR-00 through MBR-04 physically on 2026-09-20. MBR-05 is implemented on `mbr/mbr-05-ble-mouse` at `7f294a7fac9eebe226ad66c6b572582c5e483421` with green host/Pico CI; physical acceptance is pending.
 
 ## Documents
 
@@ -115,7 +115,7 @@ Historical pre-reset MBR-02 evidence is retained below. The active clean rebuild
 
 ## Evidence boundary
 
-Active execution has advanced through the clean rebuild. MBR-00 through MBR-04 are physically accepted. MBR-05 automated evidence is complete on exact head `7724de294787b33d452616b2cd9124a5199e4419`; only operator physical acceptance remains open. MBR-06 must not start until MBR-05 is physically accepted.
+Active execution has advanced through the clean rebuild. MBR-00 through MBR-04 are physically accepted. MBR-05 automated evidence is complete on exact head `7f294a7fac9eebe226ad66c6b572582c5e483421`; only operator physical acceptance remains open. MBR-06 must not start until MBR-05 is physically accepted.
 
 
 ## MBR-03 historical implementation evidence
@@ -126,11 +126,11 @@ The renderer/HAT candidate is built and green in CI, with exact production and q
 ## MBR-05 active candidate evidence
 
 - branch: `mbr/mbr-05-ble-mouse`
-- exact head: `7724de294787b33d452616b2cd9124a5199e4419`
-- CI run: `35509056712` — host and pico2-w SUCCESS
+- exact head: `7f294a7fac9eebe226ad66c6b572582c5e483421`
+- CI run: `35533201112` — host and pico2-w SUCCESS
 - host tests: 10/10 PASS
-- Actions artifact ID: `10604858272`
-- artifact archive SHA-256: `9ce6d1b0809f0be1c1b78cc57092ac53480291762d86fda15327f2bbcdef0b21`
+- Actions artifact ID: `10612321695`
+- artifact archive SHA-256: `ead4a3b57b29e9579b23d491b44eecfc24e09e3f003eb62146dee4cf564cbfa7`
 - production UF2: 861696 bytes, SHA-256 `be40b08c473c06f558b9769a661a8f197f10d3cea403e5a8b82ff21dd297b3d8`
 - qualification UF2: 95744 bytes, SHA-256 `fd8bb312bd13549ef28c60803e0ee9b483e21329cb9d81b1450510b760960df6`
 - physical acceptance: pending operator execution of the numbered MBR-05 scenarios
