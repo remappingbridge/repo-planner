@@ -48,9 +48,9 @@ G07+ Keyboard work is research evidence only.
 
 ## Accepted implementation baseline
 
-Accepted product `main` remains the MBR-01 baseline:
+Accepted product `main` now includes MBR-02:
 
-`tiagooliveirajs/mouse-bridge-remapper@cee10ee157ce0d7f6655df203327422c3c40e6b3`
+`tiagooliveirajs/mouse-bridge-remapper@34f5806763503c79aa98e54923a3ec854b11d270`
 
 MBR-01 established the compileable host/Pico 2 W scaffold, frozen module/dependency graph, single-authoritative-Mouse slot, separate non-authoritative Pair New candidate scaffold, architecture ownership guards and pinned G06-derived CI/toolchain baseline. The exact accepted implementation branch head was `826c50dab3b105c6bcecef6a6dbba401506aefc9`; exact-head CI run `35477941473` passed host/architecture and Pico 2 W production jobs.
 
@@ -60,7 +60,7 @@ The 2026-09-20 connected-HOME amendment is recorded in `requirements/2026-09-20-
 
 ## MBR-02 implementation state
 
-MBR-02 implementation exists on product branch `mbr/mbr-02-host-ux-model`, PR #2. Exact implementation head at blocker discovery: `13cad3fec43eeed0353b0271a018012d115f2845`.
+MBR-02 implementation was integrated from product branch `mbr/mbr-02-host-ux-model`, PR #2. Amended implementation head: `ec21f11685e3e80cbb119560a4e8d5cd4e8a6ff0`. Integrated main: `34f5806763503c79aa98e54923a3ec854b11d270`.
 
 Host CI on that exact SHA passed all four contracts:
 
@@ -92,7 +92,7 @@ Acceptance is complete. The connected-HOME amendment is integrated in product ma
 15. [`requirements/2026-09-19-user-rules.md`](requirements/2026-09-19-user-rules.md) — original verbatim UX source.
 16. [`requirements/2026-09-20-single-connected-mouse.md`](requirements/2026-09-20-single-connected-mouse.md) — single-live-Mouse simplification.
 17. [`requirements/2026-09-20-connected-home-pair-new.md`](requirements/2026-09-20-connected-home-pair-new.md) — connected HOME Pair New entry amendment.
-17. [`requirements/2026-09-20-pair-new-help-and-handoff.md`](requirements/2026-09-20-pair-new-help-and-handoff.md) — newest Pair New Help/handoff clarification.
+18. [`requirements/2026-09-20-pair-new-help-and-handoff.md`](requirements/2026-09-20-pair-new-help-and-handoff.md) — newest Pair New Help/handoff clarification.
 
 ## Gate summary
 
