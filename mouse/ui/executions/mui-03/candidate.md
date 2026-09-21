@@ -2,7 +2,7 @@
 
 Date: **2026-09-21**.
 
-Status: **AUTOMATED PASS / HUMAN TRACE REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 ## Candidate
 
@@ -98,7 +98,7 @@ No ASan/UBSan finding was reported.
 - identical scenario + event sequence yields identical Product View hash;
 - named scenarios initialize expected states.
 
-## Human trace review — pending
+## Human trace review — PASS
 
 Run on Debian:
 
@@ -127,3 +127,5 @@ Review whether the textual trace is immediately understandable for UX debugging.
 ## Rollback
 
 If rejected, abandon `mui/mui-03-mock-world` and return to accepted MUI-02 `8c1051904a95bd74b1f0d833a24c0a29ebcc8b29`.
+
+Acceptance record: the operator's Debian trace showed the expected deterministic states and hashes: one connected Mouse at t=0; Pair New RUNNING through t=2999ms; handoff/FOUND at t=3000ms; profile FAILED then SUCCEEDED; dirty Custom draft preserved across reboot with current connection cleared; factory reset returning to empty/default state. MUI-03 was explicitly accepted and promoted to `mouse-ui/main` at `fe7acaa5059dcc8e489e031082c57f938dff59ec`.

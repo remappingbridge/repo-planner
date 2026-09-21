@@ -1,6 +1,6 @@
 # MUI-03 — Deterministic Mock World
 
-Status: **AUTOMATED PASS / HUMAN TRACE REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Candidate: `remappingbridge/mouse-ui` branch `mui/mui-03-mock-world`, commit `fe7acaa5059dcc8e489e031082c57f938dff59ec`.
 
@@ -48,7 +48,7 @@ GitHub Actions run `35567092031` passed 6/6 CTest contracts in both Debug and AS
 
 ## Human acceptance
 
-- [ ] inspect example state traces for clarity and usefulness to UX work
+- [x] inspect example state traces for clarity and usefulness to UX work
 
 Run:
 
@@ -76,3 +76,5 @@ Candidate review confirms none of these scopes were introduced.
 ## Rollback / rebuild point
 
 If the mock starts reproducing backend internals, delete/rebuild it around semantic observable results while preserving `mock_world_contract` and Product View tests. Baseline for rebuild: accepted MUI-02 `8c1051904a95bd74b1f0d833a24c0a29ebcc8b29`.
+
+Human acceptance record: on 2026-09-21 the operator ran the Debian flow, reported `100% tests passed, 0 tests failed out of 6`, and supplied the complete semantic trace from `one-connected` through Pair New, profile failure/success, dirty Custom draft, reboot, and factory reset. The trace matched the intended MUI-03 state model and was accepted. The candidate was promoted to `mouse-ui/main` before MUI-04 began.
