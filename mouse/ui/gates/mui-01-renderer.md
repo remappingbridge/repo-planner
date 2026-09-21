@@ -1,6 +1,6 @@
 # MUI-01 — RGB565 Renderer
 
-Status: **AUTOMATED PASS / HUMAN VISUAL PENDING**.
+Status: **ACCEPTED**.
 
 Candidate: `remappingbridge/mouse-ui` branch `mui/mui-01-renderer`, commit `4daa0963e476eebd61cd7049b43cba582413144a`.
 
@@ -47,7 +47,7 @@ Locked representative hashes:
 
 ## Human acceptance
 
-- [ ] review representative title/body/hint/didactic PPM output for visual correctness
+- [x] review representative title/body/hint/didactic PPM output for visual correctness
 
 Generate with:
 
@@ -63,6 +63,8 @@ mkdir -p build/ppm
 ~~~
 
 Then inspect `build/ppm/mui-01-normal.ppm` and `build/ppm/mui-01-didactic.ppm`.
+
+Human acceptance was reported on 2026-09-21 after the Debian run produced `100% tests passed, 0 tests failed out of 4`, hashes `a6e38efd9c0561dd` / `7f9297c7748aec05`, and the PPM evidence was written successfully. The gate was explicitly accepted and the candidate was promoted to `mouse-ui/main`.
 
 ## Forbidden scope
 

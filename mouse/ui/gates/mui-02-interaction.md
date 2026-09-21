@@ -1,6 +1,10 @@
 # MUI-02 — Interaction Engine
 
-Status: **NOT STARTED**.
+Status: **AUTOMATED PASS / HUMAN SEMANTIC REVIEW PENDING**.
+
+Candidate: `remappingbridge/mouse-ui` branch `mui/mui-02-interaction`, commit `8c1051904a95bd74b1f0d833a24c0a29ebcc8b29`.
+
+Evidence: `../executions/mui-02/candidate.md`.
 
 ## Objective
 
@@ -8,7 +12,7 @@ Implement platform-independent semantic HAT press/release ownership and interact
 
 ## Dependencies
 
-MUI-00 ACCEPTED; may proceed independently of MUI-01.
+MUI-00 and MUI-01 are **ACCEPTED**. Candidate is based directly on accepted MUI-01.
 
 ## Tasks
 
@@ -20,20 +24,51 @@ MUI-00 ACCEPTED; may proceed independently of MUI-01.
 
 ## Deliverables
 
-- pure interaction library/API
-- interaction ownership tests
-- documented input semantics
+- pure `mouse_ui_interaction` API;
+- semantic control/phase/outcome names for logs/adapters;
+- `interaction_contract` regression test;
+- `docs/development/interaction.md`.
 
 ## Automated acceptance
 
-- [ ] actions trigger only on matching release
-- [ ] stale release after epoch change does not trigger
-- [ ] duplicate press/release edge cases are deterministic
-- [ ] no SDL/GPIO dependency
+- [x] actions trigger only on matching release
+- [x] stale release after epoch change does not trigger
+- [x] duplicate press/release edge cases are deterministic
+- [x] no SDL/GPIO dependency
+
+GitHub Actions run `35566653090` passed 5/5 CTest contracts in both `host-debug` and `host-asan-ubsan`, including `interaction_contract`. No sanitizer finding was reported.
 
 ## Human acceptance
 
 - [ ] review semantic mapping naming for future desktop and embedded adapters
+
+Names to review:
+
+~~~text
+Controls:
+JOY_UP
+JOY_DOWN
+JOY_LEFT
+JOY_RIGHT
+JOY_PRESS
+KEY_A
+KEY_B
+KEY_X
+KEY_Y
+
+Phases:
+PRESS
+RELEASE
+
+Outcomes:
+PRESS_ACCEPTED
+RELEASE_ACTION
+RELEASE_CONSUMED
+DUPLICATE_PRESS
+ORPHAN_RELEASE
+STALE_RELEASE
+INVALID
+~~~
 
 ## Forbidden scope
 
@@ -42,7 +77,8 @@ MUI-00 ACCEPTED; may proceed independently of MUI-01.
 - screen navigation rules
 - backend operations
 
+Candidate review confirms none of these scopes were introduced.
+
 ## Rollback / rebuild point
 
-Interaction tests are the durable asset; rewrite implementation if ownership semantics become entangled with screen-specific conditions.
-
+Interaction tests are the durable asset. If ownership semantics later become entangled with screen-specific behavior, rebuild from accepted MUI-01 `4daa0963e476eebd61cd7049b43cba582413144a` using the MUI-02 interaction tests.

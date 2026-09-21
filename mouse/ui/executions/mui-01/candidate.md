@@ -2,7 +2,7 @@
 
 Date: **2026-09-21**.
 
-Status: **AUTOMATED PASS / HUMAN VISUAL PENDING**.
+Status: **ACCEPTED**.
 
 ## Candidate
 
@@ -84,7 +84,7 @@ No ASan/UBSan finding was reported.
 - [x] normal/didactic deterministic hashes;
 - [x] no SDL dependency in renderer; architecture guard green.
 
-## Human visual acceptance — pending
+## Human visual acceptance — PASS
 
 On Debian:
 
@@ -108,7 +108,18 @@ normal hash:   a6e38efd9c0561dd
 didactic hash: 7f9297c7748aec05
 ~~~
 
-Human review should verify:
+On 2026-09-21 the operator explicitly accepted the gate after running the Debian flow. Reported terminal evidence:
+
+~~~text
+100% tests passed, 0 tests failed out of 4
+normal hash:   a6e38efd9c0561dd
+didactic hash: 7f9297c7748aec05
+PPM evidence written to build/ppm
+~~~
+
+The PPM evidence was reviewed as part of the gate acceptance. The candidate was then promoted to `mouse-ui/main`.
+
+Human review criteria were:
 
 1. normal fixture: magenta title, gray actions, white selected row, cyan connected row, black body field, dark-magenta hint field;
 2. title begins near x=7/y=8 and first body row near y=39;
