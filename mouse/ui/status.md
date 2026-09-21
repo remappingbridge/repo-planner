@@ -12,8 +12,8 @@ Last updated: 2026-09-21.
 | MUI-05 | ACCEPTED | `mui/mui-05-navigation@acdce2b26d661b9855a3220d5c95858eab1fb3ad` | `executions/mui-05/candidate.md` |
 | MUI-06 | ACCEPTED | `mui/mui-06-desktop-lab@c621fd538c515fa9591eb80afaf6130dfe6a7add` | `executions/mui-06/candidate.md` |
 | MUI-07 | ACCEPTED | `mui/mui-07-scenario-bug-lab@8694ae242e81fe2f74b00efede90962d8701161b` | `executions/mui-07/candidate.md` |
-| MUI-08 | NOT STARTED | — | — |
+| MUI-08 | AUTOMATED PASS / HUMAN BASELINE REVIEW PENDING | `mui/mui-08-baseline-parity@3154916ba7d01a7c916c22f8ae67d8e99c32bc99` | `executions/mui-08/candidate.md` |
 
-`mouse-ui/main` is promoted through accepted MUI-07 at `8694ae242e81fe2f74b00efede90962d8701161b`. MUI-08 work branches from that accepted baseline.
+`mouse-ui/main` remains promoted through accepted MUI-07 at `8694ae242e81fe2f74b00efede90962d8701161b`. MUI-08 has automated PASS on its dedicated branch and is not promoted/tagged until explicit human baseline acceptance.
 
 Status changes require evidence under `executions/` or an explicit human acceptance record. This file is a summary, not the evidence itself.

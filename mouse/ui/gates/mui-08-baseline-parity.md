@@ -1,6 +1,6 @@
 # MUI-08 — Clean MBR-08 Frontend Baseline
 
-Status: **NOT STARTED**.
+Status: **AUTOMATED PASS / HUMAN BASELINE REVIEW PENDING**.
 
 ## Objective
 
@@ -32,19 +32,25 @@ MUI-07 ACCEPTED.
 
 ## Automated acceptance
 
-- [ ] all automated tests green
-- [ ] sanitizers clean where supported
-- [ ] all 30 screens covered by semantic + renderer regression
-- [ ] all requested scale/backlight/inspector desktop requirements verified
-- [ ] no backend/SDL leakage across documented boundaries
-- [ ] documentation and code inventory agree
+- [x] all automated tests green
+- [x] sanitizers clean where supported
+- [x] all 30 screens covered by semantic + renderer regression
+- [x] all requested scale/backlight/inspector desktop requirements verified
+- [x] no backend/SDL leakage across documented boundaries
+- [x] documentation and code inventory agree
+
+Candidate: `remappingbridge/mouse-ui@3154916ba7d01a7c916c22f8ae67d8e99c32bc99` on branch `mui/mui-08-baseline-parity`.
+
+Final CI run `35573134854` passed both Debug and ASan/UBSan with **12/12 tests**. The debug job generated and uploaded the complete baseline evidence artifact, including the raw 30-screen evidence and the 200%/750% presentation matrix.
 
 ## Human acceptance
 
-- [ ] human review of all screen families at useful scales including 300%
-- [ ] human navigation review of first use, HOME, Pair New, profiles, Custom, Saved Devices, Help, Lock
-- [ ] inspector references are practical for reporting observed bugs
-- [ ] dark shell/backlight/scale behavior accepted as the development laboratory baseline
+- [ ] human review of the consolidated 30-screen baseline at useful scales including 300%
+- [ ] human navigation review of first use, HOME, Pair New, profiles, Custom, Saved Devices, Help, Lock on the MUI-08 candidate
+- [ ] inspector/evidence references remain practical after the final baseline consolidation
+- [ ] startup defaults **200% scale / 750% backlight** are accepted
+
+MUI-06 and MUI-07 human acceptance is already recorded. This remaining review is specifically for the final MUI-08 consolidated baseline and its new startup defaults.
 
 ## Forbidden scope
 
