@@ -28,3 +28,17 @@ Do not mix UX redesign with the reconstruction program unless a blocking ambigui
 - `REJECTED/REBUILD` — behavior or architecture must be retried from a clean point.
 
 No gate is accepted merely because a later gate exists.
+
+## Program completion
+
+MUI-00 through MUI-08 are **ACCEPTED** as of 2026-09-21.
+
+Accepted frontend baseline:
+
+~~~text
+remappingbridge/mouse-ui
+main @ 537b0f6fdd188b283cf10648b1cc6dbdacbfe20d
+baseline/mui-08-accepted @ same commit
+~~~
+
+There is no planned MUI-09 reconstruction gate. Post-baseline UX work uses `lab/*`, `candidate/*`, and `rebuild/*` branches from the accepted baseline.

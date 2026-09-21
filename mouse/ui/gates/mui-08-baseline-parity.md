@@ -1,6 +1,6 @@
 # MUI-08 — Clean MBR-08 Frontend Baseline
 
-Status: **AUTOMATED PASS / HUMAN BASELINE REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 ## Objective
 
@@ -24,11 +24,11 @@ MUI-07 ACCEPTED.
 
 ## Deliverables
 
-- accepted C-only MBR-08 frontend baseline
-- complete evidence record
-- clean architecture review
-- baseline executable/artifact
-- stable tag/commit suitable as base for `lab/*` experiments
+- [x] accepted C-only MBR-08 frontend baseline
+- [x] complete evidence record
+- [x] clean architecture review
+- [x] baseline executable/artifact
+- [x] stable baseline ref/commit suitable as base for `lab/*` experiments
 
 ## Automated acceptance
 
@@ -39,18 +39,18 @@ MUI-07 ACCEPTED.
 - [x] no backend/SDL leakage across documented boundaries
 - [x] documentation and code inventory agree
 
-Candidate: `remappingbridge/mouse-ui@3154916ba7d01a7c916c22f8ae67d8e99c32bc99` on branch `mui/mui-08-baseline-parity`.
+Accepted baseline: `remappingbridge/mouse-ui@537b0f6fdd188b283cf10648b1cc6dbdacbfe20d` on `main` and `baseline/mui-08-accepted`.
 
 Final CI run `35573134854` passed both Debug and ASan/UBSan with **12/12 tests**. The debug job generated and uploaded the complete baseline evidence artifact, including the raw 30-screen evidence and the 200%/750% presentation matrix.
 
 ## Human acceptance
 
-- [ ] human review of the consolidated 30-screen baseline at useful scales including 300%
-- [ ] human navigation review of first use, HOME, Pair New, profiles, Custom, Saved Devices, Help, Lock on the MUI-08 candidate
-- [ ] inspector/evidence references remain practical after the final baseline consolidation
-- [ ] startup defaults **200% scale / 750% backlight** are accepted
+- [x] consolidated 30-screen baseline accepted
+- [x] first use, HOME, Pair New, profiles, Custom, Saved Devices, Help and Lock baseline accepted
+- [x] inspector/evidence workflow accepted
+- [x] startup defaults **200% scale / 750% backlight** accepted
 
-MUI-06 and MUI-07 human acceptance is already recorded. This remaining review is specifically for the final MUI-08 consolidated baseline and its new startup defaults.
+Explicit operator acceptance recorded on 2026-09-21: "gate 8 aceito".
 
 ## Forbidden scope
 

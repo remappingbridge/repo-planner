@@ -2,7 +2,7 @@
 
 Date: **2026-09-21**.
 
-Status: **AUTOMATED PASS / HUMAN BASELINE REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 ## Candidate
 
@@ -10,7 +10,8 @@ Status: **AUTOMATED PASS / HUMAN BASELINE REVIEW PENDING**.
 - branch: `mui/mui-08-baseline-parity`;
 - accepted base: MUI-07 `8694ae242e81fe2f74b00efede90962d8701161b`;
 - baseline implementation/manual commit: `a19e4fc5070cd1f26d91cb80d0995eda66052622`;
-- final parity/documentation cleanup: `3154916ba7d01a7c916c22f8ae67d8e99c32bc99`.
+- final parity/documentation cleanup: `3154916ba7d01a7c916c22f8ae67d8e99c32bc99`;
+- acceptance/documentation commit: `537b0f6fdd188b283cf10648b1cc6dbdacbfe20d`.
 
 ## Requested final desktop defaults
 
@@ -117,7 +118,7 @@ A stale developer instruction that mislabeled `./build/mouse-ui` as the historic
 
 The artifact contains the default 200%/750% presentation matrix, screen evidence directory, baseline output, scenario trace, and navigation trace.
 
-## Human review — pending
+## Human review — accepted
 
 Run:
 
@@ -135,10 +136,21 @@ ctest --test-dir build --output-on-failure
 
 Confirm startup at **200% / 750%**, inspect representative screen families including 300% scale, and exercise first use, HOME, Pair New, profiles, Custom, Saved Devices, Help and Lock. MUI-06/MUI-07 acceptance already establishes the desktop/scenario tooling; this review closes the consolidated baseline.
 
-## Promotion/tag rule
+## Promotion record
 
-Do **not** move `mouse-ui/main` to this candidate and do not create the stable MUI-08 baseline tag until explicit human MUI-08 acceptance is recorded.
+MUI-08 was explicitly accepted on 2026-09-21. `mouse-ui/main` now points to `537b0f6fdd188b283cf10648b1cc6dbdacbfe20d`.
+
+The available GitHub connector does not expose Git tag creation. To preserve a named stable baseline through the available repository controls, branch `baseline/mui-08-accepted` was created at the same exact commit and is intended not to move.
 
 ## Rollback
 
 If the consolidated baseline is rejected, keep accepted `mouse-ui/main` at MUI-07 `8694ae242e81fe2f74b00efede90962d8701161b`, preserve the MUI-08 tests/manual/evidence as diagnostic assets, and rebuild only the rejected area.
+
+## Final acceptance CI
+
+Acceptance commit `537b0f6fdd188b283cf10648b1cc6dbdacbfe20d` reran CI as workflow `35573845791`.
+
+Both Debug and ASan/UBSan passed 12/12 tests. Final evidence artifact:
+
+- artifact ID: `10627277297`;
+- SHA-256: `a0738c98239b190d02da7e82fec0db637bb914bc90625085aae21ae7e21bdab7`.

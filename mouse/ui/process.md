@@ -20,9 +20,18 @@ Each executed gate should create an evidence directory under `executions/<gate>/
 
 If a gate implementation accumulates architecture violations or extensive workaround conditionals, do not preserve it merely because behavior appears correct. Keep specifications/tests, abandon the implementation branch, and use a `rebuild/*` or fresh gate candidate.
 
-## Baseline tags
+## Stable baseline references
 
-After major accepted checkpoints, create a stable tag so later `lab/*` experiments can branch from a known clean frontend. Exact tag names are chosen when those checkpoints are accepted.
+After major accepted checkpoints, preserve a named immutable baseline reference so later `lab/*` experiments branch from a known clean frontend.
+
+For MUI-08 the available GitHub connector did not expose tag creation, so the accepted commit is preserved as:
+
+~~~text
+baseline/mui-08-accepted
+537b0f6fdd188b283cf10648b1cc6dbdacbfe20d
+~~~
+
+Treat this baseline branch as immutable.
 
 ## No backend claims
 
