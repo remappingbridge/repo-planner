@@ -2,7 +2,7 @@
 
 Date: **2026-09-21**.
 
-Status: **AUTOMATED PASS / HUMAN VISUAL+ID REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 ## Candidate
 
@@ -119,7 +119,7 @@ learn-the-keys        7f9297c7748aec05
 
 Complete values live in the committed hash manifest rather than being duplicated here.
 
-## Human visual/ID review — pending
+## Human visual/ID review — PASS
 
 On Debian:
 
@@ -158,3 +158,5 @@ ID review should confirm that examples such as `screen=home-connected element=me
 ## Rollback
 
 If rejected, abandon `mui/mui-04-screen-projection` and return to accepted MUI-03 `fe7acaa5059dcc8e489e031082c57f938dff59ec`. Preserve the accepted semantic goldens/ID feedback separately if only the implementation is rejected.
+
+Acceptance record: the Debian probe generated the complete MUI-04 evidence set and reported all 30 framebuffer hashes. The values matched `tests/goldens/mui-04/hashes.txt` exactly, from `searching-first a04a97c7396beae5` through `learn-the-keys 7f9297c7748aec05`. The operator authorized advancing to the next gate if correct, and MUI-04 was promoted to `mouse-ui/main` at `8aed51e00eaadff351e77778f92646ec155bae9d`.

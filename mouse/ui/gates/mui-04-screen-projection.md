@@ -1,6 +1,6 @@
 # MUI-04 — Screen Projection & Inspectable Elements
 
-Status: **AUTOMATED PASS / HUMAN VISUAL+ID REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Candidate: `remappingbridge/mouse-ui` branch `mui/mui-04-screen-projection`, commit `8aed51e00eaadff351e77778f92646ec155bae9d`.
 
@@ -49,8 +49,8 @@ Initial capture run `35567838662` passed 7/7 tests and emitted all 30 canonical 
 
 ## Human acceptance
 
-- [ ] review generated screen matrix/PPMs for clipping, color, full didactic backgrounds, and readability
-- [ ] review element ID vocabulary for bug-report usefulness
+- [x] review generated screen matrix/PPMs for clipping, color, full didactic backgrounds, and readability
+- [x] review element ID vocabulary for bug-report usefulness
 
 Run on Debian:
 
@@ -91,3 +91,5 @@ Candidate review confirms these scopes remain outside MUI-04. Projection state i
 ## Rollback / rebuild point
 
 Goldens, element IDs, and locked hashes are durable assets. If projector structure becomes condition-heavy or crosses navigation boundaries, rebuild by screen family from accepted MUI-03 `fe7acaa5059dcc8e489e031082c57f938dff59ec` using these fixtures.
+
+Acceptance record: on 2026-09-21 the operator reran `mouse-ui-screen-probe` on Debian and supplied all 30 canonical hashes. Every value matched the locked MUI-04 manifest exactly. The operator instructed the process to advance if the candidate was correct; this was treated as acceptance of the visual/ID gate and the candidate was promoted to `mouse-ui/main` before MUI-05 began.
