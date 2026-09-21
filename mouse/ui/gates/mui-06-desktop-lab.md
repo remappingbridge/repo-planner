@@ -1,6 +1,6 @@
 # MUI-06 — SDL2 Desktop Laboratory
 
-Status: **AUTOMATED PASS / HUMAN DESKTOP REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Candidate: `remappingbridge/mouse-ui` branch `mui/mui-06-desktop-lab`, commit `c621fd538c515fa9591eb80afaf6130dfe6a7add`.
 
@@ -54,10 +54,12 @@ Final CI run `35569942173`, head `c621fd538c515fa9591eb80afaf6130dfe6a7add`, com
 
 ## Human acceptance
 
-- [ ] dark shell is comfortable/readable on Debian desktop
-- [ ] at 300% scale the 240×240 LCD presents as 720×720 without smoothing
-- [ ] all required controls can be operated without physical hardware
-- [ ] bug can be cited unambiguously using `screen=<id> element=<id>` from inspector
+- [x] dark shell is comfortable/readable on Debian desktop
+- [x] at 300% scale the 240×240 LCD presents as 720×720 without smoothing
+- [x] all required controls can be operated without physical hardware
+- [x] bug can be cited unambiguously using `screen=<id> element=<id>` from inspector
+
+Explicit operator acceptance was recorded on 2026-09-21: "gates 6 e 7 aceitos".
 
 Run on Debian:
 

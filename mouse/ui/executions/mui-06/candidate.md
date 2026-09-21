@@ -2,7 +2,7 @@
 
 Date: **2026-09-21**.
 
-Status: **AUTOMATED PASS / HUMAN DESKTOP REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 ## Candidate
 
@@ -109,7 +109,7 @@ mouse-ui MUI-06 SDL smoke PASS: 300%=720x720
 
 No AddressSanitizer/UndefinedBehaviorSanitizer finding was reported.
 
-## Human desktop review — pending
+## Human desktop review — accepted
 
 Run:
 
@@ -144,3 +144,7 @@ If rejected, abandon `mui/mui-06-desktop-lab` and return to accepted MUI-05 `acd
 ## Downstream provisional work
 
 MUI-07 was implemented provisionally on top of this exact candidate after explicit operator instruction to continue. This does **not** constitute MUI-06 acceptance. If MUI-06 is rejected, MUI-07 must be rebased/revalidated rather than promoted as-is.
+
+## Acceptance record
+
+On 2026-09-21 the operator explicitly accepted MUI-06 together with MUI-07 (`gates 6 e 7 aceitos`). The accepted dependency chain was then promoted through MUI-07 on `mouse-ui/main`.

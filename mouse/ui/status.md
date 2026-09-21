@@ -10,10 +10,10 @@ Last updated: 2026-09-21.
 | MUI-03 | ACCEPTED | `mui/mui-03-mock-world@fe7acaa5059dcc8e489e031082c57f938dff59ec` | `executions/mui-03/candidate.md` |
 | MUI-04 | ACCEPTED | `mui/mui-04-screen-projection@8aed51e00eaadff351e77778f92646ec155bae9d` | `executions/mui-04/candidate.md` |
 | MUI-05 | ACCEPTED | `mui/mui-05-navigation@acdce2b26d661b9855a3220d5c95858eab1fb3ad` | `executions/mui-05/candidate.md` |
-| MUI-06 | AUTOMATED PASS / HUMAN DESKTOP REVIEW PENDING | `mui/mui-06-desktop-lab@c621fd538c515fa9591eb80afaf6130dfe6a7add` | `executions/mui-06/candidate.md` |
-| MUI-07 | AUTOMATED PASS / HUMAN SCENARIO+EVIDENCE REVIEW PENDING / PROVISIONAL ON MUI-06 | `mui/mui-07-scenario-bug-lab@8694ae242e81fe2f74b00efede90962d8701161b` | `executions/mui-07/candidate.md` |
+| MUI-06 | ACCEPTED | `mui/mui-06-desktop-lab@c621fd538c515fa9591eb80afaf6130dfe6a7add` | `executions/mui-06/candidate.md` |
+| MUI-07 | ACCEPTED | `mui/mui-07-scenario-bug-lab@8694ae242e81fe2f74b00efede90962d8701161b` | `executions/mui-07/candidate.md` |
 | MUI-08 | NOT STARTED | — | — |
 
-`mouse-ui/main` remains at the latest accepted dependency, MUI-05 `acdce2b26d661b9855a3220d5c95858eab1fb3ad`. MUI-06 and MUI-07 are intentionally not promoted until the required human desktop review is explicitly accepted.
+`mouse-ui/main` is promoted through accepted MUI-07 at `8694ae242e81fe2f74b00efede90962d8701161b`. MUI-08 work branches from that accepted baseline.
 
 Status changes require evidence under `executions/` or an explicit human acceptance record. This file is a summary, not the evidence itself.

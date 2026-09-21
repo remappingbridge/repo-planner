@@ -2,7 +2,7 @@
 
 Date: **2026-09-21**.
 
-Status: **AUTOMATED PASS / HUMAN SCENARIO+EVIDENCE REVIEW PENDING / PROVISIONAL ON MUI-06**.
+Status: **ACCEPTED**.
 
 ## Candidate
 
@@ -15,9 +15,9 @@ Status: **AUTOMATED PASS / HUMAN SCENARIO+EVIDENCE REVIEW PENDING / PROVISIONAL 
 - real evidence bundle test: `8930a32462a6f7d39776c8c338a0b33c7eb75e2b`;
 - final documented candidate: `8694ae242e81fe2f74b00efede90962d8701161b`.
 
-## Promotion constraint
+## Promotion record
 
-MUI-06 has not received explicit human desktop acceptance. The operator requested MUI-07 implementation anyway. Therefore neither MUI-06 nor MUI-07 was promoted to `mouse-ui/main`; `main` remains on accepted MUI-05 `acdce2b26d661b9855a3220d5c95858eab1fb3ad`.
+MUI-06 and MUI-07 received explicit operator acceptance on 2026-09-21. The accepted chain was promoted to `mouse-ui/main` at MUI-07 commit `8694ae242e81fe2f74b00efede90962d8701161b`.
 
 ## Pure lab architecture
 
@@ -107,7 +107,7 @@ mouse-ui MUI-06 SDL smoke PASS: 300%=720x720
 
 No ASan/UBSan finding was reported.
 
-## Human review — pending
+## Human review — accepted
 
 Recommended quick validation:
 
@@ -132,3 +132,7 @@ In the window, confirm direct scenario loading, scenario cycling, fault controls
 ## Rollback
 
 If MUI-06 is rejected or replaced, retain the scenario catalog, lab tests, evidence v1 format, and documentation, then rebase/revalidate them over the replacement accepted desktop shell.
+
+## Acceptance record
+
+On 2026-09-21 the operator explicitly accepted MUI-06 and MUI-07 (`gates 6 e 7 aceitos`). MUI-07 is therefore no longer provisional and is the accepted base for MUI-08.

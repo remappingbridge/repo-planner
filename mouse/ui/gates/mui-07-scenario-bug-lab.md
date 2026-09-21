@@ -1,6 +1,6 @@
 # MUI-07 — Scenario, Fault & Bug Evidence Lab
 
-Status: **AUTOMATED PASS / HUMAN SCENARIO+EVIDENCE REVIEW PENDING / PROVISIONAL ON MUI-06**.
+Status: **ACCEPTED**.
 
 Candidate: `remappingbridge/mouse-ui` branch `mui/mui-07-scenario-bug-lab`, commit `8694ae242e81fe2f74b00efede90962d8701161b`.
 
@@ -12,7 +12,7 @@ Make difficult UX states instantly reproducible and make bug reports self-identi
 
 ## Dependency status
 
-The planned dependency is MUI-06 ACCEPTED. MUI-06 currently has automated PASS but still awaits explicit human desktop acceptance. On 2026-09-21 the operator explicitly requested implementation of the next gate before that acceptance. MUI-07 was therefore developed **provisionally** from the exact MUI-06 candidate `c621fd538c515fa9591eb80afaf6130dfe6a7add`, without promoting MUI-06 or MUI-07 to `mouse-ui/main`.
+MUI-06 is ACCEPTED at `c621fd538c515fa9591eb80afaf6130dfe6a7add`. MUI-07 was originally developed provisionally from that exact candidate; the dependency chain became valid when the operator explicitly accepted gates 6 and 7 on 2026-09-21.
 
 ## Implemented tasks
 
@@ -59,12 +59,14 @@ Final CI run `35571682117`, head `8694ae242e81fe2f74b00efede90962d8701161b`, com
 
 ## Human acceptance
 
-- [ ] select representative difficult states directly by scenario or SCN PREV/NEXT
-- [ ] use semantic fault controls and confirm the resulting frontend state is understandable
-- [ ] inspect an element and copy the compact scenario-aware bug reference
-- [ ] export `mouse-ui-evidence.txt`, `.json`, and `.ppm` and verify they describe the visible state
-- [ ] reproduce a saved regression fixture such as `stale-result`, `late-result`, or `remove-failed` from its scenario evidence
-- [ ] MUI-06 desktop presentation itself must also be explicitly accepted before MUI-07 can be promoted
+- [x] representative difficult states can be selected directly by scenario or SCN PREV/NEXT
+- [x] semantic fault controls produce understandable frontend states
+- [x] inspected elements yield useful scenario-aware compact references
+- [x] TXT/JSON/PPM evidence flow is accepted as the bug-reporting workflow
+- [x] saved regression fixtures are accepted as reproducible frontend evidence
+- [x] MUI-06 dependency is accepted
+
+Explicit operator acceptance was recorded on 2026-09-21: "gates 6 e 7 aceitos".
 
 Run on Debian:
 
