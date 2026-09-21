@@ -2,7 +2,7 @@
 
 Date: **2026-09-21**.
 
-Status: **AUTOMATED PASS / HUMAN ACCEPTANCE PENDING**.
+Status: **ACCEPTED**.
 
 ## Candidate
 
@@ -96,7 +96,7 @@ Both probes reported the deterministic black placeholder framebuffer hash:
 - [x] forbidden dependency fixture rejected — `architecture_guard_forbidden_fixture` succeeds because rejection is expected;
 - [x] ASan/UBSan — local sanitized build + GitHub `host-asan-ubsan`, no findings.
 
-## Human acceptance — pending
+## Human acceptance — PASS
 
 Run on the intended Debian workstation:
 
@@ -125,7 +125,7 @@ placeholder hash: 2d9ab45bcfc84b25
 desktop shell: not implemented (MUI-06)
 ~~~
 
-Human review should additionally confirm that `docs/development/build-and-test.md` is clear and that the `domain -> interaction -> app` module separation is acceptable before MUI-00 is marked ACCEPTED.
+On 2026-09-21 the operator ran the documented Debian commands and reported `100% tests passed, 0 tests failed out of 3` and the exact expected probe/hash `2d9ab45bcfc84b25`. The module dependency direction was re-reviewed against the accepted architecture and found consistent. MUI-00 was then promoted to `mouse-ui/main`.
 
 ## Out of scope / not claimed
 

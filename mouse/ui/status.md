@@ -4,8 +4,8 @@ Last updated: 2026-09-21.
 
 | Gate | Status | Candidate | Evidence |
 |---|---|---|---|
-| MUI-00 | AUTOMATED PASS / HUMAN ACCEPTANCE PENDING | `mui/mui-00-foundation@f0007cb7f5c19543238b564b0295256e57fec3aa` | `executions/mui-00/candidate.md` |
-| MUI-01 | NOT STARTED | — | — |
+| MUI-00 | ACCEPTED | `mui/mui-00-foundation@f0007cb7f5c19543238b564b0295256e57fec3aa` | `executions/mui-00/candidate.md` |
+| MUI-01 | AUTOMATED PASS / HUMAN VISUAL PENDING | `mui/mui-01-renderer@4daa0963e476eebd61cd7049b43cba582413144a` | `executions/mui-01/candidate.md` |
 | MUI-02 | NOT STARTED | — | — |
 | MUI-03 | NOT STARTED | — | — |
 | MUI-04 | NOT STARTED | — | — |

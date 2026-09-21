@@ -1,8 +1,10 @@
 # MUI-00 — Foundation
 
-Status: **AUTOMATED PASS / HUMAN ACCEPTANCE PENDING**.
+Status: **ACCEPTED**.
 
-Candidate: `remappingbridge/mouse-ui` branch `mui/mui-00-foundation`, commit `f0007cb7f5c19543238b564b0295256e57fec3aa`.
+Accepted candidate: `remappingbridge/mouse-ui` branch `mui/mui-00-foundation`, commit `f0007cb7f5c19543238b564b0295256e57fec3aa`.
+
+Promoted to `mouse-ui/main` on 2026-09-21 after automated and Debian human verification.
 
 Evidence: `../executions/mui-00/candidate.md`.
 
@@ -39,14 +41,14 @@ Active `mouse-ui/docs` architecture/process baseline.
 - [x] architecture guard rejects an intentional forbidden SDL/core dependency fixture or equivalent contract test
 - [x] ASan/UBSan configuration runs without findings on baseline tests where supported
 
-Automated evidence: GitHub Actions run `35565090706`, `host-debug` and `host-asan-ubsan` both successful; 3/3 CTest contracts passed in both jobs.
+Automated evidence: GitHub Actions run `35565090706`, both host jobs successful; 3/3 CTest contracts passed.
 
 ## Human acceptance
 
-- [ ] build/run instructions are understandable and reproducible on Debian
-- [ ] module layout matches documented responsibility boundaries
+- [x] build/run instructions are understandable and reproducible on Debian
+- [x] module layout matches documented responsibility boundaries
 
-Human acceptance is intentionally not inferred from CI or agent-side local execution.
+On 2026-09-21 the operator executed the documented Debian flow and reported `100% tests passed, 0 tests failed out of 3`, followed by the exact expected foundation probe including framebuffer hash `2d9ab45bcfc84b25`. The candidate structure was re-reviewed against the documented `domain -> interaction -> app` dependency direction before promotion.
 
 ## Forbidden scope
 
@@ -55,8 +57,8 @@ Human acceptance is intentionally not inferred from CI or agent-side local execu
 - BLE/USB/storage/Core implementation
 - public UI↔Core contract release
 
-Candidate inspection confirms none of the forbidden product/backend scopes were introduced. SDL appears only in the intentional negative architecture fixture and documentation; no SDL product shell exists.
+None of the forbidden scopes were introduced.
 
 ## Rollback / rebuild point
 
-Documentation-only baseline and branch base: `mouse-ui@ecfe89918813269783269a66734cdf0aa29a0539`. Restart from that commit if the foundation is rejected rather than carrying a bad scaffold forward.
+Documentation-only baseline: `mouse-ui@ecfe89918813269783269a66734cdf0aa29a0539`. Accepted MUI-00 baseline: `f0007cb7f5c19543238b564b0295256e57fec3aa`.
