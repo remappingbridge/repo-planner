@@ -1,10 +1,10 @@
 # mouse-ui gate status
 
-Last initialized: 2026-09-21.
+Last updated: 2026-09-21.
 
 | Gate | Status | Candidate | Evidence |
 |---|---|---|---|
-| MUI-00 | NOT STARTED | — | — |
+| MUI-00 | AUTOMATED PASS / HUMAN ACCEPTANCE PENDING | `mui/mui-00-foundation@f0007cb7f5c19543238b564b0295256e57fec3aa` | `executions/mui-00/candidate.md` |
 | MUI-01 | NOT STARTED | — | — |
 | MUI-02 | NOT STARTED | — | — |
 | MUI-03 | NOT STARTED | — | — |
