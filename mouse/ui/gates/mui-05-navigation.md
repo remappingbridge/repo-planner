@@ -1,6 +1,6 @@
 # MUI-05 — Navigation & Baseline UX Flows
 
-Status: **AUTOMATED PASS / HUMAN TRACE REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Candidate: `remappingbridge/mouse-ui` branch `mui/mui-05-navigation`, commit `acdce2b26d661b9855a3220d5c95858eab1fb3ad`.
 
@@ -36,8 +36,8 @@ Final verification run `35568861841`, head `acdce2b26d661b9855a3220d5c95858eab1f
 
 ## Human acceptance
 
-- [ ] run and review `mouse-ui-nav-probe` on Debian
-- [ ] confirm the scripted flow remains understandable before SDL desktop shell work
+- [x] run and review `mouse-ui-nav-probe` on Debian
+- [x] confirm the scripted flow remains understandable before SDL desktop shell work
 
 Run:
 
@@ -65,3 +65,5 @@ Candidate review confirms these scopes remain outside MUI-05.
 ## Rollback / rebuild point
 
 Scenario tests define accepted behavior. If future UX corrections require many reducer exceptions, rebuild navigation from accepted MUI-04 while retaining the scenario suite.
+
+Acceptance record: on 2026-09-21 the operator reported `100% tests passed, 0 tests failed out of 8`, supplied the complete `mouse-ui-nav-probe` trace ending in `MUI-05 trace PASS`, and explicitly stated `gate aceito`. The candidate was promoted to `mouse-ui/main` at `acdce2b26d661b9855a3220d5c95858eab1fb3ad` before MUI-06 began.

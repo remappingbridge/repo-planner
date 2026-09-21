@@ -2,7 +2,7 @@
 
 Date: **2026-09-21**.
 
-Status: **AUTOMATED PASS / HUMAN TRACE REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 ## Candidate
 
@@ -80,7 +80,7 @@ The CI trace confirms:
 - timeout while Help remains on Help but changes return owner to `home-retry`;
 - Saved Devices remains reachable after retry.
 
-## Human trace review — pending
+## Human trace review — PASS
 
 Run on Debian:
 
@@ -107,3 +107,5 @@ The review is semantic rather than graphical: confirm the ordered state lines ar
 ## Rollback
 
 If rejected, abandon `mui/mui-05-navigation` and return to accepted MUI-04 `8aed51e00eaadff351e77778f92646ec155bae9d`. Preserve scenario tests as the behavioral specification if the reducer itself is replaced.
+
+Acceptance record: the operator's Debian execution passed all 8 contracts and reproduced the expected deterministic trace for FIRST cycling, first connection, instructional Lock/unlock, HOME Help, Standard failure/success, Pair New handoff, disconnect, saved-search Help timeout, retry, and Saved Devices. The trace ended in `MUI-05 trace PASS`, after which the operator explicitly accepted the gate. MUI-05 was promoted to `mouse-ui/main` at `acdce2b26d661b9855a3220d5c95858eab1fb3ad`.
