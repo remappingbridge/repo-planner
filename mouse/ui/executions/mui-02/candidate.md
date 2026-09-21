@@ -2,7 +2,7 @@
 
 Date: **2026-09-21**.
 
-Status: **AUTOMATED PASS / HUMAN SEMANTIC REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 ## Candidate
 
@@ -96,7 +96,7 @@ No ASan/UBSan finding was reported.
 - [x] all semantic controls covered;
 - [x] architecture guard green with no SDL/GPIO/backend dependency.
 
-## Human semantic review — pending
+## Human semantic review — PASS
 
 Review whether these names are clear enough to preserve as the frontend semantic vocabulary for future SDL and embedded adapters:
 
@@ -129,3 +129,5 @@ Recommended interpretation: only `RELEASE_ACTION` authorizes a product/UI action
 ## Rollback
 
 If rejected, abandon `mui/mui-02-interaction` and return to accepted MUI-01 `4daa0963e476eebd61cd7049b43cba582413144a`.
+
+Acceptance record: on 2026-09-21 the operator explicitly accepted the proposed control/phase/outcome vocabulary. MUI-02 was then promoted to `mouse-ui/main` at `8c1051904a95bd74b1f0d833a24c0a29ebcc8b29`.

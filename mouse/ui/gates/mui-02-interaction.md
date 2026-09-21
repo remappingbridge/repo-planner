@@ -1,6 +1,6 @@
 # MUI-02 — Interaction Engine
 
-Status: **AUTOMATED PASS / HUMAN SEMANTIC REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Candidate: `remappingbridge/mouse-ui` branch `mui/mui-02-interaction`, commit `8c1051904a95bd74b1f0d833a24c0a29ebcc8b29`.
 
@@ -40,7 +40,7 @@ GitHub Actions run `35566653090` passed 5/5 CTest contracts in both `host-debug`
 
 ## Human acceptance
 
-- [ ] review semantic mapping naming for future desktop and embedded adapters
+- [x] review semantic mapping naming for future desktop and embedded adapters
 
 Names to review:
 
@@ -82,3 +82,5 @@ Candidate review confirms none of these scopes were introduced.
 ## Rollback / rebuild point
 
 Interaction tests are the durable asset. If ownership semantics later become entangled with screen-specific behavior, rebuild from accepted MUI-01 `4daa0963e476eebd61cd7049b43cba582413144a` using the MUI-02 interaction tests.
+
+Human semantic acceptance was explicitly reported on 2026-09-21. The candidate was promoted to `mouse-ui/main` before MUI-03 started.
