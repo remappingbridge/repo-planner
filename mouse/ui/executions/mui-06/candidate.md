@@ -140,3 +140,7 @@ Review shell readability, 300%=720×720 nearest-neighbor presentation, all six s
 ## Rollback
 
 If rejected, abandon `mui/mui-06-desktop-lab` and return to accepted MUI-05 `acdce2b26d661b9855a3220d5c95858eab1fb3ad`. The pure tests and accepted MUI-00–05 assets remain valid.
+
+## Downstream provisional work
+
+MUI-07 was implemented provisionally on top of this exact candidate after explicit operator instruction to continue. This does **not** constitute MUI-06 acceptance. If MUI-06 is rejected, MUI-07 must be rebased/revalidated rather than promoted as-is.

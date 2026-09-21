@@ -1,48 +1,97 @@
 # MUI-07 — Scenario, Fault & Bug Evidence Lab
 
-Status: **NOT STARTED**.
+Status: **AUTOMATED PASS / HUMAN SCENARIO+EVIDENCE REVIEW PENDING / PROVISIONAL ON MUI-06**.
+
+Candidate: `remappingbridge/mouse-ui` branch `mui/mui-07-scenario-bug-lab`, commit `8694ae242e81fe2f74b00efede90962d8701161b`.
+
+Evidence: `../executions/mui-07/candidate.md`.
 
 ## Objective
 
 Make difficult UX states instantly reproducible and make bug reports self-identifying, deterministic, and useful for rebuilds.
 
-## Dependencies
+## Dependency status
 
-MUI-06 ACCEPTED.
+The planned dependency is MUI-06 ACCEPTED. MUI-06 currently has automated PASS but still awaits explicit human desktop acceptance. On 2026-09-21 the operator explicitly requested implementation of the next gate before that acceptance. MUI-07 was therefore developed **provisionally** from the exact MUI-06 candidate `c621fd538c515fa9591eb80afaf6130dfe6a7add`, without promoting MUI-06 or MUI-07 to `mouse-ui/main`.
 
-## Tasks
+## Implemented tasks
 
-1. Define named scenario catalog covering each major screen family and edge state.
-2. Add CLI and/or shell scenario selection so relevant states can open directly without manual setup.
-3. Add controlled fault/result injection: success, failure, timeout, disconnect, stale/late result, operation pending, full registry, dirty Custom draft, etc.
-4. Allow deterministic event-step execution and virtual-time advancement.
-5. Create bug evidence capture containing screen ID, focused/inspected element ID, logical bounds, text/state/tone, scenario, mock clock, scale, selected/effective backlight, and recent semantic event history.
-6. Provide one-click/copyable compact reference plus optional structured text/JSON evidence export.
-7. Include framebuffer capture/hash in evidence without making screenshots the source of truth.
-8. Add regression scenarios for bugs as they are found: every fixed reproducible bug should be representable as a scenario/test where practical.
-9. Document how a human reports a visual/navigation bug using inspector references.
+1. Defined a 15-scenario deterministic catalog covering first use, first connection, connected/offline HOME states, Help during search, Pair New with live current Mouse, profile pending, dirty Custom, Saved Devices, removal, full registry, timeout, stale result, and late result.
+2. Added SDL-free CLI scenario probe plus desktop `--list-scenarios` / `--scenario NAME` and SCN PREV/NEXT controls.
+3. Added semantic fault/result injection: success, failure, timeout, disconnect, stale result, late result, and hold-pending.
+4. Added deterministic step runner for TAP, ADVANCE_MS, FAULT, HOME, REBOOT, and FACTORY_RESET.
+5. Added evidence v1 with scenario, screen, element metadata, clock, scale, selected/effective backlight, state/tone/bounds/text, search/operation tokens, stale count, framebuffer hash, and recent semantic events.
+6. Added compact reference plus TXT and JSON formats.
+7. Added raw logical framebuffer PPM to evidence bundles.
+8. Added regression fixtures for stale-result, late-result, and remove-failed.
+9. Added technical/user documentation for scenario startup, faults, evidence generation, and bug reproduction.
 
-## Deliverables
+## Named scenario catalog
 
-- named scenario catalog
-- fault injection controls
-- deterministic scenario runner
-- bug evidence/reference export
-- bug-reporting documentation and tests
+~~~text
+first-use
+first-connected
+one-connected
+saved-offline
+search-help
+pair-new-current-live
+profile-pending
+custom-dirty
+saved-devices
+remove-current
+remove-failed
+full-registry
+search-timeout
+stale-result
+late-result
+~~~
 
 ## Automated acceptance
 
-- [ ] named scenarios initialize deterministically
-- [ ] fault injections reach expected frontend states without backend code
-- [ ] same scenario/steps produce same semantic trace/framebuffer hash
-- [ ] evidence export contains stable screen/element references and relevant presentation settings
-- [ ] bug evidence generation does not mutate product state except explicit scenario actions
+- [x] named scenarios initialize deterministically
+- [x] fault injections reach expected frontend states without backend code
+- [x] same scenario/steps produce same semantic trace/framebuffer hash
+- [x] evidence export contains stable screen/element references and relevant presentation settings
+- [x] bug evidence generation does not mutate product state except explicit scenario actions
+- [x] actual TXT/JSON/PPM bundle files are created and verified by `lab_contract`
+
+Final CI run `35571682117`, head `8694ae242e81fe2f74b00efede90962d8701161b`, completed successfully in both `host-debug` and `host-asan-ubsan`. Both jobs reported `100% tests passed, 0 tests failed out of 10`, `MUI-07 deterministic scenario catalog PASS`, and SDL smoke PASS. No sanitizer finding was reported.
 
 ## Human acceptance
 
-- [ ] select representative difficult states in a few interactions or directly by scenario
-- [ ] copy a useful bug reference/evidence block from a visible element
-- [ ] reproduce at least one intentionally introduced visual/navigation regression from saved scenario evidence
+- [ ] select representative difficult states directly by scenario or SCN PREV/NEXT
+- [ ] use semantic fault controls and confirm the resulting frontend state is understandable
+- [ ] inspect an element and copy the compact scenario-aware bug reference
+- [ ] export `mouse-ui-evidence.txt`, `.json`, and `.ppm` and verify they describe the visible state
+- [ ] reproduce a saved regression fixture such as `stale-result`, `late-result`, or `remove-failed` from its scenario evidence
+- [ ] MUI-06 desktop presentation itself must also be explicitly accepted before MUI-07 can be promoted
+
+Run on Debian:
+
+~~~bash
+git fetch origin
+git switch mui/mui-07-scenario-bug-lab
+git pull
+rm -rf build
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build --parallel
+ctest --test-dir build --output-on-failure
+
+./build/mouse-ui-lab-probe --list
+./build/mouse-ui-lab-probe --all
+./build/mouse-ui --list-scenarios
+./build/mouse-ui --scenario stale-result
+~~~
+
+Inside the SDL application, test SCN PREV/NEXT, FAIL/TIMEOUT/STALE/LATE, Inspector selection, Ctrl+C/COPY REF, and F9/EVIDENCE.
+
+Expected evidence files:
+
+~~~text
+mouse-ui-evidence.txt
+mouse-ui-evidence.json
+mouse-ui-evidence.ppm
+~~~
 
 ## Forbidden scope
 
@@ -51,7 +100,8 @@ MUI-06 ACCEPTED.
 - real Bluetooth/USB fault injection
 - turning developer evidence metadata into product UI
 
+Candidate review confirms none of these scopes were introduced.
+
 ## Rollback / rebuild point
 
-Scenario definitions, evidence format, and regression tests survive implementation rebuilds. Shell implementation may be replaced freely.
-
+Scenario definitions, evidence format, and regression tests are the durable assets. The SDL shell implementation may be replaced freely. If MUI-06 is rejected, MUI-07 must be rebased/revalidated on the replacement accepted desktop baseline before promotion.
