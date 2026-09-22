@@ -7,8 +7,8 @@ baseline for MCORE.
 
 | Gate | Status |
 |---|---|
-| MCORE-00 | ACTIVE NEXT |
-| MCORE-01 | BLOCKED |
+| MCORE-00 | ACCEPTED |
+| MCORE-01 | ACTIVE NEXT |
 | MCORE-02 | BLOCKED |
 | MCORE-03 | BLOCKED |
 | MCORE-04 | BLOCKED |

@@ -1,9 +1,22 @@
 # mouse-core planning program
 
-Status: **PLANNED / BLOCKED UNTIL UIC-08**.
+Status: **MCORE-00 IMPLEMENTED CANDIDATE — HUMAN ARCHITECTURE ACCEPTANCE PENDING**.
 
-Technical source: `remappingbridge/mouse-core/docs/`. Neutral contract source: `remappingbridge/mouse/contracts/ui-core/`.
+Technical source: `remappingbridge/mouse-core/docs/`.
 
-Start with [`roadmap.md`](roadmap.md) and [`gates/`](gates/README.md).
+Neutral contract source:
 
-These gates are written now to preserve sequencing, but MCORE-00 must not start before UI↔Core v1.0.0 is released.
+~~~text
+remappingbridge/mouse
+UI↔Core Contract v1.0.0
+release/ui-core-v1.0.0
+~~~
+
+Start with `roadmap.md`, `status.md`, `gates/` and
+`executions/mcore-00/candidate.md`.
+
+MCORE-00 establishes the Core state/contract/platform module boundary only. Real
+persistence, Bluetooth, HID normalization, remap/output and hardware work stay in later
+gates.
+
+MCORE-01 remains blocked until explicit MCORE-00 human acceptance.
