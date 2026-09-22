@@ -1,6 +1,6 @@
 # MCORE-01 — Registry & Persistence
 
-Status: **IMPLEMENTED CANDIDATE — HUMAN PERSISTENCE/RECOVERY ACCEPTANCE PENDING**.
+Status: **ACCEPTED**.
 
 ## Objective
 
@@ -27,7 +27,7 @@ MCORE-00 ACCEPTED.
 
 ## Human acceptance
 
-- [ ] review persistence/recovery evidence
+- [x] review persistence/recovery evidence
 
 ## Deliverables
 
