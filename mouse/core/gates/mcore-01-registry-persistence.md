@@ -31,11 +31,11 @@ MCORE-00 ACCEPTED.
 
 ## Deliverables
 
-- BLE pairing implementation
-- UI ordering as storage identity
+- registry module
+- persistence tests/evidence
 
 ## Forbidden scope
 
-- registry module
-- persistence tests/evidence
+- BLE pairing implementation
+- UI ordering as storage identity
 
