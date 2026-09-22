@@ -29,7 +29,7 @@ branch: mcore/mcore-02-ble-session-lifecycle
 rollback base:
 5a26f66b60e22464f54f79f1511b66d84c5cae68
 candidate head:
-1a0970cdeff24bb279d5ef3bc0b787a9a1845ae7
+be5b4d56a2e33ddbc92742a3608c093317b13556
 ~~~
 
 ## Implemented lifecycle
@@ -184,7 +184,7 @@ mcore_ble_qualification.uf2
 candidate convenience filename:
 mcore02-ble-qualification-pico2w.uf2
 
-UF2 SHA-256:
+UF2 SHA-256 (superseded initial candidate):
 635e301f0c01d413fdfb2725ad6a445f460aec21eb79e4915a04d985d8e1eb18
 
 GitHub artifact id:
@@ -386,3 +386,65 @@ Human:
 - [ ] physical BLE scenarios P01-P09 accepted on target
 
 MCORE-03 remains blocked until MCORE-02 receives explicit physical human acceptance.
+
+
+## Physical attempt 01 result
+
+P01 was executed on the initial qualification image and **FAILED**: none of the tested
+BLE mice connected.
+
+The failure is recorded separately in:
+
+~~~text
+mouse/core/executions/mcore-02/physical-attempt-01.md
+~~~
+
+The initial UF2 is superseded.
+
+## Corrective discovery candidate
+
+Physical root cause analysis identified an interoperability defect in discovery policy:
+
+- scanning was passive;
+- a peer was discarded unless the HID Service UUID was present in the advertising report.
+
+The corrected backend now:
+
+- uses active scanning so scan-response data is collected;
+- accepts advertised HID Service UUID **or** explicit Mouse/Generic-HID Appearance as a
+  discovery qualification hint;
+- rejects explicit non-mouse HID appearances;
+- still requires successful `hids_client_connect()` before SESSION_READY;
+- keeps all FIRST/SAVED/PAIR_NEW authority semantics unchanged.
+
+A new host test proves an Appearance-only Mouse candidate can enter FIRST qualification.
+
+The architecture guard now requires active scan and the appearance fallback markers.
+
+Corrective behavior build:
+
+~~~text
+mouse-core head:
+dfb3fe9aee33de27edece3d43406d2604f2ab6d5
+
+workflow:
+35695364218
+
+host-debug:
+SUCCESS
+
+host-asan-ubsan:
+SUCCESS
+
+pico2-w-ble-qualification:
+SUCCESS
+
+corrected UF2 SHA-256:
+425cc5dc8da23f9a49e1dc98906d7855a0ab42517c46aed3f46502680ee1de24
+~~~
+
+The current branch head adds only the regression guard after that firmware-producing
+commit; it does not alter target firmware behavior.
+
+Physical acceptance restarts at P01 using the corrected UF2. MCORE-02 remains
+**PHYSICAL ACCEPTANCE PENDING**.
