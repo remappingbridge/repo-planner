@@ -1,19 +1,32 @@
 # UI↔Core Contract v1 planning
 
-Status: **ACTIVE NEXT PROGRAM**.
+Status: **UIC-08 RELEASE CANDIDATE COMPLETE — HUMAN RELEASE ACCEPTANCE PENDING**.
 
-Owner of normative contract artifacts: `remappingbridge/mouse/contracts/ui-core/`.
+Owner of normative contract artifacts: remappingbridge/mouse/contracts/ui-core/.
 
-Product source: frozen `mouse-ui UI Layout 1.0 @ e8adad7919e931c92515bf655ef4050876a8e7a9`.
+## Program result
 
-## Program
+UIC-00 through UIC-07 are accepted.
 
-Start with [`roadmap.md`](roadmap.md), [`status.md`](status.md), and [`gates/`](gates/README.md).
+UIC-08 has staged the content-addressed UI↔Core Contract v1.0.0 package and proved it
+against both component repositories.
 
-UIC-00 is the only gate initially eligible for implementation. UIC-01..08 are blocked by predecessor acceptance.
+Canonical staged package:
 
-Draft contract content lives in `remappingbridge/mouse`; planner evidence and acceptance live here.
+~~~text
+remappingbridge/mouse
+contracts/ui-core/releases/v1.0.0/
+~~~
+
+See roadmap.md, status.md and executions/uic-08/candidate.md.
+
+## Current gate
+
+UIC-08 is awaiting explicit human release acceptance.
+
+MCORE-00 remains blocked until that acceptance and promotion.
 
 ## Non-goal
 
-This program does not implement BLE/USB hardware. UIC-06/07 may implement adapters/conformance harnesses only to prove the boundary; full Core starts in MCORE after UIC-08.
+UIC-08 releases the UI↔Core boundary only. It does not claim complete Bluetooth/USB
+implementation, full product integration or physical hardware acceptance.
