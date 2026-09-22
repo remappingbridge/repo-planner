@@ -32,13 +32,13 @@ UIC-06 ACCEPTED and UIC-07 ACCEPTED.
 
 ## Deliverables
 
-- full product integration claim
-- hardware acceptance claim
-- post-release semantic edits in place
-
-## Forbidden scope
-
 - immutable UI↔Core v1.0.0
 - component compatibility pins
 - UIC-08 evidence
+
+## Forbidden scope
+
+- full product integration claim
+- hardware acceptance claim
+- post-release semantic edits in place
 
