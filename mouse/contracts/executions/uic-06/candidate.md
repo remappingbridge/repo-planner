@@ -1,8 +1,9 @@
 # UIC-06 candidate evidence
 
-Status: **IMPLEMENTED CANDIDATE — HUMAN REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Date: 2026-09-22.
+Human acceptance: **ACCEPTED by user on 2026-09-22**.
 
 ## Gate
 
@@ -368,7 +369,7 @@ Automated/documentary:
 
 Human:
 
-- [ ] review confirms no user-visible UI Layout 1.0 behavior changed
+- [x] review confirms no user-visible UI Layout 1.0 behavior changed
 
 ## Scope control
 
@@ -393,5 +394,4 @@ Not performed:
 - immutable v1 release;
 - UIC-07 work.
 
-UIC-07 remains blocked by the user's one-gate-at-a-time execution rule until UIC-06
-receives human acceptance.
+UIC-06 is accepted. UIC-07 is now the next eligible gate under the one-gate-at-a-time execution rule.
