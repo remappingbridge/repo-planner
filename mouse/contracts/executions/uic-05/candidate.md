@@ -1,8 +1,9 @@
 # UIC-05 candidate evidence
 
-Status: **IMPLEMENTED CANDIDATE — JOINT HUMAN ARCHITECTURE REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Date: 2026-09-22.
+Joint human architecture review: **ACCEPTED by user on 2026-09-22**.
 
 ## Gate
 
@@ -264,7 +265,7 @@ Automated/documentary:
 
 Human:
 
-- [ ] joint architecture review accepts candidate as implementable by both repositories
+- [x] joint architecture review accepts candidate as implementable by both repositories
 
 ## Scope control
 
@@ -296,7 +297,4 @@ earlier UIC gate documents. Execution follows Objective, Tasks, roadmap and acce
 criteria: candidate spec/C binding/fixtures/evidence are required, while release
 publication, full Core implementation and layout changes are excluded.
 
-Although the planner dependency text for UIC-06/UIC-07 mentions a UIC-05 candidate, the
-user's governing execution rule requires one gate at a time and acceptance before
-advancing. Therefore neither UIC-06 nor UIC-07 is started until UIC-05 receives human
-acceptance.
+UIC-05 is accepted. Under the one-gate-at-a-time execution rule, UIC-06 is now the next eligible gate; UIC-07 remains blocked until UIC-06 is accepted.
