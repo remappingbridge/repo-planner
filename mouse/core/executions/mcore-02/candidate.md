@@ -448,3 +448,62 @@ commit; it does not alter target firmware behavior.
 
 Physical acceptance restarts at P01 using the corrected UF2. MCORE-02 remains
 **PHYSICAL ACCEPTANCE PENDING**.
+
+
+## Diagnostic/interoperability candidate after physical attempt 02
+
+Current physical candidate:
+
+~~~text
+mouse-core branch:
+mcore/mcore-02-ble-session-lifecycle
+
+head:
+25293700d13706b9cf97b11d67735acd86362e0f
+
+workflow:
+35696414820
+
+host-debug:
+SUCCESS
+
+host-asan-ubsan:
+SUCCESS
+
+pico2-w-ble-qualification:
+SUCCESS
+
+UF2 SHA-256:
+abdfa30e9e50b097323960874d9da8fc6f17ef3459a221f1f89390522a231ad2
+~~~
+
+Changes relative to the failed physical attempt 02:
+
+- active scanning remains enabled;
+- advertising HID UUID/Mouse Appearance is no longer mandatory;
+- only an explicit non-mouse HID Appearance is rejected at advertisement time;
+- HIDS client establishment is the definitive HOGP proof;
+- BLE bonding remains required;
+- LE Secure Connections is supported but not mandatory;
+- legacy BLE HID pairing is permitted;
+- host test covers a completely hintless candidate reaching HIDS qualification;
+- KEY Y reset produces five fast acknowledgement flashes before reboot;
+- LED diagnostic adds a 50 ms candidate/connection-qualification state.
+
+Diagnostic LED meaning for P01:
+
+~~~text
+~250 ms blink
+  FIRST scan running, no candidate selected yet
+
+~50 ms fast blink
+  BLE peer detected and connection/HIDS qualification is in progress
+
+solid
+  authoritative HOGP-ready Mouse
+
+five fast flashes then reboot
+  KEY Y factory reset recognized and executed
+~~~
+
+Physical P01 must be re-run with this UF2. MCORE-02 remains unaccepted.
