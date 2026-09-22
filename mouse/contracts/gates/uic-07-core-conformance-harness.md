@@ -31,13 +31,13 @@ UIC-05 candidate available.
 
 ## Deliverables
 
-- BTstack/TinyUSB production stack
-- physical acceptance claims
-- copying frontend Product View
-
-## Forbidden scope
-
 - mouse-core conformance harness
 - candidate fixture results
 - UIC-07 evidence
+
+## Forbidden scope
+
+- BTstack/TinyUSB production stack
+- physical acceptance claims
+- copying frontend Product View
 
