@@ -1,6 +1,6 @@
 # MCORE-01 — Registry & Persistence
 
-Status: **BLOCKED**.
+Status: **IMPLEMENTED CANDIDATE — HUMAN PERSISTENCE/RECOVERY ACCEPTANCE PENDING**.
 
 ## Objective
 
@@ -20,10 +20,10 @@ MCORE-00 ACCEPTED.
 
 ## Automated / documentary acceptance
 
-- [ ] power-loss/recovery host fixtures pass
-- [ ] stable identity never aliases another record
-- [ ] capacity/encoding follows released contract
-- [ ] factory reset returns empty safe state
+- [x] power-loss/recovery host fixtures pass
+- [x] stable identity never aliases another record
+- [x] capacity/encoding follows released contract
+- [x] factory reset returns empty safe state
 
 ## Human acceptance
 
