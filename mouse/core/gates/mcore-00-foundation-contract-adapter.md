@@ -1,6 +1,6 @@
 # MCORE-00 — Foundation & Contract Adapter
 
-Status: **IMPLEMENTED CANDIDATE — HUMAN ARCHITECTURE ACCEPTANCE PENDING**.
+Status: **ACCEPTED**.
 
 ## Objective
 
@@ -27,7 +27,7 @@ UIC-08 ACCEPTED.
 
 ## Human acceptance
 
-- [ ] architecture/module-boundary review
+- [x] architecture/module-boundary review
 
 ## Deliverables
 
