@@ -4,7 +4,7 @@ Last updated: 2026-09-22.
 
 | Gate | Status | Reason |
 |---|---|---|
-| UIC-00 | NOT STARTED / ACTIVE NEXT | UI Layout 1.0 is frozen |
+| UIC-00 | IMPLEMENTED CANDIDATE / AWAITING HUMAN ACCEPTANCE | documentary acceptance passed; architecture review pending |
 | UIC-01 | BLOCKED | requires UIC-00 accepted |
 | UIC-02 | BLOCKED | requires UIC-01 accepted |
 | UIC-03 | BLOCKED | requires UIC-02 accepted |
