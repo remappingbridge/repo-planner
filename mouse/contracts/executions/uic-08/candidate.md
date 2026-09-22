@@ -1,8 +1,9 @@
 # UIC-08 release evidence
 
-Status: **IMPLEMENTED RELEASE CANDIDATE — HUMAN RELEASE ACCEPTANCE PENDING**.
+Status: **ACCEPTED — UI↔CORE CONTRACT v1.0.0 RELEASE APPROVED**.
 
 Date: 2026-09-22.
+Human release acceptance: **ACCEPTED by user on 2026-09-22**.
 
 ## Gate
 
@@ -258,15 +259,11 @@ Automated/documentary:
 
 Human:
 
-- [ ] explicit human acceptance of the v1 boundary and release readiness
+- [x] explicit human acceptance of the v1 boundary and release readiness
 
-## Promotion rule
+## Promotion result
 
-Until human acceptance:
+Human release acceptance was granted.
 
-- UIC-08 branches remain the reviewable release candidate;
-- MCORE-00 remains BLOCKED;
-- no hardware/full-product claim is made.
-
-On acceptance, UIC-08 can be promoted to main and a stable release ref can be frozen
-without changing the v1.0.0 package contents.
+UIC-08 is eligible for promotion to main. The immutable v1.0.0 package contents are not
+changed during promotion. MCORE-00 becomes the next eligible gate after promotion.
