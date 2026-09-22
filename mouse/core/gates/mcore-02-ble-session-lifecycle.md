@@ -32,12 +32,12 @@ MCORE-01 ACCEPTED.
 
 ## Deliverables
 
-- USB/remap implementation
-- Bluetooth keyboard/composite product scope
-
-## Forbidden scope
-
 - BLE lifecycle implementation
 - BT evidence
 - MCORE-02 record
+
+## Forbidden scope
+
+- USB/remap implementation
+- Bluetooth keyboard/composite product scope
 
