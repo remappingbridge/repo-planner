@@ -1,8 +1,9 @@
 # UIC-04 candidate evidence
 
-Status: **IMPLEMENTED CANDIDATE — HUMAN REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Date: 2026-09-22.
+Human review: **ACCEPTED by user on 2026-09-22**.
 
 ## Gate
 
@@ -287,7 +288,7 @@ Automated/documentary:
 
 Human:
 
-- [ ] review accepts limits, encoding and error/capability decisions
+- [x] review accepts limits, encoding and error/capability decisions
 
 ## Scope control
 
@@ -317,4 +318,4 @@ present in earlier UIC gate files. Execution follows Objective, Tasks, roadmap a
 acceptance criteria: normative limits/capabilities/errors plus fixtures/evidence, while
 vendor packet errors and screen-specific copy remain excluded.
 
-Until human review accepts this gate, UIC-05 remains blocked.
+UIC-04 is accepted. UIC-05 is now the next eligible gate.
