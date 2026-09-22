@@ -4,8 +4,8 @@ Last updated: 2026-09-22.
 
 | Gate | Status | Reason |
 |---|---|---|
-| UIC-00 | NOT STARTED / ACTIVE NEXT | UI Layout 1.0 is frozen |
-| UIC-01 | BLOCKED | requires UIC-00 accepted |
+| UIC-00 | ACCEPTED | semantic inventory and architecture split accepted |
+| UIC-01 | ACTIVE NEXT | UIC-00 accepted |
 | UIC-02 | BLOCKED | requires UIC-01 accepted |
 | UIC-03 | BLOCKED | requires UIC-02 accepted |
 | UIC-04 | BLOCKED | requires UIC-03 accepted |
