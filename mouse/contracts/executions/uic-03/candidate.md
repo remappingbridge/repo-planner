@@ -1,8 +1,9 @@
 # UIC-03 candidate evidence
 
-Status: **IMPLEMENTED CANDIDATE — HUMAN ARCHITECTURE REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Date: 2026-09-22.
+Human architecture review: **ACCEPTED by user on 2026-09-22**.
 
 ## Gate
 
@@ -187,7 +188,7 @@ Automated/documentary:
 
 Human:
 
-- [ ] architecture review accepts cancellation and ordering semantics
+- [x] architecture review accepts cancellation and ordering semantics
 
 ## Scope control
 
@@ -218,4 +219,4 @@ As with previous UIC gates, the UIC-03 gate document appears to have the content
 roadmap and acceptance criteria, which consistently require the normative async/ordering
 section, race fixtures and evidence while excluding threading/event-loop/hardware proof.
 
-Until human architecture review accepts this gate, UIC-04 remains blocked.
+UIC-03 is accepted. UIC-04 is now the next eligible gate.
