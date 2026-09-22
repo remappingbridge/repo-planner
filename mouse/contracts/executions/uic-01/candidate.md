@@ -1,8 +1,9 @@
 # UIC-01 candidate evidence
 
-Status: **IMPLEMENTED CANDIDATE — HUMAN REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Date: 2026-09-22.
+Human review: **ACCEPTED by user on 2026-09-22**.
 
 ## Gate
 
@@ -160,7 +161,7 @@ Automated/documentary:
 
 Human:
 
-- [ ] review accepts Snapshot as sufficient for all frozen UI screens/flows
+- [x] review accepts Snapshot as sufficient for all frozen UI screens/flows
 
 ## Scope control
 
@@ -194,4 +195,4 @@ Human review should confirm:
 - revision semantics are sufficient without freezing callback/event delivery;
 - Pair New pending handoff correctly leaves the new candidate outside saved records until success.
 
-Until this review is accepted, UIC-02 remains blocked.
+UIC-01 is accepted. UIC-02 is now the next eligible gate.
