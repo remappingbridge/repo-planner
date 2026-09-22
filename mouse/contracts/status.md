@@ -5,7 +5,7 @@ Last updated: 2026-09-22.
 | Gate | Status | Reason |
 |---|---|---|
 | UIC-00 | ACCEPTED | semantic inventory and architecture split accepted |
-| UIC-01 | ACTIVE NEXT | UIC-00 accepted |
+| UIC-01 | IMPLEMENTED CANDIDATE / AWAITING HUMAN ACCEPTANCE | Snapshot model and fixture validation passed |
 | UIC-02 | BLOCKED | requires UIC-01 accepted |
 | UIC-03 | BLOCKED | requires UIC-02 accepted |
 | UIC-04 | BLOCKED | requires UIC-03 accepted |
