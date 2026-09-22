@@ -1,8 +1,9 @@
 # MCORE-01 candidate evidence
 
-Status: **IMPLEMENTED CANDIDATE — HUMAN PERSISTENCE/RECOVERY ACCEPTANCE PENDING**.
+Status: **ACCEPTED**.
 
 Date: 2026-09-22.
+Human persistence/recovery acceptance: **ACCEPTED by user on 2026-09-22**.
 
 ## Gate
 
@@ -347,6 +348,6 @@ Automated/documentary:
 
 Human:
 
-- [ ] review persistence/recovery evidence
+- [x] review persistence/recovery evidence
 
-MCORE-02 remains blocked until MCORE-01 receives explicit human acceptance.
+MCORE-01 is accepted. MCORE-02 is now the next eligible gate.
