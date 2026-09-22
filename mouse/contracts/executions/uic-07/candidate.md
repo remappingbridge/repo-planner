@@ -1,8 +1,9 @@
 # UIC-07 candidate evidence
 
-Status: **IMPLEMENTED CANDIDATE — HUMAN CORE ARCHITECTURE REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Date: 2026-09-22.
+Human Core architecture review: **ACCEPTED by user on 2026-09-22**.
 
 ## Gate
 
@@ -416,7 +417,7 @@ Automated/documentary:
 
 Human:
 
-- [ ] Core architecture review confirms candidate boundary is implementable without transport leakage
+- [x] Core architecture review confirms candidate boundary is implementable without transport leakage
 
 ## Scope control
 
@@ -442,4 +443,4 @@ Not performed:
 - immutable v1 release;
 - UIC-08 work.
 
-UIC-08 remains blocked until UIC-07 receives human acceptance.
+UIC-07 is accepted. UIC-08 is now the next eligible gate.
