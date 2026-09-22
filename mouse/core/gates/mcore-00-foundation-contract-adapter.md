@@ -1,6 +1,6 @@
 # MCORE-00 — Foundation & Contract Adapter
 
-Status: **BLOCKED**.
+Status: **IMPLEMENTED CANDIDATE — HUMAN ARCHITECTURE ACCEPTANCE PENDING**.
 
 ## Objective
 
@@ -20,10 +20,10 @@ UIC-08 ACCEPTED.
 
 ## Automated / documentary acceptance
 
-- [ ] build/tests green
-- [ ] released v1 vectors pass
-- [ ] no dependency on mouse-ui headers
-- [ ] platform seams have no product UI concepts
+- [x] build/tests green
+- [x] released v1 vectors pass
+- [x] no dependency on mouse-ui headers
+- [x] platform seams have no product UI concepts
 
 ## Human acceptance
 
