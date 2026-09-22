@@ -2,17 +2,37 @@
 
 This directory separates planning/execution history for the three implementation responsibilities and their shared boundary.
 
-| Path | Responsibility | Repository |
-|---|---|---|
-| `ui/` | frontend/UX exploration and verification | `remappingbridge/mouse-ui` |
-| `core/` | backend/Core work | `remappingbridge/mouse-core` |
-| `contracts/` | UI↔Core contract proposals/promotion work | `remappingbridge/mouse/contracts` |
-| `integration/` | final product composition/release work | `remappingbridge/mouse` |
+| Path | Responsibility | Repository | Program status |
+|---|---|---|---|
+| `ui/` | frontend/UX | `remappingbridge/mouse-ui` | UI Layout 1.0 FROZEN |
+| `contracts/` | UI↔Core neutral contract | `remappingbridge/mouse/contracts` | **UIC-00 ACTIVE NEXT** |
+| `core/` | backend/Core | `remappingbridge/mouse-core` | planned / BLOCKED by UIC-08 |
+| `integration/` | final composition/release | `remappingbridge/mouse` | planned / BLOCKED by MCORE-08 |
 
-## Current state
+## Current product baseline
 
-The UI reconstruction program **MUI-00 through MUI-08 is complete and ACCEPTED**. The accepted C11/SDL2 frontend baseline is `remappingbridge/mouse-ui@537b0f6fdd188b283cf10648b1cc6dbdacbfe20d`, preserved by `baseline/mui-08-accepted`.
+~~~text
+mouse-ui application: 1.0.0
+UI Layout: 1.0 FROZEN
+main: e8adad7919e931c92515bf655ef4050876a8e7a9
+stable ref: release/ui-layout-v1.0
+~~~
 
-`mouse/core/` and `mouse/integration/` remain idle. The next recommended product phase is UI↔Core contract promotion planning under `mouse/contracts/`, using the accepted MUI-08 semantics as input rather than frontend-private C types.
+The earlier MUI-00..08 reconstruction program remains accepted historical execution evidence. The product-level layout freeze supersedes the older MUI-08 commit as the contract-analysis source.
 
-Legacy Mouse Bridge Remapper planning remains under the existing `mouse-bridge-remapper/` tree. It is historical source material and is not automatically active planning for the new split repositories.
+## Next execution order
+
+~~~text
+UI Layout 1.0 frozen
+        |
+        v
+UIC-00..08  UI↔Core Contract v1
+        |
+        v
+MCORE-00..08  real Core/backend
+        |
+        v
+MINT-00..06  final embedded integration/release
+~~~
+
+Only a gate whose dependencies are accepted may become an implementation candidate. Frontend simulation never counts as physical/Core acceptance.

@@ -1,7 +1,9 @@
-# Core planning namespace
+# mouse-core planning program
 
-Reserved planning home for `remappingbridge/mouse-core`.
+Status: **PLANNED / BLOCKED UNTIL UIC-08**.
 
-No backend plan, gate sequence, milestone, or task list is created yet. The repository remains intentionally idle until the first UI↔Core contract is deliberately promoted from the accepted frontend semantics.
+Technical source: `remappingbridge/mouse-core/docs/`. Neutral contract source: `remappingbridge/mouse/contracts/ui-core/`.
 
-When Core work starts, process records live here; technical Core documentation belongs in `remappingbridge/mouse-core` itself.
+Start with [`roadmap.md`](roadmap.md) and [`gates/`](gates/README.md).
+
+These gates are written now to preserve sequencing, but MCORE-00 must not start before UI↔Core v1.0.0 is released.

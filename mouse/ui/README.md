@@ -1,28 +1,30 @@
 # UI planning namespace
 
-Planning home for `remappingbridge/mouse-ui`.
+Planning/execution history for `remappingbridge/mouse-ui`.
 
-## Active program
+## Frozen product baseline
 
-The first implementation program is **MUI-00 through MUI-08**: reconstruct the MBR-08-derived frontend baseline as a clean C11 application with an SDL2 Debian desktop laboratory and no real backend dependency.
+UI Layout 1.0 is frozen and promoted:
 
-Start with [`roadmap.md`](roadmap.md) and [`status.md`](status.md). Individual gate specifications live under [`gates/`](gates/).
+~~~text
+main @ e8adad7919e931c92515bf655ef4050876a8e7a9
+release/ui-layout-v1.0 @ same commit
+application version 1.0.0
+~~~
 
-## Process ownership
+Business rules: `mouse-ui/docs/product/ui-layout-v1.0.md`.
+Architecture: `mouse-ui/docs/architecture/ui-layout-v1.0.md`.
+Planner release record: [`releases/ui-layout-v1.0.md`](releases/ui-layout-v1.0.md).
 
-- canonical technical/UX rules: `remappingbridge/mouse-ui/docs/`;
-- gates/tasks/execution evidence: this planner directory;
-- shared UI↔Core contract drafts/releases: `remappingbridge/mouse/contracts/ui-core/`;
-- backend work: `repo-planner/mouse/core/` (still idle).
+## Historical program
 
-## Branch model after baseline reconstruction
+MUI-00 through MUI-08 reconstructed and validated the initial C11/SDL2 frontend. Those gates are complete and remain under `gates/` and `executions/` for traceability.
 
-- `lab/*` — disposable UX experiments;
-- `candidate/*` — clean implementation of accepted UX;
-- `rebuild/*` — clean replacement when an implementation area becomes unhealthy.
+## Post-1.0 branch model
 
-`main` is expected to remain runnable, documented, and green.
+- `lab/*` — disposable/version exploration;
+- `candidate/*` — clean implementation of an accepted next-layout candidate;
+- `rebuild/*` — replacement of unhealthy internals while preserving frozen behavior;
+- `release/*` — named immutable product-layout baseline references.
 
-## Historical baseline
-
-`history/mbr08-integrated-candidate-evidence.md` preserves predecessor MBR-08 integrated evidence. It is provenance, not an active gate.
+Ordinary contract/Core work must not modify the frozen layout merely to simplify backend implementation. A true UX change requires explicit layout versioning.

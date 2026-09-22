@@ -42,3 +42,17 @@ baseline/mui-08-accepted @ same commit
 ~~~
 
 There is no planned MUI-09 reconstruction gate. Post-baseline UX work uses `lab/*`, `candidate/*`, and `rebuild/*` branches from the accepted baseline.
+
+## UI Layout 1.0 product freeze — 2026-09-22
+
+The final post-MUI UX corrections were merged via PR #2, then business/architecture documentation and version metadata were frozen on main.
+
+~~~text
+behavior merge: 65c2040f71dd68bd054fc9c3aa24d47d53e58ead
+final freeze:   e8adad7919e931c92515bf655ef4050876a8e7a9
+stable ref:     release/ui-layout-v1.0
+CI:             35682121924
+result:         13/13 PASS in Debug and ASan/UBSan
+~~~
+
+This closes UI layout work for version 1.0. The next product program is UIC under `mouse/contracts/`.

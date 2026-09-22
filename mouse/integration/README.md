@@ -1,5 +1,7 @@
-# Integration planning namespace
+# Final integration planning
 
-Reserved planning home for final composition in `remappingbridge/mouse`.
+Status: **PLANNED / BLOCKED UNTIL MCORE-08**.
 
-No integration milestone/release plan is created yet. This namespace will later track composition of compatible `mouse-ui`, `mouse-core`, and released shared-contract revisions into the public product.
+This program composes frozen/versioned `mouse-ui`, released UI↔Core contract, and accepted `mouse-core` into the public embedded product.
+
+Start with [`roadmap.md`](roadmap.md). No MINT gate may start before its dependencies are accepted.

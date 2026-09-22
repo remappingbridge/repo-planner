@@ -1,9 +1,19 @@
-# Contract planning namespace
+# UI↔Core Contract v1 planning
 
-Reserved process/evidence home for the shared UI↔Core contracts owned by `remappingbridge/mouse/contracts/`.
+Status: **ACTIVE NEXT PROGRAM**.
 
-The frontend reconstruction is now complete at accepted MUI-08 baseline `remappingbridge/mouse-ui@537b0f6fdd188b283cf10648b1cc6dbdacbfe20d`.
+Owner of normative contract artifacts: `remappingbridge/mouse/contracts/ui-core/`.
 
-The **next recommended product phase** is to define a UI↔Core contract promotion program here. Contract drafts/releases themselves belong in `remappingbridge/mouse/contracts/`; this planner namespace should hold proposal reviews, compatibility investigations, promotion evidence, and release-readiness gates.
+Product source: frozen `mouse-ui UI Layout 1.0 @ e8adad7919e931c92515bf655ef4050876a8e7a9`.
 
-No contract version is released merely because MUI-08 is accepted.
+## Program
+
+Start with [`roadmap.md`](roadmap.md), [`status.md`](status.md), and [`gates/`](gates/README.md).
+
+UIC-00 is the only gate initially eligible for implementation. UIC-01..08 are blocked by predecessor acceptance.
+
+Draft contract content lives in `remappingbridge/mouse`; planner evidence and acceptance live here.
+
+## Non-goal
+
+This program does not implement BLE/USB hardware. UIC-06/07 may implement adapters/conformance harnesses only to prove the boundary; full Core starts in MCORE after UIC-08.
