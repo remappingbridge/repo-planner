@@ -507,3 +507,25 @@ five fast flashes then reboot
 ~~~
 
 Physical P01 must be re-run with this UF2. MCORE-02 remains unaccepted.
+
+## G06 accepted-reference correction
+
+After physical attempts 01 and 02 failed, the physically working remappingbridge/blu2usb G06 implementation was used as the target BLE reference.
+
+Detailed comparison and corrective evidence:
+
+~~~text
+mouse/core/executions/mcore-02/g06-reference-correction.md
+~~~
+
+Current P01 candidate:
+
+~~~text
+mouse-core head: 2c768e7b6c202c93b60c9c944f5aaa985a648766
+workflow: 35697933226 — SUCCESS
+UF2 SHA-256: 6acaa2d4e48837ffee55b5f1eef7fd74604c8a769e3dae1d67ea3b892f4f39c1
+~~~
+
+The principal correction is that GAP commands requested by portable Core are now executed inside the BTstack run-loop context via btstack_run_loop_execute_on_main_thread(), matching the accepted G06 execution model.
+
+P01 must pass before any later physical MCORE-02 scenario is resumed.
