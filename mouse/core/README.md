@@ -1,6 +1,6 @@
 # mouse-core planning program
 
-Status: **MCORE-01 IMPLEMENTED CANDIDATE — HUMAN PERSISTENCE/RECOVERY ACCEPTANCE PENDING**.
+Status: **MCORE-02 IMPLEMENTED CANDIDATE — PHYSICAL BLE ACCEPTANCE PENDING**.
 
 Technical source: `remappingbridge/mouse-core/docs/`.
 
@@ -12,25 +12,32 @@ UI↔Core Contract v1.0.0
 release/ui-core-v1.0.0
 ~~~
 
-Accepted foundation:
+Accepted predecessors:
 
 ~~~text
 MCORE-00 — ACCEPTED
+MCORE-01 — ACCEPTED
 ~~~
 
 Current candidate:
 
 ~~~text
-MCORE-01 — Registry & Persistence
+MCORE-02 — BLE Session Lifecycle
 mouse-core branch:
-mcore/mcore-01-registry-persistence
+mcore/mcore-02-ble-session-lifecycle
+
+candidate head:
+1a0970cdeff24bb279d5ef3bc0b787a9a1845ae7
+
+CI:
+35694144945 — SUCCESS
 ~~~
 
 Start with `roadmap.md`, `status.md`, `gates/` and
-`executions/mcore-01/candidate.md`.
+`executions/mcore-02/candidate.md`.
 
-MCORE-01 adds durable stable IDs, names, confirmed profiles, global Custom, versioned CRC
-journal recovery and factory reset.
+The qualification firmware and P01-P09 procedure are documented in
+`remappingbridge/mouse-core/docs/qualification/mcore-02-physical.md`.
 
-MCORE-02 remains blocked until explicit MCORE-01 human acceptance. MCORE-02 is the first
-MCORE gate with mandatory physical BLE scenarios.
+MCORE-03 remains blocked until the required MCORE-02 physical BLE scenarios are explicitly
+accepted.
