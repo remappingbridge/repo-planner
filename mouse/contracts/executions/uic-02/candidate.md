@@ -1,8 +1,9 @@
 # UIC-02 candidate evidence
 
-Status: **IMPLEMENTED CANDIDATE — HUMAN REVIEW PENDING**.
+Status: **ACCEPTED**.
 
 Date: 2026-09-22.
+Human review: **ACCEPTED by user on 2026-09-22**.
 
 ## Gate
 
@@ -176,7 +177,7 @@ Automated/documentary:
 
 Human:
 
-- [ ] review accepts command vocabulary and Custom ownership decision
+- [x] review accepts command vocabulary and Custom ownership decision
 
 ## Scope control
 
@@ -201,4 +202,4 @@ Not performed:
 
 The UIC-02 gate document again appears to have the contents of **Deliverables** and **Forbidden scope** inverted. Execution follows the Objective, Tasks, roadmap and acceptance criteria, which consistently require the normative Intent model, fixtures/examples and evidence.
 
-Until human review accepts this gate, UIC-03 remains blocked.
+UIC-02 is accepted. UIC-03 is now the next eligible gate.
