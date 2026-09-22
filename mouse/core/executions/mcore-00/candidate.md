@@ -1,8 +1,9 @@
 # MCORE-00 candidate evidence
 
-Status: **IMPLEMENTED CANDIDATE — HUMAN ARCHITECTURE ACCEPTANCE PENDING**.
+Status: **ACCEPTED**.
 
 Date: 2026-09-22.
+Human architecture acceptance: **ACCEPTED by user on 2026-09-22**.
 
 ## Gate
 
@@ -354,6 +355,6 @@ Automated/documentary:
 
 Human:
 
-- [ ] architecture/module-boundary review
+- [x] architecture/module-boundary review
 
-MCORE-01 remains blocked until MCORE-00 receives explicit human acceptance.
+MCORE-00 is accepted. MCORE-01 is now the next eligible gate.
