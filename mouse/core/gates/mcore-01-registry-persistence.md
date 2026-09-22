@@ -1,6 +1,6 @@
 # MCORE-01 — Registry & Persistence
 
-Status: **BLOCKED**.
+Status: **ACCEPTED**.
 
 ## Objective
 
@@ -20,22 +20,22 @@ MCORE-00 ACCEPTED.
 
 ## Automated / documentary acceptance
 
-- [ ] power-loss/recovery host fixtures pass
-- [ ] stable identity never aliases another record
-- [ ] capacity/encoding follows released contract
-- [ ] factory reset returns empty safe state
+- [x] power-loss/recovery host fixtures pass
+- [x] stable identity never aliases another record
+- [x] capacity/encoding follows released contract
+- [x] factory reset returns empty safe state
 
 ## Human acceptance
 
-- [ ] review persistence/recovery evidence
+- [x] review persistence/recovery evidence
 
 ## Deliverables
 
-- BLE pairing implementation
-- UI ordering as storage identity
+- registry module
+- persistence tests/evidence
 
 ## Forbidden scope
 
-- registry module
-- persistence tests/evidence
+- BLE pairing implementation
+- UI ordering as storage identity
 
