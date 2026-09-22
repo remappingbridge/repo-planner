@@ -12,4 +12,4 @@ Last updated: 2026-09-22.
 | UIC-05 | ACCEPTED | v1 candidate, C binding, full traceability, CI and joint architecture review accepted |
 | UIC-06 | ACCEPTED | mouse-ui adapter, baseline/conformance, sanitized CI and human review accepted |
 | UIC-07 | ACCEPTED | Core semantic provider, shared vectors, invariants, sanitized CI and human architecture review accepted |
-| UIC-08 | ACTIVE NEXT | UIC-06 and UIC-07 accepted |
+| UIC-08 | IMPLEMENTED RELEASE CANDIDATE / AWAITING HUMAN ACCEPTANCE | v1.0.0 package, content hashes, compatibility declarations and both-side release CI are green |
