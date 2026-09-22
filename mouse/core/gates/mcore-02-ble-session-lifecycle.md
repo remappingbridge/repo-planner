@@ -1,6 +1,6 @@
 # MCORE-02 — BLE Session Lifecycle
 
-Status: **BLOCKED**.
+Status: **IMPLEMENTED CANDIDATE — PHYSICAL BLE ACCEPTANCE PENDING**.
 
 ## Objective
 
@@ -21,10 +21,10 @@ MCORE-01 ACCEPTED.
 
 ## Automated / documentary acceptance
 
-- [ ] host/state tests plus target build green
-- [ ] saved candidate rejected by Pair New
-- [ ] no two authoritative sessions
-- [ ] cancel/timeout leaves valid current session
+- [x] host/state tests plus target build green
+- [x] saved candidate rejected by Pair New
+- [x] no two authoritative sessions
+- [x] cancel/timeout leaves valid current session
 
 ## Human acceptance
 
