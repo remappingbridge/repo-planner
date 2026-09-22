@@ -31,13 +31,13 @@ UIC-08 ACCEPTED.
 
 ## Deliverables
 
-- real BLE/USB implementation
-- changing released contract locally
-- screen/navigation logic
-
-## Forbidden scope
-
 - Core foundation
 - contract adapter
 - MCORE-00 evidence
+
+## Forbidden scope
+
+- real BLE/USB implementation
+- changing released contract locally
+- screen/navigation logic
 
