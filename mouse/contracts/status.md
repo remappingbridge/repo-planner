@@ -9,7 +9,7 @@ Last updated: 2026-09-22.
 | UIC-02 | ACCEPTED | Intent model, Custom ownership and human review accepted |
 | UIC-03 | ACCEPTED | async cancellation, correlation, ordering and human architecture review accepted |
 | UIC-04 | ACCEPTED | capabilities, limits, encoding and error/capability decisions accepted |
-| UIC-05 | ACTIVE NEXT | UIC-04 accepted |
-| UIC-06 | BLOCKED | requires UIC-05 candidate |
-| UIC-07 | BLOCKED | requires UIC-05 candidate |
+| UIC-05 | IMPLEMENTED CANDIDATE / AWAITING HUMAN ACCEPTANCE | v1 candidate, C binding, full traceability and CI validation passed |
+| UIC-06 | BLOCKED | execution rule requires UIC-05 human acceptance before advancing |
+| UIC-07 | BLOCKED | execution rule requires UIC-05 human acceptance before advancing |
 | UIC-08 | BLOCKED | requires UIC-06 and UIC-07 accepted |
