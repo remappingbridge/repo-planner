@@ -174,7 +174,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-28 — help-home-connected
 
-**Status:** IN PROGRESS.
+**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** implementar `help-home-connected` conforme Mouse UI v1.
 
