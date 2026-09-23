@@ -28,6 +28,18 @@ Não importar silenciosamente requisitos de UIC/MCORE/MINT, contratos UI↔Core 
 
 O projeto começa com a carcaça funcional de BLU2USB G06.
 
+### Regra obrigatória: adaptar = substituir a tela
+
+Quando um gate disser **adaptar**, **reaproveitar**, **preservar a função** ou **usar a tela antiga como base**, isso significa:
+
+- reutilizar internamente a lógica, fluxo, pareamento, estado, renderer ou funções G06 que forem úteis;
+- **substituir visualmente a tela antiga pela tela Mouse UI v1 do gate**;
+- a tela/layout legado correspondente **não pode continuar como alternativa, fallback, cópia paralela ou rota concorrente**;
+- não criar um novo screen-id apenas para manter o antigo intacto ao lado do novo quando ambos representam o mesmo ponto do fluxo;
+- depois do gate, toda entrada que antes chegava à tela antiga substituída deve chegar ao novo layout do gate, salvo uma exceção explicitamente documentada pelo próprio gate.
+
+Telas de outros pontos do fluxo que ainda não chegaram ao seu gate podem continuar antigas. A tela especificamente substituída pelo gate atual, não.
+
 Cada gate posterior pode:
 
 - substituir/adaptar a tela indicada;
