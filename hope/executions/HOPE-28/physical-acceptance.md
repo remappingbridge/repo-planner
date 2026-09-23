@@ -1,6 +1,6 @@
 # HOPE-28 — physical acceptance
 
-Status: **PENDING OPERATOR TEST**.
+Status: **ACCEPTED — OPERATOR PHYSICAL PASS**.
 
 Candidate:
 
@@ -46,9 +46,11 @@ ANY KEY: BACK
 
 ## Operator result
 
-Operator declaration: **PENDING**.
+Operator declaration: **PASS / GATE ACCEPTED**.
 
-Do not merge PR #13 and do not mark HOPE-28 ACCEPTED until the operator explicitly reports PASS for this exact candidate.
+Declaration received from the operator on 2026-09-23: `gate aceito`.
+
+Replacement candidate `8dacad0a34a78ec89e74454f1b6d09d71eae01ae` with current Mouse UI v1 copy is the physically accepted HOPE-28 implementation.
 
 
 ## Copy-correction supersession
