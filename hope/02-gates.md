@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **PREPARED / NO GATE STARTED**.
+Status geral: **IN PROGRESS — HOPE-00 ACCEPTED; HOPE-01 ACTIVE**.
 
 ## Ordem oficial de execução
 
@@ -60,7 +60,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-00 — exact G06 baseline
 
-**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `16b9a3a2f164f08e3a9c25fc39a4767b04f48f39`.
 
 **Objetivo:** copiar exatamente BLU2USB G06 aceito para `remappingbridge/remappingbridge` sem quebrar nada.
 
@@ -73,6 +73,8 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 ---
 
 ## HOPE-01 — searching-first
+
+**Status:** IN PROGRESS.
 
 **Objetivo:** implementar `searching-first` como primeira tela quando não existe Mouse salvo.
 
