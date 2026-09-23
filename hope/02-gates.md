@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **IN PROGRESS — HOPE-00/01/02/08/24/09/25/06/26/07/27 ACCEPTED; HOPE-03 ACTIVE**.
+Status geral: **IN PROGRESS — HOPE-00/01/02/08/24/09/25/06/26/07/27/03 ACCEPTED; HOPE-28 ACTIVE**.
 
 ## Ordem oficial de execução
 
@@ -164,7 +164,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-03 — home-connected
 
-**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `95b8e6fab1710f562b7ce1ead629a9cca2734c17`.
 
 **Objetivo:** implementar `home-connected` como estado da HOME.
 
@@ -173,6 +173,8 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 ---
 
 ## HOPE-28 — help-home-connected
+
+**Status:** IN PROGRESS.
 
 **Objetivo:** implementar `help-home-connected` conforme Mouse UI v1.
 
