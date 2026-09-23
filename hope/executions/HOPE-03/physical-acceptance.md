@@ -49,3 +49,10 @@ Operator declaration: **PASS / GATE ACCEPTED**.
 Declaration received from the operator on 2026-09-23: `gate aceito`.
 
 Candidate `e5ba33b2c5a6b027e0277dfd05e610a8fe569efb` is the physically accepted HOPE-03 implementation, including the bundled `MOUSE NOT FOUND HELP` title improvement.
+
+
+## Promotion
+
+- PR #12 candidate physically accepted and promoted.
+- accepted main SHA: `95b8e6fab1710f562b7ce1ead629a9cca2734c17`
+- next eligible gate: **HOPE-28 — help-home-connected**.
