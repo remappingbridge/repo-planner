@@ -164,7 +164,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-03 — home-connected
 
-**Status:** IN PROGRESS.
+**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** implementar `home-connected` como estado da HOME.
 
