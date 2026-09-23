@@ -128,7 +128,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-06 — pair-new
 
-**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** REWORK — FIRST PHYSICAL CANDIDATE FAILED; BTSTACK DUAL-SESSION CAPACITY FIX IN PROGRESS.
 
 **Objetivo:** implementar `pair-new` conforme Mouse UI v1.
 
