@@ -70,3 +70,10 @@ Use only:
 - SHA-256: `6f11f76d05249f6989106a5f8346dffea76873b0ddb32cff2776296c0dc8a807`
 
 The previous HOPE-28 UF2 is superseded and must not be accepted physically.
+
+
+## Promotion
+
+- final current-v1 PR #13 candidate physically accepted and promoted.
+- accepted main SHA: `46e501f13784d3ef94e3d4213596b25afa731347`
+- next eligible gate: **HOPE-10 — remapper-options**.
