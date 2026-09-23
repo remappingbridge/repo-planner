@@ -156,7 +156,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-27 — help-retry-pair-new
 
-**Status:** IN PROGRESS.
+**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** implementar `help-retry-pair-new` conforme Mouse UI v1.
 
