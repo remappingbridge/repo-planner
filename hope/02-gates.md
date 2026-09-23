@@ -120,7 +120,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-25 — home-retry-help
 
-**Status:** IN PROGRESS.
+**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** implementar `home-retry-help` conforme Mouse UI v1.
 
