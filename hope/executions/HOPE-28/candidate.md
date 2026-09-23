@@ -9,7 +9,7 @@ Date: 2026-09-23.
 - repository: `remappingbridge/remappingbridge`
 - accepted base: `main@95b8e6fab1710f562b7ce1ead629a9cca2734c17`
 - branch: `hope/hope-28-help-home-connected`
-- candidate commit: **SUPERSEDED — replacement CI pending**
+- candidate commit: `8dacad0a34a78ec89e74454f1b6d09d71eae01ae`
 - draft PR: `#13`
 - PR remains unmerged until operator physical acceptance.
 
@@ -70,7 +70,7 @@ No BLE, remap, profile, storage, USB HID or pairing implementation file changed.
 
 ## Automated verification
 
-Canonical Previous GitHub Actions run: `35832178259` — **SUPERSEDED by copy correction**.
+Canonical Canonical GitHub Actions run: `35832917577` — **SUCCESS**.
 
 ### host-architecture — SUCCESS
 
@@ -101,16 +101,16 @@ The first CI attempt `35832105183` compiled successfully and had 30/31 runtime t
 
 GitHub Actions artifact:
 
-- artifact id: `10738046721`
+- artifact id: `10737842468`
 - name: `blu2usb-picow-production-pico2w`
-- ZIP size: **330,388 bytes**
-- ZIP digest: `sha256:ed81c1776c6eb77dd10891c503fca038f9c7d71410ca1fc4f813eb364565c19a`
+- ZIP size: **330,407 bytes**
+- ZIP digest: `sha256:d1b15989d58cffadfae5209324ac9f698d7eb1af5ca5c49aae7d6971adfb98c4`
 
 Extracted firmware:
 
-- file: `HOPE-28-help-home-connected-pico2w.uf2`
+- file: `HOPE-28-help-home-connected-current-v1-copy-pico2w.uf2`
 - size: **896,512 bytes**
-- SHA-256: `1d8a5799ca8bf0690a1e48c42e5674b7f5435b122010b8231646fef6e6ccb9e7`
+- SHA-256: `6f11f76d05249f6989106a5f8346dffea76873b0ddb32cff2776296c0dc8a807`
 
 ## Gate state
 
@@ -121,4 +121,30 @@ HOPE-28 is **not ACCEPTED** until the operator validates this exact candidate on
 
 The first candidate used stale documentation copy. Current Mouse UI v1 executable source at `src/projector/screens.c@5f269e9625ae0d02a85b5d39eb87026edc448068` defines `help-home-connected` with the updated `REMOVE CONNECTED HELP` / numbered-step text.
 
-The previous candidate `aa7c5ce7080793b83490aaf275d8cee7fb6878e6` and UF2 hash `1d8a5799...` are invalidated for physical acceptance.
+The previous candidate `aa7c5ce7080793b83490aaf275d8cee7fb6878e6` and UF2 hash `1d8a5799...` remain invalidated. The replacement candidate above is the only physical-acceptance target.
+
+
+## Final current-v1 source synchronization
+
+The replacement candidate was validated against the executable Mouse UI v1 catalog, not the stale prose spec:
+
+- `remappingbridge/mouse-ui`
+- `src/projector/screens.c`
+- ref `5f269e9625ae0d02a85b5d39eb87026edc448068`
+- `MUI_SCREEN_HELP_HOME_CONNECTED`
+
+Final literal:
+
+~~~text
+REMOVE CONNECTED HELP
+TO DISCONNECT THE
+CURRENTLY CONNECTED
+MOUSE NAVIGATE TO:
+STEP 1. SAVED DEVICES
+STEP 2. REMOVE DEVICE
+STEP 3. KEY A: REMOVE
+
+ANY KEY: BACK
+~~~
+
+The final CI run `35832917577` passed host/architecture and Pico 2 W.
