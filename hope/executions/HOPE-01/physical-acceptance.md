@@ -1,6 +1,6 @@
 # HOPE-01 — physical acceptance
 
-Status: **CORRECTED CANDIDATE / PENDING OPERATOR RETEST**.
+Status: **ACCEPTED — OPERATOR PHYSICAL PASS**.
 
 ## Invalidated candidate
 
@@ -40,6 +40,8 @@ Status: **CORRECTED CANDIDATE / PENDING OPERATOR RETEST**.
 
 ## Operator result
 
-Operator declaration for corrected candidate: **PENDING**.
+Operator declaration for corrected candidate: **PASS / GATE ACCEPTED**.
 
-Do not merge PR #2 and do not mark HOPE-01 ACCEPTED until the operator explicitly reports PASS for this corrected candidate.
+Declaration received from the operator on 2026-09-23: `gate aceito`.
+
+The corrected candidate `5c686c57efd794c08b4212736709b4825d22aa21` is the physically accepted HOPE-01 implementation.
