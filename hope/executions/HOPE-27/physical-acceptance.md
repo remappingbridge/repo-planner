@@ -1,6 +1,6 @@
 # HOPE-27 — physical acceptance
 
-Status: **PENDING OPERATOR TEST**.
+Status: **ACCEPTED — OPERATOR PHYSICAL PASS**.
 
 Candidate:
 
@@ -31,6 +31,10 @@ Candidate:
 
 ## Operator result
 
-Operator declaration: **PENDING**.
+Operator declaration: **PASS / GATE ACCEPTED**.
 
-Do not merge PR #11 and do not mark HOPE-27 ACCEPTED until the operator explicitly reports PASS.
+Declaration received from the operator on 2026-09-23: `gate aceito`.
+
+Candidate `96fff0d5c304166883419c11693e3dba4e10b556` is the physically accepted HOPE-27 implementation.
+
+A cosmetic title improvement from `DEVICE NOT FOUND HELP` to `MOUSE NOT FOUND HELP` was requested after acceptance. Per operator instruction, that improvement is intentionally carried into the next gate rather than reopening HOPE-27.
