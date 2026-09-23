@@ -17,7 +17,8 @@ Todo candidato físico precisa validar, no hardware-alvo:
 9. scroll/Forward/Backward, quando suportados pela baseline e dispositivo de teste, não regrediram;
 10. não há Bluetooth Keyboard/Composite novo;
 11. telas HOPE já aceitas continuam alcançáveis e coerentes;
-12. não existe nova tela escondida ou fluxo não documentado criado pelo gate.
+12. não existe nova tela escondida ou fluxo não documentado criado pelo gate;
+13. a tela/layout legado substituído pelo gate não aparece em nenhuma condição, fallback ou rota equivalente ao ponto substituído.
 
 ## Teste específico do gate
 
