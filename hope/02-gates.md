@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **IN PROGRESS — HOPE-00/01 ACCEPTED; HOPE-02 ACTIVE**.
+Status geral: **IN PROGRESS — HOPE-00/01/02 ACCEPTED; HOPE-08 ACTIVE**.
 
 ## Ordem oficial de execução
 
@@ -88,13 +88,15 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-02 — first-mouse-connected
 
-**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `d13f905fc2a817f464f3683edd4bf689247c30ed`.
 
 **Objetivo:** implementar `first-mouse-connected` como feedback de sucesso de `searching-first`.
 
 ---
 
 ## HOPE-08 — home-searching
+
+**Status:** IN PROGRESS.
 
 **Objetivo:** implementar `home-searching` como estado da HOME e integrá-la ao fluxo já aceito.
 
