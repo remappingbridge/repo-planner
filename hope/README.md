@@ -45,7 +45,7 @@ A integração deve ser a menor adaptação necessária entre funções que já 
 - HOPE-03: **ACCEPTED — home-connected + `MOUSE NOT FOUND HELP`, physically passed and promoted to main**;
 - HOPE-28: **ACCEPTED — current-v1 copy physically passed and promoted to main**;
 - REMAPPER OPTIONS flow — HOPE-10/29/11/14/12/13/15/16/17/18/19/20/21/22: **BUNDLED CANDIDATE READY — 35/35 host tests + Pico 2 W CI green; physical acceptance pending**;
-- gates aceitos: **HOPE-00, HOPE-01, HOPE-02, HOPE-08, HOPE-24, HOPE-09, HOPE-25, HOPE-06, HOPE-26, HOPE-07, HOPE-27, HOPE-03**.
+- gates aceitos: **HOPE-00, HOPE-01, HOPE-02, HOPE-08, HOPE-24, HOPE-09, HOPE-25, HOPE-06, HOPE-26, HOPE-07, HOPE-27, HOPE-03, HOPE-28**.
 
 Leia na ordem:
 
