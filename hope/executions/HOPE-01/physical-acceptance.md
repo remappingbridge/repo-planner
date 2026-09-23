@@ -1,6 +1,6 @@
 # HOPE-01 — physical acceptance
 
-Status: **PENDING OPERATOR TEST**.
+Status: **FAILED — CANDIDATE INVALIDATED / CORRECTION IN PROGRESS**.
 
 Candidate:
 
@@ -29,6 +29,13 @@ Candidate:
 
 ## Operator result
 
-Operator declaration: **PENDING**.
+Operator declaration: **FAIL**.
 
-Do not merge PR #2 and do not mark HOPE-01 ACCEPTED until the operator explicitly reports PASS.
+Failure reported by the operator on 2026-09-23:
+
+- the old screen was still presented as a fallback instead of the new Mouse UI v1 screen replacing it;
+- “reuse/adapt” must mean reuse of internal behavior/structure only, never preservation of the legacy visual screen at the replaced position.
+
+The candidate commit `987afd16e951160860c77bd9f304dca586c339d0` and its UF2 are **INVALIDATED**.
+
+PR #2 remains open/draft. HOPE-01 stays active and must produce a corrected candidate before a new physical acceptance attempt.
