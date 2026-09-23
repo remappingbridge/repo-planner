@@ -5,11 +5,11 @@ Status: **PENDING OPERATOR TEST**.
 Candidate:
 
 - branch: `hope/hope-28-help-home-connected`
-- commit: `aa7c5ce7080793b83490aaf275d8cee7fb6878e6`
+- commit: **SUPERSEDED — replacement CI pending**
 - draft PR: `#13`
-- UF2: `HOPE-28-help-home-connected-pico2w.uf2`
+- UF2: **SUPERSEDED — replacement pending**
 - size: **896,512 bytes**
-- SHA-256: `1d8a5799ca8bf0690a1e48c42e5674b7f5435b122010b8231646fef6e6ccb9e7`
+- SHA-256: **SUPERSEDED**
 
 ## Required physical scenarios
 
@@ -19,13 +19,13 @@ Candidate:
 4. Exact Help must appear:
 
 ~~~text
-HOME CONNECTED HELP
+REMOVE CONNECTED HELP
 TO DISCONNECT THE
 CURRENTLY CONNECTED
-MOUSE, NAVIGATE TO:
-SAVED DEVICES >
-(MOUSE PAGE) > REMOVE
-DEVICE > REMOVE
+MOUSE NAVIGATE TO:
+STEP 1. SAVED DEVICES
+STEP 2. REMOVE DEVICE
+STEP 3. KEY A: REMOVE
 
 ANY KEY: BACK
 ~~~
@@ -49,3 +49,10 @@ ANY KEY: BACK
 Operator declaration: **PENDING**.
 
 Do not merge PR #13 and do not mark HOPE-28 ACCEPTED until the operator explicitly reports PASS for this exact candidate.
+
+
+## Copy-correction supersession
+
+Do not use the previous HOPE-28 UF2. Its behavior was valid, but the visible Help copy was stale relative to current Mouse UI v1 source.
+
+Physical acceptance must use the replacement candidate generated after synchronizing with `mouse-ui/src/projector/screens.c@5f269e9625ae0d02a85b5d39eb87026edc448068`.
