@@ -8,4 +8,4 @@ Planejamento e evidências dos programas do ecossistema Remapping Bridge.
 - `mouse/` — UI/Core/integração modular.
 - `hope/` — programa HOPE para o repositório `remappingbridge/remappingbridge`: partir exatamente do BLU2USB G06 aceito e substituir, uma tela por vez, somente a UX observável pelo Mouse UI Layout 1.0.
 
-O programa HOPE está em execução: **HOPE-00 está IN PROGRESS e aguarda validação automatizada/física**.
+O programa HOPE está em execução: **HOPE-00 tem candidato com CI verde e aguarda aceitação física**.
