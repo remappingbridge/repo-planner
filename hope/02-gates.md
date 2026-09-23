@@ -60,7 +60,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-00 — exact G06 baseline
 
-**Status:** READY / NOT STARTED.
+**Status:** IN PROGRESS / AWAITING AUTOMATED + PHYSICAL ACCEPTANCE.
 
 **Objetivo:** copiar exatamente BLU2USB G06 aceito para `remappingbridge/remappingbridge` sem quebrar nada.
 
