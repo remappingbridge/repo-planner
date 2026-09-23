@@ -148,3 +148,23 @@ ANY KEY: BACK
 ~~~
 
 The final CI run `35832917577` passed host/architecture and Pico 2 W.
+
+
+## Full implemented-screen text audit
+
+Before physical acceptance, all Mouse UI screens already introduced by the HOPE series were compared row-by-row against current Mouse UI v1 source, including blank-row positions.
+
+Audit record:
+
+- `hope/audits/2026-09-23-mouse-ui-v1-text-parity.md`
+- Mouse UI v1: `release/ui-layout-v1.0@e8adad7919e931c92515bf655ef4050876a8e7a9`
+- source blob: `src/projector/screens.c@0cecfd8e802047673cb6d2d4b866c11bd6137b45`
+
+Result: no unintentional stale screen copy remains in candidate `8dacad0a34a78ec89e74454f1b6d09d71eae01ae`.
+
+The only static text differences from Mouse UI v1 are the two explicit operator overrides already accepted:
+
+- `NEW MOUSE NOT FOUND`;
+- `MOUSE NOT FOUND HELP`.
+
+The dynamic name/profile rows of home-connected are runtime implementations of the v1 example fields, not copy mismatches.
