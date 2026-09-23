@@ -1,6 +1,6 @@
 # HOPE-00 — physical acceptance
 
-Status: **PENDING OPERATOR TEST**.
+Status: **ACCEPTED — OPERATOR PHYSICAL PASS**.
 
 Candidate:
 
@@ -46,6 +46,8 @@ Also confirm the universal HOPE-00 baseline checks:
 
 ## Operator result
 
-Operator declaration: **PENDING**.
+Operator declaration: **PASS / GATE ACCEPTED**.
 
-Do not merge PR #1 and do not mark HOPE-00 ACCEPTED until the operator explicitly reports PASS.
+Declaration received from the operator on 2026-09-23: `gate aceito`.
+
+This declaration is the authoritative physical acceptance for HOPE-00. The complete required G06 regression matrix and universal HOPE-00 baseline checks are therefore recorded as physically accepted by the operator.
