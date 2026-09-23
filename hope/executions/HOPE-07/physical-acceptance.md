@@ -39,3 +39,10 @@ Operator declaration: **PASS / GATE ACCEPTED**.
 Declaration received from the operator on 2026-09-23: `gate aceito`.
 
 Final candidate `1f7c7d7b35faffad55bb52dab0155ba95f626174`, including the approved title `NEW MOUSE NOT FOUND`, is the physically accepted HOPE-07 implementation.
+
+
+## Promotion
+
+- final title-improved PR #10 candidate physically accepted and promoted.
+- accepted main SHA: `a4ce8cc7d3be425152bfb825c9b282d8ee510bd8`
+- next eligible gate: **HOPE-27 — help-retry-pair-new**.
