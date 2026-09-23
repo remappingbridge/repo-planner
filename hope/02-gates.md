@@ -74,7 +74,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-01 — searching-first
 
-**Status:** IN PROGRESS.
+**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** implementar `searching-first` como primeira tela quando não existe Mouse salvo.
 
