@@ -104,7 +104,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-24 — home-searching-help
 
-**Status:** IN PROGRESS.
+**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** implementar `home-searching-help` conforme Mouse UI v1.
 
