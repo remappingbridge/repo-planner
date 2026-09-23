@@ -47,6 +47,8 @@ Somente o primeiro gate não aceito da sequência pode ser iniciado.
 
 Em todo gate, inclusive gates de Help e HOPE-00:
 
+- **adaptar/reaproveitar = substituir in-place**: pode reutilizar lógica G06, mas o layout antigo correspondente não pode continuar como fallback, alternativa ou tela paralela;
+- toda rota equivalente ao ponto de fluxo substituído deve mostrar exclusivamente o layout Mouse UI v1 do gate atual;
 - layout da tela introduzida deve corresponder à referência Mouse UI v1;
 - região de dicas deve usar a cor correta;
 - pixels/backgrounds devem estar nas posições corretas;
@@ -74,13 +76,13 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-01 — searching-first
 
-**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** FAILED / CORRECTION IN PROGRESS.
 
-**Objetivo:** implementar `searching-first` como primeira tela quando não existe Mouse salvo.
+**Objetivo:** substituir a apresentação inicial herdada pela tela `searching-first` Mouse UI v1.
 
-**Adaptar antigo para novo:** reaproveitar a antiga `LEARN THE KEYS`, onde o pareamento automático já acontece, como base da nova tela.
+**Adaptar antigo para novo:** transformar in-place o ponto de fluxo/tela antiga `LEARN THE KEYS` usada no primeiro boot. Reutilizar pareamento automático e infraestrutura existente por baixo, mas **não manter o layout antigo em nenhuma condição desse ponto de fluxo**.
 
-**Remover antigo:** nenhuma remoção adicional foi especificada; não inferir.
+**Remover antigo:** remover a apresentação visual antiga desse ponto do fluxo. Não criar `searching-first` em paralelo deixando `LEARN THE KEYS` como fallback.
 
 ---
 
@@ -118,7 +120,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 **Objetivo:** implementar `pair-new` conforme Mouse UI v1.
 
-**Adaptar antigo para novo:** aproveitar o fluxo antigo `HOME > MOUSE OPTIONS > PAIR DEVICE`.
+**Adaptar antigo para novo:** substituir in-place o fluxo antigo `HOME > MOUSE OPTIONS > PAIR DEVICE`, reaproveitando apenas sua lógica funcional; as telas/layouts antigos correspondentes não permanecem como fallback.
 
 **Remover antigo completamente:** remover as telas antigas subsequentes desse fluxo antigo.
 
@@ -146,7 +148,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 **Objetivo:** implementar `home-connected` como estado da HOME.
 
-**Adaptar antigo para novo:** reaproveitar a HOME antiga para dar origem a esta nova tela.
+**Adaptar antigo para novo:** substituir in-place a HOME antiga por `home-connected`, reaproveitando somente lógica/estado necessários; a HOME antiga não permanece como alternativa.
 
 ---
 
@@ -158,7 +160,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-10 — remapper-options
 
-**Objetivo:** manter essencialmente as funcionalidades do antigo `HOME > MOUSE OPTIONS`, aplicando layout/texto Mouse UI v1.
+**Objetivo:** substituir in-place o antigo `HOME > MOUSE OPTIONS` por `remapper-options`, mantendo suas funções úteis por baixo e exibindo somente o layout/texto Mouse UI v1.
 
 ---
 
@@ -244,7 +246,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 **Objetivo:** implementar `saved-devices`.
 
-**Adaptar antigo para novo:** reaproveitar `HOME > OTHER OPTIONS > SAVED DEVICES`.
+**Adaptar antigo para novo:** substituir in-place `HOME > OTHER OPTIONS > SAVED DEVICES` pela nova `saved-devices`, reutilizando apenas a funcionalidade interna necessária.
 
 **Remover antigo completamente:** remover `PAIR KEYBOARD`, `PAIR COMPOSITE` e telas subsequentes desses fluxos, se existirem.
 
