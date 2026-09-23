@@ -9,14 +9,14 @@ Date: 2026-09-23.
 - repository: `remappingbridge/remappingbridge`
 - accepted base: `main@4a1451e5ce25573734fc6179c45867588b76bbb0`
 - branch: `hope/hope-07-retry-pair-new`
-- candidate commit: `790ee2754c89cf151e1d85f20cad4c64c674834e`
+- candidate commit: `1f7c7d7b35faffad55bb52dab0155ba95f626174`
 - draft PR: `#10`
 - PR remains unmerged until operator physical acceptance.
 
 ## Canonical screen
 
 ~~~text
-PAIR NEW MOUSE
+NEW MOUSE NOT FOUND
 NO NEW MOUSE OUTSIDE
 THE LIST OF SAVED
 DEVICES WAS FOUND
@@ -66,7 +66,7 @@ No BLE Pair New runtime file changed.
 
 ## Automated verification
 
-GitHub Actions run: `35827737745` — **SUCCESS**.
+GitHub Actions run: `35828756931` — **SUCCESS**.
 
 ### host-architecture — SUCCESS
 
@@ -102,17 +102,26 @@ Focused tests freeze:
 
 GitHub Actions artifact:
 
-- artifact id: `10736310248`
+- artifact id: `10736321472`
 - name: `blu2usb-picow-production-pico2w`
-- ZIP size: **328,353 bytes**
-- ZIP digest: `sha256:72959bc315db59a32ee781513a074f0aae60e71b2df3a7c92bce2d6ecf52cb11`
+- ZIP size: **328,319 bytes**
+- ZIP digest: `sha256:a4cf22775d04c814084103094a1eb4ffd715a87877978926fb3f3fa0907092d6`
 
 Extracted firmware:
 
-- file: `HOPE-07-retry-pair-new-pico2w.uf2`
+- file: `HOPE-07-retry-pair-new-new-title-pico2w.uf2`
 - size: **891,392 bytes**
-- SHA-256: `096c387861a949085c48428f348315d210c18e8f73f5235e1dae6fb66565c067`
+- SHA-256: `095eece4b490274f3ae9f697bdee2e9b80461bf32897deffdb870656cb7fdb2e`
 
 ## Gate state
 
 HOPE-07 is **not ACCEPTED** until the operator validates this exact candidate on hardware.
+
+
+## Operator-requested title improvement
+
+Before physical acceptance, the retry title was changed from `PAIR NEW MOUSE` to `NEW MOUSE NOT FOUND`.
+
+All other retry text and behavior remain unchanged.
+
+The previous candidate `790ee2754c89cf151e1d85f20cad4c64c674834e` and UF2 hash `096c3878...` are superseded.
