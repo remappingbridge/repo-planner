@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **IN PROGRESS — HOPE-00/01/02/08/24/09/25 ACCEPTED; HOPE-06 ACTIVE**.
+Status geral: **IN PROGRESS — HOPE-00/01/02/08/24/09/25/06 ACCEPTED; HOPE-26 ACTIVE**.
 
 ## Ordem oficial de execução
 
@@ -128,7 +128,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-06 — pair-new
 
-**Status:** REWORK CANDIDATE READY / AUTOMATED PASS / PHYSICAL RE-TEST PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `90e6e1884aa109cdf1dfd48c5e5762226d0e29ba`.
 
 **Objetivo:** implementar `pair-new` conforme Mouse UI v1.
 
@@ -139,6 +139,8 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 ---
 
 ## HOPE-26 — help-pair-new
+
+**Status:** IN PROGRESS.
 
 **Objetivo:** implementar `help-pair-new` conforme Mouse UI v1.
 
