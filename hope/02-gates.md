@@ -88,7 +88,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-02 — first-mouse-connected
 
-**Status:** IN PROGRESS.
+**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** implementar `first-mouse-connected` como feedback de sucesso de `searching-first`.
 
