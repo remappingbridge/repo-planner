@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **IN PROGRESS — HOPE-00/01/02/08 ACCEPTED; HOPE-24 ACTIVE**.
+Status geral: **IN PROGRESS — HOPE-00/01/02/08/24 ACCEPTED; HOPE-09 ACTIVE**.
 
 ## Ordem oficial de execução
 
@@ -104,13 +104,15 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-24 — home-searching-help
 
-**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `aa6abb2294248aa8eabc4918eae1bdcfef26a959`.
 
 **Objetivo:** implementar `home-searching-help` conforme Mouse UI v1.
 
 ---
 
 ## HOPE-09 — home-retry
+
+**Status:** IN PROGRESS.
 
 **Objetivo:** implementar `home-retry` como estado da HOME e integrá-la ao fluxo já aceito.
 
