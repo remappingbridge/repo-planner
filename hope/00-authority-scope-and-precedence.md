@@ -64,7 +64,9 @@ Cada gate não pode:
 
 ## 5. Regra contra interpretação silenciosa
 
-Se a especificação do gate não disser para remover algo, não inferir remoção.
+Se a especificação do gate não disser para remover algo, não inferir remoção **fora do ponto de fluxo que o próprio gate substitui**.
+
+A tela/layout legado explicitamente adaptado pelo gate é uma exceção: sua apresentação visual deve desaparecer daquele ponto do fluxo por definição da regra “adaptar = substituir in-place”.
 
 Se houver conflito real entre a função G06 e a regra observável da nova tela, registrar o conflito em `executions/HOPE-XX/pre-implementation.md` antes de alterar código. A solução deve ser a menor adaptação que preserve a função G06 e satisfaça a regra observável da tela.
 
