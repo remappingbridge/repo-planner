@@ -1,6 +1,6 @@
 # HOPE-06 — physical acceptance
 
-Status: **REWORK CANDIDATE READY — PHYSICAL RE-TEST PENDING**.
+Status: **ACCEPTED — CORRECTED REWORK PHYSICAL PASS**.
 
 Candidate:
 
@@ -79,4 +79,8 @@ Repeat the Pair New scenarios, with special emphasis on:
 6. verify a saved Mouse remains ignored as a new candidate;
 7. verify B, timeout, and Y cancel preserve the current Mouse.
 
-Operator result for the corrected candidate: **PENDING**.
+Operator result for the corrected candidate: **PASS / GATE ACCEPTED**.
+
+Declaration received from the operator on 2026-09-23: `gate aceito`.
+
+Corrected candidate `ac685b6d05de20706aa40c3c04591aab0639c98e` is the physically accepted HOPE-06 implementation.
