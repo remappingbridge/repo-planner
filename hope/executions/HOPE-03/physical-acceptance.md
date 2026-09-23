@@ -1,6 +1,6 @@
 # HOPE-03 — physical acceptance
 
-Status: **PENDING OPERATOR TEST**.
+Status: **ACCEPTED — OPERATOR PHYSICAL PASS**.
 
 Candidate:
 
@@ -44,6 +44,8 @@ Candidate:
 
 ## Operator result
 
-Operator declaration: **PENDING**.
+Operator declaration: **PASS / GATE ACCEPTED**.
 
-Do not merge PR #12 and do not mark HOPE-03 ACCEPTED until the operator explicitly reports PASS for this exact candidate.
+Declaration received from the operator on 2026-09-23: `gate aceito`.
+
+Candidate `e5ba33b2c5a6b027e0277dfd05e610a8fe569efb` is the physically accepted HOPE-03 implementation, including the bundled `MOUSE NOT FOUND HELP` title improvement.
