@@ -1,6 +1,6 @@
 # HOPE-06 — physical acceptance
 
-Status: **FAILED — REWORK REQUIRED**.
+Status: **REWORK CANDIDATE READY — PHYSICAL RE-TEST PENDING**.
 
 Candidate:
 
@@ -53,3 +53,30 @@ The candidate firmware was built with:
 Therefore the runtime architecture added by HOPE-06 could not actually keep the current Mouse connected while creating a second candidate HOGP connection. The compiler accepted the code, but BTstack was statically configured for only one concurrent connection/client.
 
 HOPE-06 remains open on PR #8 and must be corrected/rebuilt/retested.
+
+
+## Corrected rework candidate
+
+The first failure root cause has been corrected without advancing to HOPE-04.
+
+- branch: `hope/hope-06-pair-new`
+- corrected commit: `ac685b6d05de20706aa40c3c04591aab0639c98e`
+- draft PR: `#8`
+- CI run: `35823937034` — **SUCCESS**
+- UF2: `HOPE-06-pair-new-rework-pico2w.uf2`
+- size: **890,368 bytes**
+- SHA-256: `1fab62b23d68e28432a311b3f0bcddca9e9b3c320e90aca7222e3bbc2ebaab27`
+
+### Re-test focus
+
+Repeat the Pair New scenarios, with special emphasis on:
+
+1. keep the current Mouse connected and usable;
+2. enter Pair New;
+3. put a genuinely new Mouse in pairing mode;
+4. verify the candidate now establishes a second temporary BLE/HIDS session and completes qualification;
+5. verify handoff occurs only after qualification;
+6. verify a saved Mouse remains ignored as a new candidate;
+7. verify B, timeout, and Y cancel preserve the current Mouse.
+
+Operator result for the corrected candidate: **PENDING**.
