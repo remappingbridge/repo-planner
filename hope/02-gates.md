@@ -76,7 +76,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-01 — searching-first
 
-**Status:** FAILED / CORRECTION IN PROGRESS.
+**Status:** CORRECTED CANDIDATE READY / AUTOMATED PASS / PHYSICAL RETEST PENDING.
 
 **Objetivo:** substituir a apresentação inicial herdada pela tela `searching-first` Mouse UI v1.
 
