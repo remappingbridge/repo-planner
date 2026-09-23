@@ -84,3 +84,10 @@ Operator result for the corrected candidate: **PASS / GATE ACCEPTED**.
 Declaration received from the operator on 2026-09-23: `gate aceito`.
 
 Corrected candidate `ac685b6d05de20706aa40c3c04591aab0639c98e` is the physically accepted HOPE-06 implementation.
+
+
+## Promotion
+
+- corrected PR #8 candidate physically accepted and promoted.
+- accepted main SHA: `90e6e1884aa109cdf1dfd48c5e5762226d0e29ba`
+- next eligible gate: **HOPE-26 — help-pair-new**.
