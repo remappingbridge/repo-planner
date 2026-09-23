@@ -1,15 +1,15 @@
 # HOPE-07 — physical acceptance
 
-Status: **PENDING OPERATOR TEST**.
+Status: **ACCEPTED — OPERATOR PHYSICAL PASS**.
 
 Candidate:
 
 - branch: `hope/hope-07-retry-pair-new`
-- commit: `790ee2754c89cf151e1d85f20cad4c64c674834e`
+- commit: `1f7c7d7b35faffad55bb52dab0155ba95f626174`
 - draft PR: `#10`
-- UF2: `HOPE-07-retry-pair-new-pico2w.uf2`
+- UF2: `HOPE-07-retry-pair-new-new-title-pico2w.uf2`
 - size: **891,392 bytes**
-- SHA-256: `096c387861a949085c48428f348315d210c18e8f73f5235e1dae6fb66565c067`
+- SHA-256: `095eece4b490274f3ae9f697bdee2e9b80461bf32897deffdb870656cb7fdb2e`
 
 ## Required physical scenarios
 
@@ -17,7 +17,7 @@ Candidate:
 2. Enter accepted `PAIR NEW MOUSE` active search.
 3. Let the full 15-second window expire without a new unsaved Mouse.
 4. Exact retry screen must appear:
-   `PAIR NEW MOUSE / NO NEW MOUSE OUTSIDE / THE LIST OF SAVED / DEVICES WAS FOUND`.
+   `NEW MOUSE NOT FOUND / NO NEW MOUSE OUTSIDE / THE LIST OF SAVED / DEVICES WAS FOUND`.
 5. Confirm the active searching copy `TRYING TO CONNECT / A NEW MOUSE THAT ...` is no longer shown after timeout.
 6. Verify black body and dark-magenta hint region beginning at `KEY A: RETRY NEW PAIR`.
 7. Current Mouse must remain connected and usable.
@@ -34,6 +34,8 @@ Candidate:
 
 ## Operator result
 
-Operator declaration: **PENDING**.
+Operator declaration: **PASS / GATE ACCEPTED**.
 
-Do not merge PR #10 and do not mark HOPE-07 ACCEPTED until the operator explicitly reports PASS.
+Declaration received from the operator on 2026-09-23: `gate aceito`.
+
+Final candidate `1f7c7d7b35faffad55bb52dab0155ba95f626174`, including the approved title `NEW MOUSE NOT FOUND`, is the physically accepted HOPE-07 implementation.
