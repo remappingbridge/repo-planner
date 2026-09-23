@@ -9,7 +9,7 @@ Date: 2026-09-23.
 - repository: `remappingbridge/remappingbridge`
 - accepted base: `main@90e6e1884aa109cdf1dfd48c5e5762226d0e29ba`
 - branch: `hope/hope-26-help-pair-new`
-- candidate commit: `45dab4093d1b99ddd7cabba98322bfd8b3d14ee8`
+- candidate commit: `60c9050095603712baae61dfb12766b1ba46b67f`
 - draft PR: `#9`
 - PR must remain unmerged until operator physical acceptance.
 
@@ -63,7 +63,7 @@ No BLE implementation file changed.
 
 ## Automated verification
 
-GitHub Actions run: `35826114490` — **SUCCESS**.
+GitHub Actions run: `35826910007` — **SUCCESS**.
 
 - `host-architecture`: **SUCCESS**
   - inherited G02–G06 tests: PASS
@@ -85,17 +85,33 @@ The first CI attempt failed only because the historical HOPE-06 test still asser
 
 GitHub Actions artifact:
 
-- artifact id: `10734984786`
+- artifact id: `10735512100`
 - name: `blu2usb-picow-production-pico2w`
-- ZIP size: **328,184 bytes**
-- ZIP digest: `sha256:3b4c63bb2e02809fd82027974123d71ba70201f9ad3a69257d91011d2698f2e0`
+- ZIP size: **328,150 bytes**
+- ZIP digest: `sha256:53f127c844980a856d179e3467f0c613f6f1e76a8475b302fccc4c38621e66cf`
 
 Extracted firmware:
 
-- file: `HOPE-26-help-pair-new-pico2w.uf2`
+- file: `HOPE-26-help-pair-new-layout-fix-pico2w.uf2`
 - size: **890,880 bytes**
-- SHA-256: `d5127a85fede683c85f5666aa130fb848e03e2e094bdc0037a56c286134ce996`
+- SHA-256: `a8d32a529883dded80e3d169bc22e2a207b434e8a8ac37b7dc8f6875bdc22ccd`
 
 ## Gate state
 
 HOPE-26 is **not ACCEPTED** until the operator validates this exact candidate on hardware.
+
+
+## Layout correction after operator report
+
+The first HOPE-26 candidate incorrectly let the renderer infer the hint region from the explanatory line `KEY B TO BACK UNTIL`.
+
+That line is **body text**, not a hint.
+
+Corrected renderer semantics for `BLU2USB_SCREEN_HELP_PAIR_NEW`:
+
+- rows 0–7 remain in the black body region;
+- explanatory lines, including `KEY B TO BACK UNTIL` and `SEARCHING APPEARS.`, remain static/yellow body text;
+- only row 8, `ANY KEY: BACK`, starts the dark-magenta hint region;
+- corrected `hint_start_row = 8`.
+
+The previous candidate `45dab4093d1b99ddd7cabba98322bfd8b3d14ee8` and UF2 hash `d5127a85...` are superseded and must not be used for physical acceptance.
