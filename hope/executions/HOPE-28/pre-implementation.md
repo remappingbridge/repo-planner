@@ -17,13 +17,13 @@ Accepted product base:
 ## Canonical screen
 
 ~~~text
-HOME CONNECTED HELP
+REMOVE CONNECTED HELP
 TO DISCONNECT THE
 CURRENTLY CONNECTED
-MOUSE, NAVIGATE TO:
-SAVED DEVICES >
-(MOUSE PAGE) > REMOVE
-DEVICE > REMOVE
+MOUSE NAVIGATE TO:
+STEP 1. SAVED DEVICES
+STEP 2. REMOVE DEVICE
+STEP 3. KEY A: REMOVE
 
 ANY KEY: BACK
 ~~~
@@ -95,3 +95,17 @@ Tests must prove:
 11. Confirm saved reconnect proceeds normally.
 12. Confirm profile/remap/persistence/Pair New behavior is unchanged.
 13. Confirm no Keyboard/Composite behavior was introduced.
+
+
+## Authority correction
+
+The earlier pre-implementation text was taken from `mouse-ui/docs/spec/01-screen-reference.md`, which is stale for this screen.
+
+The current executable Mouse UI v1 screen catalog is authoritative for the updated copy:
+
+- repository: `remappingbridge/mouse-ui`
+- source: `src/projector/screens.c`
+- ref: `5f269e9625ae0d02a85b5d39eb87026edc448068`
+- screen: `MUI_SCREEN_HELP_HOME_CONNECTED`
+
+The HOPE-28 candidate must match that source literal exactly.
