@@ -5,11 +5,11 @@ Status: **PENDING OPERATOR TEST**.
 Candidate:
 
 - branch: `hope/hope-26-help-pair-new`
-- commit: `45dab4093d1b99ddd7cabba98322bfd8b3d14ee8`
+- commit: `60c9050095603712baae61dfb12766b1ba46b67f`
 - draft PR: `#9`
-- UF2: `HOPE-26-help-pair-new-pico2w.uf2`
+- UF2: `HOPE-26-help-pair-new-layout-fix-pico2w.uf2`
 - size: **890,880 bytes**
-- SHA-256: `d5127a85fede683c85f5666aa130fb848e03e2e094bdc0037a56c286134ce996`
+- SHA-256: `a8d32a529883dded80e3d169bc22e2a207b434e8a8ac37b7dc8f6875bdc22ccd`
 
 ## Required physical scenarios
 
@@ -17,7 +17,7 @@ Candidate:
 2. Enter accepted `PAIR NEW MOUSE`; confirm normal Pair New starts.
 3. While Pair New is active, press/release KEY X.
 4. Exact `PAIR NEW DEVICE HELP` must appear.
-5. Confirm exact text, black body and dark-magenta `ANY KEY: BACK` hint field.
+5. Confirm exact text: rows through `SEARCHING APPEARS.` stay on black body; specifically `KEY B TO BACK UNTIL` must **not** start the hint background. Only `ANY KEY: BACK` uses the dark-magenta hint field.
 6. Confirm entering Help cancels the active Pair New operation.
 7. While Help is visible, keep an unsaved Mouse advertising/pairable; it must not be accepted.
 8. Press/release KEY Y while Help is visible; it must behave only as Any Key Back and must not lock or turn off the display.
@@ -34,3 +34,10 @@ Candidate:
 Operator declaration: **PENDING**.
 
 Do not merge PR #9 and do not mark HOPE-26 ACCEPTED until the operator explicitly reports PASS.
+
+
+## Superseded layout candidate
+
+The original HOPE-26 physical candidate was invalidated by an operator-reported layout bug: the generic renderer mistook `KEY B TO BACK UNTIL` for the start of the hint region.
+
+Use only corrected candidate `60c9050095603712baae61dfb12766b1ba46b67f` and SHA-256 `a8d32a529883dded80e3d169bc22e2a207b434e8a8ac37b7dc8f6875bdc22ccd`.
