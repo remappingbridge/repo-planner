@@ -1,6 +1,6 @@
 # HOPE-26 — physical acceptance
 
-Status: **PENDING OPERATOR TEST**.
+Status: **ACCEPTED — OPERATOR PHYSICAL PASS**.
 
 Candidate:
 
@@ -31,9 +31,11 @@ Candidate:
 
 ## Operator result
 
-Operator declaration: **PENDING**.
+Operator declaration: **PASS / GATE ACCEPTED**.
 
-Do not merge PR #9 and do not mark HOPE-26 ACCEPTED until the operator explicitly reports PASS.
+Declaration received from the operator on 2026-09-23: `gate aceito`.
+
+Corrected candidate `60c9050095603712baae61dfb12766b1ba46b67f` is the physically accepted HOPE-26 implementation.
 
 
 ## Superseded layout candidate
