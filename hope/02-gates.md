@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **IN PROGRESS — HOPE-00 ACCEPTED; HOPE-01 ACTIVE**.
+Status geral: **IN PROGRESS — HOPE-00/01 ACCEPTED; HOPE-02 ACTIVE**.
 
 ## Ordem oficial de execução
 
@@ -76,7 +76,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-01 — searching-first
 
-**Status:** CORRECTED CANDIDATE READY / AUTOMATED PASS / PHYSICAL RETEST PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `4b0ebe933721895488a38f84c03f009c0d30cb32`.
 
 **Objetivo:** substituir a apresentação inicial herdada pela tela `searching-first` Mouse UI v1.
 
@@ -87,6 +87,8 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 ---
 
 ## HOPE-02 — first-mouse-connected
+
+**Status:** IN PROGRESS.
 
 **Objetivo:** implementar `first-mouse-connected` como feedback de sucesso de `searching-first`.
 
