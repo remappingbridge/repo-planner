@@ -7,10 +7,17 @@ Date: 2026-09-23.
 ## Product candidate
 
 - repository: `remappingbridge/remappingbridge`
-- accepted base: `main@46e501f13784d3ef94e3d4213596b25afa731347`
+- accepted functional base: HOPE-28 tree `95eaf0c45a0b92e50ea203e7dd9056db2036c0f9`
+- current main restoration commit: `3471e983cb7ec048c9ebb4b057633ff1b028e3aa`
 - branch: `hope/hope-10-remapper-options`
 - candidate commit: `45407b30d8f438586ad4d380c65ce5dfb2415b64`
-- draft PR: `#14`
+- draft PR awaiting physical acceptance: `#15`
+
+## Promotion correction
+
+PR #14 was prematurely merged during operator interaction before physical acceptance. That promotion is **not acceptance**.
+
+The repository was immediately restored with commit `3471e983cb7ec048c9ebb4b057633ff1b028e3aa`, whose tree is exactly the accepted HOPE-28 tree. HOPE-10 was then reopened as draft PR #15 from the original candidate branch. Do not promote HOPE-10 again until the operator explicitly accepts the physical test.
 
 ## Current Mouse UI v1 authority
 
@@ -120,4 +127,4 @@ Extracted firmware:
 - size: **896,512 bytes**
 - SHA-256: `42a40d9079bdad2cf22cec939d69862c0ba1912c1bc6e4d7f54a5d7ec265fdfa`
 
-HOPE-10 remains unmerged until physical acceptance.
+HOPE-10 remains **not accepted** and draft PR #15 remains unmerged until physical acceptance.
