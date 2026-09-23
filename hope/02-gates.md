@@ -128,7 +128,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-06 — pair-new
 
-**Status:** IN PROGRESS.
+**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** implementar `pair-new` conforme Mouse UI v1.
 
