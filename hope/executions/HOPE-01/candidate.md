@@ -1,27 +1,40 @@
 # HOPE-01 — candidate
 
-Status: **CANDIDATE READY / PHYSICAL ACCEPTANCE PENDING**.
+Status: **CORRECTED CANDIDATE READY / PHYSICAL ACCEPTANCE PENDING**.
 
 Date: 2026-09-23.
 
-## Product candidate
+## Superseded failed candidate
+
+The previous candidate at `987afd16e951160860c77bd9f304dca586c339d0` is **INVALIDATED**.
+
+Failure: it created `searching-first` as a parallel screen while retaining the legacy `LEARN THE KEYS` presentation as a saved-bond fallback.
+
+That interpretation is now forbidden program-wide.
+
+## Corrected product candidate
 
 - repository: `remappingbridge/remappingbridge`
 - accepted base: `main@16b9a3a2f164f08e3a9c25fc39a4767b04f48f39`
 - branch: `hope/hope-01-searching-first`
-- candidate commit: `987afd16e951160860c77bd9f304dca586c339d0`
+- corrected candidate commit: `5c686c57efd794c08b4212736709b4825d22aa21`
 - draft PR: `#2`
-- PR state: **must remain unmerged until operator physical acceptance**
+- PR remains unmerged until operator physical acceptance.
 
-## Provenance
+## Replacement semantics
 
-- accepted HOPE-00/G06 base: `16b9a3a2f164f08e3a9c25fc39a4767b04f48f39`
-- original BLU2USB G06: `7eee024ad4ee726c5a85ffa2f32b9f47187878af`
-- Mouse UI Layout 1.0: `e8adad7919e931c92515bf655ef4050876a8e7a9`
+HOPE-01 now transforms the inherited first-screen slot `BLU2USB_SCREEN_LEARN_KEYS` **in-place**.
 
-## Scope implemented
+There is no separate `BLU2USB_SCREEN_SEARCHING_FIRST` screen-id.
 
-Only the canonical `searching-first` screen was introduced:
+The legacy visual content was removed from the implementation:
+
+- `PRESS TO LEARN A KEY`
+- `LOCK SCREEN    KEY B`
+- `OPEN HOME -> KEY Y`
+- bond-dependent legacy visual fallback.
+
+Every route to that inherited screen slot now renders only:
 
 ~~~text
 SEARCHING FIRST MOUSE
@@ -35,86 +48,67 @@ WHILE WAIT CONNECTION
  KEY B         KEY Y
 ~~~
 
-Observable behavior:
+## Observable behavior
 
 - full 240x240 dark-magenta didactic background;
-- title uses the existing title/magenta tone;
-- rows `PRESS TO LEARN KEYS` and `WHILE WAIT CONNECTION` use the standard body/yellow tone;
-- HAT labels rest in action/light-gray;
-- the exact visible token(s) for a held HAT control become white;
-- release restores the resting color;
-- joystick, A, B, X and Y are all didactic only;
-- B does not navigate;
+- title in title/magenta tone;
+- rows `PRESS TO LEARN KEYS` and `WHILE WAIT CONNECTION` in body/yellow;
+- HAT labels resting in light gray;
+- held control tokens turn white;
+- release restores resting tone;
+- joystick and A/B/X/Y are didactic only;
+- B does not navigate/cancel;
 - Y does not lock;
-- no HAT control cancels first-Mouse discovery.
+- discovery continues independently underneath.
 
-The implementation reuses the G06 renderer and interaction primitives. No mouse-ui architecture, contract layer or separate Core was imported.
+A stored BLE bond may influence the existing G06 reconnect behavior, but it cannot restore the old visual screen.
 
-## Startup integration
+## Post-success bridge
 
-G06 does not yet have the future Saved Devices registry. HOPE-01 therefore uses the already-existing persistent BTstack LE device database as the minimal first-start discriminator:
+`first-mouse-connected` belongs to HOPE-02 and is not introduced early.
 
-- no persisted G06 Mouse bond -> `searching-first`;
-- existing G06 Mouse bond -> preserve inherited G06 startup behavior until later HOME/search gates replace it.
-
-This does not introduce Bluetooth Keyboard or Composite pairing.
-
-## Post-success behavior in this gate
-
-`first-mouse-connected` belongs to HOPE-02 and was deliberately not implemented early.
-
-When the BLE HOGP pipeline reaches the existing G06 READY/`CONNECTED` event while `searching-first` is displayed, HOPE-01 temporarily transfers to the inherited G06 HOME. HOPE-02 will replace that temporary successor with the canonical `first-mouse-connected` screen.
-
-## Changed files
-
-Compared with accepted HOPE-00 main:
-
-- `include/blu2usb/ble_hogp/ble_hogp.h`
-- `include/blu2usb/ux_model/ux_model.h`
-- `src/app/main.c`
-- `src/ble_hogp/ble_hogp_pico.c`
-- `src/renderer/renderer.c`
-- `src/ux_model/ux_model.c`
-- `tests/CMakeLists.txt`
-- `tests/test_hope01_searching_first.c`
-
-No HOPE-02+ screen was added.
+When the existing G06 BLE HOGP pipeline reports a fully qualified READY Mouse while the replaced first-screen slot is visible, the current gate transitions to the inherited G06 HOME. That HOME is a different future migration point and remains unchanged until its own HOPE gate.
 
 ## Automated verification
 
-GitHub Actions run: `35815523922` — **SUCCESS**.
+GitHub Actions run: `35816267180` — **SUCCESS**.
 
 - `host-architecture`: **SUCCESS**
-  - configure host build: PASS
-  - build inherited + HOPE-01 tests: PASS
-  - host/architecture/screen-contract tests: PASS
+  - host configure: PASS
+  - inherited G02–G06 tests: PASS
+  - architecture/screen-contract tests: PASS
+  - HOPE-01 focused tests: PASS
 - `pico2-w-production`: **SUCCESS**
   - pinned ARM toolchain: PASS
   - pinned Pico SDK: PASS
-  - Pico 2 W configure: PASS
+  - configure: PASS
   - production build: PASS
   - UF2 verification: PASS
   - artifact upload: PASS
 
-The focused HOPE-01 test proves exact screen rows, full didactic background, yellow prompt, gray resting controls, white held feedback, frozen coordinates, B inert, Y inert and no navigation/lock from any HAT control.
+Additional source verification on the corrected branch found no occurrence of:
 
-## Candidate UF2
+- `BLU2USB_SCREEN_SEARCHING_FIRST`;
+- `PRESS TO LEARN A KEY`;
+- `LOCK SCREEN    KEY B`;
+- `OPEN HOME -> KEY Y`;
+- `blu2usb_ble_hogp_pico_has_bonded_mouse`.
+
+## Corrected candidate UF2
 
 GitHub Actions artifact:
 
-- artifact id: `10731516620`
-- name: `blu2usb-picow-production-pico2w`
-- ZIP size: 324,056 bytes
-- ZIP digest reported by GitHub: `sha256:1aca428309f4c00e5b3eaeffc6b29d634eee681585bcdf2ebe0557ea9d1c690e`
+- artifact id: `10731942224`
+- artifact name: `blu2usb-picow-production-pico2w`
+- ZIP size: 323,486 bytes
+- ZIP digest reported by GitHub: `sha256:bccc82bcd759e39ebeaa7682fbbd862a08cfd6d615ccd315ad940b73d90d56cc`
 
 Extracted firmware:
 
 - file: `blu2usb_picow.uf2`
-- size: **880,640 bytes**
-- SHA-256: `2ef475f7d7fd26914cfd8e86ff2a990b03d923696155312c8281956d8826a03b`
+- size: **878,592 bytes**
+- SHA-256: `cd8074d4adb680011a8e1c469ec26220edf925d2b31974512621c5260bd4b6d8`
 
 ## Gate state
 
-HOPE-01 is **not ACCEPTED**.
-
-It may be promoted only after the operator flashes this exact candidate and explicitly reports physical PASS.
+HOPE-01 remains **NOT ACCEPTED** until the operator physically validates this corrected candidate.
