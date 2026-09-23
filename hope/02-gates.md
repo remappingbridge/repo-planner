@@ -96,7 +96,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-08 — home-searching
 
-**Status:** IN PROGRESS.
+**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** implementar `home-searching` como estado da HOME e integrá-la ao fluxo já aceito.
 
