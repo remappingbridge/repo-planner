@@ -43,3 +43,10 @@ Corrected candidate `60c9050095603712baae61dfb12766b1ba46b67f` is the physically
 The original HOPE-26 physical candidate was invalidated by an operator-reported layout bug: the generic renderer mistook `KEY B TO BACK UNTIL` for the start of the hint region.
 
 Use only corrected candidate `60c9050095603712baae61dfb12766b1ba46b67f` and SHA-256 `a8d32a529883dded80e3d169bc22e2a207b434e8a8ac37b7dc8f6875bdc22ccd`.
+
+
+## Promotion
+
+- corrected PR #9 candidate physically accepted and promoted.
+- accepted main SHA: `4a1451e5ce25573734fc6179c45867588b76bbb0`
+- next eligible gate: **HOPE-07 — retry-pair-new**.
