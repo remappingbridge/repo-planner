@@ -79,16 +79,17 @@ Frozen 0-based columns used by the existing renderer implementation:
 
 The G06 didactic renderer already uses title Y=8, body Y=39 and 25-pixel didactic advance, matching Mouse UI v1. This gate reuses those renderer primitives rather than importing mouse-ui architecture.
 
-## Saved-device condition and minimal adaptation
+## In-place replacement rule
 
-G06 does not contain the later Mouse UI saved-device registry. It does already own the persistent BTstack LE bond database, and Bluetooth Keyboard/Composite pairing does not exist in G06.
+The inherited `BLU2USB_SCREEN_LEARN_KEYS` slot is the old first-start presentation used by G06. HOPE-01 **transforms that slot in-place** into `searching-first`.
 
-For HOPE-01 only, “saved Mouse exists” is therefore mapped minimally to “the existing G06 persistent LE device database contains a bonded peer”. This avoids creating the future Saved Devices architecture early.
+There is no parallel `BLU2USB_SCREEN_SEARCHING_FIRST` screen-id and there is no runtime branch that chooses between the old and new visual layouts.
 
-Behavior at startup:
+Therefore:
 
-- no persisted G06 Mouse bond -> show `searching-first`;
-- persisted G06 Mouse bond -> preserve the old G06 first-screen behavior for now, until the later HOME/search gates replace it.
+- every route that reaches the inherited first-screen slot now renders the Mouse UI v1 `searching-first` layout;
+- stored BLE bonds may still affect the underlying G06 reconnect behavior, but they do **not** restore the old `LEARN THE KEYS` presentation;
+- state-specific HOME variants remain future gates and are not introduced here.
 
 ## Temporary post-success bridge
 
@@ -103,8 +104,6 @@ The BLE `CONNECTED` event already means the HIDS descriptor has been accepted, a
 - `include/blu2usb/ux_model/ux_model.h`
 - `src/ux_model/ux_model.c`
 - `src/renderer/renderer.c`
-- `include/blu2usb/ble_hogp/ble_hogp.h`
-- `src/ble_hogp/ble_hogp_pico.c`
 - `src/app/main.c`
 - `tests/CMakeLists.txt`
 - one focused HOPE-01 host test.
@@ -115,13 +114,19 @@ The BLE `CONNECTED` event already means the HIDS descriptor has been accepted, a
 - G06 HAT input/press tracking;
 - G06 ST7789 renderer, glyphs, palette and didactic Y geometry;
 - G06 USB HID Mouse/Keyboard identity and Mouse forwarding/remapping;
-- G06 persistent BTstack bond database.
+- G06 persistent BTstack bond/reconnect behavior, without using it to select a legacy visual fallback.
 
 ## Explicit removals
 
-None.
+The legacy visual presentation of the inherited `LEARN THE KEYS` slot is removed from this point of the flow:
 
-The old `LEARN THE KEYS` screen remains in the product because its canonical replacement is HOPE-23, not HOPE-01.
+- `PRESS TO LEARN A KEY`;
+- the old joystick/key geometry;
+- `LOCK SCREEN    KEY B`;
+- `AND UNLOCK    KEY X`;
+- `OPEN HOME -> KEY Y`.
+
+The internal screen slot/name may remain as an implementation detail, but it no longer exposes the legacy layout. HOPE-23 will later introduce the canonical Mouse UI v1 `learn-the-keys` screen as its own product screen.
 
 ## Out of scope
 
@@ -154,7 +159,7 @@ The focused tests must prove:
 
 ## Physical scenarios
 
-1. boot with no saved/bonded Mouse -> exact `SEARCHING FIRST MOUSE` screen;
+1. boot into the inherited first-screen slot -> it must always render exact `SEARCHING FIRST MOUSE`, never the old `LEARN THE KEYS` layout;
 2. verify full dark-magenta background and exact text/geometry;
 3. verify prompt text is yellow;
 4. press/release each joystick direction, joystick press, A/B/X/Y and verify only the corresponding label becomes white while held;
@@ -165,16 +170,22 @@ The focused tests must prove:
 9. verify X/Y movement;
 10. verify Left/Right/Middle and supported wheel/Forward/Backward;
 11. verify previously accepted G06 remap/persistence behavior is not regressed;
-12. reboot with an already bonded Mouse and verify the product does not incorrectly treat that bond as a first unsaved Mouse;
+12. reboot with an already bonded Mouse and verify that bonded reconnect still works underneath **without ever restoring the old first-screen layout**;
 13. verify no Bluetooth Keyboard/Composite pairing was added.
 
 ## Risks
 
-- querying the persistent LE DB before BTstack initialization;
 - a connection-ready event arriving while the first screen is being initialized;
-- accidental change to the old Learn screen geometry/interaction;
+- accidental retention of the old Learn visual as a fallback or parallel screen;
 - treating press feedback as navigation;
 - introducing future HOPE screens early;
 - pairing/input regression from changing startup ordering.
 
 The implementation must keep the adaptation minimal and preserve the accepted G06 runtime.
+
+
+## Correction after failed candidate
+
+The first candidate incorrectly created a parallel `searching-first` screen and retained the legacy first screen as a bond-dependent fallback. The operator rejected that interpretation.
+
+The corrected implementation follows the program-wide rule: **reuse means reuse internals; the visual screen itself is replaced in-place**.
