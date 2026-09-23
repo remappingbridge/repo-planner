@@ -38,3 +38,11 @@ Declaration received from the operator on 2026-09-23: `gate aceito`.
 Candidate `96fff0d5c304166883419c11693e3dba4e10b556` is the physically accepted HOPE-27 implementation.
 
 A cosmetic title improvement from `DEVICE NOT FOUND HELP` to `MOUSE NOT FOUND HELP` was requested after acceptance. Per operator instruction, that improvement is intentionally carried into the next gate rather than reopening HOPE-27.
+
+
+## Promotion
+
+- PR #11 candidate physically accepted and promoted.
+- accepted main SHA: `1ffffebc0e9fabc55d981b7dcfbf7bba80bde78a`
+- cosmetic title improvement `MOUSE NOT FOUND HELP` is intentionally bundled into HOPE-03 per operator instruction.
+- next eligible gate: **HOPE-03 — home-connected**.
