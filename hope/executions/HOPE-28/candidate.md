@@ -9,20 +9,20 @@ Date: 2026-09-23.
 - repository: `remappingbridge/remappingbridge`
 - accepted base: `main@95b8e6fab1710f562b7ce1ead629a9cca2734c17`
 - branch: `hope/hope-28-help-home-connected`
-- candidate commit: `aa7c5ce7080793b83490aaf275d8cee7fb6878e6`
+- candidate commit: **SUPERSEDED — replacement CI pending**
 - draft PR: `#13`
 - PR remains unmerged until operator physical acceptance.
 
 ## Canonical screen
 
 ~~~text
-HOME CONNECTED HELP
+REMOVE CONNECTED HELP
 TO DISCONNECT THE
 CURRENTLY CONNECTED
-MOUSE, NAVIGATE TO:
-SAVED DEVICES >
-(MOUSE PAGE) > REMOVE
-DEVICE > REMOVE
+MOUSE NAVIGATE TO:
+STEP 1. SAVED DEVICES
+STEP 2. REMOVE DEVICE
+STEP 3. KEY A: REMOVE
 
 ANY KEY: BACK
 ~~~
@@ -70,7 +70,7 @@ No BLE, remap, profile, storage, USB HID or pairing implementation file changed.
 
 ## Automated verification
 
-Canonical GitHub Actions run: `35832178259` — **SUCCESS**.
+Canonical Previous GitHub Actions run: `35832178259` — **SUPERSEDED by copy correction**.
 
 ### host-architecture — SUCCESS
 
@@ -115,3 +115,10 @@ Extracted firmware:
 ## Gate state
 
 HOPE-28 is **not ACCEPTED** until the operator validates this exact candidate on hardware.
+
+
+## Copy correction before physical acceptance
+
+The first candidate used stale documentation copy. Current Mouse UI v1 executable source at `src/projector/screens.c@5f269e9625ae0d02a85b5d39eb87026edc448068` defines `help-home-connected` with the updated `REMOVE CONNECTED HELP` / numbered-step text.
+
+The previous candidate `aa7c5ce7080793b83490aaf275d8cee7fb6878e6` and UF2 hash `1d8a5799...` are invalidated for physical acceptance.
