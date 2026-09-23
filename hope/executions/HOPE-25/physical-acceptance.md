@@ -35,3 +35,10 @@ Operator declaration: **PASS / GATE ACCEPTED**.
 Declaration received from the operator on 2026-09-23: `gate aceito`.
 
 Candidate `69570808a1c7e1ef82094e4dc63623716fe8e833` is the physically accepted HOPE-25 implementation.
+
+
+## Promotion
+
+- PR #7 promoted after operator acceptance.
+- accepted main SHA: `def2743022c3b522190eac06b97af0d4148348bd`
+- next eligible gate: **HOPE-06 — pair-new**.
