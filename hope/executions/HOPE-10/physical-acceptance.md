@@ -1,15 +1,18 @@
 # HOPE-10 — physical acceptance
 
-Status: **PENDING OPERATOR TEST**.
+Status: **PENDING OPERATOR TEST / NOT ACCEPTED**.
 
 Candidate:
 
 - branch: `hope/hope-10-remapper-options`
 - commit: `45407b30d8f438586ad4d380c65ce5dfb2415b64`
-- draft PR: `#14`
+- draft PR: `#15`
+- current main restoration commit: `3471e983cb7ec048c9ebb4b057633ff1b028e3aa`
 - UF2: `HOPE-10-remapper-options-pico2w.uf2`
 - size: **896,512 bytes**
 - SHA-256: `42a40d9079bdad2cf22cec939d69862c0ba1912c1bc6e4d7f54a5d7ec265fdfa`
+
+PR #14 was prematurely merged before physical acceptance and immediately functionally reverted. This event does not count as acceptance. The candidate to test is still commit `45407b30d8f438586ad4d380c65ce5dfb2415b64` and its UF2 above.
 
 ## Required physical scenarios
 
@@ -44,4 +47,4 @@ Candidate:
 
 Operator declaration: **PENDING**.
 
-Do not merge PR #14 until the operator explicitly accepts this exact candidate.
+Do not merge PR #15 until the operator explicitly accepts this exact candidate.
