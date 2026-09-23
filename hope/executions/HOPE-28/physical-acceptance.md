@@ -5,11 +5,11 @@ Status: **PENDING OPERATOR TEST**.
 Candidate:
 
 - branch: `hope/hope-28-help-home-connected`
-- commit: **SUPERSEDED — replacement CI pending**
+- commit: `8dacad0a34a78ec89e74454f1b6d09d71eae01ae`
 - draft PR: `#13`
-- UF2: **SUPERSEDED — replacement pending**
+- UF2: `HOPE-28-help-home-connected-current-v1-copy-pico2w.uf2`
 - size: **896,512 bytes**
-- SHA-256: **SUPERSEDED**
+- SHA-256: `6f11f76d05249f6989106a5f8346dffea76873b0ddb32cff2776296c0dc8a807`
 
 ## Required physical scenarios
 
@@ -56,3 +56,15 @@ Do not merge PR #13 and do not mark HOPE-28 ACCEPTED until the operator explicit
 Do not use the previous HOPE-28 UF2. Its behavior was valid, but the visible Help copy was stale relative to current Mouse UI v1 source.
 
 Physical acceptance must use the replacement candidate generated after synchronizing with `mouse-ui/src/projector/screens.c@5f269e9625ae0d02a85b5d39eb87026edc448068`.
+
+
+## Replacement candidate
+
+Use only:
+
+- commit: `8dacad0a34a78ec89e74454f1b6d09d71eae01ae`
+- CI: `35832917577` — PASS
+- UF2: `HOPE-28-help-home-connected-current-v1-copy-pico2w.uf2`
+- SHA-256: `6f11f76d05249f6989106a5f8346dffea76873b0ddb32cff2776296c0dc8a807`
+
+The previous HOPE-28 UF2 is superseded and must not be accepted physically.
