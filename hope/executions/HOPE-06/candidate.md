@@ -1,6 +1,6 @@
 # HOPE-06 — candidate
 
-Status: **CANDIDATE READY / PHYSICAL ACCEPTANCE PENDING**.
+Status: **REWORK CANDIDATE READY / PHYSICAL RE-TEST PENDING**.
 
 Date: 2026-09-23.
 
@@ -155,3 +155,40 @@ Extracted firmware:
 HOPE-06 is **not ACCEPTED**.
 
 The concurrent-current/candidate behavior, saved-candidate rejection and atomic handoff require the operator physical matrix below before PR #8 may be promoted.
+
+
+## Rework after first physical failure
+
+First physical candidate `6f4d8890a6011e679efb56bc098f81844632074a` failed because a new Mouse did not pair.
+
+The failure was traced to the static BTstack pool configuration, not to the future Saved Devices UI:
+
+~~~text
+MAX_NR_GATT_CLIENTS 1
+MAX_NR_HCI_CONNECTIONS 1
+MAX_NR_HIDS_CLIENTS 1
+~~~
+
+This made the intended current+candidate Pair New runtime impossible on hardware even though the code compiled.
+
+Corrected candidate:
+
+- commit: `ac685b6d05de20706aa40c3c04591aab0639c98e`
+- `MAX_NR_GATT_CLIENTS 2`
+- `MAX_NR_HCI_CONNECTIONS 2`
+- `MAX_NR_HIDS_CLIENTS 2`
+- test now freezes all three values at 2
+- GitHub Actions run: `35823937034` — **SUCCESS**
+- host-architecture: **SUCCESS**
+- Pico 2 W configure/build/UF2/upload: **SUCCESS**
+
+Corrected artifact:
+
+- artifact id: `10734381302`
+- ZIP size: **328,135 bytes**
+- ZIP digest: `sha256:d3af896dee6949a506cb6904c48eb79e0eafccb3de55f78aee98ebb08bc94e0b`
+- UF2: `HOPE-06-pair-new-rework-pico2w.uf2`
+- UF2 size: **890,368 bytes**
+- UF2 SHA-256: `1fab62b23d68e28432a311b3f0bcddca9e9b3c320e90aca7222e3bbc2ebaab27`
+
+`saved-devices` remains HOPE-04 and is not a prerequisite for Pair New classification: Pair New reads the LE device DB directly.
