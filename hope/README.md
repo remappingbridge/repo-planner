@@ -1,6 +1,6 @@
 # HOPE — Remapping Bridge incremental UI migration
 
-Status: **HOPE-00/01/02/08/24/09/25 ACCEPTED / HOPE-06 REWORK AFTER PHYSICAL FAILURE**.
+Status: **HOPE-00/01/02/08/24/09/25 ACCEPTED / HOPE-06 REWORK CANDIDATE READY / PHYSICAL RE-TEST PENDING**.
 
 Este namespace é a fonte de planejamento do programa HOPE do repositório `remappingbridge/remappingbridge`.
 
@@ -38,7 +38,7 @@ A integração deve ser a menor adaptação necessária entre funções que já 
 - HOPE-24: **ACCEPTED — physically passed and promoted to main**;
 - HOPE-09: **ACCEPTED — physically passed and promoted to main**;
 - HOPE-25: **ACCEPTED — physically passed and promoted to main**;
-- HOPE-06: **REWORK — first physical candidate failed because BTstack pools allowed only one HCI/GATT/HIDS session; dual-session capacity fix in progress**;
+- HOPE-06: **REWORK CANDIDATE READY — BTstack HCI/GATT/HIDS pools raised from 1 to 2; CI green; physical re-test pending**;
 - gates aceitos: **HOPE-00, HOPE-01, HOPE-02, HOPE-08, HOPE-24, HOPE-09, HOPE-25**.
 
 Leia na ordem:
