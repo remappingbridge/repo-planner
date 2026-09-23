@@ -1,6 +1,6 @@
 # HOPE-06 — physical acceptance
 
-Status: **PENDING OPERATOR TEST**.
+Status: **FAILED — REWORK REQUIRED**.
 
 Candidate:
 
@@ -36,6 +36,20 @@ Candidate:
 
 ## Operator result
 
-Operator declaration: **PENDING**.
+Operator declaration: **FAIL**.
 
-Do not merge PR #8 and do not mark HOPE-06 ACCEPTED until the operator explicitly reports PASS for this exact candidate.
+Failure reported by the operator on 2026-09-23: a new Mouse did not pair.
+
+## Root cause found
+
+The failure is not caused by the future `saved-devices` UI gate. Pair New already queries the BLE LE device database directly.
+
+The candidate firmware was built with:
+
+- `MAX_NR_HCI_CONNECTIONS 1`
+- `MAX_NR_GATT_CLIENTS 1`
+- `MAX_NR_HIDS_CLIENTS 1`
+
+Therefore the runtime architecture added by HOPE-06 could not actually keep the current Mouse connected while creating a second candidate HOGP connection. The compiler accepted the code, but BTstack was statically configured for only one concurrent connection/client.
+
+HOPE-06 remains open on PR #8 and must be corrected/rebuilt/retested.
