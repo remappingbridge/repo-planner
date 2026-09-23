@@ -51,3 +51,10 @@ Operator declaration: **PASS / GATE ACCEPTED**.
 Declaration received from the operator on 2026-09-23: `gate aceito`.
 
 This declaration is the authoritative physical acceptance for HOPE-00. The complete required G06 regression matrix and universal HOPE-00 baseline checks are therefore recorded as physically accepted by the operator.
+
+
+## Promotion
+
+- PR #1 promoted after operator acceptance.
+- accepted main SHA: `16b9a3a2f164f08e3a9c25fc39a4767b04f48f39`
+- next eligible gate: **HOPE-01 — searching-first**.
