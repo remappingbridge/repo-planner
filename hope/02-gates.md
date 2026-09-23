@@ -182,7 +182,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-10 — remapper-options
 
-**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** substituir in-place o antigo `HOME > MOUSE OPTIONS` por `remapper-options`, mantendo suas funções úteis por baixo e exibindo somente o layout/texto Mouse UI v1.
 
@@ -190,11 +190,15 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-29 — help-remapper-options
 
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+
 **Objetivo:** implementar `help-remapper-options` conforme Mouse UI v1.
 
 ---
 
 ## HOPE-11 — passthrough-active
+
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > PASSTHROUGH` e aplicar layout/texto Mouse UI v1.
 
@@ -202,11 +206,15 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-14 — passthrough-not-active
 
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > PASSTHROUGH` e aplicar layout/texto Mouse UI v1.
 
 ---
 
 ## HOPE-12 — standard-not-active
+
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > DEFAULT REMAP` e aplicar layout/texto Mouse UI v1.
 
@@ -214,11 +222,15 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-13 — standard-active
 
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > DEFAULT REMAP` e aplicar layout/texto Mouse UI v1.
 
 ---
 
 ## HOPE-15 — escape-not-active
+
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > ESCAPE REMAP` e aplicar layout/texto Mouse UI v1.
 
@@ -226,11 +238,15 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-16 — escape-active
 
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > ESCAPE REMAP` e aplicar layout/texto Mouse UI v1.
 
 ---
 
 ## HOPE-17 — custom-edit
+
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > CUSTOM REMAP (EDIT CUSTOM REMAP)` e aplicar layout/texto Mouse UI v1.
 
@@ -238,11 +254,15 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-18 — left
 
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+
 **Objetivo:** preservar a função antiga de edição `LEFT IS... / LEFT WILL BECOME` e aplicar a tela `left` Mouse UI v1.
 
 ---
 
 ## HOPE-19 — right
+
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** preservar a função antiga de edição `RIGHT IS... / RIGHT WILL BECOME` e aplicar a tela `right` Mouse UI v1.
 
@@ -250,17 +270,23 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-20 — middle
 
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+
 **Objetivo:** preservar a função antiga de edição `MIDDLE IS... / MIDDLE WILL BECOME` e aplicar a tela `middle` Mouse UI v1.
 
 ---
 
 ## HOPE-21 — forward
 
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+
 **Objetivo:** preservar a função antiga de edição `FORWARD IS... / FORWARD WILL BECOME` e aplicar a tela `forward` Mouse UI v1.
 
 ---
 
 ## HOPE-22 — backward
+
+**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
 
 **Objetivo:** preservar a função antiga de edição `BACKWARD IS... / BACKWARD WILL BECOME` e aplicar a tela `backward` Mouse UI v1.
 
