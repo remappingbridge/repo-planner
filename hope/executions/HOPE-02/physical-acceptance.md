@@ -38,3 +38,10 @@ Operator declaration: **PASS / GATE ACCEPTED**.
 Declaration received from the operator on 2026-09-23: `gate aceito`.
 
 Candidate `e8b66a324ba74ab41a5538299accced28d1f2add` is the physically accepted HOPE-02 implementation.
+
+
+## Promotion
+
+- PR #3 promoted after operator acceptance.
+- accepted main SHA: `d13f905fc2a817f464f3683edd4bf689247c30ed`
+- next eligible gate: **HOPE-08 — home-searching**.
