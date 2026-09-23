@@ -1,6 +1,6 @@
 # HOPE — Remapping Bridge incremental UI migration
 
-Status: **HOPE-00/01/02/08/24/09/25/06/26/07/27/03 ACCEPTED / HOPE-28 CANDIDATE READY / PHYSICAL ACCEPTANCE PENDING**.
+Status: **HOPE-00/01/02/08/24/09/25/06/26/07/27/03/28 ACCEPTED / HOPE-10 IN PROGRESS**.
 
 Este namespace é a fonte de planejamento do programa HOPE do repositório `remappingbridge/remappingbridge`.
 
@@ -43,7 +43,8 @@ A integração deve ser a menor adaptação necessária entre funções que já 
 - HOPE-07: **ACCEPTED — title-improved candidate physically passed and promoted to main**;
 - HOPE-27: **ACCEPTED — physically passed and promoted to main**;
 - HOPE-03: **ACCEPTED — home-connected + `MOUSE NOT FOUND HELP`, physically passed and promoted to main**;
-- HOPE-28: **CANDIDATE READY — CI green, physical acceptance pending**;
+- HOPE-28: **ACCEPTED — current-v1 copy physically passed and promoted to main**;
+- HOPE-10: **IN PROGRESS — remapper-options**;
 - gates aceitos: **HOPE-00, HOPE-01, HOPE-02, HOPE-08, HOPE-24, HOPE-09, HOPE-25, HOPE-06, HOPE-26, HOPE-07, HOPE-27, HOPE-03**.
 
 Leia na ordem:
