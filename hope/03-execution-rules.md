@@ -62,6 +62,20 @@ Criar `hope/executions/HOPE-XX/pre-implementation.md` com:
 
 Preferir conexão direta com funções G06 já existentes.
 
+### Substituição visual, não coexistência
+
+“Reaproveitar” uma tela G06 significa construir o novo comportamento/layout Mouse UI v1 **sobre o ponto de fluxo antigo**, reutilizando apenas o que for útil por baixo.
+
+É proibido, para a tela do gate atual:
+
+- manter o layout antigo como fallback;
+- deixar a tela antiga alcançável por outra condição do mesmo ponto de fluxo;
+- criar uma tela nova paralela e conservar a antiga para decidir em runtime qual mostrar;
+- considerar “reuso” como coexistência visual do velho e do novo.
+
+O critério de teste deve procurar explicitamente qualquer rota que ainda revele o layout antigo substituído.
+
+
 Não introduzir:
 
 - camada genérica de contratos;
@@ -96,9 +110,11 @@ Não copiar como obrigação arquitetural:
 
 ## 7. Não antecipar telas
 
-Uma tela futura pode continuar antiga até seu gate.
+Uma tela futura, em outro ponto do fluxo, pode continuar antiga até seu gate.
 
-Exceção: se o gate atual explicitamente manda remover um fluxo antigo inteiro (ex.: Pair Device antigo ou Keyboard/Composite), a remoção é parte do gate atual.
+Isso **não** autoriza manter a tela antiga que o gate atual está substituindo. A tela corrente deve ser substituída in-place no fluxo.
+
+Exceção adicional: se o gate atual explicitamente manda remover um fluxo antigo inteiro (ex.: Pair Device antigo ou Keyboard/Composite), a remoção é parte do gate atual.
 
 ## 8. Promoção
 
