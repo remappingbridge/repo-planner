@@ -1,6 +1,6 @@
 # HOPE-24 — physical acceptance
 
-Status: **PENDING OPERATOR TEST**.
+Status: **ACCEPTED — OPERATOR PHYSICAL PASS**.
 
 Candidate:
 
@@ -31,6 +31,8 @@ Candidate:
 
 ## Operator result
 
-Operator declaration: **PENDING**.
+Operator declaration: **PASS / GATE ACCEPTED**.
 
-Do not merge PR #5 and do not mark HOPE-24 ACCEPTED until the operator explicitly reports PASS.
+Declaration received from the operator on 2026-09-23: `gate aceito`.
+
+Candidate `81d76a862b2d6e6e3dc55abe055a7e0fb3d1a58a` is the physically accepted HOPE-24 implementation.
