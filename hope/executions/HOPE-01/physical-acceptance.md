@@ -45,3 +45,10 @@ Operator declaration for corrected candidate: **PASS / GATE ACCEPTED**.
 Declaration received from the operator on 2026-09-23: `gate aceito`.
 
 The corrected candidate `5c686c57efd794c08b4212736709b4825d22aa21` is the physically accepted HOPE-01 implementation.
+
+
+## Promotion
+
+- PR #2 promoted after operator acceptance.
+- accepted main SHA: `4b0ebe933721895488a38f84c03f009c0d30cb32`
+- next eligible gate: **HOPE-02 — first-mouse-connected**.
