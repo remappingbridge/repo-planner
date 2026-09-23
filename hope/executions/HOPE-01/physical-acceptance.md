@@ -1,41 +1,45 @@
 # HOPE-01 — physical acceptance
 
-Status: **FAILED — CANDIDATE INVALIDATED / CORRECTION IN PROGRESS**.
+Status: **CORRECTED CANDIDATE / PENDING OPERATOR RETEST**.
 
-Candidate:
+## Invalidated candidate
+
+- old commit: `987afd16e951160860c77bd9f304dca586c339d0`
+- result: **FAIL**
+- reason: legacy `LEARN THE KEYS` visual remained available as a fallback.
+- old UF2: invalidated and must not be used for acceptance.
+
+## Corrected candidate
 
 - branch: `hope/hope-01-searching-first`
-- commit: `987afd16e951160860c77bd9f304dca586c339d0`
+- commit: `5c686c57efd794c08b4212736709b4825d22aa21`
 - draft PR: `#2`
-- UF2: `blu2usb_picow.uf2`
-- size: 880,640 bytes
-- SHA-256: `2ef475f7d7fd26914cfd8e86ff2a990b03d923696155312c8281956d8826a03b`
+- UF2: `HOPE-01-searching-first-corrected-pico2w.uf2`
+- size: **878,592 bytes**
+- SHA-256: `cd8074d4adb680011a8e1c469ec26220edf925d2b31974512621c5260bd4b6d8`
 
-## Required physical scenarios
+## Required retest
 
-1. With no previously bonded/saved Mouse, boot must show exactly `SEARCHING FIRST MOUSE`.
-2. Confirm the complete 9-row text, coordinates and full dark-magenta background.
-3. Confirm title magenta, the two waiting/instruction rows yellow, and resting HAT labels light-gray.
-4. Press/release Joy Up, Down, Left, Right, Press and Keys A/B/X/Y; only the matching visible token(s) become white while held and return on release.
-5. Confirm `KEY B` does not navigate or cancel discovery.
-6. Confirm `KEY Y` does not lock or turn off the backlight.
-7. Pair a valid BLE HOGP Mouse directly while this screen is visible.
-8. Once the Mouse reaches ready state, confirm the inherited G06 HOME appears. This is the intentional HOPE-01 bridge; `first-mouse-connected` belongs to HOPE-02.
-9. Confirm Mouse X/Y movement reaches the host.
-10. Confirm Left/Right/Middle and supported wheel/Forward/Backward continue working.
-11. Confirm the accepted G06 profile/remap/persistence behavior has not regressed.
-12. Reboot with an already bonded Mouse and confirm it is not treated as a first unsaved Mouse; the inherited G06 startup presentation is allowed at this gate and bonded reconnect must still work.
-13. Confirm no Bluetooth Keyboard or Composite pairing was introduced.
+1. Boot and confirm the first-screen slot shows exactly `SEARCHING FIRST MOUSE`.
+2. Confirm that **`PRESS TO LEARN A KEY` never appears**, including when the device already has a bonded Mouse.
+3. Confirm there is no bond-dependent or other fallback to the old `LEARN THE KEYS` visual.
+4. Confirm the exact 9-row Mouse UI v1 layout and frozen positions.
+5. Confirm full dark-magenta background.
+6. Confirm the two instruction rows are yellow.
+7. Confirm HAT labels are light gray at rest.
+8. Press/release Joy Up/Down/Left/Right/Press and A/B/X/Y; only the corresponding visible token(s) become white while held.
+9. Confirm B does not navigate or cancel discovery.
+10. Confirm Y does not lock or turn off the backlight.
+11. Pair/reconnect a valid BLE HOGP Mouse from this screen.
+12. On READY, confirm the gate may transition to the inherited G06 HOME; `first-mouse-connected` is HOPE-02.
+13. Confirm Mouse X/Y movement.
+14. Confirm Left/Right/Middle and supported wheel/Forward/Backward.
+15. Confirm accepted G06 profile/remap/persistence behavior remains functional.
+16. Reboot with an already bonded Mouse: reconnect must continue working underneath, but the old first-screen layout must **never** reappear.
+17. Confirm no Bluetooth Keyboard/Composite pairing was introduced.
 
 ## Operator result
 
-Operator declaration: **FAIL**.
+Operator declaration for corrected candidate: **PENDING**.
 
-Failure reported by the operator on 2026-09-23:
-
-- the old screen was still presented as a fallback instead of the new Mouse UI v1 screen replacing it;
-- “reuse/adapt” must mean reuse of internal behavior/structure only, never preservation of the legacy visual screen at the replaced position.
-
-The candidate commit `987afd16e951160860c77bd9f304dca586c339d0` and its UF2 are **INVALIDATED**.
-
-PR #2 remains open/draft. HOPE-01 stays active and must produce a corrected candidate before a new physical acceptance attempt.
+Do not merge PR #2 and do not mark HOPE-01 ACCEPTED until the operator explicitly reports PASS for this corrected candidate.
