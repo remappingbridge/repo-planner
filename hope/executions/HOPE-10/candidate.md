@@ -1,35 +1,91 @@
-# HOPE-10 — candidate
+# HOPE remapper-options flow — consolidated candidate
 
-Status: **CANDIDATE READY / PHYSICAL ACCEPTANCE PENDING**.
+Status: **BUNDLED CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING**.
 
 Date: 2026-09-23.
+
+## Operator-authorized bundle
+
+The operator explicitly authorized consolidating the remaining screens of the `remapper-options` flow without stopping for physical acceptance between each screen.
+
+This single candidate contains:
+
+- HOPE-10 — remapper-options
+- HOPE-29 — help-remapper-options
+- HOPE-11 — passthrough-active
+- HOPE-14 — passthrough-not-active
+- HOPE-12 — standard-not-active
+- HOPE-13 — standard-active
+- HOPE-15 — escape-not-active
+- HOPE-16 — escape-active
+- HOPE-17 — custom-edit
+- HOPE-18 — left
+- HOPE-19 — right
+- HOPE-20 — middle
+- HOPE-21 — forward
+- HOPE-22 — backward
+
+None of these bundled gates is accepted yet. They share one consolidated physical candidate.
 
 ## Product candidate
 
 - repository: `remappingbridge/remappingbridge`
-- accepted functional base: HOPE-28 tree `95eaf0c45a0b92e50ea203e7dd9056db2036c0f9`
-- current main restoration commit: `3471e983cb7ec048c9ebb4b057633ff1b028e3aa`
+- accepted base/restored main: `main@3471e983cb7ec048c9ebb4b057633ff1b028e3aa`
 - branch: `hope/hope-10-remapper-options`
-- candidate commit: `45407b30d8f438586ad4d380c65ce5dfb2415b64`
-- draft PR awaiting physical acceptance: `#15`
+- candidate commit: `d2a9256d2a5a38bb4cdb892c38ae6445f207598f`
+- draft PR: `#15`
+- PR title: `HOPE remapper flow: consolidate REMAPPING OPTIONS screens`
+- PR remains draft/unmerged until operator physical acceptance.
 
-## Promotion correction
+The earlier PR #14 premature merge remains non-acceptance history; main was restored before this candidate was built.
 
-PR #14 was prematurely merged during operator interaction before physical acceptance. That promotion is **not acceptance**.
+## Mouse UI v1 authority check
 
-The repository was immediately restored with commit `3471e983cb7ec048c9ebb4b057633ff1b028e3aa`, whose tree is exactly the accepted HOPE-28 tree. HOPE-10 was then reopened as draft PR #15 from the original candidate branch. Do not promote HOPE-10 again until the operator explicitly accepts the physical test.
+The relevant remapper-flow sections in `mouse-ui/main` and `release/ui-layout-v1.0` were compared on 2026-09-23 and are identical for:
 
-## Current Mouse UI v1 authority
+- remapper-options
+- help-remapper-options
+- passthrough-active / passthrough-not-active
+- standard-active / standard-not-active
+- escape-active / escape-not-active
+- custom-edit
+- left / right / middle / forward / backward
 
-Synchronized against:
+Therefore there is no v1 branch ambiguity for this bundle.
 
-- `mouse-ui/src/projector/screens.c@5f269e9625ae0d02a85b5d39eb87026edc448068`
-- `mouse-ui/src/navigation/navigation.c@5f269e9625ae0d02a85b5d39eb87026edc448068`
+## Explicit remappingbridge improvements
 
-Canonical screen:
+The operator requested two deliberate improvements which override the frozen v1 presentation and will be backported to Mouse UI only after the HOPE series finishes.
+
+### Title
+
+The remapper menu title is:
 
 ~~~text
-MOUSE OPTIONS
+REMAPPING OPTIONS
+~~~
+
+instead of v1's `MOUSE OPTIONS`.
+
+### Exclusive current-profile cyan
+
+On `REMAPPING OPTIONS`:
+
+- exactly one confirmed current profile may be cyan;
+- all non-current, non-selected profile rows are ordinary light gray;
+- the selected row is white, even when it is the current profile;
+- after a confirmed profile change, the previously current profile is explicitly reset to ordinary action tone before the new current profile is made cyan.
+
+The renderer now rebuilds rows 1–4 from authoritative `active_profile` on every projection, eliminating stale cyan accumulation.
+
+The renderer-base stale row mapping was also corrected from the historical five-option layout to the current four-option layout.
+
+## Consolidated visible screens
+
+### REMAPPING OPTIONS
+
+~~~text
+REMAPPING OPTIONS
  PASSTHROUGH
  STANDARD REMAP
  ESCAPE REMAP
@@ -40,91 +96,227 @@ KEY B: BACK
 KEY X: HELP
 ~~~
 
-## Replacement
+### REMAPPER OPTIONS HELP
 
-The existing `BLU2USB_SCREEN_MOUSE_OPTIONS` slot was replaced in-place.
+~~~text
+REMAPPER OPTIONS HELP
+CHOOSE FROM THE
+OPTIONS TO CHANGE THE
+FUNCTIONS OF THE
+MOUSE BUTTONS.
+PASSTHROUGH IS THE
+DEFAULT OPTION.
 
-Removed from this flow point:
+ANY KEY: BACK
+~~~
 
-- `PAIR MOUSE`;
-- `DEFAULT REMAP` wording;
-- the old five-option layout.
+### PASSTHROUGH ACTIVE
 
-No parallel remapper-options screen was created.
+~~~text
+PASSTHROUGH ACTIVE
+ORIGINAL MOUSE
+BUTTONS POSITION
+ARE ACTIVE NOW
 
-## Behavior
 
-- exactly four selectable profile rows;
-- Up/Down wraps;
-- current profile is cyan;
-- selected row is white and overrides cyan;
-- Joy Press preserves the existing functional profile destinations:
-  - Passthrough active/not-active;
-  - Standard active/not-active;
-  - Escape active/not-active;
-  - Custom edit;
-- KEY B returns through HOME resolver;
-- current Mouse UI v1 Joy Left shortcut also returns HOME;
-- KEY X remains inert until HOPE-29;
-- global KEY Y lock remains functional;
-- Pair New is no longer reachable from remapper-options and remains available from accepted home-connected.
 
-## Visual profile correction
+KEY B: BACK
+KEY Y: LOCK
+~~~
 
-Because the old `PAIR MOUSE` row was removed, active-profile cyan mapping was shifted to:
+### APPLY PASSTHROUGH
 
-- Passthrough -> row 1;
-- Standard -> row 2;
-- Escape -> row 3;
-- Custom -> row 4.
+~~~text
+APPLY PASSTHROUGH
+ORIGINAL MOUSE
+BUTTONS POSITION
+ARE NOT ACTIVE
 
-The obsolete rule that colored row 1 cyan merely because a Mouse was connected was removed.
+
+KEY A: APPLY
+KEY B: CANCEL
+KEY Y: LOCK
+~~~
+
+### APPLY STANDARD REMAP
+
+~~~text
+APPLY STANDARD REMAP
+FORWARD IS LEFT
+LEFT IS FORWARD
+BACKWARD IS RIGHT
+RIGHT IS BACKWARD
+
+KEY A: APPLY
+KEY B: CANCEL
+KEY Y: LOCK
+~~~
+
+### STANDARD REMAP ACTIVE
+
+~~~text
+STANDARD REMAP ACTIVE
+FORWARD IS LEFT
+LEFT IS FORWARD
+BACKWARD IS RIGHT
+RIGHT IS BACKWARD
+
+
+KEY B: BACK
+KEY Y: LOCK
+~~~
+
+### APPLY ESCAPE REMAP
+
+~~~text
+APPLY ESCAPE REMAP
+FORWARD IS LEFT
+BACKWARD IS RIGHT
+LEFT IS ESCAPE
+RIGHT IS BACKWARD
+MIDDLE IS FORWARD
+
+KEY A: APPLY
+KEY B: CANCEL
+~~~
+
+KEY Y remains the global Lock action when a Mouse is saved even though this screen intentionally does not print the Lock hint.
+
+### ESCAPE APPLIED ACTIVE
+
+~~~text
+ESCAPE APPLIED ACTIVE
+FORWARD IS LEFT
+BACKWARD IS RIGHT
+LEFT IS ESCAPE
+RIGHT IS BACKWARD
+MIDDLE IS FORWARD
+
+KEY B: BACK
+KEY Y: LOCK
+~~~
+
+### EDIT CUSTOM REMAP
+
+~~~text
+EDIT CUSTOM REMAP
+ LEFT IS LEFT
+ RIGHT IS RIGHT
+ MIDDLE IS MIDDLE
+ FORWARD IS FORWARD
+ BACKWARD IS BACKWARD
+
+JOY PRESS: ACCESS
+KEY A: APPLY CUSTOM
+~~~
+
+Successful Custom apply no longer enters the legacy `CUSTOM APPLIED` presentation. Runtime+persistence confirmation leaves the user in `EDIT CUSTOM REMAP`, with the clean confirmed mapping rows cyan and the selected row white.
+
+### Source editors
+
+Each source editor uses this target order:
+
+1. LEFT
+2. RIGHT
+3. MIDDLE
+4. ESCAPE
+5. FORWARD
+6. BACKWARD
+
+The product domain/storage enum order is unchanged. Explicit UI-order ↔ domain-target mapping functions isolate presentation order from persistence/runtime semantics.
+
+KEY A applies the selected draft target and returns to Custom Edit. Current Mouse UI v1 behavior also accepts Joy Press for the same action. KEY B returns to Custom Edit preserving the edited source row.
+
+## Functional consolidation
+
+Existing G06 remap/profile/storage implementation remains the underlying authority.
+
+- preset apply still requires successful runtime activation + persistence before active feedback;
+- Custom target edits still persist through the existing draft engine;
+- Custom full apply still uses the existing runtime/persistence confirmation;
+- Escape still uses the accepted synthetic USB Keyboard output exception;
+- no Bluetooth Keyboard/Composite functionality was introduced.
+
+When the current Mouse disconnects while one of these active screens is visible:
+
+- Passthrough Active -> Apply Passthrough
+- Standard Remap Active -> Apply Standard Remap
+- Escape Applied Active -> Apply Escape Remap
+
+This matches current Mouse UI v1 active/not-active behavior.
 
 ## Changed files
 
+- `include/blu2usb/ux_model/ux_model.h`
+- `src/app/main.c`
 - `src/renderer/profile_feedback.c`
+- `src/renderer/renderer.c`
+- `src/ux_model/profile_state.c`
 - `src/ux_model/ux_model.c`
 - `tests/CMakeLists.txt`
 - `tests/test_g06_profile_ui.c`
 - `tests/test_hope10_remapper_options.c`
 - `tests/test_hope10_remapper_options_source.py`
+- `tests/test_hope_remapper_flow_consolidated.c`
+- `tests/test_hope_remapper_flow_consolidated_source.py`
 
-No BLE, storage, remap engine, profile persistence, USB HID or pairing implementation file changed.
+No BLE pairing, storage format, USB HID descriptor, profile domain enum, or remap engine architecture was changed.
 
 ## Automated verification
 
-GitHub Actions run: `35834313013` — **SUCCESS**.
+Canonical GitHub Actions run: `35838169062` — **SUCCESS**.
 
-- host-architecture: **SUCCESS**
-- Pico 2 W production: **SUCCESS**
-- UF2 verification/upload: **SUCCESS**
+### host-architecture — SUCCESS
 
-Focused tests freeze:
+**35/35 tests PASS**.
 
-1. exact current-v1 9-row literal;
-2. four options only;
-3. absence of legacy Pair Mouse and Default Remap copy;
-4. active cyan rows 1..4;
-5. selected white precedence;
-6. active/inactive profile destinations;
-7. Custom destination;
-8. B and Joy Left HOME behavior;
-9. X inert until HOPE-29;
-10. global Y lock;
-11. Pair New absent from remapper-options.
+The focused tests cover:
+
+1. exact visible text for every bundled screen;
+2. four-option REMAPPING OPTIONS menu;
+3. active/inactive routing for Passthrough, Standard and Escape;
+4. contextual Help and Help-owned KEY Y;
+5. exclusive current-profile cyan after sequential confirmed profile changes;
+6. selected-white precedence over current cyan;
+7. Custom apply success remaining in Custom Edit;
+8. Custom clean-current cyan rows with selected-white precedence;
+9. source editor exact target order;
+10. UI-order ↔ domain-target mapping, including ESCAPE and BACKWARD;
+11. source editor KEY A / Joy Press apply-and-back;
+12. source-editor KEY B return preserving source row;
+13. global Y lock on non-Help remapper screens;
+14. active preset screen demotion on Mouse disconnect;
+15. all previously accepted HOPE regressions;
+16. architecture and screen-contract tests.
+
+An intermediate run found only a missing local renderer tone helper at link time; it was corrected before the canonical final run.
+
+### pico2-w-production — SUCCESS
+
+- pinned ARM toolchain: PASS
+- pinned Pico SDK: PASS
+- Pico 2 W configure: PASS
+- production firmware build/link: PASS
+- UF2 verification: PASS
+- artifact upload: PASS
 
 ## Candidate UF2
 
 GitHub Actions artifact:
 
-- artifact id: `10738621023`
-- ZIP size: **330,352 bytes**
-- ZIP digest: `sha256:2788c13132de2bdcf741f0ad9769abe985a232842e47464e1fcc57a94ee8ce79`
+- artifact id: `10740041877`
+- name: `blu2usb-picow-production-pico2w`
+- ZIP size: **330,637 bytes**
+- ZIP digest: `sha256:0c6fbf208cc0d4d3e92c18f3e0989943441ad3ffcdbf7d2310d280887aecfd56`
 
 Extracted firmware:
 
-- file: `HOPE-10-remapper-options-pico2w.uf2`
-- size: **896,512 bytes**
-- SHA-256: `42a40d9079bdad2cf22cec939d69862c0ba1912c1bc6e4d7f54a5d7ec265fdfa`
+- file: `HOPE-remapper-flow-consolidated-pico2w.uf2`
+- size: **897,536 bytes**
+- SHA-256: `875cda790bcc86652cd4e6676d5b75ae1108b8ff91ae7f1c1003e25e982c42f4`
 
-HOPE-10 remains **not accepted** and draft PR #15 remains unmerged until physical acceptance.
+## Gate state
+
+All bundled remapper-flow gates remain **PHYSICAL ACCEPTANCE PENDING**.
+
+Do not merge PR #15 and do not mark HOPE-10/29/11/14/12/13/15/16/17/18/19/20/21/22 ACCEPTED until the operator explicitly accepts this exact consolidated candidate.
