@@ -174,13 +174,15 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-28 — help-home-connected
 
-**Status:** CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `46e501f13784d3ef94e3d4213596b25afa731347`.
 
 **Objetivo:** implementar `help-home-connected` conforme Mouse UI v1.
 
 ---
 
 ## HOPE-10 — remapper-options
+
+**Status:** IN PROGRESS.
 
 **Objetivo:** substituir in-place o antigo `HOME > MOUSE OPTIONS` por `remapper-options`, mantendo suas funções úteis por baixo e exibindo somente o layout/texto Mouse UI v1.
 
