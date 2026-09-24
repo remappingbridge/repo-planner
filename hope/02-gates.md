@@ -294,7 +294,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-04 — saved-devices
 
-**Status:** IMPLEMENTED / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING — candidate `143c00b053e22345768054786a3f334d995bbb60`.
+**Status:** IMPLEMENTED / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING — corrected candidate `3b85bac57189b7dc92b8bc564d2ddf983d8e4520`; previous candidate `143c00b053e22345768054786a3f334d995bbb60` superseded after physical-test bug report.
 
 **Objetivo:** implementar `saved-devices`.
 
