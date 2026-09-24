@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **IN PROGRESS — all implemented gates through the consolidated remapper flow are ACCEPTED; HOPE-04 ACTIVE. Current feature scope ends after HOPE-05 and HOPE-30. HOPE-23 and HOPE-31 are DEFERRED to a new feature/gate series.**.
+Status geral: **CURRENT HOPE SERIES COMPLETE / EXECUTION PAUSED BY OPERATOR — HOPE-30 accepted and promoted. Do not start any new gate or deferred feature until a new explicit operator order. HOPE-23 and HOPE-31 remain DEFERRED to a future feature/gate series.**.
 
 ## Ordem oficial de execução
 
@@ -39,9 +39,11 @@ HOPE-05
 HOPE-30
 ~~~
 
-Somente o primeiro gate não aceito da sequência **desta feature** pode ser iniciado.
+A sequência desta feature está **concluída**. Nenhum novo gate deve ser iniciado automaticamente.
 
-`HOPE-23` e `HOPE-31` foram removidos da sequência desta feature por decisão do operador em 2026-09-24. O trabalho correspondente será reprojetado como uma **nova feature, com uma nova série de gates**, sem bloquear HOPE-04/05/30 e sem ser iniciado automaticamente ao término de HOPE-30.
+**HOLD DO OPERADOR (2026-09-24): não executar nenhum novo gate até ordem contrária.**
+
+`HOPE-23` e `HOPE-31` permanecem removidos desta sequência por decisão do operador. O trabalho correspondente poderá ser reprojetado futuramente como uma **nova feature, com uma nova série de gates**, mas somente após nova ordem explícita do operador.
 
 ## Regra universal de todos os gates
 
@@ -314,7 +316,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-30 — help-remove-this
 
-**Status:** ACCEPTED / PHYSICAL PASS — exact candidate `956906c2320c99937875bbbb95e6372945898424`; promotion to main in progress.
+**Status:** ACCEPTED / PROMOTED TO MAIN `25670c9692aaaf709912e2d6bb87c27c10b25b4e` — exact physically accepted candidate `956906c2320c99937875bbbb95e6372945898424`.
 
 **Objetivo:** implementar `help-remove-this` conforme Mouse UI v1.
 
