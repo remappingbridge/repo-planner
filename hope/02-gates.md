@@ -294,7 +294,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-04 — saved-devices
 
-**Status:** ACTIVE — implementation candidate in `hope/hope-04-saved-devices`.
+**Status:** IMPLEMENTED / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING — candidate `143c00b053e22345768054786a3f334d995bbb60`.
 
 **Objetivo:** implementar `saved-devices`.
 
