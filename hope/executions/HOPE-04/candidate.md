@@ -5,7 +5,7 @@ Status: **IMPLEMENTED / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING**.
 - branch: `hope/hope-04-saved-devices`
 - draft PR: `#16`
 - accepted base: `5c62a98a4495570237d7b4b223a090bea1020990`
-- current implementation head: `143c00b053e22345768054786a3f334d995bbb60`
+- current implementation head: `3b85bac57189b7dc92b8bc564d2ddf983d8e4520`
 
 ## Implemented behavior
 
@@ -24,13 +24,15 @@ Status: **IMPLEMENTED / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING**.
 
 ## Automated evidence
 
-- GitHub Actions run: `#63` / `35980402577`
+- corrected GitHub Actions run: `#64` / `35982729822`
 - `host-architecture`: PASS
-- 37 host/architecture tests: PASS
+- host/architecture test suite: PASS
 - `pico2-w-production`: PASS
 - production UF2 verification: PASS
+- corrected UF2: `HOPE-04-saved-devices-name-fix-3b85bac-pico2w.uf2`
 - UF2 size: **895,488 bytes**
-- UF2 SHA-256: `bc3cc1501fbc7fd145758b07070abafbf734d30869b4d64799bc8a6054b29f25`
+- UF2 SHA-256: `fe481023d13f29300f061e081ec54a05706b87ba50ee8f98f0c1d9949c98c256`
+- previous run #63 / candidate `143c00b...`: SUPERSEDED
 
 Do not promote before the operator physically accepts this exact candidate UF2.
 
