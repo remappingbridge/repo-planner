@@ -1,6 +1,6 @@
 # HOPE-05 — remove-this physical acceptance
 
-Status: **PENDING OPERATOR TEST / NOT ACCEPTED**.
+Status: **ACCEPTED BY OPERATOR / READY FOR PROMOTION**.
 
 Candidate:
 
@@ -33,4 +33,10 @@ Candidate:
 
 ## Operator result
 
-**PENDING**.
+**ACCEPTED** by the operator on 2026-09-24.
+
+Accepted exact candidate:
+- commit: `6359472553df98da57a4fb8af2d28942e9deda67`
+- UF2 SHA-256: `b2770517744cf6f3d71933c57a963f502e563f0e03bc76b45e73f07012004070`
+
+Operator declaration: gate accepted after physical testing.
