@@ -8,7 +8,7 @@ Candidate:
 - commit: `4e738622a06a572589f4626a9a7454c486efbe62`
 - draft PR: `#16`
 - accepted base: `5c62a98a4495570237d7b4b223a090bea1020990`
-- UF2: `HOPE-04-saved-devices-persistent-names-4e73862-pico2w.uf2`
+- UF2: `HOPE-04-saved-devices-persistent-names-connected-first-4e73862-pico2w.uf2`
 - size: **900,608 bytes**
 - SHA-256: `15208ed71da728e69038b3bd15d19699e194e9974f84df3a108c5e9d3103617e`
 - CI run: `35985679522` — host/architecture PASS; Pico 2 W production PASS.
