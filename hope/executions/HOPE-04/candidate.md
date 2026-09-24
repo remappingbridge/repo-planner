@@ -48,3 +48,18 @@ Correction: the saved-page association now uses BTstack Security Manager `sm_le_
 Corrected candidate head: `3b85bac57189b7dc92b8bc564d2ddf983d8e4520`.
 
 The previous physical candidate `143c00b053e22345768054786a3f334d995bbb60` is superseded and must not be accepted.
+
+
+## Second physical-test correction — authoritative saved-page index
+
+The previous correction still rendered `UNKNOWN MOUSE` in physical testing. The name itself remained correct on `home-connected`; therefore the failure was again the saved-page association, not GATT Device Name acquisition.
+
+The corrected implementation no longer depends only on querying `sm_le_device_index()` after the connection is already ready. It now caches the LE Device DB index at the moment BTstack resolves the peer identity:
+
+- `SM_EVENT_IDENTITY_RESOLVING_SUCCEEDED` -> `sm_event_identity_resolving_succeeded_get_index(packet)`;
+- newly paired Mouse -> newly created LE Device DB index during Pair New promotion;
+- defensive single-device fallback -> page 0 when exactly one Mouse is saved.
+
+Corrected implementation head: `8980f39705f79ef9a0a49b4ee04450e64ca5d761`.
+
+Superseded candidates: `143c00b...` and `3b85bac...`.
