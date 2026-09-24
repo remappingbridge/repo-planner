@@ -37,3 +37,10 @@ Accepted exact candidate:
 Operator declaration: HOPE-30 accepted after physical testing.
 
 Upon physical acceptance, HOPE-30 can be promoted and the current HOPE series is complete.
+
+
+Promotion:
+- merged PR: `#18`
+- main commit: `25670c9692aaaf709912e2d6bb87c27c10b25b4e`
+- series state: **COMPLETE / EXECUTION PAUSED BY OPERATOR**
+- hold: **do not execute any new gate until a new explicit operator order**
