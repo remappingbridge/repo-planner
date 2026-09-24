@@ -294,7 +294,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-04 — saved-devices
 
-**Status:** ACCEPTED / PHYSICAL PASS — exact candidate `14001e06da8be2fce05fd842dec5c868f33b475a`; promotion to main in progress.
+**Status:** ACCEPTED / PROMOTED TO MAIN `a459316fd2c9eefb9fc85e6656cd96134f22d0a0`.
 
 **Objetivo:** implementar `saved-devices`.
 
@@ -305,6 +305,8 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 ---
 
 ## HOPE-05 — remove-this
+
+**Status:** ACTIVE.
 
 **Objetivo:** implementar `remove-this` conforme Mouse UI v1.
 
