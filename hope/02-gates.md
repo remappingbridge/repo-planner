@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **IN PROGRESS — HOPE-00/01/02/08/24/09/25/06/26/07/27/03 ACCEPTED; HOPE-28 ACTIVE**.
+Status geral: **IN PROGRESS — all implemented gates through the consolidated remapper flow are ACCEPTED; HOPE-04 ACTIVE. Current feature scope ends after HOPE-05 and HOPE-30. HOPE-23 and HOPE-31 are DEFERRED to a new feature/gate series.**.
 
 ## Ordem oficial de execução
 
@@ -182,7 +182,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-10 — remapper-options
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** substituir in-place o antigo `HOME > MOUSE OPTIONS` por `remapper-options`, mantendo suas funções úteis por baixo e exibindo somente o layout/texto Mouse UI v1.
 
@@ -190,7 +190,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-29 — help-remapper-options
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** implementar `help-remapper-options` conforme Mouse UI v1.
 
@@ -198,7 +198,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-11 — passthrough-active
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > PASSTHROUGH` e aplicar layout/texto Mouse UI v1.
 
@@ -206,7 +206,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-14 — passthrough-not-active
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > PASSTHROUGH` e aplicar layout/texto Mouse UI v1.
 
@@ -214,7 +214,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-12 — standard-not-active
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > DEFAULT REMAP` e aplicar layout/texto Mouse UI v1.
 
@@ -222,7 +222,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-13 — standard-active
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > DEFAULT REMAP` e aplicar layout/texto Mouse UI v1.
 
@@ -230,7 +230,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-15 — escape-not-active
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > ESCAPE REMAP` e aplicar layout/texto Mouse UI v1.
 
@@ -238,7 +238,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-16 — escape-active
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > ESCAPE REMAP` e aplicar layout/texto Mouse UI v1.
 
@@ -246,7 +246,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-17 — custom-edit
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função do antigo `HOME > MOUSE OPTIONS > CUSTOM REMAP (EDIT CUSTOM REMAP)` e aplicar layout/texto Mouse UI v1.
 
@@ -254,7 +254,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-18 — left
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função antiga de edição `LEFT IS... / LEFT WILL BECOME` e aplicar a tela `left` Mouse UI v1.
 
@@ -262,7 +262,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-19 — right
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função antiga de edição `RIGHT IS... / RIGHT WILL BECOME` e aplicar a tela `right` Mouse UI v1.
 
@@ -270,7 +270,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-20 — middle
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função antiga de edição `MIDDLE IS... / MIDDLE WILL BECOME` e aplicar a tela `middle` Mouse UI v1.
 
@@ -278,7 +278,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-21 — forward
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função antiga de edição `FORWARD IS... / FORWARD WILL BECOME` e aplicar a tela `forward` Mouse UI v1.
 
@@ -286,13 +286,15 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-22 — backward
 
-**Status:** BUNDLED REMAPPER-FLOW CANDIDATE READY / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5c62a98a4495570237d7b4b223a090bea1020990`.
 
 **Objetivo:** preservar a função antiga de edição `BACKWARD IS... / BACKWARD WILL BECOME` e aplicar a tela `backward` Mouse UI v1.
 
 ---
 
 ## HOPE-04 — saved-devices
+
+**Status:** ACTIVE — implementation candidate in `hope/hope-04-saved-devices`.
 
 **Objetivo:** implementar `saved-devices`.
 
@@ -316,11 +318,15 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-23 — learn-the-keys
 
+**Status:** DEFERRED — moved to a new feature and a new gate series by operator decision on 2026-09-24.
+
 **Objetivo:** implementar `learn-the-keys` conforme Mouse UI v1.
 
 ---
 
 ## HOPE-31 — final inventory and documentation
+
+**Status:** DEFERRED — moved to a new feature and a new gate series by operator decision on 2026-09-24.
 
 **Objetivo:** garantir exatamente **30 telas novas/canônicas** com regras bem definidas e nenhuma tela antiga solta, escondida ou alcançável fora do fluxo.
 
