@@ -1,6 +1,6 @@
 # HOPE-04 — saved-devices physical acceptance
 
-Status: **PENDING OPERATOR TEST / NOT ACCEPTED**.
+Status: **ACCEPTED BY OPERATOR / READY FOR PROMOTION**.
 
 Candidate:
 
@@ -42,4 +42,10 @@ Superseded candidates: `143c00b...`, `3b85bac...`, `8980f397...`, `4e738622...` 
 
 ## Operator result
 
-**PENDING**. The stable-identity/sparse-slot candidate above must be physically tested.
+**ACCEPTED** by the operator on 2026-09-24.
+
+Accepted exact candidate:
+- commit: `14001e06da8be2fce05fd842dec5c868f33b475a`
+- UF2 SHA-256: `ae1ea834c6d559af37f4a51d031c850bed97cff5371f9436bce83275fda05368`
+
+Operator declaration: gate accepted after physical testing.
