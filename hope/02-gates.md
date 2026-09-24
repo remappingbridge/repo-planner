@@ -314,6 +314,8 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-30 — help-remove-this
 
+**Status:** IMPLEMENTED / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING — candidate `956906c2320c99937875bbbb95e6372945898424`.
+
 **Objetivo:** implementar `help-remove-this` conforme Mouse UI v1.
 
 ---
