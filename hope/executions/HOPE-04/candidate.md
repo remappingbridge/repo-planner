@@ -33,3 +33,16 @@ Status: **IMPLEMENTED / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING**.
 - UF2 SHA-256: `bc3cc1501fbc7fd145758b07070abafbf734d30869b4d64799bc8a6054b29f25`
 
 Do not promote before the operator physically accepts this exact candidate UF2.
+
+
+## Physical-test bugfix — saved page name
+
+Physical testing reported that the connected Mouse name was correct on `home-connected` but was not shown on the corresponding `saved-devices` page.
+
+Root cause: `home-connected` consumes the current GATT Device Name directly, while the saved page first needs to identify which bond/page is the current Mouse. The initial HOPE-04 implementation compared the live GAP peer address against the persisted LE bond address. That is not reliable with BLE Privacy/RPA because the connection can expose a resolvable private address while the bond stores the identity address.
+
+Correction: the saved-page association now uses BTstack Security Manager `sm_le_device_index(g_connection_handle)`, which is the authoritative mapping from the live connection to the LE Device DB bond.
+
+Corrected candidate head: `3b85bac57189b7dc92b8bc564d2ddf983d8e4520`.
+
+The previous physical candidate `143c00b053e22345768054786a3f334d995bbb60` is superseded and must not be accepted.
