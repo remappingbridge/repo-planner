@@ -37,11 +37,11 @@ HOPE-22
 HOPE-04
 HOPE-05
 HOPE-30
-HOPE-23
-HOPE-31
 ~~~
 
-Somente o primeiro gate não aceito da sequência pode ser iniciado.
+Somente o primeiro gate não aceito da sequência **desta feature** pode ser iniciado.
+
+`HOPE-23` e `HOPE-31` foram removidos da sequência desta feature por decisão do operador em 2026-09-24. O trabalho correspondente será reprojetado como uma **nova feature, com uma nova série de gates**, sem bloquear HOPE-04/05/30 e sem ser iniciado automaticamente ao término de HOPE-30.
 
 ## Regra universal de todos os gates
 
