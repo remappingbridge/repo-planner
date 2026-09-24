@@ -5,7 +5,7 @@ Status: **IMPLEMENTED / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING**.
 - branch: `hope/hope-04-saved-devices`
 - draft PR: `#16`
 - accepted base: `5c62a98a4495570237d7b4b223a090bea1020990`
-- current implementation head: `4e738622a06a572589f4626a9a7454c486efbe62`
+- current implementation head: `14001e06da8be2fce05fd842dec5c868f33b475a`
 
 ## Implemented behavior
 
@@ -96,3 +96,35 @@ Final corrected candidate:
 - SHA-256: `15208ed71da728e69038b3bd15d19699e194e9974f84df3a108c5e9d3103617e`
 
 All earlier HOPE-04 candidates are superseded.
+
+
+## Physical-test correction — sparse BTstack slots and stable identity
+
+Physical testing of `4e738622...` showed that disconnected Mouse names still reverted to `UNKNOWN MOUSE`, and reconnecting an already-saved Mouse could create a third page.
+
+Root cause was identified in BTstack's TLV LE Device DB semantics: `le_device_db_count()` returns the **number of valid entries**, but valid entries are not guaranteed to occupy indexes `0..count-1`. The TLV implementation can place the first bonds in high slots such as 7 and 6. HOPE-04 had incorrectly used the cardinality as an index upper bound.
+
+The corrected implementation:
+
+- enumerates `0..le_device_db_max_count()-1` and validates each real slot;
+- maps sparse physical DB slots to logical saved-Mouse ordinals/pages;
+- captures the exact DB slot from both `SM_EVENT_IDENTITY_RESOLVING_SUCCEEDED` and `SM_EVENT_IDENTITY_CREATED`;
+- never derives a new bond slot from `count - 1`;
+- persists Mouse names using BLE identity/IRK (registry schema v2), with migration from schema v1;
+- counts logical Mice by unique BLE identity rather than raw duplicate bond entries;
+- treats entries with the same non-zero IRK (or same identity address) as the same saved Mouse;
+- after a successful HID connection, keeps the known-working current bond and removes equivalent duplicate bond entries;
+- saved reconnect whitelist enumeration now uses the actual valid sparse slots;
+- Pair New distinguishes a genuinely new logical Mouse from a transient duplicate raw bond.
+
+Final corrected candidate:
+
+- commit: `14001e06da8be2fce05fd842dec5c868f33b475a`
+- CI: `#81` / `35991066967`
+- host/architecture: PASS
+- Pico 2 W production: PASS
+- UF2: `HOPE-04-saved-devices-stable-identity-14001e0-pico2w.uf2`
+- size: **906,752 bytes**
+- SHA-256: `ae1ea834c6d559af37f4a51d031c850bed97cff5371f9436bce83275fda05368`
+
+All earlier HOPE-04 physical candidates, including `4e738622...`, are superseded.
