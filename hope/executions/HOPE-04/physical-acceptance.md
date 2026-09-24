@@ -5,13 +5,13 @@ Status: **PENDING OPERATOR TEST / NOT ACCEPTED**.
 Candidate:
 
 - branch: `hope/hope-04-saved-devices`
-- commit: `4e738622a06a572589f4626a9a7454c486efbe62`
+- commit: `14001e06da8be2fce05fd842dec5c868f33b475a`
 - draft PR: `#16`
 - accepted base: `5c62a98a4495570237d7b4b223a090bea1020990`
-- UF2: `HOPE-04-saved-devices-persistent-names-connected-first-4e73862-pico2w.uf2`
-- size: **900,608 bytes**
-- SHA-256: `15208ed71da728e69038b3bd15d19699e194e9974f84df3a108c5e9d3103617e`
-- CI run: `35985679522` — host/architecture PASS; Pico 2 W production PASS.
+- UF2: `HOPE-04-saved-devices-stable-identity-14001e0-pico2w.uf2`
+- size: **906,752 bytes**
+- SHA-256: `ae1ea834c6d559af37f4a51d031c850bed97cff5371f9436bce83275fda05368`
+- CI run: `35991066967` — host/architecture PASS; Pico 2 W production PASS.
 
 ## Required scenarios
 
@@ -33,10 +33,13 @@ Candidate:
 16. Disconnect/reconnect the current Mouse while on `saved-devices`; the screen stays usable and connection status reflects runtime state.
 17. Confirm Pair New, Mouse movement, buttons, scroll and all already accepted remapping profiles still work.
 18. Confirm no Keyboard/Composite pairing option or legacy saved-device detail screen is reachable.
+19. With two previously saved Mice, connect each Mouse once so its Device Name is learned by this corrected firmware; then disconnect both and confirm both names remain instead of `UNKNOWN MOUSE`.
+20. Turn either saved Mouse back on from home-searching and confirm the saved-device count does not increase; the Mouse must reuse its existing logical page/identity instead of creating a third Mouse.
+21. If the previous buggy firmware already left a duplicate bond, reconnect that Mouse and confirm the logical page count is deduplicated and remains stable after another disconnect/reconnect cycle.
 
 
-Superseded candidates: `143c00b...`, `3b85bac...`, `8980f397...` — do not use/accept.
+Superseded candidates: `143c00b...`, `3b85bac...`, `8980f397...`, `4e738622...` — do not use/accept.
 
 ## Operator result
 
-**PENDING**. The connected-first/persistent-name candidate above must be physically tested.
+**PENDING**. The stable-identity/sparse-slot candidate above must be physically tested.
