@@ -1,6 +1,6 @@
 # HOPE-30 — help-remove-this physical acceptance
 
-Status: **PENDING OPERATOR TEST / NOT ACCEPTED**.
+Status: **ACCEPTED BY OPERATOR / READY FOR PROMOTION**.
 
 Candidate:
 
@@ -28,6 +28,12 @@ Candidate:
 
 ## Operator result
 
-**PENDING**.
+**ACCEPTED** by the operator on 2026-09-24.
+
+Accepted exact candidate:
+- commit: `956906c2320c99937875bbbb95e6372945898424`
+- UF2 SHA-256: `3de284a57a243759839f3b427f9d4a6060b11c0ecae64ba337099b08209b8a5f`
+
+Operator declaration: HOPE-30 accepted after physical testing.
 
 Upon physical acceptance, HOPE-30 can be promoted and the current HOPE series is complete.
