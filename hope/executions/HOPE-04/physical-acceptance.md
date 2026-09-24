@@ -2,7 +2,16 @@
 
 Status: **PENDING OPERATOR TEST / NOT ACCEPTED**.
 
-Candidate branch: `hope/hope-04-saved-devices`.
+Candidate:
+
+- branch: `hope/hope-04-saved-devices`
+- commit: `143c00b053e22345768054786a3f334d995bbb60`
+- draft PR: `#16`
+- accepted base: `5c62a98a4495570237d7b4b223a090bea1020990`
+- UF2: `HOPE-04-saved-devices-143c00b-pico2w.uf2`
+- size: **895,488 bytes**
+- SHA-256: `bc3cc1501fbc7fd145758b07070abafbf734d30869b4d64799bc8a6054b29f25`
+- CI run: `35980402577` — host/architecture PASS; Pico 2 W production PASS.
 
 ## Required scenarios
 
