@@ -5,13 +5,13 @@ Status: **PENDING OPERATOR TEST / NOT ACCEPTED**.
 Candidate:
 
 - branch: `hope/hope-04-saved-devices`
-- commit: `3b85bac57189b7dc92b8bc564d2ddf983d8e4520`
+- commit: `8980f39705f79ef9a0a49b4ee04450e64ca5d761`
 - draft PR: `#16`
 - accepted base: `5c62a98a4495570237d7b4b223a090bea1020990`
-- UF2: `HOPE-04-saved-devices-name-fix-3b85bac-pico2w.uf2`
-- size: **895,488 bytes**
-- SHA-256: `fe481023d13f29300f061e081ec54a05706b87ba50ee8f98f0c1d9949c98c256`
-- CI run: `35982729822` — host/architecture PASS; Pico 2 W production PASS.
+- UF2: `HOPE-04-saved-devices-name-fix-v2-8980f39-pico2w.uf2`
+- size: **896,000 bytes**
+- SHA-256: `4b660250ed493adc161881f91b7e752acd8815d4deafeb266d9e4fd9d63c5ac2`
+- CI run: `35983866849` — host/architecture PASS; Pico 2 W production PASS.
 - superseded physical candidate: `143c00b053e22345768054786a3f334d995bbb60` — do not accept/use for HOPE-04.
 
 ## Required scenarios
@@ -33,6 +33,8 @@ Candidate:
 15. Confirm Pair New, Mouse movement, buttons, scroll and all already accepted remapping profiles still work.
 16. Confirm no Keyboard/Composite pairing option or legacy saved-device detail screen is reachable.
 
+
+- superseded physical candidates: `143c00b...`, `3b85bac...` — do not use/accept.
 ## Operator result
 
-**PENDING**.
+**PENDING**. The second corrected candidate must be physically tested.
