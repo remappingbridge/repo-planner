@@ -1,6 +1,6 @@
 # REMAPPING OPTIONS flow — consolidated physical acceptance
 
-Status: **PENDING OPERATOR TEST / NOT ACCEPTED**.
+Status: **ACCEPTED / PHYSICAL TEST PASSED / PROMOTED TO MAIN**.
 
 Candidate:
 
@@ -86,6 +86,8 @@ This one test matrix covers bundled gates HOPE-10, HOPE-29, HOPE-11, HOPE-14, HO
 
 ## Operator result
 
-Operator declaration: **PENDING**.
+Operator declaration: **PASSED / ACCEPTED on 2026-09-24**.
 
-Do not merge PR #15 and do not mark any bundled remapper-flow gate ACCEPTED until the operator explicitly accepts this exact consolidated candidate.
+The operator confirmed that all bundled gates passed the physical test matrix. PR #15 was promoted to `main` as merge commit `5c62a98a4495570237d7b4b223a090bea1020990`.
+
+Accepted bundled gates: HOPE-10, HOPE-29, HOPE-11, HOPE-14, HOPE-12, HOPE-13, HOPE-15, HOPE-16, HOPE-17, HOPE-18, HOPE-19, HOPE-20, HOPE-21 and HOPE-22.
