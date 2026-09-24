@@ -49,3 +49,7 @@ Accepted exact candidate:
 - UF2 SHA-256: `ae1ea834c6d559af37f4a51d031c850bed97cff5371f9436bce83275fda05368`
 
 Operator declaration: gate accepted after physical testing.
+
+Promotion:
+- merged PR: `#16`
+- main commit: `a459316fd2c9eefb9fc85e6656cd96134f22d0a0`
