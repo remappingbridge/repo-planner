@@ -1,6 +1,6 @@
 # HOPE-23 — remove learn-the-keys physical acceptance
 
-Status: **PENDING OPERATOR TEST / NOT ACCEPTED**.
+Status: **ACCEPTED BY OPERATOR / READY FOR PROMOTION**.
 
 Candidate:
 
@@ -29,6 +29,12 @@ Candidate:
 
 ## Operator result
 
-**PENDING**.
+**ACCEPTED** by the operator on 2026-09-26.
+
+Accepted exact candidate:
+- commit: `0c12061f010bbd5416808643d843d64f9bf89b73`
+- UF2 SHA-256: `22e6ff36fcca0ae2cd6f7696cde31d0998dbf7a895fc034213f8a096a0ee706f`
+
+Operator declaration: HOPE-23 accepted after physical testing.
 
 After this gate, remain on HOLD. Do not start any subsequent gate without a new explicit operator order.
