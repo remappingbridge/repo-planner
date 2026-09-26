@@ -1,6 +1,6 @@
 # HOPE-31 — final physical acceptance
 
-Status: **PENDING OPERATOR TEST / NOT ACCEPTED**.
+Status: **ACCEPTED BY OPERATOR / READY FOR PROMOTION**.
 
 Candidate:
 
@@ -67,6 +67,12 @@ Verify the canonical 29-screen set as applicable through normal flows:
 
 ## Operator result
 
-**PENDING**.
+**ACCEPTED** by the operator on 2026-09-26.
+
+Accepted exact candidate:
+- commit: `15a3ec9f8b20c96e41cb7e04610191b2853378bf`
+- UF2 SHA-256: `6ff7b6e5d8d171e65184b16298b0559105793ac838ee1d2a0f13ecf2f8a7d4ef`
+
+Operator declaration: HOPE-31 accepted after final physical testing.
 
 Upon acceptance of this exact candidate, merge PR #20. That promotion completes the HOPE gate series; no further gate exists in this series.
