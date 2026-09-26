@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **CURRENT HOPE SERIES COMPLETE / EXECUTION PAUSED BY OPERATOR — HOPE-30 accepted and promoted. Do not start any new gate or deferred feature until a new explicit operator order. HOPE-23 and HOPE-31 remain DEFERRED to a future feature/gate series.**.
+Status geral: **HOPE-23 REOPENED BY OPERATOR — replace the cancelled learn-the-keys feature with removal of its user-facing option/route. HOPE-31 remains DEFERRED. No gate after HOPE-23 may start without a new explicit operator order.**.
 
 ## Ordem oficial de execução
 
@@ -41,7 +41,7 @@ HOPE-30
 
 A sequência desta feature está **concluída**. Nenhum novo gate deve ser iniciado automaticamente.
 
-**HOLD DO OPERADOR (2026-09-24): não executar nenhum novo gate até ordem contrária.**
+**ORDEM DO OPERADOR (2026-09-26): executar somente o HOPE-23 com o novo escopo abaixo. Após sua conclusão, voltar ao HOLD e não iniciar nenhum outro gate sem nova ordem explícita.**
 
 `HOPE-23` e `HOPE-31` permanecem removidos desta sequência por decisão do operador. O trabalho correspondente poderá ser reprojetado futuramente como uma **nova feature, com uma nova série de gates**, mas somente após nova ordem explícita do operador.
 
@@ -322,11 +322,21 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ---
 
-## HOPE-23 — learn-the-keys
+## HOPE-23 — remove learn-the-keys
 
-**Status:** DEFERRED — moved to a new feature and a new gate series by operator decision on 2026-09-24.
+**Status:** ACTIVE — scope replaced by operator decision on 2026-09-26.
 
-**Objetivo:** implementar `learn-the-keys` conforme Mouse UI v1.
+**Objetivo:** cancelar definitivamente a tela/feature `learn-the-keys` e remover sua opção/rota de navegação da aplicação.
+
+**Procedimento atualizado:**
+- não implementar a tela `learn-the-keys`;
+- remover `LEARN THE KEYS` das opções de `home-connected`, `home-searching` e `home-retry`;
+- ajustar seleção, quantidade de opções, layout e navegação dessas HOME para que não exista posição vazia/rota residual;
+- remover qualquer navegação manual que leve da HOME para `learn-the-keys`;
+- preservar o fluxo automático `searching-first` usado quando ainda não existe Mouse salvo; ele não é a feature `learn-the-keys` e continua necessário para o primeiro pareamento;
+- limpar nomes/aliases legados no código quando isso puder ser feito sem alterar o comportamento aceito de `searching-first`;
+- manter todos os gates já aceitos sem regressão;
+- ao concluir, voltar ao HOLD: nenhum gate seguinte deve ser iniciado automaticamente.
 
 ---
 
