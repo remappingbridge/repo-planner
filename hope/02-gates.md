@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **HOPE SERIES COMPLETE — HOPE-31 physically accepted at exact candidate `15a3ec9f8b20c96e41cb7e04610191b2853378bf`; promotion to main in progress. No further gate exists in this series.**.
+Status geral: **HOPE SERIES COMPLETE — HOPE-31 accepted and promoted to main `5a8f3d39e37e9b5a17ccdee0af5531c6d3423087`. Release 1.0 preparation authorized by operator on 2026-09-26. No further HOPE gate exists.**.
 
 ## Ordem oficial de execução
 
@@ -342,7 +342,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-31 — final inventory and documentation
 
-**Status:** ACCEPTED / PHYSICAL PASS — exact candidate `15a3ec9f8b20c96e41cb7e04610191b2853378bf`; promotion to main in progress.
+**Status:** ACCEPTED / PROMOTED TO MAIN `5a8f3d39e37e9b5a17ccdee0af5531c6d3423087` — exact physically accepted candidate `15a3ec9f8b20c96e41cb7e04610191b2853378bf`.
 
 **Objetivo atualizado após HOPE-23:** garantir exatamente **29 telas canônicas reais** com regras bem definidas e nenhuma tela antiga, duplicada, solta, escondida ou inalcançável fora do fluxo.
 
