@@ -76,3 +76,10 @@ Accepted exact candidate:
 Operator declaration: HOPE-31 accepted after final physical testing.
 
 Upon acceptance of this exact candidate, merge PR #20. That promotion completes the HOPE gate series; no further gate exists in this series.
+
+
+Promotion:
+- merged PR: `#20`
+- main commit: `5a8f3d39e37e9b5a17ccdee0af5531c6d3423087`
+- HOPE series: **COMPLETE**
+- next action authorized by operator: publish RemappingBridge 1.0
