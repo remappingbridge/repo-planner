@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **HOPE SERIES COMPLETE — HOPE-31 accepted and promoted to main `5a8f3d39e37e9b5a17ccdee0af5531c6d3423087`. Release 1.0 preparation authorized by operator on 2026-09-26. No further HOPE gate exists.**.
+Status geral: **HOPE SERIES COMPLETE / REMAPPINGBRIDGE 1.0 PUBLISHED — HOPE-31 accepted and promoted; stable release `v1.0.0` published from main `99a59287342bc2daa519629e5572513dce7cc7f4` on 2026-09-26. No further HOPE gate exists.**.
 
 ## Ordem oficial de execução
 
