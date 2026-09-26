@@ -1,6 +1,6 @@
 # HOPE gate plan
 
-Status geral: **HOPE-23 IMPLEMENTED / PHYSICAL ACCEPTANCE PENDING — cancelled learn-the-keys feature replaced by removal of its HOME option/route. EXECUTION HOLD after HOPE-23; HOPE-31 remains DEFERRED and no further gate may start without a new explicit operator order.**.
+Status geral: **HOPE-23 ACCEPTED / PROMOTED. HOPE-31 ACTIVE as the final gate by explicit operator order on 2026-09-26. No gate exists after HOPE-31 in this series.**.
 
 ## Ordem oficial de execução
 
@@ -324,7 +324,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-23 — remove learn-the-keys
 
-**Status:** ACCEPTED / PHYSICAL PASS — exact candidate `0c12061f010bbd5416808643d843d64f9bf89b73`; promotion to main in progress.
+**Status:** ACCEPTED / PROMOTED TO MAIN `8aa50611bcaf1a0091de6b111de0c6b7e4a67646`.
 
 **Objetivo:** cancelar definitivamente a tela/feature `learn-the-keys` e remover sua opção/rota de navegação da aplicação.
 
@@ -342,7 +342,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-31 — final inventory and documentation
 
-**Status:** DEFERRED — moved to a new feature and a new gate series by operator decision on 2026-09-24.
+**Status:** ACTIVE — explicitly resumed by operator on 2026-09-26 as the final gate.
 
 **Objetivo:** garantir exatamente **30 telas novas/canônicas** com regras bem definidas e nenhuma tela antiga solta, escondida ou alcançável fora do fluxo.
 
