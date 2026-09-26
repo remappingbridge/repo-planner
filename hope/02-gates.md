@@ -344,9 +344,11 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 **Status:** ACTIVE — explicitly resumed by operator on 2026-09-26 as the final gate.
 
-**Objetivo:** garantir exatamente **30 telas novas/canônicas** com regras bem definidas e nenhuma tela antiga solta, escondida ou alcançável fora do fluxo.
+**Objetivo atualizado após HOPE-23:** garantir exatamente **29 telas canônicas reais** com regras bem definidas e nenhuma tela antiga, duplicada, solta, escondida ou inalcançável fora do fluxo.
 
-**Inventário esperado:** os 30 gates de tela HOPE-01..30 listados neste plano.
+**Inventário esperado:** 29 telas. O plano original previa 30, mas HOPE-23 foi substituído por decisão do operador em 2026-09-26: a feature/tela `learn-the-keys` foi cancelada e sua opção removida das HOME. `searching-first` continua sendo a tela automática do HOPE-01 e permanece no inventário.
+
+**Limpeza final obrigatória:** remover as quatro telas G06 legadas de status/help que sobreviveram fora do fluxo HOPE (`MOUSE_STATUS`, `OTHER_DEVICES_STATUS`, `MOUSE_HELP`, `DEVICES_HELP`) e remover qualquer tela/ID duplicado sem rota real. Não manter uma tela artificial apenas para preservar a contagem histórica de 30.
 
 **Documentação final:** registrar arquitetura efetivamente resultante e regras em `remappingbridge/remappingbridge/docs`, descrevendo a implementação simples realmente existente, sem inventar contratos/Core que o programa excluiu.
 
