@@ -324,7 +324,7 @@ Em todo gate, inclusive gates de Help e HOPE-00:
 
 ## HOPE-23 — remove learn-the-keys
 
-**Status:** IMPLEMENTED / AUTOMATED PASS / PHYSICAL ACCEPTANCE PENDING — candidate `0c12061f010bbd5416808643d843d64f9bf89b73`; scope replaced by operator decision on 2026-09-26.
+**Status:** ACCEPTED / PHYSICAL PASS — exact candidate `0c12061f010bbd5416808643d843d64f9bf89b73`; promotion to main in progress.
 
 **Objetivo:** cancelar definitivamente a tela/feature `learn-the-keys` e remover sua opção/rota de navegação da aplicação.
 
