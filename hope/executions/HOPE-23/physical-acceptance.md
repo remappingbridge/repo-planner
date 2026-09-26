@@ -38,3 +38,8 @@ Accepted exact candidate:
 Operator declaration: HOPE-23 accepted after physical testing.
 
 After this gate, remain on HOLD. Do not start any subsequent gate without a new explicit operator order.
+
+
+Promotion:
+- merged PR: `#19`
+- main commit: `8aa50611bcaf1a0091de6b111de0c6b7e4a67646`
